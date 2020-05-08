@@ -10,8 +10,6 @@ baseurl: "" # site subpath, e.g. /blog
 url: "" # base hostname & protocol, e.g. http://example.com
 author: Copyright &copy; 2019 - Start Bootstrap
 lang: en_US
-twitter_username: paxt0n4
-github_username:  paxtonfitzpatrick
 
 # Build settings
 safe: true
