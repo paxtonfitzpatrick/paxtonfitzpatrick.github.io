@@ -1,7 +1,6 @@
 # Site settings
 # Values are accessed from HTML files via {{ site.value }}
 title: Paxton Fitzpatrick
-email: Paxton.C.Fitzpatrick@Dartmouth.edu
 description: >- # ignore newlines until "baseurl:"
   Write an awesome description for your new site here. You can edit this
   line in _config.yml. It will appear in your document head meta (for
@@ -10,6 +9,15 @@ baseurl: "" # site subpath, e.g. /blog
 url: "" # base hostname & protocol, e.g. http://example.com
 author: Copyright &copy; 2019 - Start Bootstrap
 lang: en_US
+
+email: Paxton.C.Fitzpatrick@Dartmouth.edu
+github_username: paxtonfitzpatrick
+linkedin_username: paxton-fitzpatrick-962500132
+twitter_username: paxt0n4
+lab_website: https://www.context-lab.com/
+google_analytics_id:
+
+
 
 # Build settings
 safe: true
