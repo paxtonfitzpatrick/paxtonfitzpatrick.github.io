@@ -23,9 +23,18 @@ end
 # alternate jekyll gem or using GitHub Pages
 gem "github-pages", "~> 204", group: :jekyll_plugins
 
+# basic plugins
+group :noupdate do
+  gem "ffi", "= 1.12.2"
+  gem "nokogiri", "= 1.10.9"
+end
+
 # jekyll plugins
 group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.6"
+  gem "jekyll-sitemap", "~> 1.2"
+  gem "jekyll-seo-tag", "~> 2.5"
+
 end
 # ========================================
 

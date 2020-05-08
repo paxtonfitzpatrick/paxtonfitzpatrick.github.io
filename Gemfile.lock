@@ -242,9 +242,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ffi (= 1.12.2)
   github-pages (~> 204)
   jekyll-feed (~> 0.6)
-  minima (~> 2.0)
+  jekyll-seo-tag (~> 2.5)
+  jekyll-sitemap (~> 1.2)
+  nokogiri (= 1.10.9)
   tzinfo-data
 
 BUNDLED WITH
