@@ -34,3 +34,4 @@ exclude:
   - Gemfile.lock
   - README.md
   - .idea
+  - node_modules
