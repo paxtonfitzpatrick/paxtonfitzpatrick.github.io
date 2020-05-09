@@ -1,0 +1,33 @@
+#particles-js {
+  padding-top: 10rem;
+  padding-bottom: calc(10rem - 72px);
+  background-color: #262626;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+}
+
+#particles-js h1 {
+  font-size: 2.25rem;
+}
+
+@media (min-width: 992px) {
+  #particles-js {
+    height: 100vh;
+    min-height: 40rem;
+    padding-top: 72px;
+    padding-bottom: 0;
+  }
+  #particles-js p {
+    font-size: 1.15rem;
+  }
+  #particles-js h1 {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1200px) { #particles-js h1  {
+    font-size: 3.5rem;
+  }
+}
