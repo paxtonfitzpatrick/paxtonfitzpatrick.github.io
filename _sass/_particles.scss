@@ -5,8 +5,10 @@ header.masthead {
 
 
 #particles-js {
-  background-color: #1a222c;
-  position: fixed;
+  background-color: $bg-color;
+  height: 100%;
+  width: 100%;
+  position: absolute;
   top: 72px;
   right: 0;
   bottom: 0;
