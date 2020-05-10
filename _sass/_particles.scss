@@ -6,8 +6,8 @@ header.masthead {
 
 #particles-js {
   background-color: $bg-color;
-  height: 100%;
-  width: 100%;
+  height: inherit;
+  width: inherit;
   position: absolute;
   top: 72px;
   right: 0;
