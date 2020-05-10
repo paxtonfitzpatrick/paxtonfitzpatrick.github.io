@@ -13,9 +13,10 @@
       {% assign colsM = colsL | times: 2 %}
 
       {% for service in section.services %}
+      {% assign fa = service.icon_type | default: "fas" %}
       <div class="col-lg-{{ colsL }} col-md-{{ colsM }} text-center">
         <div class="mt-5">
-          <i class="fas fa-4x {{ service.icon }} text-primary mb-4"></i>
+          <i class="{{ fa }} fa-4x {{ service.icon }} text-primary mb-4"></i>
           <h3 class="h4 mb-2">{{ service.title }}</h3>
           <div class="text-muted mb-0">
             {{ service.text | markdownify }}
