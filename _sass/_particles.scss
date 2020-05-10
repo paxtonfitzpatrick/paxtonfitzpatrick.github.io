@@ -1,18 +1,16 @@
 header.masthead {
   background: none;
+  position: relative;
 }
-
-
 
 #particles-js {
   background-color: $bg-color;
-  height: inherit;
-  width: inherit;
   position: absolute;
-  top: 72px;
-  right: 0;
+  padding-top: 72px;
+  top: 0;
   bottom: 0;
+  right: 0;
   left: 0;
-  z-index: 0;
+  height: 100%;
+  width: 100%;
 }
-
