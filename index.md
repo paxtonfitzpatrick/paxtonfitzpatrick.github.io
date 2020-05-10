@@ -1,12 +1,11 @@
 ---
 layout: home
 header:
-  title: Your Favorite Source of Free Bootstrap Themes
+  title: Paxton Fitzpatrick
   text: >
-    Start Bootstrap can help you build better websites using the Bootstrap
-    framework! Just download a theme and start customizing, no strings attached!
+    Some text here
   action: # action button is optional
-    label: Find Out More
+    label: About me
     url: '#about'
 
 
@@ -38,13 +37,16 @@ sections:
         icon: fa-laptop-code
       - title: Made with Love
         text: You have to make your websites with love these days!
-        icon: fa-heart
+        icon: fa-github
+        icon_type: fab
       - title: Other 1
         text: Some not-so long text here.
-        icon: fa-heart
+        icon: fa-github-alt
+        icon_type: fab
       - title: Other 2
         text: Some not-so long text here.
-        icon: fa-heart
+        icon: fa-python
+        icon_type: fab
 
   - type: portfolio.html
     # this section has always ID 'portfolio'
