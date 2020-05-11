@@ -9,18 +9,16 @@
 }
 
 .header-icons .icon {
-  font-size: 1.5em;
+  display: inline-block;
+  font-size: 2em;
   text-align: center;
   vertical-align: middle;
   line-height: 2em;
   color: $header-fg;
-  display: inline;
-  width: 50%;
-  min-width: 400px;
-  height: 50%;
+  width: 2em;
+  height: 2em;
   border: 2px solid $header-fg;
   border-radius: 50%;
-  padding: .5em;
   margin: .5em;
   transition: all .7s;
 
@@ -33,5 +31,5 @@
   &:active {
     color: $header-bg;
     background: $header-fg;
-}
+  }
 }
