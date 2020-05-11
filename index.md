@@ -2,11 +2,31 @@
 layout: home
 header:
   title: Paxton Fitzpatrick
-  text: >
-    Some text here
-  action: # action button is optional
-    label: About me
-    url: '#about'
+  icons:
+    - title: Email
+      icon: fa-envelope
+      fa_type: fa
+      url: mailto:Paxton.C.Fitzpatrick@Dartmouth.edu
+    - title: GitHub
+      icon: fa-github
+      fa_type: fab
+      url: https://github.com/paxtonfitzpatrick
+    - title: LinkedIn
+      icon: fa-linkedin-in
+      fa_type: fab
+      url: https://www.linkedin.com/in/paxton-fitzpatrick-962500132
+    - title: Twitter
+      icon: fa-twitter
+      fa_type: fab
+      url: https://twitter.com/paxt0n4
+    - title: CV
+      icon: fa-file-alt
+      fa_type: fa
+      url: '#'
+    - title: CDL
+      icon: fa-brain
+      fa_type: fas
+      url: https://www.context-lab.com/
 
 
 sections:
