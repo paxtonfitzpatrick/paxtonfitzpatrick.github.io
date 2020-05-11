@@ -33,3 +33,39 @@
     background: $header-fg;
   }
 }
+
+.cdl-logo:before {
+  content: "\e901";
+  font-weight: 900;
+
+}
+
+
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icomoon.eot?7x9kdc');
+  src:  url('../fonts/icomoon.eot?7x9kdc#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?7x9kdc') format('truetype'),
+    url('../fonts/icomoon.woff?7x9kdc') format('woff'),
+    url('../fonts/icomoon.svg?7x9kdc#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="custom"], [class*=" custom"] {
+//a[class="custom"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  //font-size: 2em;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

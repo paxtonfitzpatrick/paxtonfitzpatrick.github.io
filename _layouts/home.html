@@ -11,7 +11,7 @@ layout: base
       </div>
       <div class="header-icons col-lg-8 align-self-baseline">
         {% for icon in page.header.icons %}
-        <a aria-label="{{ icon.title }}" href="{{ icon.url }}" target="_blank" rel="noopener noreferrer"><i class="icon {{ icon.fa_type }} {{ icon.icon }}" aria-hidden="true"></i></a>
+        <a aria-label="{{ icon.title }}" href="{{ icon.url }}" target="_blank" rel="noopener noreferrer"><i class="icon {{ icon.icon_type }} {{ icon.icon }}" aria-hidden="true"></i></a>
         {% endfor %}
       </div>
         {% if page.header.action %}
