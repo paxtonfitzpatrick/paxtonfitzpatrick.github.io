@@ -75,7 +75,6 @@ var pJS = function(tag_id, params){
         enable: true,
         speed: 2,
         direction: 'none',
-        text: 'none',
         random: false,
         straight: false,
         out_mode: 'out',
@@ -1504,7 +1503,7 @@ window.particlesJS = function(tag_id, params){
 
   /* create canvas element */
   var canvas_el = document.createElement('canvas');
-      canvas_el.className = pJS_canvas_class;
+  canvas_el.className = pJS_canvas_class;
 
   /* set size canvas */
   canvas_el.style.width = "100%";
@@ -1512,17 +1511,6 @@ window.particlesJS = function(tag_id, params){
 
   /* append canvas */
   var canvas = document.getElementById(tag_id).appendChild(canvas_el);
-
-  /* if optional "data-text" attribute is set in element, update movement
-  behavior to text formation */
-  if(pJS_tag.hasAttribute("data-text")){
-    params.particles.move.enable = true;
-    params.particles.move.direction = 'text';
-    params.particles.move.text = pJS_tag.getAttribute("data-text");
-    params.particles.move.random = false;
-    params.particles.move.straight = false;
-  }
-
 
   /* launch particle.js */
   if(canvas != null){
