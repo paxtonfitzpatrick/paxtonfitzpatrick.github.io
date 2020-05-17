@@ -7,7 +7,7 @@
 /* v2.0.0
 /* ----------------------------------------------- */
 
-var pJS = function(tag_id, params){
+const pJS = function(tag_id, params){
 
   var canvas_el = document.querySelector('#'+tag_id+' > .particles-js-canvas-el');
 
@@ -134,7 +134,7 @@ var pJS = function(tag_id, params){
     tmp: {}
   };
 
-  var pJS = this.pJS;
+  const pJS = this.pJS;
 
   /* params settings */
   if(params){
