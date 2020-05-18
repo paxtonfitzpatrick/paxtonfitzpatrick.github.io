@@ -19,7 +19,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
       enabled: true,
       array: [],
       text: '',
-      density: 100,
+      density: 300,
       color: '#fff',
       opacity: {
         value: 1,
@@ -164,6 +164,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
       size: pText.text_particles.size.value,
       size_anim_speed: pText.text_particles.size.animate.speed,
       move_speed: pText.text_particles.movement.speed,
+      restless_val: pText.text_particles.movement.restless.value,
       line_linked_distance: pText.text_particles.line_linked.distance,
       line_linked_width: pText.text_particles.line_linked.width,
     },
@@ -196,6 +197,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
     pText.text_particles.size.value = pText.tmp.text_particles.size * pText.canvas.pxratio;
     pText.text_particles.size.animate.speed = pText.tmp.text_particles.size_anim_speed * pText.canvas.pxratio;
     pText.text_particles.movement.speed = pText.tmp.text_particles.move_speed * pText.canvas.pxratio;
+    pText.text_particles.movement.restless.value = pText.tmp.text_particles.restless_val * pText.canvas.pxratio;
     pText.text_particles.line_linked.distance = pText.tmp.text_particles.line_linked_distance * pText.canvas.pxratio;
     pText.text_particles.line_linked.width = pText.tmp.text_particles.line_linked_width * pText.canvas.pxratio;
     pText.bg_particles.size.value = pText.tmp.bg_particles.size * pText.canvas.pxratio;
@@ -233,7 +235,6 @@ const ParticleTextDisplayer = function(tag_id, params) {
           - push or remove difference in number of text particles in array
           - reassign remaining text particle positions */
     });
-
   };
 
   pText.functions.canvas.clear = function() {
@@ -267,7 +268,12 @@ const ParticleTextDisplayer = function(tag_id, params) {
     this.acc_x = 0;  // initial x-acceleration
     this.acc_y = 0;  // initial y-acceleration
     this.friction = Math.random() * 0.01 + 0.95;  // friction TODO: make this customizable?
-
+    this.restlessness = {  // restlessness behavior
+      max_displacement: Math.ceil(Math.random() * pText.text_particles.movement.restless.value),
+      x_jitter: pText.functions.randIntInRange(-3, 3),
+      y_jitter: pText.functions.randIntInRange(-3, 3),
+      on_curr_frame: false
+    };
     // set size
     this.radius = (pText.text_particles.size.random ? Math.random() : 1) * pText.text_particles.size.value;
     // set color & opacity
@@ -306,11 +312,57 @@ const ParticleTextDisplayer = function(tag_id, params) {
     pText.canvas.context.fill();
   };
 
-  pText.functions.particles.createTextParticles = function() {
-    for (let i = 0; i < )
+  pText.functions.particles.createTextParticles = function(pixel_data, at_dest = false) {
+    // given pixel-wise RGBA data, create text particles
+    for (let i = 0; i < pText.canvas.w; i += Math.round(pText.canvas.w / pText.text_particles.density)) {
+      for (let j = 0; j < pText.canvas.h; j += Math.round(pText.canvas.h / pText.text_particles.density)) {
+        // if alpha value of pixel is > 128, create a particle whose destination is that pixel
+        if (pixel_data[(i + j * pText.canvas.w) * 4 + 3] > 128) {
+          let dest_xy = {x: i, y: j};
+          // if at_dest is true, create the particle at the pixel instead of random point on canvas
+          let init_xy = at_dest ? dest_xy : {x: Math.random() * pJS.canvas.w, y: Math.random() * pJS.canvas.h};
+          pText.text_particles.array.push(new pText.functions.particles.SingleTextParticle(init_xy, dest_xy));
+        }
+      }
+    }
+  };
+
+  pText.functions.particles.jitterParticle = function(p) {
+    p.x += p.restlessness.x_jitter;
+    p.y += p.restlessness.y_jitter;
+    if (Math.sqrt((p.dest_x - p.x) ** 2 + (p.dest_y - p.y) ** 2) >= pText.text_particles.movement.restless.value) {
+      p.restlessness.on_curr_frame = false;
+    }
+  };
+
+  pText.functions.particles.updateTextParticles = function() {
+    for (let p in pText.text_particles.array) {
+      // update position, velocity, acceleration
+      if ((pText.text_particles.movement.restless.enabled) && (p.restlessness.on_curr_frame)) {
+        // if restless activity is enabled & particle is in restless mode, animate some random movement
+        pText.functions.particles.jitterParticle(p);
+      } else {
+        // update position with approach to destination
+        p.acc_x = (p.dest_x - p.x) / 500;
+        p.acc_y = (p.dest_y - p.y) / 500;
+        p.vx = (p.vx + p.acc_x) * p.friction;
+        p.vy = (p.vy + p.acc_y) * p.friction;
+        p.x += p.vx;
+        p.y += p.vy;
+      }
+
+
+    }
+  };
+
+  /*
+  ========================================
+  =            OTHER FUNCTIONS           =
+  ========================================
+  */
+  pText.functions.randIntInRange = function(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
-
-
 
 
 
