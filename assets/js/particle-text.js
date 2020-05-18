@@ -401,15 +401,13 @@ const ParticleTextDisplayer = function(tag_id, params) {
 
   pText.functions.particles.updateTextParticles = function() {
     // set line-linked params upfront to save re-declaring each time through loop
-    if (pText.text_particles.line_linked.enabled) {
-      var link_params = {
-        distance: pText.text_particles.line_linked.distance,
-        opacity: pText.text_particles.line_linked.opacity,
-        color: pText.text_particles.line_linked.color,
-        width: pText.text_particles.line_linked.width
-      };
-    }
-    for (let p in pText.text_particles.array) {
+    const link_params = {
+      distance: pText.text_particles.line_linked.distance,
+      opacity: pText.text_particles.line_linked.opacity,
+      color: pText.text_particles.line_linked.color,
+      width: pText.text_particles.line_linked.width
+    };
+    for (let p of pText.text_particles.array) {
       // update position, velocity, acceleration
       if ((pText.text_particles.movement.restless.enabled) && (p.restlessness.on_curr_frame)) {
         // if restless activity is enabled & particle is in restless mode, animate some random movement
@@ -431,7 +429,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
 
       // draw linking lines, if enabled
       if (pText.text_particles.line_linked.enabled) {
-        for (let p_other in pText.text_particles.array) {
+        for (let p_other of pText.text_particles.array) {
           pText.functions.interactivity.linkParticles(p, p_other, link_params);
         }
       }
@@ -476,13 +474,41 @@ const ParticleTextDisplayer = function(tag_id, params) {
   // SingleBackgroundParticle's draw method is the same as SingleTextParticle's
   pText.functions.particles.SingleBackgroundParticle.prototype.draw = pText.functions.particles.SingleTextParticle.prototype.draw;
 
-  // createBackgroundParticles
   pText.functions.particles.createBackgroundParticles = function () {
-    // calculate canvas area
+    // compute get number of pixels in canvas
+    let canvas_area = pText.canvas.w * pText.canvas.h / 1000;
+    if (pText.tmp.retina) {
+      canvas_area /= (pText.canvas.pxratio * 2);
+    }
+    // compute total number of particles from density and canvas size
+    const n_particles = canvas_area * pText.bg_particles.density;
+    // push particles to array
+    for (let i = 0; i < n_particles; i++) {
+      pText.bg_particles.array.push(new pText.functions.particles.SingleBackgroundParticle());
+    }
+  };
 
-
-  }
   // updateBackgroundParticles
+  pText.functions.particles.updateBackgroundParticles = function() {
+    const link_params = {
+      distance: pText.bg_particles.line_linked.distance,
+      opacity: pText.bg_particles.line_linked.opacity,
+      color: pText.bg_particles.line_linked.color,
+      width: pText.bg_particles.line_linked.width
+    };
+    for (let p of pText.bg_particles.array) {
+      // update position
+      p.x += p.vx;
+      p.y += p.vy;
+      // draw linking lines, if enabled
+      if (pText.bg_particles.line_linked.enabled) {
+        for (let p_other of pText.bg_particles.array) {
+          pText.functions.interactivity.linkParticles(p, p_other, link_params)
+        }
+      }
+
+    }
+  };
 
 
 
@@ -511,16 +537,17 @@ const ParticleTextDisplayer = function(tag_id, params) {
   pText.functions.particles.drawParticles = function() {
     /* updates and redraws ALL particles on each frame */
     // clear canvas
-    pText.canvas.context.clearRect(0, 0, pText.canvas.w, pText.canvas.h);
+    pText.functions.canvas.clear();
+    // pText.canvas.context.clearRect(0, 0, pText.canvas.w, pText.canvas.h);
     // update text particle states (position, velocity, linkage, etc.) and re-draw
     pText.functions.particles.updateTextParticles();
-    for (let p in pText.text_particles.array) {
+    for (let p of pText.text_particles.array) {
       p.draw();
     }
     // update and re-draw background particles, if enabled
     if (pText.bg_particles.enabled) {
       pText.functions.particles.updateBackgroundParticles();
-      for (let p in pText.bg_particles.array) {
+      for (let p of pText.bg_particles.array) {
         p.draw();
       }
     }
