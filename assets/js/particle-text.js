@@ -277,10 +277,10 @@ const ParticleTextDisplayer = function(tag_id, params) {
       on_curr_frame: false
     };
     // set color & opacity
-    if (pText.color instanceof Array) {
-      this.color = pText.color[Math.floor(Math.random() * (pText.color.length + 1))];
+    if (pText.text_particles.color instanceof Array) {
+      this.color = pText.text_particles.color[Math.floor(Math.random() * (pText.text_particles.color.length + 1))];
     } else {
-      this.color = pText.color;
+      this.color = pText.text_particles.color;
     }
     // this.opacity = (pText.text_particles.opacity.random ? Math.random() : 1) * pText.text_particles.opacity.value;
     // set size & size animation params
@@ -426,13 +426,75 @@ const ParticleTextDisplayer = function(tag_id, params) {
       if (pText.size.animate.enabled) {
         pText.functions.particles.updateParticleSize(p);
       }
-      // TODO: add interactivity actions
+      // TODO: add on_hover interactivity actions
 
       // draw linking lines, if enabled
       if (pText.text_particles.line_linked.enabled) {
         for (let p_other in pText.text_particles.array) {
           pText.functions.interactivity.linkParticles(p, p_other, link_params);
         }
+      }
+    }
+  };
+
+  // SingleBackgroundParticle
+  pText.functions.particles.SingleBackgroundParticle = function(init_xy) {
+    // initial x, y position
+    this.x = init_xy.x;
+    this.y = init_xy.y;
+
+
+    // size
+    this.radius = (pText.bg_particles.size.random ? Math.random() : 1) * pText.bg_particles.size.value;
+    if (pText.bg_particles.size.animate.enabled) {
+      this.grow = false;
+      this.resize_speed = pText.bg_particles.size.animate.speed / 100;
+      if (!pText.bg_particles.size.animate.sync) {
+        this.resize_speed *= Math.random();
+    }
+  }
+  // singleBackgroundParticle.prototype.draw  ** probably same as textparticles'
+  // createBackgroundParticles
+  // updateBackgroundParticles
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  pText.functions.particles.drawParticles = function() {
+    /* updates and redraws ALL particles on each frame */
+    // clear canvas
+    pText.canvas.context.clearRect(0, 0, pText.canvas.w, pText.canvas.h);
+    // update text particle states (position, velocity, linkage, etc.) and re-draw
+    pText.functions.particles.updateTextParticles();
+    for (let p in pText.text_particles.array) {
+      p.draw();
+    }
+    // update and re-draw background particles, if enabled
+    if (pText.bg_particles.enabled) {
+      pText.functions.particles.updateBackgroundParticles();
+      for (let p in pText.bg_particles.array) {
+        p.draw();
       }
     }
   };
