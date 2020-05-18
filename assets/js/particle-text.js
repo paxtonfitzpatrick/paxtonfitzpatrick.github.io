@@ -98,7 +98,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
       },
       movement: {
         speed: 1,
-        on_border: 'out'
+        bounce_on_border: false
       },
       line_linked: {
         enabled: true,
@@ -148,7 +148,8 @@ const ParticleTextDisplayer = function(tag_id, params) {
     },
     functions: {
       particles: {},
-      canvas: {}
+      canvas: {},
+      interactivity: {}
     },
     retina_detect: true, // helps reduce CPU load on retina displays
     tmp: {}
@@ -335,7 +336,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
     }
   };
 
-  pText.functions.particles.linkParticles = function(p, p_other, link) {
+  pText.functions.interactivity.linkParticles = function(p, p_other, link) {
     let dist = Math.sqrt((p.x - p_other.x) ** 2 + (p.y - p_other.y) ** 2);
     if (dist <= link.dist) {
       let opacity = link.opacity - (dist / (link.opacity)) / link.dist;
@@ -368,8 +369,37 @@ const ParticleTextDisplayer = function(tag_id, params) {
     }
   };
 
+  pText.functions.particles.updateOnBorder = function(p, bounce = false) {
+    let new_pos = {
+      x_left: p.radius,
+      x_right: pText.canvas.w,
+      y_top: p.radius,
+      y_bottom: pText.canvas.h
+    }
+    if (!bounce) {
+      new_pos.x_left *= -1;
+      new_pos.x_right += p.radius;
+      new_pos.y_top *= -1;
+      new_pos.y_bottom += p.radius;
+    }
+    if (p.x - p.radius > pText.canvas.w) {
+      p.x = new_pos.x_left;
+      p.y = Math.random() * pText.canvas.h;
+    } else if (p.x + p.radius < 0) {
+      p.x = new_pos.x_right;
+      p.y = Math.random() * pText.canvas.h;
+    }
+    if (p.y - p.radius > pText.canvas.h) {
+      p.y = new_pos.y_top;
+      p.x = Math.random() * pText.canvas.w;
+    } else if (p.y + p.radius < 0) {
+      p.y = new_pos.y_bottom;
+      p.x = Math.random() * pText.canvas.w;
+    }
+  };
+
   pText.functions.particles.updateTextParticles = function() {
-    // set line-linked params upfront to save recomputing each time through loop
+    // set line-linked params upfront to save re-declaring each time through loop
     if (pText.text_particles.line_linked.enabled) {
       var link_params = {
         distance: pText.text_particles.line_linked.distance,
@@ -396,12 +426,12 @@ const ParticleTextDisplayer = function(tag_id, params) {
       if (pText.size.animate.enabled) {
         pText.functions.particles.updateParticleSize(p);
       }
-      // TODO: add interactivity actions?
+      // TODO: add interactivity actions
 
       // draw linking lines, if enabled
       if (pText.text_particles.line_linked.enabled) {
         for (let p_other in pText.text_particles.array) {
-          pText.functions.particles.linkParticles(p, p_other, link_params);
+          pText.functions.interactivity.linkParticles(p, p_other, link_params);
         }
       }
     }
