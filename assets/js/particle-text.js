@@ -371,31 +371,28 @@ const ParticleTextDisplayer = function(tag_id, params) {
   };
 
   pText.functions.particles.updateOnBorder = function(p, bounce = false) {
-    let new_pos = {
-      x_left: p.radius,
-      x_right: pText.canvas.w,
-      y_top: p.radius,
-      y_bottom: pText.canvas.h
-    }
-    if (!bounce) {
-      new_pos.x_left *= -1;
-      new_pos.x_right += p.radius;
-      new_pos.y_top *= -1;
-      new_pos.y_bottom += p.radius;
-    }
-    if (p.x - p.radius > pText.canvas.w) {
-      p.x = new_pos.x_left;
-      p.y = Math.random() * pText.canvas.h;
-    } else if (p.x + p.radius < 0) {
-      p.x = new_pos.x_right;
-      p.y = Math.random() * pText.canvas.h;
-    }
-    if (p.y - p.radius > pText.canvas.h) {
-      p.y = new_pos.y_top;
-      p.x = Math.random() * pText.canvas.w;
-    } else if (p.y + p.radius < 0) {
-      p.y = new_pos.y_bottom;
-      p.x = Math.random() * pText.canvas.w;
+    if (bounce) {
+      if (p.x + p.radius > pText.canvas.w || p.x - p.radius < 0) {
+        p.vx *= -1;
+      }
+      if (p.y + p.radius > pText.canvas.h || p.y - p.radius < 0) {
+        p.vy *= -1;
+      }
+    } else {
+      if (p.x - p.radius > pText.canvas.w) {
+        p.x = -p.radius;
+        p.y = Math.random() * pText.canvas.h;
+      } else if (p.x + p.radius < 0) {
+        p.x = pText.canvas.w + p.radius;
+        p.y = Math.random() * pText.canvas.h;
+      }
+      if (p.y - p.radius > pText.canvas.h) {
+        p.y = -p.radius;
+        p.x = Math.random() * pText.canvas.w;
+      } else if (p.y + p.radius < 0) {
+        p.y = pText.canvas.h + p.radius;
+        p.x = Math.random() * pText.canvas.w;
+      }
     }
   };
 
@@ -422,7 +419,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
         p.y += p.vy;
       }
       // update size (if animated)
-      if (pText.size.animate.enabled) {
+      if (pText.text_particles.size.animate.enabled) {
         pText.functions.particles.updateParticleSize(p);
       }
       // TODO: add on_hover interactivity actions
@@ -500,10 +497,16 @@ const ParticleTextDisplayer = function(tag_id, params) {
       // update position
       p.x += p.vx;
       p.y += p.vy;
+      // update size (if animated)
+      if (pText.bg_particles.size.animate.enabled) {
+        pText.functions.particles.updateParticleSize(p);
+      }
+      // control behavior if particle hits border
+      pText.functions.particles.updateOnBorder(p);
       // draw linking lines, if enabled
       if (pText.bg_particles.line_linked.enabled) {
         for (let p_other of pText.bg_particles.array) {
-          pText.functions.interactivity.linkParticles(p, p_other, link_params)
+          pText.functions.interactivity.linkParticles(p, p_other, link_params);
         }
       }
 
