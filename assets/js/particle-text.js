@@ -77,14 +77,14 @@ const ParticleTextDisplayer = function(tag_id, params) {
       density: 10,
       color: '#fff',
       opacity: {
-        value: 1,
-        random: false,
-        animate: {
-          enable: false,
-          speed: 1,
-          min: 0,
-          sync: false
-        },
+        value: 0.5,
+        // random: false,
+        // animate: {
+        //   enable: false,
+        //   speed: 1,
+        //   min: 0,
+        //   sync: false
+        // },
       },
       size: {
         value: 20,
@@ -235,7 +235,8 @@ const ParticleTextDisplayer = function(tag_id, params) {
           - redraw text and recompute pixels to fill
           - recompute new number of text particles based on new number of text pixels
           - push or remove difference in number of text particles in array
-          - reassign remaining text particle positions */
+          - reassign remaining text particle positions
+          - recompute new number of background particles based on new canvas size*/
     });
   };
 
@@ -437,13 +438,19 @@ const ParticleTextDisplayer = function(tag_id, params) {
     }
   };
 
-  // SingleBackgroundParticle
   pText.functions.particles.SingleBackgroundParticle = function(init_xy) {
-    // initial x, y position
-    this.x = init_xy.x;
-    this.y = init_xy.y;
-
-
+    // initial position & velocity
+    this.x = init_xy ? init_xy.x : Math.random() * pText.canvas.w;
+    this.y = init_xy ? init_xy.y : Math.random() * pText.canvas.h;
+    this.vx = (Math.random() - 0.5) * pText.bg_particles.movement.speed;
+    this.vy = (Math.random() - 0.5) * pText.bg_particles.movement.speed;
+    // color & opacity
+    if (pText.bg_particles.color instanceof Array) {
+      this.color = pText.bg_particles.color[Math.floor(Math.random() * (pText.bg_particles.color.length + 1))];
+    } else {
+      this.color = pText.bg_particles.color;
+    }
+    this.opacity = pText.bg_particles.opacity.value;
     // size
     this.radius = (pText.bg_particles.size.random ? Math.random() : 1) * pText.bg_particles.size.value;
     if (pText.bg_particles.size.animate.enabled) {
@@ -451,10 +458,30 @@ const ParticleTextDisplayer = function(tag_id, params) {
       this.resize_speed = pText.bg_particles.size.animate.speed / 100;
       if (!pText.bg_particles.size.animate.sync) {
         this.resize_speed *= Math.random();
+      }
     }
-  }
-  // singleBackgroundParticle.prototype.draw  ** probably same as textparticles'
+    // make sure initial position is inside canvas
+    if (this.x > pText.canvas.w - this.radius * 2) {
+      this.x -= this.radius;
+    } else if (this.x < this.radius * 2) {
+      this.x += this.radius;
+    }
+    if (this.y > pText.canvas.h - this.radius * 2) {
+      this.y -= this.radius;
+    } else if (this.y < this.radius * 2) {
+      this.y += this.radius;
+    }
+  };
+
+  // SingleBackgroundParticle's draw method is the same as SingleTextParticle's
+  pText.functions.particles.SingleBackgroundParticle.prototype.draw = pText.functions.particles.SingleTextParticle.prototype.draw;
+
   // createBackgroundParticles
+  pText.functions.particles.createBackgroundParticles = function () {
+    // calculate canvas area
+
+
+  }
   // updateBackgroundParticles
 
 
