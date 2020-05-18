@@ -51,7 +51,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
       },
       line_linked: {
         enabled: false,
-        distance: 100,
+        distance: 10,
         color: '#fff',
         opacity: 1,
         width: 1
@@ -183,6 +183,12 @@ const ParticleTextDisplayer = function(tag_id, params) {
     big_repulse_strength: pText.interactions.big_repulse.strength
   };
 
+  /*
+  ========================================
+  =           CANVAS FUNCTIONS           =
+  ========================================
+  */
+
   pText.functions.canvas.retinaInit = function() {
     if (pText.retina_detect && window.devicePixelRatio > 1) {
       pText.canvas.pxratio = window.devicePixelRatio;
@@ -212,11 +218,6 @@ const ParticleTextDisplayer = function(tag_id, params) {
     pText.interactions.big_repulse.strength = pText.tmp.big_repulse_strength * pText.canvas.pxratio;
   };
 
-  /*
-  ========================================
-  =           CANVAS FUNCTIONS           =
-  ========================================
-  */
   pText.functions.canvas.init = function() {
     // get context, set size, set text alignment
     pText.canvas.context = pText.canvas.el.getContext('2d');
@@ -334,14 +335,56 @@ const ParticleTextDisplayer = function(tag_id, params) {
     }
   };
 
+  pText.functions.particles.linkParticles = function(p, p_other, link) {
+    let dist = Math.sqrt((p.x - p_other.x) ** 2 + (p.y - p_other.y) ** 2);
+    if (dist <= link.dist) {
+      let opacity = link.opacity - (dist / (link.opacity)) / link.dist;
+      if (opacity > 0) {
+        pText.canvas.context.strokeStyle = link.color;
+        pText.canvas.context.lineWidth = link.width;
+        pText.canvas.context.beginPath();
+        pText.canvas.context.moveTo(p.x, p.y);
+        pText.canvas.context.lineTo(p_other.x, p_other.y);
+        pText.canvas.context.stroke();
+        pText.canvas.context.closePath();
+      }
+    }
+  };
+
+  pText.functions.particles.updateParticleSize = function(p) {
+    if (p.grow) {
+      p.radius += p.resize_speed;
+      if (p.radius >= pText.text_particles.size.value) {
+        p.grow = false;
+      }
+    } else {
+      p.radius -= p.resize_speed;
+      if (p.radius <= pText.text_particles.size.animate.min) {
+        p.grow = true;
+      }
+    }
+    if (p.radius < 0) {
+      p.radius = 0;
+    }
+  };
+
   pText.functions.particles.updateTextParticles = function() {
+    // set line-linked params upfront to save recomputing each time through loop
+    if (pText.text_particles.line_linked.enabled) {
+      var link_params = {
+        distance: pText.text_particles.line_linked.distance,
+        opacity: pText.text_particles.line_linked.opacity,
+        color: pText.text_particles.line_linked.color,
+        width: pText.text_particles.line_linked.width
+      };
+    }
     for (let p in pText.text_particles.array) {
       // update position, velocity, acceleration
       if ((pText.text_particles.movement.restless.enabled) && (p.restlessness.on_curr_frame)) {
         // if restless activity is enabled & particle is in restless mode, animate some random movement
         pText.functions.particles.jitterParticle(p);
       } else {
-        // update position with approach to destination
+        // otherwise, update position with approach to destination
         p.acc_x = (p.dest_x - p.x) / 500;
         p.acc_y = (p.dest_y - p.y) / 500;
         p.vx = (p.vx + p.acc_x) * p.friction;
@@ -351,26 +394,16 @@ const ParticleTextDisplayer = function(tag_id, params) {
       }
       // update size (if animated)
       if (pText.size.animate.enabled) {
-        if (p.grow) {
-          p.radius += p.resize_speed;
-          if (p.radius >= pText.text_particles.size.value) {
-            p.grow = false;
-          }
-        } else {
-          p.radius -= p.resize_speed;
-          if (p.radius <= pText.text_particles.size.animate.min) {
-            p.grow = true;
-          }
-        }
-        if (p.radius < 0) {
-          p.radius = 0;
+        pText.functions.particles.updateParticleSize(p);
+      }
+      // TODO: add interactivity actions?
+
+      // draw linking lines, if enabled
+      if (pText.text_particles.line_linked.enabled) {
+        for (let p_other in pText.text_particles.array) {
+          pText.functions.particles.linkParticles(p, p_other, link_params);
         }
       }
-      
-
-
-
-
     }
   };
 
