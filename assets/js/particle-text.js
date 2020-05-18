@@ -23,13 +23,13 @@ const ParticleTextDisplayer = function(tag_id, params) {
       color: '#fff',
       opacity: {
         value: 1,
-        random: false,
-        animate: {
-          enabled: false,
-          speed: 1,
-          min: 0,
-          sync: false
-        },
+        // random: false,
+        // animate: {
+        //   enabled: false,
+        //   speed: 1,
+        //   min: 0,
+        //   sync: false
+        // },
       },
       size: {
         value: 20,
@@ -90,7 +90,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
         value: 20,
         random: false,
         animate: {
-          enable: false,
+          enabled: false,
           speed: 1,
           min: 0,
           sync: false
@@ -274,16 +274,15 @@ const ParticleTextDisplayer = function(tag_id, params) {
       y_jitter: pText.functions.randIntInRange(-3, 3),
       on_curr_frame: false
     };
-    // set size
-    this.radius = (pText.text_particles.size.random ? Math.random() : 1) * pText.text_particles.size.value;
     // set color & opacity
     if (pText.color instanceof Array) {
       this.color = pText.color[Math.floor(Math.random() * (pText.color.length + 1))];
     } else {
       this.color = pText.color;
     }
-    this.opacity = (pText.text_particles.opacity.random ? Math.random() : 1) * pText.text_particles.opacity.value;
-    // set size change animation params
+    // this.opacity = (pText.text_particles.opacity.random ? Math.random() : 1) * pText.text_particles.opacity.value;
+    // set size & size animation params
+    this.radius = (pText.text_particles.size.random ? Math.random() : 1) * pText.text_particles.size.value;
     if (pText.text_particles.size.animate.enabled) {
       this.grow = false;  // controls whether particle is currently growing or shrinking
       this.resize_speed = pText.text_particles.size.animate.speed / 100;
@@ -350,6 +349,26 @@ const ParticleTextDisplayer = function(tag_id, params) {
         p.x += p.vx;
         p.y += p.vy;
       }
+      // update size (if animated)
+      if (pText.size.animate.enabled) {
+        if (p.grow) {
+          p.radius += p.resize_speed;
+          if (p.radius >= pText.text_particles.size.value) {
+            p.grow = false;
+          }
+        } else {
+          p.radius -= p.resize_speed;
+          if (p.radius <= pText.text_particles.size.animate.min) {
+            p.grow = true;
+          }
+        }
+        if (p.radius < 0) {
+          p.radius = 0;
+        }
+      }
+      
+
+
 
 
     }
