@@ -227,6 +227,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
   };
 
   pText.functions.canvas.init = function() {
+    pText.functions.canvas.retinaInit();
     // get context, set size, set text alignment
     pText.canvas.context = pText.canvas.el.getContext('2d');
     pText.canvas.el.width = pText.canvas.w;
@@ -245,6 +246,8 @@ const ParticleTextDisplayer = function(tag_id, params) {
           - reassign remaining text particle positions
           - recompute new number of background particles based on new canvas size*/
     });
+
+    // TODO: add event listener for canvas not in view to pause animation and lighten load
   };
 
   pText.functions.canvas.clear = function() {
@@ -523,6 +526,11 @@ const ParticleTextDisplayer = function(tag_id, params) {
     }
   };
 
+  pText.functions.particles.animateParticles = function() {
+    pText.functions.particles.drawParticles();
+    requestAnimFrame(pText.functions.particles.animateParticles);
+  };
+
   /*
   ========================================
   =        INTERACTIVITY FUNCTIONS       =
@@ -541,20 +549,6 @@ const ParticleTextDisplayer = function(tag_id, params) {
         pText.canvas.context.stroke();
         pText.canvas.context.closePath();
       }
-    }
-  };
-
-  pText.functions.interactivity.onMouseMove = function(func, args, p, p_type) {
-    if (pText.mouse.x != null && pText.mouse.y != null) {
-      func(p, args, p_type);
-    }
-  };
-
-  pText.functions.interactivity.onMouseClick = function(func, args, p, p_type) {
-    if (pText.mouse.click_x != null && pText.mouse.y != null) {
-      func(p, args, p_type);
-      pText.mouse.click_x = null;
-      pText.mouse.click_y = null;
     }
   };
 
@@ -614,6 +608,20 @@ const ParticleTextDisplayer = function(tag_id, params) {
         pText.canvas.context.stroke();
         pText.canvas.context.closePath();
       }
+    }
+  };
+
+  pText.functions.interactivity.onMouseMove = function(func, args, p, p_type) {
+    if (pText.mouse.x != null && pText.mouse.y != null) {
+      func(p, args, p_type);
+    }
+  };
+
+  pText.functions.interactivity.onMouseClick = function(func, args, p, p_type) {
+    if (pText.mouse.click_x != null && pText.mouse.y != null) {
+      func(p, args, p_type);
+      pText.mouse.click_x = null;
+      pText.mouse.click_y = null;
     }
   };
 
@@ -725,8 +733,23 @@ const ParticleTextDisplayer = function(tag_id, params) {
       pText.bg_particles.interactivity.fn_array.push(partial_func);
     }
   };
-};
 
+  /*
+  ========================================
+  =           LAUNCH FUNCTION            =
+  ========================================
+  */
+  pText.functions.launch = function() {
+    pText.functions.interactivity.addEventListeners();
+    pText.functions.canvas.init();
+    const text_pixels = pText.functions.canvas.getTextData();
+    pText.functions.particles.createTextParticles(text_pixels);
+    pText.functions.particles.createBackgroundParticles();
+    pText.functions.particles.animateParticles();
+  };
+
+  pText.functions.launch();
+};
 
 /*
 ========================================
@@ -767,12 +790,6 @@ window.cancelRequestAnimFrame = (function() {
     clearTimeout
 })();
 
-
-/*
-========================================
-=           LAUNCH FUNCTIONS           =
-========================================
-*/
 window.pTextDom = [];
 
 window.particleTextDisplay = function(tag_id, params){
