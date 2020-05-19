@@ -68,7 +68,8 @@ const ParticleTextDisplayer = function(tag_id, params) {
         on_touch: {
           enabled: true,
           action: 'repulse',
-        }
+        },
+        fn_array: [],
       }
     },
     bg_particles: {
@@ -113,13 +114,14 @@ const ParticleTextDisplayer = function(tag_id, params) {
           action: 'repulse',
         },
         on_click: {
-          enabled: true,
-          action: 'grab',
+          enabled: false,
+          action: 'big_repulse',
         },
         on_touch: {
           enabled: false,
           action: 'repulse'
-        }
+        },
+        fn_array: [],
       }
     },
     interactions: {
@@ -133,9 +135,9 @@ const ParticleTextDisplayer = function(tag_id, params) {
         duration: 0.4,
         strength: 100
       },
-      create: {         // number of particles to be created
-        n_particles: 4
-      },
+      // create: {         // number of particles to be created
+      //   n_particles: 4
+      // },
       grab: {
         distance: 100,
         line_opacity: 1
@@ -151,7 +153,13 @@ const ParticleTextDisplayer = function(tag_id, params) {
       canvas: {},
       interactivity: {}
     },
-    retina_detect: true, // helps reduce CPU load on retina displays
+    mouse: {
+      x: null,
+      y: null,
+      click_x: null,
+      click_y: null
+    },
+    retina_detect: true,  // helps reduce CPU load on retina displays
     tmp: {}
   }
   // apply params for this instance
@@ -337,22 +345,6 @@ const ParticleTextDisplayer = function(tag_id, params) {
     }
   };
 
-  pText.functions.interactivity.linkParticles = function(p, p_other, link) {
-    let dist = Math.sqrt((p.x - p_other.x) ** 2 + (p.y - p_other.y) ** 2);
-    if (dist <= link.dist) {
-      let opacity = link.opacity - (dist / (link.opacity)) / link.dist;
-      if (opacity > 0) {
-        pText.canvas.context.strokeStyle = link.color;
-        pText.canvas.context.lineWidth = link.width;
-        pText.canvas.context.beginPath();
-        pText.canvas.context.moveTo(p.x, p.y);
-        pText.canvas.context.lineTo(p_other.x, p_other.y);
-        pText.canvas.context.stroke();
-        pText.canvas.context.closePath();
-      }
-    }
-  };
-
   pText.functions.particles.updateParticleSize = function(p) {
     if (p.grow) {
       p.radius += p.resize_speed;
@@ -422,8 +414,8 @@ const ParticleTextDisplayer = function(tag_id, params) {
       if (pText.text_particles.size.animate.enabled) {
         pText.functions.particles.updateParticleSize(p);
       }
-      // TODO: add on_hover interactivity actions
-
+      // deal with all enabled listener interactions
+      pText.functions.interactivity.textInteractWithClient(p);
       // draw linking lines, if enabled
       if (pText.text_particles.line_linked.enabled) {
         for (let p_other of pText.text_particles.array) {
@@ -485,7 +477,6 @@ const ParticleTextDisplayer = function(tag_id, params) {
     }
   };
 
-  // updateBackgroundParticles
   pText.functions.particles.updateBackgroundParticles = function() {
     const link_params = {
       distance: pText.bg_particles.line_linked.distance,
@@ -503,6 +494,8 @@ const ParticleTextDisplayer = function(tag_id, params) {
       }
       // control behavior if particle hits border
       pText.functions.particles.updateOnBorder(p);
+      // deal with all enabled listener interactions
+      pText.functions.interactivity.bgInteractWithClient(p);
       // draw linking lines, if enabled
       if (pText.bg_particles.line_linked.enabled) {
         for (let p_other of pText.bg_particles.array) {
@@ -513,35 +506,10 @@ const ParticleTextDisplayer = function(tag_id, params) {
     }
   };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   pText.functions.particles.drawParticles = function() {
     /* updates and redraws ALL particles on each frame */
     // clear canvas
     pText.functions.canvas.clear();
-    // pText.canvas.context.clearRect(0, 0, pText.canvas.w, pText.canvas.h);
     // update text particle states (position, velocity, linkage, etc.) and re-draw
     pText.functions.particles.updateTextParticles();
     for (let p of pText.text_particles.array) {
@@ -555,6 +523,160 @@ const ParticleTextDisplayer = function(tag_id, params) {
       }
     }
   };
+
+  /*
+  ========================================
+  =        INTERACTIVITY FUNCTIONS       =
+  ========================================
+  */
+  pText.functions.interactivity.linkParticles = function(p, p_other, link) {
+    let dist = Math.sqrt((p.x - p_other.x) ** 2 + (p.y - p_other.y) ** 2);
+    if (dist <= link.dist) {
+      let opacity = link.opacity - (dist / (link.opacity)) / link.dist;
+      if (opacity > 0) {
+        pText.canvas.context.strokeStyle = link.color;
+        pText.canvas.context.lineWidth = link.width;
+        pText.canvas.context.beginPath();
+        pText.canvas.context.moveTo(p.x, p.y);
+        pText.canvas.context.lineTo(p_other.x, p_other.y);
+        pText.canvas.context.stroke();
+        pText.canvas.context.closePath();
+      }
+    }
+  };
+
+  pText.functions.interactivity.onMouseMove = function(p, p_type, func) {
+    if (pText.mouse.x != null && pText.mouse.y != null) {
+      func(p, p_type);
+    }
+  };
+
+  pText.functions.interactivity.onMouseClick = function(p, p_type, func) {
+    if (pText.mouse.click_x != null && pText.mouse.y != null) {
+      func(p, p_type);
+      pText.mouse.click_x = null;
+      pText.mouse.click_y = null;
+    }
+  };
+
+
+
+  pText.functions.interactivity.repulseParticle = function(p, p_type) {
+
+  };
+
+  pText.functions.interactivity.addEventListeners = function() {
+    // key-value mapping for client interaction functions
+    let function_mapping = {
+      repulse: pText.functions.interactivity.repulseParticle,
+      big_repulse: pText.functions.interactivity.bigRepulseParticle,
+      grab: pText.functions.interactivity.grabParticle
+    }
+    // determine events to listen for
+    let listen_for = {click: false, mouse: false, touch: false};
+    if (pText.text_particles.interactivity.on_click.enabled || pText.bg_particles.interactivity.on_click.enabled) {
+      listen_for.click = listen_for.mouse = true;
+    } else if (pText.text_particles.interactivity.on_hover || pText.bg_particles.interactivity.on_hover) {
+      listen_for.mouse = true;
+    }
+    if (pText.text_particles.interactivity.on_touch.enabled || pText.bg_particles.interactivity.on_touch.enabled) {
+      listen_for.touch = true;
+    }
+     // enable listeners and construct arrays for particle interaction functions
+    if (listen_for.mouse) {
+      // add mouseover and mouseleave EventListeners
+      pText.canvas.el.addEventListener('mouseover', function(e) {
+        let pos_x = e.offsetX || e.clientX,
+            pos_y = e.offsetY || e.clientY;
+        // adjust for retina display (pxratio is 1 if not retina)
+        pText.mouse.x = pos_x * pText.canvas.pxratio;
+        pText.mouse.y = pos_y * pText.canvas.pxratio;
+      });
+      pText.canvas.el.addEventListener('mouseleave', function(e) {
+        // if mouse is not over canvas, set coordinates to null
+        pText.mouse.x = null;
+        pText.mouse.y = null;
+      });
+      // TODO: add info to call appropriate on_hover functions
+      // if (pText.text_particles.interactivity.on_hover.enabled) {
+      //   let func = function_mapping[pText.text_particles.interactivity.on_hover.action];
+      //   pText.text_particles.interactivity.fn_array.push(func)
+      // }
+
+      if (listen_for.click) {
+        pText.canvas.el.addEventListener('click', function(e) {
+          pText.mouse.click_x = pText.mouse.x;
+          pText.mouse.click_y = pText.mouse.y;
+        });
+      }
+      // TODO: add info to call appropriate on_click functions
+
+      if (listen_for.touch) {
+        pText.canvas.el.addEventListener('touchmove', function(e) {
+          let pos_x = e.touches[0].clientX,  // treat touch as mouse
+              pos_y = e.touches[0].clientY;
+          pText.mouse.x = pos_x * pText.canvas.pxratio;
+          pText.mouse.y = pos_y * pText.canvas.pxratio;
+        });
+        pText.canvas.el.addEventListener('touchend', function(e) {
+          pText.mouse.x = null;
+          pText.mouse.y = null;
+        });
+        // TODO: add info to call appropriate on_touch functions
+      }
+    };
+
+
+
+
+
+  };
+
+
+
+
+
+  pText.functions.interactivity.bgInteractWithClient = function(p) {
+    for (let func of pText.bg_particles.interactivity.fn_array) {
+      func(p, 'bg');
+    }
+  };
+
+  pText.functions.interactivity.textInteractWithClient = function(p) {
+    for (let func of pText.text_particles.interactivity.fn_array) {
+      func(p, 'text');
+    }
+  };
+
+
+  //
+  //
+  // pText.functions.interactivity.interactOnHover = function(p, is_text_particle) {
+  //   const p_type = is_text_particle ? 'text_particles' : 'bg_particles';
+  //   const enabled = pText[p_type].interactivity.on_hover.enabled;
+  //   if (enabled) {
+  //     const action = pText[p_type].interactivity.on_hover.
+  //   }
+  // };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   /*
   ========================================
