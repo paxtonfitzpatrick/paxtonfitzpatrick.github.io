@@ -62,7 +62,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
           action: 'repulse',
         },
         on_click: {
-          enabled: true,
+          enabled: false,
           action: 'big_repulse',
         },
         on_touch: {
@@ -151,7 +151,8 @@ const ParticleTextDisplayer = function(tag_id, params) {
     functions: {
       particles: {},
       canvas: {},
-      interactivity: {}
+      interactivity: {},
+      utils: {}
     },
     mouse: {
       x: null,
@@ -281,8 +282,8 @@ const ParticleTextDisplayer = function(tag_id, params) {
     this.friction = Math.random() * 0.01 + 0.95;  // friction TODO: make this customizable?
     this.restlessness = {  // restlessness behavior
       max_displacement: Math.ceil(Math.random() * pText.text_particles.movement.restless.value),
-      x_jitter: pText.functions.randIntInRange(-3, 3),
-      y_jitter: pText.functions.randIntInRange(-3, 3),
+      x_jitter: pText.functions.utils.randIntInRange(-3, 3),
+      y_jitter: pText.functions.utils.randIntInRange(-3, 3),
       on_curr_frame: false
     };
     // set color & opacity
@@ -545,33 +546,25 @@ const ParticleTextDisplayer = function(tag_id, params) {
     }
   };
 
-  pText.functions.interactivity.onMouseMove = function(p, p_type, func) {
+  pText.functions.interactivity.onMouseMove = function(func, args, p) {
     if (pText.mouse.x != null && pText.mouse.y != null) {
-      func(p, p_type);
+      func(p, args);
     }
   };
 
-  pText.functions.interactivity.onMouseClick = function(p, p_type, func) {
+  pText.functions.interactivity.onMouseClick = function(func, args, p) {
     if (pText.mouse.click_x != null && pText.mouse.y != null) {
-      func(p, p_type);
+      func(p, args);
       pText.mouse.click_x = null;
       pText.mouse.click_y = null;
     }
   };
 
-
-
-  pText.functions.interactivity.repulseParticle = function(p, p_type) {
-
+  pText.functions.interactivity.repulseParticle = function(p, args) {
+    // compute distance to mouse
   };
 
   pText.functions.interactivity.addEventListeners = function() {
-    // key-value mapping for client interaction functions
-    let function_mapping = {
-      repulse: pText.functions.interactivity.repulseParticle,
-      big_repulse: pText.functions.interactivity.bigRepulseParticle,
-      grab: pText.functions.interactivity.grabParticle
-    }
     // determine events to listen for
     let listen_for = {click: false, mouse: false, touch: false};
     if (pText.text_particles.interactivity.on_click.enabled || pText.bg_particles.interactivity.on_click.enabled) {
@@ -582,7 +575,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
     if (pText.text_particles.interactivity.on_touch.enabled || pText.bg_particles.interactivity.on_touch.enabled) {
       listen_for.touch = true;
     }
-     // enable listeners and construct arrays for particle interaction functions
+     // enable listeners and add action functions
     if (listen_for.mouse) {
       // add mouseover and mouseleave EventListeners
       pText.canvas.el.addEventListener('mouseover', function(e) {
@@ -597,11 +590,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
         pText.mouse.x = null;
         pText.mouse.y = null;
       });
-      // TODO: add info to call appropriate on_hover functions
-      // if (pText.text_particles.interactivity.on_hover.enabled) {
-      //   let func = function_mapping[pText.text_particles.interactivity.on_hover.action];
-      //   pText.text_particles.interactivity.fn_array.push(func)
-      // }
+      pText.functions.utils.addEventActions('on_hover');
 
       if (listen_for.click) {
         pText.canvas.el.addEventListener('click', function(e) {
@@ -609,11 +598,12 @@ const ParticleTextDisplayer = function(tag_id, params) {
           pText.mouse.click_y = pText.mouse.y;
         });
       }
-      // TODO: add info to call appropriate on_click functions
+      pText.functions.utils.addEventActions('on_click');
 
       if (listen_for.touch) {
+        // treat touch/drag the same as mouse movement
         pText.canvas.el.addEventListener('touchmove', function(e) {
-          let pos_x = e.touches[0].clientX,  // treat touch as mouse
+          let pos_x = e.touches[0].clientX,
               pos_y = e.touches[0].clientY;
           pText.mouse.x = pos_x * pText.canvas.pxratio;
           pText.mouse.y = pos_y * pText.canvas.pxratio;
@@ -622,57 +612,22 @@ const ParticleTextDisplayer = function(tag_id, params) {
           pText.mouse.x = null;
           pText.mouse.y = null;
         });
-        // TODO: add info to call appropriate on_touch functions
+        pText.functions.utils.addEventActions('on_touch');
       }
-    };
-
-
-
-
-
+    }
   };
-
-
-
-
 
   pText.functions.interactivity.bgInteractWithClient = function(p) {
     for (let func of pText.bg_particles.interactivity.fn_array) {
-      func(p, 'bg');
+      func(p);
     }
   };
 
   pText.functions.interactivity.textInteractWithClient = function(p) {
     for (let func of pText.text_particles.interactivity.fn_array) {
-      func(p, 'text');
+      func(p);
     }
   };
-
-
-  //
-  //
-  // pText.functions.interactivity.interactOnHover = function(p, is_text_particle) {
-  //   const p_type = is_text_particle ? 'text_particles' : 'bg_particles';
-  //   const enabled = pText[p_type].interactivity.on_hover.enabled;
-  //   if (enabled) {
-  //     const action = pText[p_type].interactivity.on_hover.
-  //   }
-  // };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -680,12 +635,39 @@ const ParticleTextDisplayer = function(tag_id, params) {
 
   /*
   ========================================
-  =            OTHER FUNCTIONS           =
+  =            UTILS FUNCTIONS           =
   ========================================
   */
-  pText.functions.randIntInRange = function(min, max) {
+  pText.functions.utils.randIntInRange = function(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
+  };
+
+  pText.functions.utils.addEventActions = function(event) {
+    /* event is a particle-client interaction, one of: on_hover, on_click, on_touch */
+    const action_funcs = {
+      repulse: pText.functions.interactivity.repulseParticle,
+      big_repulse: pText.functions.interactivity.repulseParticle,
+      grab: pText.functions.interactivity.grabParticle
+    };
+    let event_wrapper = pText.functions.interactivity.onMouseMove;
+    if (event === 'on_click') {
+      event_wrapper = pText.functions.interactivity.onMouseClick;
+    }
+    // get function from action_funcs mapping
+    if (pText.text_particles.interactivity[event].enabled) {
+      const func = action_funcs[pText.text_particles.interactivity[event].action],
+            args = pText.interactions[pText.text_particles.interactivity[event].action];
+      const partial_func = event_wrapper.bind(null, func, args);
+      // create partial function where remaining arg is an individual particle
+      pText.text_particles.interactivity.fn_array.push(partial_func);
+    }
+    if (pText.bg_particles.interactivity[event].enabled) {
+      const func = action_funcs[pText.bg_particles.interactivity[event].action],
+            args = pText.interactions[pText.bg_particles.interactivity[event].action];
+      const partial_func = event_wrapper.bind(null, func, args);
+      pText.bg_particles.interactivity.fn_array.push(partial_func);
+    }
+  };
 
 
 
