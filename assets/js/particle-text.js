@@ -232,7 +232,6 @@ const ParticleTextDisplayer = function(tag_id, params) {
     pText.canvas.context = pText.canvas.el.getContext('2d');
     pText.canvas.el.width = pText.canvas.w;
     pText.canvas.el.height = pText.canvas.h;
-
     // add event listener for window resize
     window.addEventListener('resize', pText.functions.canvas.onResize);
 
@@ -269,17 +268,22 @@ const ParticleTextDisplayer = function(tag_id, params) {
       }
     }
     if (p_ix + 1 < old_n_particles) {
-      // new canvas size requires fewer particles, so delete extras from end
+      // new canvas size requires fewer particles, so delete ones not updated
       pText.text_particles.array.splice(-(old_n_particles - p_ix - 1));
     }
-
-    /* TODO: call pText.functions.canvas function(s) to:
-        - redraw text and recompute pixels to fill
-        - recompute new number of text particles based on new number of text pixels
-        - push or remove difference in number of text particles in array
-        - reassign remaining text particle positions
-        - recompute new number of background particles based on new canvas size*/
-  }
+    // update number of background particles
+    let new_canvas_area = pText.canvas.w * pText.canvas.h / 1000;
+    if (pText.tmp.retina) {
+      new_canvas_area /= (pText.canvas.pxratio * 2);
+    }
+    const new_n_particles = Math.round(new_canvas_area * pText.bg_particles.density),
+          particle_diff = new_n_particles - pText.bg_particles.array.length;
+    if (particle_diff <= 0) {
+      pText.bg_particles.array.splice(0, particle_diff);
+    } else {
+      pText.bg_particles.array.push(new pText.functions.particles.SingleBackgroundParticle());
+    }
+  };
 
   pText.functions.canvas.clear = function() {
     // convenience function to clear the canvas
@@ -505,7 +509,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
       canvas_area /= (pText.canvas.pxratio * 2);
     }
     // compute total number of particles from density and canvas size
-    const n_particles = canvas_area * pText.bg_particles.density;
+    const n_particles = Math.round(canvas_area * pText.bg_particles.density);
     // push particles to array
     for (let i = 0; i < n_particles; i++) {
       pText.bg_particles.array.push(new pText.functions.particles.SingleBackgroundParticle());
