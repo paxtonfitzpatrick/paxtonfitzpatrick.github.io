@@ -642,6 +642,10 @@ const ParticleTextDisplayer = function(tag_id, params) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
 
+  pText.functions.utils.clamp = function(n, min, max) {
+    return Math.min(Math.max(n, min), max);
+  };
+
   pText.functions.utils.addEventActions = function(event) {
     /* event is a particle-client interaction, one of: on_hover, on_click, on_touch */
     const action_funcs = {
@@ -668,12 +672,6 @@ const ParticleTextDisplayer = function(tag_id, params) {
       pText.bg_particles.interactivity.fn_array.push(partial_func);
     }
   };
-
-
-
-
-
-
 };
 
 
