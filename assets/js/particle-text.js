@@ -234,21 +234,52 @@ const ParticleTextDisplayer = function(tag_id, params) {
     pText.canvas.el.height = pText.canvas.h;
 
     // add event listener for window resize
-    window.addEventListener('resize', function() {
-      pText.canvas.w = pText.canvas.el.offsetWidth * pText.canvas.pxratio;
-      pText.canvas.h = pText.canvas.el.offsetHeight * pText.canvas.pxratio;
-      pText.canvas.el.width = pText.canvas.w;
-      pText.canvas.el.height = pText.canvas.h;
-      /* TODO: call pText.functions.canvas function(s) to:
-          - redraw text and recompute pixels to fill
-          - recompute new number of text particles based on new number of text pixels
-          - push or remove difference in number of text particles in array
-          - reassign remaining text particle positions
-          - recompute new number of background particles based on new canvas size*/
-    });
+    window.addEventListener('resize', pText.functions.canvas.onResize);
 
     // TODO: add event listener for canvas not in view to pause animation and lighten load
   };
+
+  pText.functions.canvas.onResize = function() {
+    // resize canvas
+    pText.canvas.w = pText.canvas.el.offsetWidth * pText.canvas.pxratio;
+    pText.canvas.h = pText.canvas.el.offsetHeight * pText.canvas.pxratio;
+    pText.canvas.el.width = pText.canvas.w;
+    pText.canvas.el.height = pText.canvas.h;
+    // clear canvas, update text pixels
+    const new_pixel_data = pText.functions.canvas.getTextData(),
+          new_w_increment = Math.round(pText.canvas.w / pText.text_particles.density),
+          new_h_increment = Math.round(pText.canvas.h / pText.text_particles.density),
+          old_n_particles = pText.text_particles.array.length;
+    let p_ix = 0;
+    for (let i = 0; i < pText.canvas.w; i += new_w_increment) {
+      for (let j = 0; j < pText.canvas.h; j += new_h_increment) {
+        if (new_pixel_data[(i + j * pText.canvas.w) * 4 + 3] > 128) {
+          // if any particles left in existing array, update x,y position
+          if (p_ix < old_n_particles) {
+            pText.text_particles.array[p_ix].dest_x = i;
+            pText.text_particles.array[p_ix].dest_y = j;
+            p_ix++;
+          } else {
+            // new canvas size requires more particles, so create new ones
+            const init_xy = {x: Math.random() * pText.canvas.w, y: Math.random() * pJS.canvas.h},
+                  dest_xy = {x: i, y: j};
+            pText.text_particles.array.push(new pText.functions.particles.SingleTextParticle(init_xy, dest_xy));
+          }
+        }
+      }
+    }
+    if (p_ix + 1 < old_n_particles) {
+      // new canvas size requires fewer particles, so delete extras from end
+      pText.text_particles.array.splice(-(old_n_particles - p_ix - 1));
+    }
+
+    /* TODO: call pText.functions.canvas function(s) to:
+        - redraw text and recompute pixels to fill
+        - recompute new number of text particles based on new number of text pixels
+        - push or remove difference in number of text particles in array
+        - reassign remaining text particle positions
+        - recompute new number of background particles based on new canvas size*/
+  }
 
   pText.functions.canvas.clear = function() {
     // convenience function to clear the canvas
@@ -258,9 +289,9 @@ const ParticleTextDisplayer = function(tag_id, params) {
   pText.functions.canvas.getTextData = function() {
     // get ImageData object with pixel-wise RGBA values to determine text pixels
     pText.functions.canvas.clear();
-    pText.canvas.context.font = "bold " + (pText.canvas.width) + "px sans-serif";
-    pText.canvas.context.fillText(pText.text_particles.text, pText.canvas.width / 10, pText.canvas.height / 10);
-    const pixel_data = pText.canvas.context.getImageData(0, 0, pText.canvas.width, pText.canvas.height).data;
+    pText.canvas.context.font = "bold " + (pText.canvas.w) + "px sans-serif";
+    pText.canvas.context.fillText(pText.text_particles.text, pText.canvas.w / 10, pText.canvas.h / 10);
+    const pixel_data = pText.canvas.context.getImageData(0, 0, pText.canvas.w, pText.canvas.h).data;
     pText.functions.canvas.clear();
     return pixel_data;
   };
@@ -326,13 +357,15 @@ const ParticleTextDisplayer = function(tag_id, params) {
 
   pText.functions.particles.createTextParticles = function(pixel_data, at_dest = false) {
     // given pixel-wise RGBA data, create text particles
-    for (let i = 0; i < pText.canvas.w; i += Math.round(pText.canvas.w / pText.text_particles.density)) {
-      for (let j = 0; j < pText.canvas.h; j += Math.round(pText.canvas.h / pText.text_particles.density)) {
+    const w_increment = Math.round(pText.canvas.w / pText.text_particles.density),
+          h_increment = Math.round(pText.canvas.h / pText.text_particles.density);
+    for (let i = 0; i < pText.canvas.w; i += w_increment) {
+      for (let j = 0; j < pText.canvas.h; j += h_increment) {
         // if alpha value of pixel is > 128, create a particle whose destination is that pixel
         if (pixel_data[(i + j * pText.canvas.w) * 4 + 3] > 128) {
-          let dest_xy = {x: i, y: j};
+          const dest_xy = {x: i, y: j};
           // if at_dest is true, create the particle at the pixel instead of random point on canvas
-          let init_xy = at_dest ? dest_xy : {x: Math.random() * pJS.canvas.w, y: Math.random() * pJS.canvas.h};
+          const init_xy = at_dest ? dest_xy : {x: Math.random() * pJS.canvas.w, y: Math.random() * pJS.canvas.h};
           pText.text_particles.array.push(new pText.functions.particles.SingleTextParticle(init_xy, dest_xy));
         }
       }
@@ -689,10 +722,6 @@ const ParticleTextDisplayer = function(tag_id, params) {
       func(p, 'text');
     }
   };
-
-
-
-
 
   /*
   ========================================
