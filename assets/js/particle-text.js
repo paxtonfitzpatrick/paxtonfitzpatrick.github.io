@@ -127,12 +127,10 @@ const ParticleTextDisplayer = function(tag_id, params) {
     interactions: {
       repulse: {
         distance: 100,  // trigger distance between mouse/touch and particles
-        duration: 0.4,  // how long interaction lasts
         strength: 100   // how far away the particles are repulsed
       },
       big_repulse: {    // same as repulse, but stronger
         distance: 100,
-        duration: 0.4,
         strength: 100
       },
       // create: {         // number of particles to be created
@@ -546,22 +544,55 @@ const ParticleTextDisplayer = function(tag_id, params) {
     }
   };
 
-  pText.functions.interactivity.onMouseMove = function(func, args, p) {
+  pText.functions.interactivity.onMouseMove = function(func, args, p, p_type) {
     if (pText.mouse.x != null && pText.mouse.y != null) {
-      func(p, args);
+      func(p, args, p_type);
     }
   };
 
-  pText.functions.interactivity.onMouseClick = function(func, args, p) {
+  pText.functions.interactivity.onMouseClick = function(func, args, p, p_type) {
     if (pText.mouse.click_x != null && pText.mouse.y != null) {
-      func(p, args);
+      func(p, args, p_type);
       pText.mouse.click_x = null;
       pText.mouse.click_y = null;
     }
   };
 
-  pText.functions.interactivity.repulseParticle = function(p, args) {
+  pText.functions.interactivity.repulseParticle = function(p, args, p_type) {
     // compute distance to mouse
+    const dx_mouse = p.x - pText.mouse.x,
+          dy_mouse = p.y - pText.mouse.y,
+          mouse_dist = Math.sqrt(dx_mouse * dx_mouse + dy_mouse * dy_mouse);
+
+    if (mouse_dist <= args.distance) {
+      if (p_type === 'bg') {
+        // handle repulsion style for background particles
+        const norm_x = dx_mouse / mouse_dist,
+              norm_y = dy_mouse / mouse_dist,
+              strength = Math.min((1 / args.distance) * (-1 * Math.pow(mouse_dist / args.distance, 2) + 1) * args.distance * args.strength, 50),
+              new_x = p.x + norm_x * strength,
+              new_y = p.y + norm_y * strength;
+        if (pText.bg_particles.movement.bounce_on_border) {
+          // if enabled, only update position if it wouldn't push particle outside canvas
+          if (new_x - p.radius > 0 && new_x + p.radius < pText.canvas.w) {
+            p.x = new_x;
+          }
+          if (new_y - p.radius > 0 && new_y + p.radius < pText.canvas.h) {
+            p.y = new_y;
+          }
+        } else {
+          p.x = new_x;
+          p.y = new_y;
+        }
+      } else {
+        // handle repulsion style for text particles
+        const inv_strength = clamp(300 - args.strength, 10, 300);
+        p.acc_x = (p.acc_x - pText.mouse.x) / inv_strength;
+        p.acc_y = (p.acc_y - pText.mouse.y) / inv_strength;
+        p.vx += p.acc_x;
+        p.vy += p.acc_y;
+      }
+    }
   };
 
   pText.functions.interactivity.addEventListeners = function() {
@@ -619,13 +650,13 @@ const ParticleTextDisplayer = function(tag_id, params) {
 
   pText.functions.interactivity.bgInteractWithClient = function(p) {
     for (let func of pText.bg_particles.interactivity.fn_array) {
-      func(p);
+      func(p, 'bg');
     }
   };
 
   pText.functions.interactivity.textInteractWithClient = function(p) {
     for (let func of pText.text_particles.interactivity.fn_array) {
-      func(p);
+      func(p, 'text');
     }
   };
 
@@ -635,7 +666,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
 
   /*
   ========================================
-  =            UTILS FUNCTIONS           =
+  =            UTIL FUNCTIONS            =
   ========================================
   */
   pText.functions.utils.randIntInRange = function(min, max) {
@@ -675,15 +706,49 @@ const ParticleTextDisplayer = function(tag_id, params) {
 };
 
 
+/*
+========================================
+=           GLOBAL FUNCTIONS           =
+========================================
+*/
+Object.deepExtend = function(destination, source) {
+  // credit: https://andrewdupont.net/2009/08/28/deep-extending-objects-in-javascript/
+  for (var property in source) {
+    if (source[property] && source[property].constructor &&
+     source[property].constructor === Object) {
+      destination[property] = destination[property] || {};
+      arguments.callee(destination[property], source[property]);
+    } else {
+      destination[property] = source[property];
+    }
+  }
+  return destination;
+};
 
+window.requestAnimFrame = (function() {
+  return  window.requestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    window.mozRequestAnimationFrame    ||
+    window.oRequestAnimationFrame      ||
+    window.msRequestAnimationFrame     ||
+    function(callback) {
+      window.setTimeout(callback, 1000 / 60);
+    };
+})();
 
-
-
+window.cancelRequestAnimFrame = (function() {
+  return window.cancelAnimationFrame         ||
+    window.webkitCancelRequestAnimationFrame ||
+    window.mozCancelRequestAnimationFrame    ||
+    window.oCancelRequestAnimationFrame      ||
+    window.msCancelRequestAnimationFrame     ||
+    clearTimeout
+})();
 
 
 /*
 ========================================
-=           LAUNCH FUNCTION            =
+=           LAUNCH FUNCTIONS           =
 ========================================
 */
 window.pTextDom = [];
