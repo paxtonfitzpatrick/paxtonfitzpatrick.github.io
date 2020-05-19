@@ -595,6 +595,28 @@ const ParticleTextDisplayer = function(tag_id, params) {
     }
   };
 
+  pText.functions.interactivity.grabParticle = function(p, args, p_type) {
+    const dx_mouse = p.x - pText.mouse.x,
+          dy_mouse = p.y - pText.mouse.y,
+          mouse_dist = Math.sqrt(dx_mouse * dx_mouse + dy_mouse * dy_mouse);
+
+    if (mouse_dist <= args.distance) {
+      // draw a line between the mouse and the particle
+      const opacity = args.line_opacity - (mouse_dist / (1 / args.line_opacity)) - args.distance;
+      if (opacity > 0) {
+        // draw line, use particle's color TODO: add opacity
+        pText.canvas.context.strokeStyle = p.color;
+        // don't let line be wider than particle
+        pText.canvas.context.lineWidth = Math.min(pText[`'${p_type}_particles'`].line_linked.width, p.radius * 2);
+        pText.canvas.context.beginPath();
+        pText.canvas.context.moveTo(p.x, p.y);
+        pText.canvas.context.lineTo(pText.mouse.x, pText.mouse.y);
+        pText.canvas.context.stroke();
+        pText.canvas.context.closePath();
+      }
+    }
+  };
+
   pText.functions.interactivity.addEventListeners = function() {
     // determine events to listen for
     let listen_for = {click: false, mouse: false, touch: false};
