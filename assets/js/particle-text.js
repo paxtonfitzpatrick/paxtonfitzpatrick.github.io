@@ -144,7 +144,8 @@ const ParticleTextDisplayer = function(tag_id, params) {
     canvas: {
       el: canvas_el,
       w: canvas_el.offsetWidth,
-      h: canvas_el.offsetHeight
+      h: canvas_el.offsetHeight,
+      pxratio: 1
     },
     functions: {
       particles: {},
@@ -158,8 +159,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
       click_x: null,
       click_y: null
     },
-    retina_detect: true,  // helps reduce CPU load on retina displays
-    tmp: {}
+    retina_detect: true  // helps reduce CPU load on retina displays
   }
   // apply params for this instance
   const pText = this.pTextConfig;
@@ -183,6 +183,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
       line_linked_distance: pText.bg_particles.line_linked.distance,
       line_linked_width: pText.bg_particles.line_linked.width,
     },
+    retina: false,
     retina_detect: pText.retina_detect,
     grab_distance: pText.interactions.grab.distance,
     repulse_distance: pText.interactions.repulse.distance,
@@ -196,18 +197,26 @@ const ParticleTextDisplayer = function(tag_id, params) {
   =           CANVAS FUNCTIONS           =
   ========================================
   */
+  pText.functions.canvas.init = function() {
+    pText.functions.canvas.retinaInit();
+    // get context, set size, get area
+    pText.canvas.context = pText.canvas.el.getContext('2d');
+    pText.canvas.el.width = pText.canvas.w;
+    pText.canvas.el.height = pText.canvas.h;
+    pText.canvas.area = (pText.canvas.el.width * pText.canvas.el.height / 1000) / (pText.canvas.pxratio * 2);
+    // add event listener for window resize
+    window.addEventListener('resize', pText.functions.utils.debounce(pText.functions.canvas.onResize, 900));
+    // TODO: add event listener for canvas not in view to pause animation and lighten load
+  };
 
   pText.functions.canvas.retinaInit = function() {
+    // TODO: improve this check, it's dirty and doesn't always work
     if (pText.retina_detect && window.devicePixelRatio > 1) {
-      pText.canvas.pxratio = window.devicePixelRatio;
       pText.tmp.retina = true;
-    } else {
-      pText.canvas.pxratio = 1;
-      pText.tmp.retina = false;
+      pText.canvas.pxratio = window.devicePixelRatio;  // non-retina default is 1
+      pText.canvas.w *= pText.canvas.pxratio;
+      pText.canvas.h *= pText.canvas.pxratio;
     }
-
-    pText.canvas.w = pText.canvas.el.offsetWidth * pText.canvas.pxratio;
-    pText.canvas.h = pText.canvas.el.offsetHeight * pText.canvas.pxratio;
     pText.text_particles.size.value = pText.tmp.text_particles.size * pText.canvas.pxratio;
     pText.text_particles.size.animate.speed = pText.tmp.text_particles.size_anim_speed * pText.canvas.pxratio;
     pText.text_particles.movement.speed = pText.tmp.text_particles.move_speed * pText.canvas.pxratio;
@@ -226,39 +235,30 @@ const ParticleTextDisplayer = function(tag_id, params) {
     pText.interactions.big_repulse.strength = pText.tmp.big_repulse_strength * pText.canvas.pxratio;
   };
 
-  pText.functions.canvas.init = function() {
-    pText.functions.canvas.retinaInit();
-    // get context, set size, set text alignment
-    pText.canvas.context = pText.canvas.el.getContext('2d');
-    pText.canvas.el.width = pText.canvas.w;
-    pText.canvas.el.height = pText.canvas.h;
-    // add event listener for window resize
-    window.addEventListener('resize', pText.functions.utils.debounce(pText.functions.canvas.onResize, 300));
-
-    // TODO: add event listener for canvas not in view to pause animation and lighten load
-  };
-
   pText.functions.canvas.onResize = function() {
-    // resize canvas
+    // store old canvas width & resize
+    const old_canvas_w = pText.canvas.w,
+          old_n_particles = pText.text_particles.array.length;
     pText.canvas.w = pText.canvas.el.offsetWidth * pText.canvas.pxratio;
     pText.canvas.h = pText.canvas.el.offsetHeight * pText.canvas.pxratio;
     pText.canvas.el.width = pText.canvas.w;
     pText.canvas.el.height = pText.canvas.h;
-    // clear canvas, update text pixels
+    // compute new text pixels
     const new_pixel_data = pText.functions.canvas.getTextData(),
           new_increment = Math.round(pText.canvas.w / pText.text_particles.density),
-          old_n_particles = pText.text_particles.array.length;
+          particle_resize_factor = pText.canvas.w / old_canvas_w;
+    // scale size of each particle by window width change, update positions
     let p_ix = 0;
     for (let i = 0; i < pText.canvas.w; i += new_increment) {
       for (let j = 0; j < pText.canvas.h; j += new_increment) {
         if (new_pixel_data[(i + j * pText.canvas.w) * 4 + 3] > 128) {
-          // if any particles left in existing array, update x,y position
           if (p_ix < old_n_particles) {
-            pText.text_particles.array[p_ix].dest_x = i;
-            pText.text_particles.array[p_ix].dest_y = j;
-            p_ix++;
+            const p = pText.text_particles.array[p_ix];
+            p.dest_x = i;
+            p.dest_y = j;
+            p.radius *= particle_resize_factor;
+            p_ix ++;
           } else {
-            // new canvas size requires more particles, so create new ones
             const init_xy = {x: Math.random() * pText.canvas.w, y: Math.random() * pText.canvas.h},
                   dest_xy = {x: i, y: j};
             pText.text_particles.array.push(new pText.functions.particles.SingleTextParticle(init_xy, dest_xy));
@@ -266,21 +266,9 @@ const ParticleTextDisplayer = function(tag_id, params) {
         }
       }
     }
-    if (p_ix + 1 < old_n_particles) {
+    if (p_ix < old_n_particles) {
       // new canvas size requires fewer particles, so delete ones not updated
-      pText.text_particles.array.splice(-(old_n_particles - p_ix - 1));
-    }
-    // update number of background particles
-    let new_canvas_area = pText.canvas.w * pText.canvas.h / 1000;
-    if (pText.tmp.retina) {
-      new_canvas_area /= (pText.canvas.pxratio * 2);
-    }
-    const new_n_particles = Math.round(new_canvas_area * pText.bg_particles.density),
-          particle_diff = new_n_particles - pText.bg_particles.array.length;
-    if (particle_diff <= 0) {
-      pText.bg_particles.array.splice(0, particle_diff);
-    } else {
-      pText.bg_particles.array.push(new pText.functions.particles.SingleBackgroundParticle());
+      pText.text_particles.array.splice(-(old_n_particles - p_ix));
     }
   };
 
@@ -330,7 +318,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
     }
     // this.opacity = (pText.text_particles.opacity.random ? Math.random() : 1) * pText.text_particles.opacity.value;
     // set size & size animation params
-    this.radius = (pText.text_particles.size.random ? Math.min(Math.random(), 0.5) : 1) * pText.text_particles.size.value;
+    this.radius = (pText.text_particles.size.random ? Math.min(Math.random(), 0.5) : 1) * pText.text_particles.size.value * pText.canvas.w / 1500;
     if (pText.text_particles.size.animate.enabled) {
       this.grow = false;  // controls whether particle is currently growing or shrinking
       this.resize_speed = pText.text_particles.size.animate.speed / 100;
