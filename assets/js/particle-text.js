@@ -39,7 +39,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
           speed: 1,
           min: 0,
           sync: false
-        },
+        }
       },
       movement: {
         speed: 1,
@@ -200,7 +200,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
   pText.functions.canvas.retinaInit = function() {
     if (pText.retina_detect && window.devicePixelRatio > 1) {
       pText.canvas.pxratio = window.devicePixelRatio;
-      pText.tmp.retina_detect = true;
+      pText.tmp.retina = true;
     } else {
       pText.canvas.pxratio = 1;
       pText.tmp.retina = false;
@@ -233,7 +233,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
     pText.canvas.el.width = pText.canvas.w;
     pText.canvas.el.height = pText.canvas.h;
     // add event listener for window resize
-    window.addEventListener('resize', pText.functions.canvas.onResize);
+    window.addEventListener('resize', pText.functions.utils.debounce(pText.functions.canvas.onResize, 300));
 
     // TODO: add event listener for canvas not in view to pause animation and lighten load
   };
@@ -246,12 +246,11 @@ const ParticleTextDisplayer = function(tag_id, params) {
     pText.canvas.el.height = pText.canvas.h;
     // clear canvas, update text pixels
     const new_pixel_data = pText.functions.canvas.getTextData(),
-          new_w_increment = Math.round(pText.canvas.w / pText.text_particles.density),
-          new_h_increment = Math.round(pText.canvas.h / pText.text_particles.density),
+          new_increment = Math.round(pText.canvas.w / pText.text_particles.density),
           old_n_particles = pText.text_particles.array.length;
     let p_ix = 0;
-    for (let i = 0; i < pText.canvas.w; i += new_w_increment) {
-      for (let j = 0; j < pText.canvas.h; j += new_h_increment) {
+    for (let i = 0; i < pText.canvas.w; i += new_increment) {
+      for (let j = 0; j < pText.canvas.h; j += new_increment) {
         if (new_pixel_data[(i + j * pText.canvas.w) * 4 + 3] > 128) {
           // if any particles left in existing array, update x,y position
           if (p_ix < old_n_particles) {
@@ -260,7 +259,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
             p_ix++;
           } else {
             // new canvas size requires more particles, so create new ones
-            const init_xy = {x: Math.random() * pText.canvas.w, y: Math.random() * pJS.canvas.h},
+            const init_xy = {x: Math.random() * pText.canvas.w, y: Math.random() * pText.canvas.h},
                   dest_xy = {x: i, y: j};
             pText.text_particles.array.push(new pText.functions.particles.SingleTextParticle(init_xy, dest_xy));
           }
@@ -293,8 +292,9 @@ const ParticleTextDisplayer = function(tag_id, params) {
   pText.functions.canvas.getTextData = function() {
     // get ImageData object with pixel-wise RGBA values to determine text pixels
     pText.functions.canvas.clear();
-    pText.canvas.context.font = "bold " + (pText.canvas.w) + "px sans-serif";
-    pText.canvas.context.fillText(pText.text_particles.text, pText.canvas.w / 10, pText.canvas.h / 10);
+    pText.canvas.context.font = "bold " + (pText.canvas.w / 15) + "px sans-serif";
+    pText.canvas.context.textAlign = "center";
+    pText.canvas.context.fillText(pText.text_particles.text, pText.canvas.w / 2, pText.canvas.h / 2);
     const pixel_data = pText.canvas.context.getImageData(0, 0, pText.canvas.w, pText.canvas.h).data;
     pText.functions.canvas.clear();
     return pixel_data;
@@ -315,7 +315,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
     this.vy = (Math.random() - 0.5) * pText.text_particles.movement.speed;  // initial y-velocity
     this.acc_x = 0;  // initial x-acceleration
     this.acc_y = 0;  // initial y-acceleration
-    this.friction = Math.random() * 0.01 + 0.95;  // friction TODO: make this customizable?
+    this.friction = Math.random() * 0.01 + 0.92;  // friction TODO: make this customizable?
     this.restlessness = {  // restlessness behavior
       max_displacement: Math.ceil(Math.random() * pText.text_particles.movement.restless.value),
       x_jitter: pText.functions.utils.randIntInRange(-3, 3),
@@ -330,7 +330,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
     }
     // this.opacity = (pText.text_particles.opacity.random ? Math.random() : 1) * pText.text_particles.opacity.value;
     // set size & size animation params
-    this.radius = (pText.text_particles.size.random ? Math.random() : 1) * pText.text_particles.size.value;
+    this.radius = (pText.text_particles.size.random ? Math.min(Math.random(), 0.5) : 1) * pText.text_particles.size.value;
     if (pText.text_particles.size.animate.enabled) {
       this.grow = false;  // controls whether particle is currently growing or shrinking
       this.resize_speed = pText.text_particles.size.animate.speed / 100;
@@ -361,15 +361,14 @@ const ParticleTextDisplayer = function(tag_id, params) {
 
   pText.functions.particles.createTextParticles = function(pixel_data, at_dest = false) {
     // given pixel-wise RGBA data, create text particles
-    const w_increment = Math.round(pText.canvas.w / pText.text_particles.density),
-          h_increment = Math.round(pText.canvas.h / pText.text_particles.density);
-    for (let i = 0; i < pText.canvas.w; i += w_increment) {
-      for (let j = 0; j < pText.canvas.h; j += h_increment) {
+    const increment = Math.round(pText.canvas.w / pText.text_particles.density);
+    for (let i = 0; i < pText.canvas.w; i += increment) {
+      for (let j = 0; j < pText.canvas.h; j += increment) {
         // if alpha value of pixel is > 128, create a particle whose destination is that pixel
         if (pixel_data[(i + j * pText.canvas.w) * 4 + 3] > 128) {
           const dest_xy = {x: i, y: j};
           // if at_dest is true, create the particle at the pixel instead of random point on canvas
-          const init_xy = at_dest ? dest_xy : {x: Math.random() * pJS.canvas.w, y: Math.random() * pJS.canvas.h};
+          const init_xy = at_dest ? dest_xy : {x: Math.random() * pText.canvas.w, y: Math.random() * pText.canvas.h};
           pText.text_particles.array.push(new pText.functions.particles.SingleTextParticle(init_xy, dest_xy));
         }
       }
@@ -437,6 +436,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
     };
     for (let p of pText.text_particles.array) {
       // update position, velocity, acceleration
+      // TODO: factor out this check that runs for each particle for each frame
       if ((pText.text_particles.movement.restless.enabled) && (p.restlessness.on_curr_frame)) {
         // if restless activity is enabled & particle is in restless mode, animate some random movement
         pText.functions.particles.jitterParticle(p);
@@ -478,7 +478,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
     }
     this.opacity = pText.bg_particles.opacity.value;
     // size
-    this.radius = (pText.bg_particles.size.random ? Math.random() : 1) * pText.bg_particles.size.value;
+    this.radius = (pText.bg_particles.size.random ? Math.max(Math.random(), 0.5) : 1) * pText.bg_particles.size.value;
     if (pText.bg_particles.size.animate.enabled) {
       this.grow = false;
       this.resize_speed = pText.bg_particles.size.animate.speed / 100;
@@ -550,9 +550,11 @@ const ParticleTextDisplayer = function(tag_id, params) {
     // clear canvas
     pText.functions.canvas.clear();
     // update text particle states (position, velocity, linkage, etc.) and re-draw
-    pText.functions.particles.updateTextParticles();
-    for (let p of pText.text_particles.array) {
-      p.draw();
+    if (pText.text_particles.enabled) {
+      pText.functions.particles.updateTextParticles();
+      for (let p of pText.text_particles.array) {
+        p.draw();
+      }
     }
     // update and re-draw background particles, if enabled
     if (pText.bg_particles.enabled) {
@@ -617,9 +619,9 @@ const ParticleTextDisplayer = function(tag_id, params) {
         }
       } else {
         // handle repulsion style for text particles
-        const inv_strength = clamp(300 - args.strength, 10, 300);
-        p.acc_x = (p.acc_x - pText.mouse.x) / inv_strength;
-        p.acc_y = (p.acc_y - pText.mouse.y) / inv_strength;
+        const inv_strength = pText.functions.utils.clamp(300 - args.strength, 10, 300);
+        p.acc_x = (p.x - pText.mouse.x) / inv_strength;
+        p.acc_y = (p.y - pText.mouse.y) / inv_strength;
         p.vx += p.acc_x;
         p.vy += p.acc_y;
       }
@@ -675,8 +677,8 @@ const ParticleTextDisplayer = function(tag_id, params) {
     }
      // enable listeners and add action functions
     if (listen_for.mouse) {
-      // add mouseover and mouseleave EventListeners
-      pText.canvas.el.addEventListener('mouseover', function(e) {
+      // add mousemove and mouseleave EventListeners
+      pText.canvas.el.addEventListener('mousemove', function(e) {
         let pos_x = e.offsetX || e.clientX,
             pos_y = e.offsetY || e.clientY;
         // adjust for retina display (pxratio is 1 if not retina)
@@ -740,6 +742,15 @@ const ParticleTextDisplayer = function(tag_id, params) {
     return Math.min(Math.max(n, min), max);
   };
 
+  pText.functions.utils.debounce = function(func, min_interval) {
+    // credit: https://stackoverflow.com/a/45905199/9986591
+    let timer;
+    return function(event) {
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(func, min_interval, event);
+    };
+  };
+
   pText.functions.utils.addEventActions = function(event) {
     /* event is a particle-client interaction, one of: on_hover, on_click, on_touch */
     const action_funcs = {
@@ -776,8 +787,12 @@ const ParticleTextDisplayer = function(tag_id, params) {
     pText.functions.interactivity.addEventListeners();
     pText.functions.canvas.init();
     const text_pixels = pText.functions.canvas.getTextData();
-    pText.functions.particles.createTextParticles(text_pixels);
-    pText.functions.particles.createBackgroundParticles();
+    if (pText.text_particles.enabled) {
+      pText.functions.particles.createTextParticles(text_pixels);
+    }
+    if (pText.bg_particles.enabled) {
+      pText.functions.particles.createBackgroundParticles();
+    }
     pText.functions.particles.animateParticles();
   };
 
@@ -825,7 +840,7 @@ window.cancelRequestAnimFrame = (function() {
 
 window.pTextDom = [];
 
-window.particleTextDisplay = function(tag_id, params){
+window.particleTextDisplay = function(tag_id, params) {
   // get target element by ID, check for existing canvases
   const pText_el = document.getElementById(tag_id),
       canvas_classname = 'particle-text-canvas-el',
