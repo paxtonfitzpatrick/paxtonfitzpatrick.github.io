@@ -205,7 +205,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
     pText.canvas.el.height = pText.canvas.h;
     pText.canvas.area = (pText.canvas.el.width * pText.canvas.el.height / 1000) / (pText.canvas.pxratio * 2);
     // add event listener for window resize
-    window.addEventListener('resize', pText.functions.utils.debounce(pText.functions.canvas.onResize, 900));
+    window.addEventListener('resize', pText.functions.utils.debounce(pText.functions.canvas.onResize, 150));
     // TODO: add event listener for canvas not in view to pause animation and lighten load
   };
 
@@ -235,40 +235,54 @@ const ParticleTextDisplayer = function(tag_id, params) {
     pText.interactions.big_repulse.strength = pText.tmp.big_repulse_strength * pText.canvas.pxratio;
   };
 
+  // pText.functions.canvas.onResize = function() {
+  //   // store old canvas width & resize
+  //   const old_canvas_w = pText.canvas.w,
+  //         old_n_particles = pText.text_particles.array.length;
+  //   pText.canvas.w = pText.canvas.el.offsetWidth * pText.canvas.pxratio;
+  //   pText.canvas.h = pText.canvas.el.offsetHeight * pText.canvas.pxratio;
+  //   pText.canvas.el.width = pText.canvas.w;
+  //   pText.canvas.el.height = pText.canvas.h;
+  //   // compute new text pixels
+  //   const new_pixel_data = pText.functions.canvas.getTextData(),
+  //         new_increment = Math.round(pText.canvas.w / pText.text_particles.density),
+  //         particle_resize_factor = pText.canvas.w / old_canvas_w;
+  //   // scale size of each particle by window width change, update positions
+  //   let p_ix = 0;
+  //   for (let i = 0; i < pText.canvas.w; i += new_increment) {
+  //     for (let j = 0; j < pText.canvas.h; j += new_increment) {
+  //       if (new_pixel_data[(i + j * pText.canvas.w) * 4 + 3] > 128) {
+  //         if (p_ix < old_n_particles) {
+  //           const p = pText.text_particles.array[p_ix];
+  //           p.dest_x = i;
+  //           p.dest_y = j;
+  //           p.radius *= particle_resize_factor;
+  //           p_ix ++;
+  //         } else {
+  //           const init_xy = {x: Math.random() * pText.canvas.w, y: Math.random() * pText.canvas.h},
+  //                 dest_xy = {x: i, y: j};
+  //           pText.text_particles.array.push(new pText.functions.particles.SingleTextParticle(init_xy, dest_xy));
+  //         }
+  //       }
+  //     }
+  //   }
+  //   if (p_ix < old_n_particles) {
+  //     // new canvas size requires fewer particles, so delete ones not updated
+  //     pText.text_particles.array.splice(-(old_n_particles - p_ix));
+  //   }
+  // };
+
   pText.functions.canvas.onResize = function() {
-    // store old canvas width & resize
-    const old_canvas_w = pText.canvas.w,
-          old_n_particles = pText.text_particles.array.length;
+    // resize canvas
     pText.canvas.w = pText.canvas.el.offsetWidth * pText.canvas.pxratio;
     pText.canvas.h = pText.canvas.el.offsetHeight * pText.canvas.pxratio;
     pText.canvas.el.width = pText.canvas.w;
     pText.canvas.el.height = pText.canvas.h;
     // compute new text pixels
-    const new_pixel_data = pText.functions.canvas.getTextData(),
-          new_increment = Math.round(pText.canvas.w / pText.text_particles.density),
-          particle_resize_factor = pText.canvas.w / old_canvas_w;
-    // scale size of each particle by window width change, update positions
-    let p_ix = 0;
-    for (let i = 0; i < pText.canvas.w; i += new_increment) {
-      for (let j = 0; j < pText.canvas.h; j += new_increment) {
-        if (new_pixel_data[(i + j * pText.canvas.w) * 4 + 3] > 128) {
-          if (p_ix < old_n_particles) {
-            const p = pText.text_particles.array[p_ix];
-            p.dest_x = i;
-            p.dest_y = j;
-            p.radius *= particle_resize_factor;
-            p_ix ++;
-          } else {
-            const init_xy = {x: Math.random() * pText.canvas.w, y: Math.random() * pText.canvas.h},
-                  dest_xy = {x: i, y: j};
-            pText.text_particles.array.push(new pText.functions.particles.SingleTextParticle(init_xy, dest_xy));
-          }
-        }
-      }
-    }
-    if (p_ix < old_n_particles) {
-      // new canvas size requires fewer particles, so delete ones not updated
-      pText.text_particles.array.splice(-(old_n_particles - p_ix));
+    pText.text_particles.array = [];
+    const text_pixels = pText.functions.canvas.getTextData();
+    if (pText.text_particles.enabled) {
+      pText.functions.particles.createTextParticles(text_pixels, true);
     }
   };
 
@@ -280,7 +294,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
   pText.functions.canvas.getTextData = function() {
     // get ImageData object with pixel-wise RGBA values to determine text pixels
     pText.functions.canvas.clear();
-    pText.canvas.context.font = "bold " + (pText.canvas.w / 15) + "px sans-serif";
+    pText.canvas.context.font = "bold " + (pText.canvas.w / 12) + "px sans-serif";
     pText.canvas.context.textAlign = "center";
     pText.canvas.context.fillText(pText.text_particles.text, pText.canvas.w / 2, pText.canvas.h / 2);
     const pixel_data = pText.canvas.context.getImageData(0, 0, pText.canvas.w, pText.canvas.h).data;
@@ -318,7 +332,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
     }
     // this.opacity = (pText.text_particles.opacity.random ? Math.random() : 1) * pText.text_particles.opacity.value;
     // set size & size animation params
-    this.radius = (pText.text_particles.size.random ? Math.min(Math.random(), 0.5) : 1) * pText.text_particles.size.value * pText.canvas.w / 1500;
+    this.radius = (pText.text_particles.size.random ? Math.max(Math.random(), 0.5) : 1) * pText.text_particles.size.value * pText.canvas.w / 1500;
     if (pText.text_particles.size.animate.enabled) {
       this.grow = false;  // controls whether particle is currently growing or shrinking
       this.resize_speed = pText.text_particles.size.animate.speed / 100;
@@ -794,7 +808,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
 */
 Object.deepExtend = function(destination, source) {
   // credit: https://andrewdupont.net/2009/08/28/deep-extending-objects-in-javascript/
-  for (var property in source) {
+  for (let property in source) {
     if (source[property] && source[property].constructor &&
      source[property].constructor === Object) {
       destination[property] = destination[property] || {};
