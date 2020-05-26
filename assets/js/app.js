@@ -2,7 +2,7 @@ particleTextDisplay('particle-text',
   {
     "text_particles": {
       "enabled": true,
-      "density": 500,
+      "density": 450,
       "color": "#fff",
       "opacity": {
         "value": 1,
@@ -69,7 +69,7 @@ particleTextDisplay('particle-text',
         "bounce_on_border": false
       },
       "line_linked": {
-        "enabled": true,
+        "enabled": false,
         "distance": 100,
         "color": "#fff",
         "opacity": 1,
@@ -93,7 +93,7 @@ particleTextDisplay('particle-text',
     "interactions": {
       "repulse": {
         "distance": 100,
-        "strength": 100
+        "strength": 200
       },
       "big_repulse": {
         "distance": 100,
@@ -104,6 +104,6 @@ particleTextDisplay('particle-text',
         "line_opacity": 1
       }
     },
-    retina_detect: true
+    retina_detect: false
   }
 );

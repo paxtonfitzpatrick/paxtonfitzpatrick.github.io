@@ -505,13 +505,8 @@ const ParticleTextDisplayer = function(tag_id, params) {
   pText.functions.particles.SingleBackgroundParticle.prototype.draw = pText.functions.particles.SingleTextParticle.prototype.draw;
 
   pText.functions.particles.createBackgroundParticles = function () {
-    // compute get number of pixels in canvas
-    let canvas_area = pText.canvas.w * pText.canvas.h / 1000;
-    if (pText.tmp.retina) {
-      canvas_area /= (pText.canvas.pxratio * 2);
-    }
     // compute total number of particles from density and canvas size
-    const n_particles = Math.round(canvas_area * pText.bg_particles.density);
+    const n_particles = Math.round(pText.canvas.area * pText.bg_particles.density);
     // push particles to array
     for (let i = 0; i < n_particles; i++) {
       pText.bg_particles.array.push(new pText.functions.particles.SingleBackgroundParticle());
