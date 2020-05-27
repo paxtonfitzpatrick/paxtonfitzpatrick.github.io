@@ -104,35 +104,48 @@ particleTextDisplay('particle-animation',
         "line_opacity": 1
       }
     },
-    retina_detect: false
+    "retina_detect": false
   }
 );
 
 particleImageDisplay('particle-animation',
   {
     "particles": {
+      "density": 300,
+      "color": "#fff",
+      "opactiy": {
+        "value": 1
+      },
       "size": {
         "value": 2,
         "random": false,
-        "animate": {
-          "enabled": false,
-          "speed": 20,
-          "min": 0,
-          "sync": false
-        }
       },
       "movement": {
         "speed": 1,
-        "restless": {
-          "enabled": false,
-          "value": 10,
-          "sync": false
-        }
       },
+      "interactivity": {
+        "on_hover": {
+          "enabled": true,
+          "action": "repulse"
+        },
+        "on_click": {
+          "enabled": false,
+          "action": "big_repulse"
+        },
+        "on_touch": {
+          "enabled": true,
+          "action": "repulse"
+        },
+      }
     },
     "image": {
-      "size": 1
-    }
+      "size": {
+        "width_pct": 40,
+        "min_px": 50,
+        "max_px": 400
+      }
+    },
+    "retina_detect": false
   }
 );
 
