@@ -1,8 +1,8 @@
-particleTextDisplay('particle-text',
+particleTextDisplay('particle-animation',
   {
     "text_particles": {
       "enabled": true,
-      "density": 450,
+      "density": 300,
       "color": "#fff",
       "opacity": {
         "value": 1,
@@ -107,3 +107,32 @@ particleTextDisplay('particle-text',
     retina_detect: false
   }
 );
+
+particleImageDisplay('particle-animation',
+  {
+    "particles": {
+      "size": {
+        "value": 2,
+        "random": false,
+        "animate": {
+          "enabled": false,
+          "speed": 20,
+          "min": 0,
+          "sync": false
+        }
+      },
+      "movement": {
+        "speed": 1,
+        "restless": {
+          "enabled": false,
+          "value": 10,
+          "sync": false
+        }
+      },
+    },
+    "image": {
+      "size": 1
+    }
+  }
+);
+
