@@ -52,7 +52,13 @@ const ParticleImageDisplayer = function(tag_id, params) {
       }
     },
     image: {
-      size: 5
+      x: 0,
+      y: 0,
+      size: {
+        width_pct: 40,
+        min_px: 50,
+        max_px: 400
+      }
     },
     interactions: {
       repulse: {
@@ -65,6 +71,7 @@ const ParticleImageDisplayer = function(tag_id, params) {
       },
       grab: {
         distance: 100,
+        line_width: 1,
         line_opacity: 1
       }
     },
@@ -147,6 +154,7 @@ const ParticleImageDisplayer = function(tag_id, params) {
     pImg.canvas.el.width = pImg.canvas.w;
     pImg.canvas.el.height = pImg.canvas.h;
     pImg.particles.array = [];
+    pImg.functions.image.resize();
     const image_pixels = pImg.functions.canvas.getImagePixels();
     pImg.functions.particles.createImageParticles(image_pixels, true);
   };
@@ -156,9 +164,11 @@ const ParticleImageDisplayer = function(tag_id, params) {
   };
 
   pImg.functions.particles.getImagePixels = function() {
-    // clear the canvas
     pImg.functions.canvas.clear();
-    //
+    pImg.canvas.context.drawImage(pImg.image.x, pImg.image.y);
+    const pixel_data = pImg.canvas.context.getImageData(pImg.image.x, pImg.image.y, pImg.image.obj.width, pImg.image.obj.height);
+    pImg.functions.canvas.clear();
+    return pixel_data;
   };
 
   /*
@@ -166,35 +176,287 @@ const ParticleImageDisplayer = function(tag_id, params) {
   =           IMAGE FUNCTIONS            =
   ========================================
   */
-
   pImg.functions.image.load = function() {
     pImg.image.obj = pImg.image = new Image();
     pImg.image.obj.addEventListener('load', function() {
-      // get aspect ratio (doesn't change on resize, so do separately)
-      pImg.image.ratio = pImg.image.obj.width / pImg.image.obj.height;
+      // get aspect ratio (only have to compute once on initial load)
+      pImg.image.ratio = pImg.image.obj.height / pImg.image.obj.width;
       pImg.functions.image.resize();
     });
     pImg.image.obj.src = pImg.src_path;
-
-    pImg.image.obj.height =
-
-  }
+  };
 
   pImg.functions.image.resize = function() {
+    // resize the image and set x,y coords to align in the center of the canvas
+    const new_width = Math.round(pImg.canvas.w * pImg.image.size.width_pct / 100);
+    if (new_width < pImg.image.size.min_px) {
+      pImg.image.obj.width = pImg.image.size.min_px;
+    } else if (new_width > pImg.image.size.max_px) {
+      pImg.image.obj.width = pImg.image.size.max_px;
+    } else {
+      pImg.image.obj.width = new_width;
+    }
+    pImg.image.obj.height = Math.round(pImg.image.obj.width * pImg.image.ratio);
+    pImg.image.x = Math.round(pImg.canvas.w  / 2 - pImg.image.obj.width / 2);
+    pImg.image.y = Math.round(pImg.canvas.h / 2 - pImg.image.obj.height / 2);
+  };
 
-    pImg.image.obj.width = Math.round(pImg.canvas.w * pImg.image.size / 100);
-  }
+  /*
+  ========================================
+  =          PARTICLE FUNCTIONS          =
+  ========================================
+  */
+  pImg.functions.particles.SingleImageParticle = function(init_xy, dest_xy) {
+    this.x = init_xy.x;
+    this.y = init_xy.y;
+    this.dest_x = dest_xy.x;
+    this.dest_y = dest_xy.y;
+    this.vx = (Math.random() - 0.5) * pImg.particles.movement.speed;
+    this.vy = (Math.random() - 0.5) * pImg.particles.movement.speed;
+    this.acc_x = 0;
+    this.acc_y = 0;
+    this.friction = Math.random() * 0.01 + 0.92;
+    this.restlessness = {
+      max_displacement: Math.ceil(Math.random() * pImg.particles.movement.restless.value),
+      x_jitter: pImg.functions.utils.randIntInRange(-3, 3),
+      y_jitter: pImg.functions.utils.randIntInRange(-3, 3),
+      on_curr_frame: false
+    };
+    if (pImg.particles.color instanceof Array) {
+      this.color = pImg.particles.color[Math.floor(Math.random() * (pImg.particles.color.length + 1))];
+    } else {
+      this.color = pImg.particles.color;
+    }
+    this.radius = (pImg.particles.size.random ? Math.max(Math.random(), 0.5) : 1) * pImg.particles.size.value * pImg.canvas.w / 1500;
+    if (pImg.particles.size.animate.enabled) {
+      this.grow = false;
+      this.resize_speed = pImg.particles.size.animate.speed / 100;
+      if (!pImg.particles.size.animate.sync) {
+        this.resize_speed *= Math.random();
+      }
+    }
+  };
 
+  pImg.functions.particles.SingleImageParticle.prototype.draw = function() {
+    pImg.canvas.context.fillStyle = this.color;
+    pImg.canvas.context.beginPath();
+    pImg.canvas.context.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+    pImg.canvas.context.fill();
+  };
 
+  pImg.functions.particles.createImageParticles = function(pixel_data, at_dest = false) {
+    const increment = Math.round(pImg.canvas.w / pImg.particles.density);
+    for (let i = 0; i < pixel_data.width; i += increment) {
+      for (let j = 0; j < pixel_data.height; j += increment) {
+        if (pixel_data.data[(i + j * pixel_data.width) * 4 + 3] > 128) {
+          const dest_xy = {x: i, y: j};
+          const init_xy = at_dest ? dest_xy : {x: Math.random() * pImg.canvas.w, y: Math.random() * pImg.canvas.h};
+          pImg.particles.array.push(new pImg.functions.particles.SingleImageParticle(init_xy, dest_xy));
+        }
+      }
+    }
+  };
 
+  pImg.functions.particles.updateParticles = function() {
+    for (let p of pImg.particles.array) {
+      if ((pImg.particles.movement.restless.enabled) && (p.restlessness.on_curr_frame)) {
+        // if restless activity is enabled & particle is in restless mode, animate some random movement
+        pImg.functions.particles.jitterParticle(p);
+      } else {
+        // otherwise, update position with approach to destination
+        p.acc_x = (p.dest_x - p.x) / 500;
+        p.acc_y = (p.dest_y - p.y) / 500;
+        p.vx = (p.vx + p.acc_x) * p.friction;
+        p.vy = (p.vy + p.acc_y) * p.friction;
+        p.x += p.vx;
+        p.y += p.vy;
+      }
+      if (pImg.particles.size.animate.enabled) {
+        pImg.functions.particles.updateParticleSize(p);
+      }
+      pImg.functions.interactivity.interactWithClient(p);
+    }
+  };
 
+  pImg.functions.particles.jitterParticle = function(p) {
+    p.x += p.restlessness.x_jitter;
+    p.y += p.restlessness.y_jitter;
+    if (Math.sqrt((p.dest_x - p.x) ** 2 + (p.dest_y - p.y) ** 2) >= pImg.particles.movement.restless.value) {
+      p.restlessness.on_curr_frame = false;
+    }
+  };
 
+  pImg.functions.particles.updateParticleSize = function(p) {
+    if (p.grow) {
+      p.radius += p.resize_speed;
+      if (p.radius >= pImg.particles.size.value) {
+        p.grow = false;
+      }
+    } else {
+      p.radius -= p.resize_speed;
+      if (p.radius <= pImg.particles.size.animate.min) {
+        p.grow = true;
+      }
+    }
+    if (p.radius < 0) {
+      p.radius = 0;
+    }
+  };
 
+  pImg.functions.particles.animateParticles = function() {
+    pImg.functions.canvas.clear()
+    pImg.functions.particles.updateParticles();
+    for (let p of pImg.particles.array) {
+      p.draw();
+    }
+    requestAnimFrame(pImg.functions.particles.animateParticles);
+  };
 
+  /*
+  ========================================
+  =        INTERACTIVITY FUNCTIONS       =
+  ========================================
+  */
+  pImg.functions.interactivity.repulseParticle = function(p, args) {
+    // compute distance to mouse
+    const dx_mouse = p.x - pImg.mouse.x,
+          dy_mouse = p.y - pImg.mouse.y,
+          mouse_dist = Math.sqrt(dx_mouse * dx_mouse + dy_mouse * dy_mouse),
+          inv_strength = pImg.functions.utils.clamp(300 - args.strength, 10, 300);
+    if (mouse_dist <= args.distance) {
+      p.acc_x = (p.x - pImg.mouse.x) / inv_strength;
+      p.acc_y = (p.y - pImg.mouse.y) / inv_strength;
+      p.vx += p.acc_x;
+      p.vy += p.acc_y;
+    }
+  };
 
+  pImg.functions.interactivity.grabParticle = function(p, args) {
+    const dx_mouse = p.x - pImg.mouse.x,
+          dy_mouse = p.y - pImg.mouse.y,
+          mouse_dist = Math.sqrt(dx_mouse * dx_mouse + dy_mouse * dy_mouse);
+    if (mouse_dist <= args.distance) {
+      const opacity = args.line_opacity - (mouse_dist / (1 / args.line_opacity)) - args.distance;
+      if (opacity > 0) {
+        pImg.canvas.context.strokeStyle = p.color;
+        pImg.canvas.context.lineWidth = Math.min(args.line_width, p.radius * 2);
+        pImg.canvas.context.beginPath();
+        pImg.canvas.context.moveTo(p.x, p.y);
+        pImg.canvas.context.lineTo(pImg.mouse.x, pImg.mouse.y);
+        pImg.canvas.context.stroke();
+        pImg.canvas.context.closePath();
+      }
+    }
+  };
+
+  pImg.functions.interactivity.onMouseMove = function(func, args, p) {
+    if (pImg.mouse.x != null && pImg.mouse.y != null) {
+      func(p, args);
+    }
+  };
+
+  pImg.functions.interactivity.onMouseClick = function(func, args, p) {
+    if (pImg.mouse.click_x != null && pImg.mouse.click_y != null) {
+      func(p, args);
+      pImg.mouse.click_x = null;
+      pImg.mouse.click_y = null;
+    }
+  };
+
+  pImg.functions.interactivity.addEventListeners = function() {
+    if (pImg.particles.interactivity.on_hover.enabled || pImg.particles.interactivity.on_click.enabled) {
+      pImg.canvas.el.addEventListener('mousemove', function(e) {
+        let pos_x = e.offsetX || e.clientX,
+            pos_y = e.offsetY || e.clientY;
+        pImg.mouse.x = pos_x * pImg.canvas.pxratio;
+        pImg.mouse.y = pos_y * pImg.canvas.pxratio;
+      });
+      pImg.canvas.el.addEventListener('mouseleave', function(e) {
+        pImg.mouse.x = null;
+        pImg.mouse.y = null;
+      });
+      pImg.functions.utils.addEventActions('on_hover');
+    }
+    if (pImg.particles.interactivity.on_click.enabled) {
+      pImg.canvas.el.addEventListener('click', function(e) {
+        pImg.mouse.click_x = pImg.mouse.x;
+        pImg.mouse.click_y = pImg.mouse.y;
+      });
+      pImg.functions.utils.addEventActions('on_click');
+    }
+    if (pImg.particles.interactivity.on_touch.enabled) {
+      pImg.canvas.el.addEventListener('touchmove', function(e) {
+        let pos_x = e.touches[0].clientX,
+            pos_y = e.touches[0].clientY;
+        pImg.mouse.x = pos_x * pImg.canvas.pxratio;
+        pImg.mouse.y = pos_y * pImg.canvas.pxratio;
+      });
+      pImg.canvas.el.addEventListener('touchend', function(e) {
+        pImg.mouse.x = null;
+        pImg.mouse.y = null;
+      });
+      pImg.functions.utils.addEventActions('on_touch');
+    }
+  };
+
+  pImg.functions.interactivity.interactWithClient = function(p) {
+    for (let func of pImg.particles.interactivity.fn_array) {
+      func(p);
+    }
+  };
+
+  /*
+  ========================================
+  =           UTILS FUNCTIONS            =
+  ========================================
+  */
+  pImg.functions.utils.randIntInRange = function(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  };
+
+  pImg.functions.utils.clamp = function(n, min, max) {
+    return Math.min(Math.max(n, min), max);
+  };
+
+  pImg.functions.utils.debounce = function(func, min_interval) {
+    let timer;
+    return function(event) {
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(func, min_interval, event);
+    };
+  };
+  
+  pImg.functions.utils.addEventActions = function(event) {
+    const action_funcs = {
+      repulse: pImg.functions.interactivity.repulseParticle,
+      big_repulse: pImg.functions.interactivity.repulseParticle,
+      grab: pImg.functions.interactivity.grabParticle
+    };
+    let event_wrapper = event === 'on_click' ? pImg.functions.interactivity.onMouseClick : pImg.functions.interactivity.onMouseMove;
+    if (pImg.particles.interactivity[event].enabled) {
+      const func = action_funcs[pImg.particles.interactivity[event].action],
+            args = pImg.interactions[pImg.particles.interactivity[event].action];
+      const partial_func = event_wrapper.bind(null, func, args);
+      pImg.particles.interactivity.fn_array.push(partial_func);
+    }
+  };
+
+  /*
+  ========================================
+  =           LAUNCH FUNCTIONS           =
+  ========================================
+  */
+  pImg.functions.launch = function() {
+    pImg.functions.interactivity.addEventListeners();
+    pImg.functions.canvas.init();
+    pImg.functions.image.load();
+    const img_pixels = pImg.functions.particles.getImagePixels();
+    pImg.functions.particles.createImageParticles(img_pixels);
+    pImg.functions.particles.animateParticles();
+  };
+
+  pImg.functions.launch();
 };
-
-
 
 /*
 ========================================
