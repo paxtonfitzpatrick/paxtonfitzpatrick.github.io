@@ -32,7 +32,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
         // },
       },
       size: {
-        value: 20,
+        value: 5,
         random: false,
         animate: {
           enabled: false,
@@ -160,7 +160,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
       click_y: null
     },
     retina_detect: true  // helps reduce CPU load on retina displays
-  }
+  };
   // apply params for this instance
   const pText = this.pTextConfig;
   if (params) {
@@ -856,7 +856,6 @@ window.particleTextDisplay = function(tag_id, params) {
   canvas_el.style.width = "100%";
   canvas_el.style.height = "100%";
   const canvas = document.getElementById(tag_id).appendChild(canvas_el);
-  // const canvas = pt_tag.appendChild(canvas_el);
 
   /* get text to be "particlized" from element dataobject
   (easier to dynamically set there via liquid) */
