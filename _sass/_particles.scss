@@ -14,3 +14,13 @@ header.masthead {
   height: 100%;
   width: 100%;
 }
+
+#particle-animation .particle-text-canvas-el {
+  position: absolute;
+  z-index: 1;
+}
+
+#particle-animation .particle-image-canvas-el {
+  position: absolute;
+  z-index: 0;
+}
