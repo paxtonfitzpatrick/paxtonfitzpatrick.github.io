@@ -294,9 +294,9 @@ const ParticleTextDisplayer = function(tag_id, params) {
   pText.functions.canvas.getTextData = function() {
     // get ImageData object with pixel-wise RGBA values to determine text pixels
     pText.functions.canvas.clear();
-    pText.canvas.context.font = "bold " + (pText.canvas.w / 12) + "px sans-serif";
+    pText.canvas.context.font = "bold " + (pText.canvas.w / 16) + "px sans-serif";
     pText.canvas.context.textAlign = "center";
-    pText.canvas.context.fillText(pText.text_particles.text, pText.canvas.w / 2, pText.canvas.h / 2);
+    pText.canvas.context.fillText(pText.text_particles.text, pText.canvas.w / 2, pText.canvas.h * 2 / 3);
     const pixel_data = pText.canvas.context.getImageData(0, 0, pText.canvas.w, pText.canvas.h).data;
     pText.functions.canvas.clear();
     return pixel_data;
