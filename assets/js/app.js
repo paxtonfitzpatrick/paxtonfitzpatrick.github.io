@@ -1,3 +1,5 @@
+"use strict";
+
 // particleTextDisplay('particle-animation',
 //   {
 //     "text_particles": {

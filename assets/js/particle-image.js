@@ -1,3 +1,5 @@
+"use strict";
+
 const ParticleImageDisplayer = function(tag_id, params) {
   // get canvas element
   const canvas_el = document.querySelector('#' + tag_id + ' > .particle-image-canvas-el');
@@ -126,7 +128,7 @@ const ParticleImageDisplayer = function(tag_id, params) {
     pImg.canvas.context = pImg.canvas.el.getContext('2d');
     pImg.canvas.el.width = pImg.canvas.w;
     pImg.canvas.el.height = pImg.canvas.h;
-    window.addEventListener('resize', pImg.functions.utils.debounce(pImg.functions.canvas.onResize, 100));
+    window.addEventListener('resize', pImg.functions.utils.debounce(pImg.functions.canvas.onResize, 200));
   };
 
   pImg.functions.canvas.retinaInit = function() {
@@ -179,8 +181,8 @@ const ParticleImageDisplayer = function(tag_id, params) {
     // resize the image and set x,y coords to align in the center of the canvas
     pImg.image.obj.width = pImg.functions.utils.clamp(Math.round(pImg.canvas.w * pImg.image.size.width_pct / 100), pImg.image.size.min_px, pImg.image.size.max_px);
     pImg.image.obj.height = Math.round(pImg.image.obj.width * pImg.image.ratio);
-    pImg.image.x = Math.round(pImg.canvas.w  / 2 - pImg.image.obj.width / 2);
-    pImg.image.y = Math.round(pImg.canvas.h / 2.25 - pImg.image.obj.width / 2); //Math.round(pImg.canvas.h / 2 - pImg.image.obj.height / 2);
+    pImg.image.x = pImg.canvas.w  / 2 - pImg.image.obj.width / 2;
+    pImg.image.y = pImg.canvas.h / 2.25 - pImg.image.obj.width / 2;
   };
 
   pImg.functions.image.init = function() {
