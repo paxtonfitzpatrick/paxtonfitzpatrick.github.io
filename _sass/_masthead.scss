@@ -43,8 +43,15 @@
   @include anim-delay(2.5s);
 }
 
+@media (min-width: 1600px) {
+  .masthead .container-fluid .row h1 {
+    font-size: 80px;
+  }
+}
+
+
 .masthead .container-fluid .row .header-icons {
-  @include anim-delay(3s);
+  @include anim-delay(3.25s);
 }
 
 .fade-in {
