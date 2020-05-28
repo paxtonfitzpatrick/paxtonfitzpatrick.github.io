@@ -1,6 +1,5 @@
-"use strict";
-
 const ParticleImageDisplayer = function(tag_id, params) {
+  "use strict";
   // get canvas element
   const canvas_el = document.querySelector('#' + tag_id + ' > .particle-image-canvas-el');
 
@@ -457,40 +456,39 @@ const ParticleImageDisplayer = function(tag_id, params) {
 =           GLOBAL FUNCTIONS           =
 ========================================
 */
-// GLOBALLY DEFINED IN PARTICLE-TEXT.JS
-// Object.deepExtend = function(destination, source) {
-//   // credit: https://andrewdupont.net/2009/08/28/deep-extending-objects-in-javascript/
-//   for (let property in source) {
-//     if (source[property] && source[property].constructor &&
-//      source[property].constructor === Object) {
-//       destination[property] = destination[property] || {};
-//       arguments.callee(destination[property], source[property]);
-//     } else {
-//       destination[property] = source[property];
-//     }
-//   }
-//   return destination;
-// };
-//
-// window.requestAnimFrame = (function() {
-//   return  window.requestAnimationFrame ||
-//     window.webkitRequestAnimationFrame ||
-//     window.mozRequestAnimationFrame    ||
-//     window.oRequestAnimationFrame      ||
-//     window.msRequestAnimationFrame     ||
-//     function(callback) {
-//       window.setTimeout(callback, 1000 / 60);
-//     };
-// })();
-//
-// window.cancelRequestAnimFrame = (function() {
-//   return window.cancelAnimationFrame         ||
-//     window.webkitCancelRequestAnimationFrame ||
-//     window.mozCancelRequestAnimationFrame    ||
-//     window.oCancelRequestAnimationFrame      ||
-//     window.msCancelRequestAnimationFrame     ||
-//     clearTimeout
-// })();
+Object.deepExtend = function(destination, source) {
+  // credit: https://andrewdupont.net/2009/08/28/deep-extending-objects-in-javascript/
+  for (let property in source) {
+    if (source[property] && source[property].constructor &&
+     source[property].constructor === Object) {
+      destination[property] = destination[property] || {};
+      arguments.callee(destination[property], source[property]);
+    } else {
+      destination[property] = source[property];
+    }
+  }
+  return destination;
+};
+
+window.requestAnimFrame = (function() {
+  return  window.requestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    window.mozRequestAnimationFrame    ||
+    window.oRequestAnimationFrame      ||
+    window.msRequestAnimationFrame     ||
+    function(callback) {
+      window.setTimeout(callback, 1000 / 60);
+    };
+})();
+
+window.cancelRequestAnimFrame = (function() {
+  return window.cancelAnimationFrame         ||
+    window.webkitCancelRequestAnimationFrame ||
+    window.mozCancelRequestAnimationFrame    ||
+    window.oCancelRequestAnimationFrame      ||
+    window.msCancelRequestAnimationFrame     ||
+    clearTimeout
+})();
 
 window.pImgDom = [];
 
