@@ -32,7 +32,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
         // },
       },
       size: {
-        value: 20,
+        value: 5,
         random: false,
         animate: {
           enabled: false,
@@ -160,7 +160,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
       click_y: null
     },
     retina_detect: true  // helps reduce CPU load on retina displays
-  }
+  };
   // apply params for this instance
   const pText = this.pTextConfig;
   if (params) {
@@ -205,7 +205,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
     pText.canvas.el.height = pText.canvas.h;
     pText.canvas.area = (pText.canvas.el.width * pText.canvas.el.height / 1000) / (pText.canvas.pxratio * 2);
     // add event listener for window resize
-    window.addEventListener('resize', pText.functions.utils.debounce(pText.functions.canvas.onResize, 150));
+    window.addEventListener('resize', pText.functions.utils.debounce(pText.functions.canvas.onResize, 100));
     // TODO: add event listener for canvas not in view to pause animation and lighten load
   };
 
@@ -294,9 +294,9 @@ const ParticleTextDisplayer = function(tag_id, params) {
   pText.functions.canvas.getTextData = function() {
     // get ImageData object with pixel-wise RGBA values to determine text pixels
     pText.functions.canvas.clear();
-    pText.canvas.context.font = "bold " + (pText.canvas.w / 12) + "px sans-serif";
+    pText.canvas.context.font = "bold " + (pText.canvas.w / 16) + "px sans-serif";
     pText.canvas.context.textAlign = "center";
-    pText.canvas.context.fillText(pText.text_particles.text, pText.canvas.w / 2, pText.canvas.h / 2);
+    pText.canvas.context.fillText(pText.text_particles.text, pText.canvas.w / 2, pText.canvas.h * 2 / 3);
     const pixel_data = pText.canvas.context.getImageData(0, 0, pText.canvas.w, pText.canvas.h).data;
     pText.functions.canvas.clear();
     return pixel_data;
@@ -654,7 +654,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
   };
 
   pText.functions.interactivity.onMouseClick = function(func, args, p, p_type) {
-    if (pText.mouse.click_x != null && pText.mouse.y != null) {
+    if (pText.mouse.click_x != null && pText.mouse.click_y != null) {
       func(p, args, p_type);
       pText.mouse.click_x = null;
       pText.mouse.click_y = null;
@@ -675,42 +675,41 @@ const ParticleTextDisplayer = function(tag_id, params) {
      // enable listeners and add action functions
     if (listen_for.mouse) {
       // add mousemove and mouseleave EventListeners
-      pText.canvas.el.addEventListener('mousemove', function(e) {
+      pText.canvas.el.addEventListener('mousemove', function (e) {
         let pos_x = e.offsetX || e.clientX,
-            pos_y = e.offsetY || e.clientY;
+          pos_y = e.offsetY || e.clientY;
         // adjust for retina display (pxratio is 1 if not retina)
         pText.mouse.x = pos_x * pText.canvas.pxratio;
         pText.mouse.y = pos_y * pText.canvas.pxratio;
       });
-      pText.canvas.el.addEventListener('mouseleave', function(e) {
+      pText.canvas.el.addEventListener('mouseleave', function (e) {
         // if mouse is not over canvas, set coordinates to null
         pText.mouse.x = null;
         pText.mouse.y = null;
       });
       pText.functions.utils.addEventActions('on_hover');
+    }
+    if (listen_for.click) {
+      pText.canvas.el.addEventListener('click', function(e) {
+        pText.mouse.click_x = pText.mouse.x;
+        pText.mouse.click_y = pText.mouse.y;
+      });
+    }
+    pText.functions.utils.addEventActions('on_click');
 
-      if (listen_for.click) {
-        pText.canvas.el.addEventListener('click', function(e) {
-          pText.mouse.click_x = pText.mouse.x;
-          pText.mouse.click_y = pText.mouse.y;
-        });
-      }
-      pText.functions.utils.addEventActions('on_click');
-
-      if (listen_for.touch) {
-        // treat touch/drag the same as mouse movement
-        pText.canvas.el.addEventListener('touchmove', function(e) {
-          let pos_x = e.touches[0].clientX,
-              pos_y = e.touches[0].clientY;
-          pText.mouse.x = pos_x * pText.canvas.pxratio;
-          pText.mouse.y = pos_y * pText.canvas.pxratio;
-        });
-        pText.canvas.el.addEventListener('touchend', function(e) {
-          pText.mouse.x = null;
-          pText.mouse.y = null;
-        });
-        pText.functions.utils.addEventActions('on_touch');
-      }
+    if (listen_for.touch) {
+      // treat touch/drag the same as mouse movement
+      pText.canvas.el.addEventListener('touchmove', function(e) {
+        let pos_x = e.touches[0].clientX,
+            pos_y = e.touches[0].clientY;
+        pText.mouse.x = pos_x * pText.canvas.pxratio;
+        pText.mouse.y = pos_y * pText.canvas.pxratio;
+      });
+      pText.canvas.el.addEventListener('touchend', function(e) {
+        pText.mouse.x = null;
+        pText.mouse.y = null;
+      });
+      pText.functions.utils.addEventActions('on_touch');
     }
   };
 
@@ -783,8 +782,8 @@ const ParticleTextDisplayer = function(tag_id, params) {
   pText.functions.launch = function() {
     pText.functions.interactivity.addEventListeners();
     pText.functions.canvas.init();
-    const text_pixels = pText.functions.canvas.getTextData();
     if (pText.text_particles.enabled) {
+      const text_pixels = pText.functions.canvas.getTextData();
       pText.functions.particles.createTextParticles(text_pixels);
     }
     if (pText.bg_particles.enabled) {
@@ -856,7 +855,6 @@ window.particleTextDisplay = function(tag_id, params) {
   canvas_el.style.width = "100%";
   canvas_el.style.height = "100%";
   const canvas = document.getElementById(tag_id).appendChild(canvas_el);
-  // const canvas = pt_tag.appendChild(canvas_el);
 
   /* get text to be "particlized" from element dataobject
   (easier to dynamically set there via liquid) */
