@@ -7,8 +7,8 @@ layout: base
   <div class="container-fluid h-100">
     <div class="row align-items-center justify-content-center text-center">
       <div class="col-auto">
-        <h1 class="text-uppercase text-white font-weight-bold">{{ page.header.title }}</h1>
-        <div class="header-icons">
+        <h1 class="text-uppercase text-white font-weight-bold fade-in">{{ page.header.title }}</h1>
+        <div class="header-icons fade-in">
           {% for icon in page.header.icons %}
           <a aria-label="{{ icon.title }}" href="{{ icon.url }}" target="_blank" rel="noopener noreferrer"><i class="icon {{ icon.icon_type }} {{ icon.icon }}" aria-hidden="true"></i></a>
           {% endfor %}
