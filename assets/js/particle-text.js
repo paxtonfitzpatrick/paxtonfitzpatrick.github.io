@@ -205,7 +205,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
     pText.canvas.el.height = pText.canvas.h;
     pText.canvas.area = (pText.canvas.el.width * pText.canvas.el.height / 1000) / (pText.canvas.pxratio * 2);
     // add event listener for window resize
-    window.addEventListener('resize', pText.functions.utils.debounce(pText.functions.canvas.onResize, 150));
+    window.addEventListener('resize', pText.functions.utils.debounce(pText.functions.canvas.onResize, 100));
     // TODO: add event listener for canvas not in view to pause animation and lighten load
   };
 

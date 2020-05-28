@@ -126,7 +126,7 @@ const ParticleImageDisplayer = function(tag_id, params) {
     pImg.canvas.context = pImg.canvas.el.getContext('2d');
     pImg.canvas.el.width = pImg.canvas.w;
     pImg.canvas.el.height = pImg.canvas.h;
-    window.addEventListener('resize', pImg.functions.utils.debounce(pImg.functions.canvas.onResize, 200));
+    window.addEventListener('resize', pImg.functions.utils.debounce(pImg.functions.canvas.onResize, 100));
   };
 
   pImg.functions.canvas.retinaInit = function() {
