@@ -2,13 +2,13 @@ particleTextDisplay('particle-animation',
   {
     "text_particles": {
       "enabled": true,
-      "density": 300,
+      "density": 400,
       "color": "#fff",
       "opacity": {
         "value": 1,
       },
       "size": {
-        "value": 2,
+        "value": 1,
         "random": false,
         "animate": {
           "enabled": false,
@@ -111,13 +111,13 @@ particleTextDisplay('particle-animation',
 particleImageDisplay('particle-animation',
   {
     "particles": {
-      "density": 300,
+      "density": 200,
       "color": "#fff",
       "opactiy": {
         "value": 1
       },
       "size": {
-        "value": 2,
+        "value": 1,
         "random": false,
       },
       "movement": {
@@ -140,9 +140,15 @@ particleImageDisplay('particle-animation',
     },
     "image": {
       "size": {
-        "width_pct": 40,
-        "min_px": 50,
-        "max_px": 400
+        "width_pct": 50,
+        "min_px": 150,
+        "max_px": 800
+      }
+    },
+    "interactions": {
+      "repulse": {
+        "distance": 100,
+        "strength": 200
       }
     },
     "retina_detect": false
