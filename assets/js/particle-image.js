@@ -126,8 +126,7 @@ const ParticleImageDisplayer = function(tag_id, params) {
     pImg.canvas.context = pImg.canvas.el.getContext('2d');
     pImg.canvas.el.width = pImg.canvas.w;
     pImg.canvas.el.height = pImg.canvas.h;
-    pImg.canvas.area = (pImg.canvas.el.width * pImg.canvas.el.height / 1000) / (pImg.canvas.pxratio * 2);
-    window.addEventListener('resize', pImg.functions.utils.debounce(pImg.functions.canvas.onResize, 150));
+    window.addEventListener('resize', pImg.functions.utils.debounce(pImg.functions.canvas.onResize, 200));
   };
 
   pImg.functions.canvas.retinaInit = function() {
@@ -163,9 +162,9 @@ const ParticleImageDisplayer = function(tag_id, params) {
     pImg.canvas.context.clearRect(0, 0, pImg.canvas.w, pImg.canvas.h);
   };
 
-  pImg.functions.particles.getImagePixels = function() {
+  pImg.functions.canvas.getImagePixels = function() {
     pImg.functions.canvas.clear();
-    pImg.canvas.context.drawImage(pImg.image.x, pImg.image.y);
+    pImg.canvas.context.drawImage(pImg.image.obj, pImg.image.x, pImg.image.y, pImg.image.obj.width, pImg.image.obj.height);
     const pixel_data = pImg.canvas.context.getImageData(pImg.image.x, pImg.image.y, pImg.image.obj.width, pImg.image.obj.height);
     pImg.functions.canvas.clear();
     return pixel_data;
@@ -176,29 +175,25 @@ const ParticleImageDisplayer = function(tag_id, params) {
   =           IMAGE FUNCTIONS            =
   ========================================
   */
-  pImg.functions.image.load = function() {
-    pImg.image.obj = pImg.image = new Image();
+  pImg.functions.image.resize = function() {
+    // resize the image and set x,y coords to align in the center of the canvas
+    pImg.image.obj.width = pImg.functions.utils.clamp(Math.round(pImg.canvas.w * pImg.image.size.width_pct / 100), pImg.image.size.min_px, pImg.image.size.max_px);
+    pImg.image.obj.height = Math.round(pImg.image.obj.width * pImg.image.ratio);
+    pImg.image.x = Math.round(pImg.canvas.w  / 2 - pImg.image.obj.width / 2);
+    pImg.image.y = Math.round(pImg.canvas.h / 2.25 - pImg.image.obj.width / 2); //Math.round(pImg.canvas.h / 2 - pImg.image.obj.height / 2);
+  };
+
+  pImg.functions.image.init = function() {
+    pImg.image.obj = new Image();
     pImg.image.obj.addEventListener('load', function() {
       // get aspect ratio (only have to compute once on initial load)
       pImg.image.ratio = pImg.image.obj.height / pImg.image.obj.width;
       pImg.functions.image.resize();
+      const img_pixels = pImg.functions.canvas.getImagePixels();
+      pImg.functions.particles.createImageParticles(img_pixels);
+      pImg.functions.particles.animateParticles();
     });
     pImg.image.obj.src = pImg.src_path;
-  };
-
-  pImg.functions.image.resize = function() {
-    // resize the image and set x,y coords to align in the center of the canvas
-    const new_width = Math.round(pImg.canvas.w * pImg.image.size.width_pct / 100);
-    if (new_width < pImg.image.size.min_px) {
-      pImg.image.obj.width = pImg.image.size.min_px;
-    } else if (new_width > pImg.image.size.max_px) {
-      pImg.image.obj.width = pImg.image.size.max_px;
-    } else {
-      pImg.image.obj.width = new_width;
-    }
-    pImg.image.obj.height = Math.round(pImg.image.obj.width * pImg.image.ratio);
-    pImg.image.x = Math.round(pImg.canvas.w  / 2 - pImg.image.obj.width / 2);
-    pImg.image.y = Math.round(pImg.canvas.h / 2 - pImg.image.obj.height / 2);
   };
 
   /*
@@ -227,7 +222,7 @@ const ParticleImageDisplayer = function(tag_id, params) {
     } else {
       this.color = pImg.particles.color;
     }
-    this.radius = (pImg.particles.size.random ? Math.max(Math.random(), 0.5) : 1) * pImg.particles.size.value * pImg.canvas.w / 1500;
+    this.radius = Math.round((pImg.particles.size.random ? Math.max(Math.random(), 0.5) : 1) * pImg.particles.size.value);
     if (pImg.particles.size.animate.enabled) {
       this.grow = false;
       this.resize_speed = pImg.particles.size.animate.speed / 100;
@@ -245,11 +240,11 @@ const ParticleImageDisplayer = function(tag_id, params) {
   };
 
   pImg.functions.particles.createImageParticles = function(pixel_data, at_dest = false) {
-    const increment = Math.round(pImg.canvas.w / pImg.particles.density);
+    const increment = Math.round(pixel_data.width / pImg.particles.density);
     for (let i = 0; i < pixel_data.width; i += increment) {
       for (let j = 0; j < pixel_data.height; j += increment) {
         if (pixel_data.data[(i + j * pixel_data.width) * 4 + 3] > 128) {
-          const dest_xy = {x: i, y: j};
+          const dest_xy = {x: pImg.image.x + i, y: pImg.image.y + j};
           const init_xy = at_dest ? dest_xy : {x: Math.random() * pImg.canvas.w, y: Math.random() * pImg.canvas.h};
           pImg.particles.array.push(new pImg.functions.particles.SingleImageParticle(init_xy, dest_xy));
         }
@@ -449,10 +444,7 @@ const ParticleImageDisplayer = function(tag_id, params) {
   pImg.functions.launch = function() {
     pImg.functions.interactivity.addEventListeners();
     pImg.functions.canvas.init();
-    pImg.functions.image.load();
-    const img_pixels = pImg.functions.particles.getImagePixels();
-    pImg.functions.particles.createImageParticles(img_pixels);
-    pImg.functions.particles.animateParticles();
+    pImg.functions.image.init();
   };
 
   pImg.functions.launch();
