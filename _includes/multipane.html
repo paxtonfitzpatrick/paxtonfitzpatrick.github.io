@@ -20,6 +20,9 @@
       {% for pane in section.panes %}
         {% include {{ pane.type }} pane=pane %}
       {% endfor %}
+      {% if section.after_text %}
+        <p class="text-muted mb-5">{{ section.after_text }}</p>
+      {% endif %}
     </div>
   </div>
 </section>

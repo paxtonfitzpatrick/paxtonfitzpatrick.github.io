@@ -35,7 +35,8 @@ sections:
     section_id: about
     background_style: bg-light
     title: About me
-    before_text: test before text
+    before_text: TEST BEFORE TEXT
+    after_text: TEST AFTER TEXT
     panes:
       - type: bio-timeline.html
         title: Bio
