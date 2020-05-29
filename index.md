@@ -35,8 +35,8 @@ sections:
     section_id: about
     background_style: bg-light
     title: About me
-    before_text: TEST BEFORE TEXT
-    after_text: TEST AFTER TEXT
+    before_text: TEST MULTIPANE BEFORE TEXT
+    after_text: TEST MULTIPANE AFTER TEXT
     panes:
       - type: bio-timeline.html
         title: Bio
@@ -51,6 +51,8 @@ sections:
             end: present
             text: TEST CDL TIMELINE TEXT
       - type: skills.html
+        before_text: TEST PANE BEFORE TEXT
+        after_text: TEST PANE BEFORE TEXT
         title: Skills
         skills:
           - image: python.png
@@ -75,7 +77,7 @@ sections:
             caption: jsPsych
           
   - type: call-to-action.html
-    section_id: about
+    section_id: action
     background_style: bg-primary
     title: We've got what you need!
     text: Start Bootstrap has everything you need to get your new website up and running in no time! All of the templates and themes on Start Bootstrap are open source, free to download, and easy to use. No strings attached!
