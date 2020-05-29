@@ -1,14 +1,16 @@
 <section id="{{ section.section_id }}" class="page-section {{ section.background_style }}">
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-lg-8 text center">
+      <div class="col-lg-8 text-center">
         <h2 class="mt-0">{{ section.title }}</h2>
         <hr class="divider my-4">
         {% if section.before_text %}
-          <p class="text-muted mb-5">{{ section.before_text }}</p>
+          <p class="text-muted mb-4">{{ section.before_text }}</p>
         {% endif %}
       </div>
-      <ul class="nav nav-pills d-inline-block">
+    </div>
+    <div class="row justify-content-center">
+      <ul class="nav nav-pills mb-4" role="tablist">
         {% for pane in section.panes %}
           <li class="nav-item">
             <a class="nav-link {% if forloop.first %}active{% endif %}" data-toggle="pill" href="#{{ pane.title | downcase | replace: ' ', '_' }}">
@@ -17,11 +19,19 @@
           </li>
         {% endfor %}
       </ul>
-      {% for pane in section.panes %}
-        {% include {{ pane.type }} pane=pane %}
-      {% endfor %}
+    </div>
+    <div class="row justify-content-center">
+      <div class="tab-content">
+        {% for pane in section.panes %}
+          <div class="tab-pane {% if forloop.first %}active{% else %}fade{% endif %}" id="{{ pane.title | downcase | replace: ' ', '_' }}">
+            {% include {{ pane.type }} pane=pane %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="row justify-content-center">
       {% if section.after_text %}
-        <p class="text-muted mb-5">{{ section.after_text }}</p>
+        <p class="text-muted mb-4">{{ section.after_text }}</p>
       {% endif %}
     </div>
   </div>
