@@ -31,15 +31,15 @@ header:
 
 
 sections:
-  - type: multi-panel.html
+  - type: multipane.html
     section_id: about
     background_style: bg-light
     title: About me
     before_text: test before text
-    panels:
+    panes:
       - type: bio-timeline.html
         title: Bio
-        bio: BIO TEXT GOES HERE
+        bio_text: BIO TEXT GOES HERE
         timeline_events: 
           - image: assets/img/timeline/dartmouth-logo.png
             start: 2015.5

@@ -9,16 +9,16 @@
         {% endif %}
       </div>
       <ul class="nav nav-pills d-inline-block">
-        {% for panel in section.panels %}
+        {% for pane in section.panes %}
           <li class="nav-item">
-            <a class="nav-link {% if forloop.first %}active{% endif %}" data-toggle="pill" href="#{{ panel.title | downcase | replace: ' ', '_' }}">
-              {{ panel.title }}
+            <a class="nav-link {% if forloop.first %}active{% endif %}" data-toggle="pill" href="#{{ pane.title | downcase | replace: ' ', '_' }}">
+              {{ pane.title }}
             </a>
           </li>
         {% endfor %}
       </ul>
-      {% for panel in section.panels %}
-        {% include {{ panel.type }} section=panel %}
+      {% for pane in section.panes %}
+        {% include {{ pane.type }} pane=pane %}
       {% endfor %}
     </div>
   </div>
