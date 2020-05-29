@@ -2,6 +2,7 @@
 layout: home
 header:
   title: Paxton Fitzpatrick
+  image: assets/img/brain-medium.png
   icons:
     - title: Email
       icon: fa-envelope
@@ -30,6 +31,48 @@ header:
 
 
 sections:
+  - type: multi-panel.html
+    section_id: about
+    background_style: bg-light
+    title: About me
+    before_text: test before text
+    panels:
+      - type: bio-timeline.html
+        title: Bio
+        bio: BIO TEXT GOES HERE
+        timeline_events: 
+          - image: assets/img/timeline/dartmouth-logo.png
+            start: 2015.5
+            end: 2019.5
+            text: TEST DARTMOUTH TIMELINE TEXT
+          - image: assets/img/timeline/cdl-logo.png
+            start: 2017
+            end: present
+            text: TEST CDL TIMELINE TEXT
+      - type: skills.html
+        title: Skills
+        skills:
+          - image: python.png
+            caption: Python
+          - image: conda.png
+            caption: Conda
+          - image: numpy.png
+            caption: NumPy
+          - image: pandas.png
+            caption: Pandas
+          - image: matplotlib.png
+            caption: Data Visualization
+          - image: git.png
+            caption: Git/GitHub
+          - image: html.png
+            caption: HTML
+          - image: css.png
+            caption: CSS
+          - image: javascript.png
+            caption: JavaScript
+          - image: jspsych.png
+            caption: jsPsych
+          
   - type: call-to-action.html
     section_id: about
     background_style: bg-primary
