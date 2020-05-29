@@ -1,0 +1,25 @@
+<section id="{{ section.section_id }}" class="page-section {{ section.background_style }}">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text center">
+        <h2 class="mt-0">{{ section.title }}</h2>
+        <hr class="divider my-4">
+        {% if section.before_text %}
+          <p class="text-muted mb-5">{{ section.before_text }}</p>
+        {% endif %}
+      </div>
+      <ul class="nav nav-pills d-inline-block">
+        {% for panel in section.panels %}
+          <li class="nav-item">
+            <a class="nav-link {% if forloop.first %}active{% endif %}" data-toggle="pill" href="#{{ panel.title | downcase | replace: ' ', '_' }}">
+              {{ panel.title }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+      {% for panel in section.panels %}
+        {% include {{ panel.type }} section=panel %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
