@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="row">
+    {% for skill in include.pane.skills %}
+    <div class="col-md-2 col-xs-4">
+      <div class="skill-box">
+        <img src="assets/img/skills/{{ skill.image }}" alt="{{ skill.caption }}">
+        <p>{{ skill.caption }}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
