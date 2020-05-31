@@ -47,6 +47,12 @@
     <script type="text/javascript" src="../assets/js/particle-image.js"></script>
     <script type="text/javascript" src="../assets/js/app.js"></script>
   {% endif %}
+  <!-- init script for tooltip plugin (from Popper.js) -->
+  <script>
+    $(document).ready(function() {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+  </script>
 </body>
 
 </html>
