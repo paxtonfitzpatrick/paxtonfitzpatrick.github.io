@@ -3,8 +3,7 @@
     {% for skill in include.pane.skills %}
     <div class="col-md-2 col-xs-4">
       <div class="skill-box">
-        <img src="assets/img/skills/{{ skill.image }}" alt="{{ skill.caption }}">
-        <p>{{ skill.caption }}</p>
+        <img src="assets/img/skills/{{ skill.image }}" alt="{{ skill.caption }}" title="{{ skill.caption }}" data-toggle="tooltip" data-placement="bottom">
       </div>
     </div>
     {% endfor %}
