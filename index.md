@@ -38,6 +38,49 @@ sections:
     before_text: TEST MULTIPANE BEFORE TEXT
     after_text: TEST MULTIPANE AFTER TEXT
     panes:
+      - type: skills.html
+        before_text: TEST PANE BEFORE TEXT
+        after_text: TEST PANE AFTER TEXT
+        title: Skills
+        skills:
+          - image: python.png
+            caption: Python
+          - image: conda.png
+            caption: Conda
+          - image: numpy.png
+            caption: NumPy
+          - image: pandas.png
+            caption: Pandas
+          - image: scikit-learn.png
+            caption: Scikit-learn
+          - image: matplotlib.png
+            caption: Matplotlib
+          - image: psychopy.png
+            caption: PsychoPy
+          - image: jupyter.png
+            caption: Jupyter
+          - image: git.png
+            caption: Git/GitHub
+          - image: html.png
+            caption: HTML
+          - image: css.png
+            caption: CSS
+          - image: javascript.png
+            caption: JavaScript
+          - image: jspsych.png
+            caption: jsPsych
+          - image: psiturk.jpg
+            caption: psiTurk
+          - image: docker.png
+            caption: Docker
+          - image: travis.png
+            caption: Travis CI
+          - image: shell.png
+            caption: Shell
+          - image: latex.png
+            caption: LaTeX
+          - image: supercollider.png
+            caption: SuperCollider
       - type: bio-timeline.html
         title: Bio
         bio_text: BIO TEXT GOES HERE
@@ -50,31 +93,9 @@ sections:
             start: 2017
             end: present
             text: TEST CDL TIMELINE TEXT
-      - type: skills.html
-        before_text: TEST PANE BEFORE TEXT
-        after_text: TEST PANE BEFORE TEXT
-        title: Skills
-        skills:
-          - image: python.png
-            caption: Python
-          - image: conda.png
-            caption: Conda
-          - image: numpy.png
-            caption: NumPy
-          - image: pandas.png
-            caption: Pandas
-          - image: matplotlib.png
-            caption: Data Visualization
-          - image: git.png
-            caption: Git/GitHub
-          - image: html.png
-            caption: HTML
-          - image: css.png
-            caption: CSS
-          - image: javascript.png
-            caption: JavaScript
-          - image: jspsych.png
-            caption: jsPsych
+            
+  - type: multipane.html
+    section_id: 
           
   - type: call-to-action.html
     section_id: action
