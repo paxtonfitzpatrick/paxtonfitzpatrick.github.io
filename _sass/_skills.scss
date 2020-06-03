@@ -1,9 +1,18 @@
+//.skills.container {
+//  padding-left: 4vw;
+//  padding-right: 4vw;
+//}
+
+//@media (max-width: 768px) {
+//  .skills.container {
+//    margin-left: 4vw;
+//    margin-right: 4vw;
+//  }
+//}
+
 .skill-box {
-  height: 100%;
-  width: 100%;
   img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+    width: 80%;
+    height: 80%;
   }
 }
