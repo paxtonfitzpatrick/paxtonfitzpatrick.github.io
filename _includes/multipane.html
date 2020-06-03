@@ -21,7 +21,7 @@
       </ul>
     </div>
     <div class="row justify-content-center text-center">
-      <div class="tab-content">
+      <div class="tab-content mb-4">
         {% for pane in section.panes %}
           <div class="tab-pane {% if forloop.first %}active{% else %}fade{% endif %}" id="{{ pane.title | downcase | replace: ' ', '_' }}">
             {% if pane.before_text %}
@@ -29,7 +29,7 @@
             {% endif %}
             {% include {{ pane.type }} pane=pane %}
             {% if pane.after_text %}
-              <p class="text-muted mb-4">{{ pane.after_text }}</p>
+              <p class="text-muted mt-4">{{ pane.after_text }}</p>
             {% endif %}
           </div>
         {% endfor %}
@@ -38,7 +38,7 @@
     {% if section.after_text %}
       <div class="row justify-content-center">
         <div class="col-lg-8 text-center">
-          <hr class="divider my-4">
+          <hr class="divider mt-0 mb-4">
           <p class="text-muted mb-4">{{ section.after_text }}</p>
         </div>
       </div>
