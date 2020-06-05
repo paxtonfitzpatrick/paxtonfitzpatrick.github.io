@@ -98,34 +98,28 @@ sections:
     section_id: research
     background_style: bg-primary
     title: Research
-    before_text: STATEMENT ABOUT RESEARCH INTERESTS & FOCUS HERE
     pane_type: publication-cards.html
+    before_text: STATEMENT ABOUT RESEARCH INTERESTS & FOCUS HERE
+    all_after_text: '&dagger;denotes equal contribution'
     panes:
-      - title: Articles
-        filter: article
+      - title: Manuscripts
+        filter: manuscript
+        after_text: '&dagger;denotes equal contribution'
       - title: Posters
         filter: poster
         before_text: TEST POSTERS BEFORE TEXT
     items:
-      - type: article
-        title: XXXX
-        text: XXXX
-        image: XXXX
-      - type: poster
-        title: YYYY
-        text: YYYY
-        image: YYYY
+      - type: manuscript
+        title: How is experience transformed into memory?
+        text: Heusser A. C.&dagger;, **Fitzpatrick P. C.**&dagger;, Manning J. R. (under revision). How is experience
+         transformed into memory?. *bioRxiv*&#58; 409987.
+        image: sherlock-white.png
+      - type: manuscript
+        title: Is automatic speech-to-text transcription ready for use in psychological experiments?
+        text: Ziman K., Heusser A. C., **Fitzpatrick P. C.**, Field C. E., Manning J. R. (2018). Is automatic
+         speech-to-text transcription ready for use in psychological experiments?. *Behavior research methods*, 1-9.
+        image: autofr-paper-white.png
                 
-          
-  - type: call-to-action.html
-    section_id: action
-    background_style: bg-primary
-    title: We've got what you need!
-    text: Start Bootstrap has everything you need to get your new website up and running in no time! All of the templates and themes on Start Bootstrap are open source, free to download, and easy to use. No strings attached!
-    actions:
-      - title: Get Started!
-        url: '#'
-        class: btn-light
 
   - type: services.html
     section_id: services
@@ -154,6 +148,16 @@ sections:
         text: Some not-so long text here.
         icon: fa-python
         icon_type: fab
+        
+  - type: call-to-action.html
+    section_id: action
+    background_style: bg-primary
+    title: We've got what you need!
+    text: Start Bootstrap has everything you need to get your new website up and running in no time! All of the templates and themes on Start Bootstrap are open source, free to download, and easy to use. No strings attached!
+    actions:
+      - title: Get Started!
+        url: '#'
+        class: btn-light
 
   - type: portfolio.html
     # this section has always ID 'portfolio'
