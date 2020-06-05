@@ -1,0 +1,40 @@
+.bg-primary {
+  background-color: $bg-primary !important;
+  color: $fg-primary;
+  .text-muted {
+    color: $muted-primary !important;
+  }
+  hr.divider {
+    border-color: $fg-primary;
+  }
+  a {
+    color: $fg-primary;
+  }
+  a:hover, a:focus, button:hover, button:focus {
+    background-color: $bg-primary-hf;
+  }
+  .nav-pills .nav-link.active,
+  .nav-pills .show > .nav-link {
+    color: $bg-primary;
+    background-color: $fg-primary;
+  }
+}
+
+.bg-secondary {
+  background-color: $bg-secondary !important;
+  color: $fg-secondary;
+  hr.divider {
+    border-color: $fg-secondary;
+  }
+  a {
+    color: $fg-secondary;
+  }
+  a:hover, a:focus, button:hover, button:focus {
+    background-color: $bg-secondary-hf;
+  }
+  .nav-pills .nav-link.active,
+  .nav-pills .show > .nav-link {
+    color: $bg-secondary;
+    background-color: $fg-secondary;
+  }
+}

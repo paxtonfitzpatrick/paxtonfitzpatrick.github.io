@@ -1,3 +1,15 @@
-$header-bg: #1a222c;
-$header-fg: #fff;
+$bg-primary: #2d3b4d;
+$bg-primary-hf: #575c63;
+$fg-primary: #fff;
+$fg-primary-hf: #c4c2c2;
+$muted-primary: #aeb2b5;
+
+$bg-secondary: #f7f7f7;
+$bg-secondary-hf: #e2e2e2;
+$fg-secondary: $bg-primary;
+$fg-secondary-hf: $bg-primary-hf;
+
+$header-bg: $bg-primary;
+$header-fg: $fg-primary;
+
 $fade-time: 3s;
