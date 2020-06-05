@@ -119,6 +119,11 @@ sections:
         text: Ziman K., Heusser A. C., **Fitzpatrick P. C.**, Field C. E., Manning J. R. (2018). Is automatic
          speech-to-text transcription ready for use in psychological experiments?. *Behavior research methods*, 1-9.
         image: autofr-paper-white.png
+      - type: manuscript
+        title: Quail&#58; a Python toolbox for analyzing and plotting free recall data
+        text: Heusser A. C., **Fitzpatrick P. C.**, Field C. E., Ziman K., Manning J. R. (2017). Quail&#58; a Python
+         toolbox for analyzing and plotting free recall data. *The Journal of Open Source Software*, 2(18)&#58; 424.
+        image: quail-white.png
                 
 
   - type: services.html
