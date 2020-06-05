@@ -33,7 +33,7 @@ header:
 sections:
   - type: multipane.html
     section_id: about
-    background_style: bg-light
+    background_style: bg-secondary
     title: About me
     before_text: TEST MULTIPANE BEFORE TEXT
     after_text: TEST MULTIPANE AFTER TEXT
@@ -94,8 +94,28 @@ sections:
             end: present
             text: TEST CDL TIMELINE TEXT
             
-  - type: multipane.html
-    section_id: 
+  - type: multipane-filter.html
+    section_id: research
+    background_style: bg-primary
+    title: Research
+    before_text: STATEMENT ABOUT RESEARCH INTERESTS & FOCUS HERE
+    pane_type: publication-cards.html
+    panes:
+      - title: Articles
+        filter: article
+      - title: Posters
+        filter: poster
+        before_text: TEST POSTERS BEFORE TEXT
+    items:
+      - type: article
+        title: XXXX
+        text: XXXX
+        image: XXXX
+      - type: poster
+        title: YYYY
+        text: YYYY
+        image: YYYY
+                
           
   - type: call-to-action.html
     section_id: action
