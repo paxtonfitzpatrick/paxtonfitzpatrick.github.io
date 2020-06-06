@@ -109,15 +109,36 @@ sections:
         filter: poster
         before_text: TEST POSTERS BEFORE TEXT
     items:
+      - type: poster
+        title: Capturing the evolving geometric and neural structures of experiences and memories
+        text: __Fitzpatrick P. C.__, Heusser A. C., Manning J. R. (2019). Capturing the evolving geometric and neural
+         structures of experiences and memories. *Society for Neuroscience Annual Meeting*. Chicago, IL.
+        image: sfn-2019.png
       - type: manuscript
         title: How is experience transformed into memory?
         text: Heusser A. C.&dagger;, **Fitzpatrick P. C.**&dagger;, Manning J. R. (under revision). How is experience
          transformed into memory?. *bioRxiv*&#58; 409987.
         image: sherlock-white.png
+      - type: poster
+        title: Mapping between naturalistic experience and verbal recall
+        text: __Fitzpatrick P. C.__, Heusser A. C., Manning J. R. (2018). Mapping between naturalistic experience and
+         verbal recall. *Society for Neuroscience Annual Meeting*. San Diego, CA.
+        image: sfn-2018.png
+      - type: poster
+        title: The utility of speech-to-text software for transcription of verbal response data
+        text: __Fitzpatrick P. C.__, Ziman K., Heusser A. C., Field C. E., Manning J. R. (2018). The utility of
+         speech-to-text software for transcription of verbal response data. *Wetterhahn Science Symposium*. Hanover, NH.
+        image: wetterhahn-2018a.png
+      - type: poster
+        title: Adaptive free recall&#58; Enhancing (or diminishing) memory
+        text: Lee M., Chacko R., Whitaker E., **Fitzpatrick P. C.**, Field C. E., Ziman K., Bollinger B., Heusser A. C., Manning J. R. (2018). Adaptive free recall&#58; Enhancing (or diminishing) memory. *Wetterhahn Science
+         Symposium*. Hanover, NH.
+        image: wetterhahn-2018b.png
       - type: manuscript
         title: Is automatic speech-to-text transcription ready for use in psychological experiments?
         text: Ziman K., Heusser A. C., **Fitzpatrick P. C.**, Field C. E., Manning J. R. (2018). Is automatic
-         speech-to-text transcription ready for use in psychological experiments?. *Behavior research methods*, 1-9.
+         speech-to-text transcription ready for use in psychological experiments?. *Behavior Research Methods
+         *, 1-9.
         image: autofr-paper-white.png
       - type: manuscript
         title: Quail&#58; a Python toolbox for analyzing and plotting free recall data
