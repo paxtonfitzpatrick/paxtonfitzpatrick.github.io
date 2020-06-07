@@ -145,40 +145,44 @@ sections:
          toolbox for analyzing and plotting free recall data. *The Journal of Open Source Software*, 2(18)&#58; 424.
         image: quail-white.png
         
-  - type: software.html
+  - type: multisection.html
     section_id: software
     background_style: bg-secondary
     title: Software
     before_text: STATEMENT ABOUT SOFTWARE DEVELOPMENT HERE
     after_text: ...and of course [this website!](https://github.com/paxtonfitzpatrick/paxtonfitzpatrick.github.io)
-    main:
-      - title: gittracker
-        description: some description about gittracker package
-      - title: quail
-        description: some description about quail package
-      - title: hypertools
-        description: hypertools description
-      - title: cluster-tools-dartmouth
-        description: cluster tools description
-      - title: autoFR
-        description: some description about autoFR package
-      - title: psiturk-example-template
-        description: psiturk example template description here
-      - title: Dockerfile template
-        description: Dockerfile template gist description here
-      - title: BIDS conversion
-        description: BIDS converter description here
-    contributions:
-      - title: umap
-        description: UMAP description
-      - title: CDL-tutorials
-        description: CDL tutorials description
-      - title: lab-manual
-        description: CDL lab manual description
-      - title: CDL-bibliography
-        description: CDL bibliography description
-      - title: storytelling-with-data
-        description: open course/TAing description here
+    subsections:
+      - main:
+        items:
+          - title: gittracker
+            description: some description about gittracker package
+          - title: quail
+            description: some description about quail package
+          - title: hypertools
+            description: hypertools description
+          - title: cluster-tools-dartmouth
+            description: cluster tools description
+          - title: autoFR
+            description: some description about autoFR package
+          - title: psiturk-example-template
+            description: psiturk example template description here
+          - title: Dockerfile template
+            description: Dockerfile template gist description here
+          - title: BIDS conversion
+            description: BIDS converter description here
+      - contributions:
+        before_text: CONTRIBUTIONS BEFORE TEXT
+        items:
+          - title: umap
+            description: UMAP description
+          - title: CDL-tutorials
+            description: CDL tutorials description
+          - title: lab-manual
+            description: CDL lab manual description
+          - title: CDL-bibliography
+            description: CDL bibliography description
+          - title: storytelling-with-data
+            description: open course/TAing description here
         
   - type: services.html
     section_id: services
