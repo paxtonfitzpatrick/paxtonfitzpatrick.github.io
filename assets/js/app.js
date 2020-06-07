@@ -153,7 +153,8 @@ particleImageDisplay('particle-animation',
         "strength": 200
       }
     },
-    "retina_detect": false
+    "retina_detect": false,
+    "disabled": true
   }
 );
 

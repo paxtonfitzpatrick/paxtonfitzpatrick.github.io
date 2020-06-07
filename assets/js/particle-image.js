@@ -448,7 +448,9 @@ const ParticleImageDisplayer = function(tag_id, params) {
     pImg.functions.image.init();
   };
 
-  pImg.functions.launch();
+  if (!pImg.disabled) {
+    pImg.functions.launch();
+  }
 };
 
 /*

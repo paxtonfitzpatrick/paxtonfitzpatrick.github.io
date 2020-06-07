@@ -2,6 +2,7 @@
 layout: home
 header:
   title: Paxton Fitzpatrick
+  image: assets/img/brain-medium.png
   icons:
     - title: Email
       icon: fa-envelope
@@ -30,15 +31,120 @@ header:
 
 
 sections:
-  - type: call-to-action.html
+  - type: multipane.html
     section_id: about
+    background_style: bg-secondary
+    title: About me
+    before_text: TEST MULTIPANE BEFORE TEXT
+    after_text: TEST MULTIPANE AFTER TEXT
+    panes:
+      - type: skills.html
+        before_text: TEST PANE BEFORE TEXT
+        after_text: TEST PANE AFTER TEXT
+        title: Skills
+        skills:
+          - image: python.png
+            caption: Python
+          - image: conda.png
+            caption: Conda
+          - image: numpy.png
+            caption: NumPy
+          - image: pandas.png
+            caption: Pandas
+          - image: scikit-learn.png
+            caption: Scikit-learn
+          - image: matplotlib.png
+            caption: Matplotlib
+          - image: psychopy.png
+            caption: PsychoPy
+          - image: jupyter.png
+            caption: Jupyter
+          - image: git.png
+            caption: Git/GitHub
+          - image: html.png
+            caption: HTML
+          - image: css.png
+            caption: CSS
+          - image: javascript.png
+            caption: JavaScript
+          - image: jspsych.png
+            caption: jsPsych
+          - image: psiturk.jpg
+            caption: psiTurk
+          - image: docker.png
+            caption: Docker
+          - image: travis.png
+            caption: Travis CI
+          - image: shell.png
+            caption: Shell
+          - image: latex.png
+            caption: LaTeX
+          - image: supercollider.png
+            caption: SuperCollider
+      - type: bio-timeline.html
+        title: Bio
+        bio_text: BIO TEXT GOES HERE
+        timeline_events: 
+          - image: assets/img/timeline/dartmouth-logo.png
+            start: 2015.5
+            end: 2019.5
+            text: TEST DARTMOUTH TIMELINE TEXT
+          - image: assets/img/timeline/cdl-logo.png
+            start: 2017
+            end: present
+            text: TEST CDL TIMELINE TEXT
+            
+  - type: multipane-filter.html
+    section_id: research
     background_style: bg-primary
-    title: We've got what you need!
-    text: Start Bootstrap has everything you need to get your new website up and running in no time! All of the templates and themes on Start Bootstrap are open source, free to download, and easy to use. No strings attached!
-    actions:
-      - title: Get Started!
-        url: '#'
-        class: btn-light
+    title: Research
+    pane_type: publication-cards.html
+    before_text: STATEMENT ABOUT RESEARCH INTERESTS & FOCUS HERE
+    all_after_text: '&dagger;denotes equal contribution'
+    panes:
+      - title: Manuscripts
+        filter: manuscript
+        after_text: '&dagger;denotes equal contribution'
+      - title: Posters
+        filter: poster
+        before_text: TEST POSTERS BEFORE TEXT
+    items:
+      - type: poster
+        title: Capturing the evolving geometric and neural structures of experiences and memories
+        text: __Fitzpatrick P. C.__, Heusser A. C., Manning J. R. (2019). Capturing the evolving geometric and neural
+         structures of experiences and memories. *Society for Neuroscience Annual Meeting*. Chicago, IL.
+        image: sfn-2019.png
+      - type: manuscript
+        title: How is experience transformed into memory?
+        text: Heusser A. C.&dagger;, **Fitzpatrick P. C.**&dagger;, Manning J. R. (under revision). How is experience
+         transformed into memory?. *bioRxiv*&#58; 409987.
+        image: sherlock-white.png
+      - type: poster
+        title: Mapping between naturalistic experience and verbal recall
+        text: __Fitzpatrick P. C.__, Heusser A. C., Manning J. R. (2018). Mapping between naturalistic experience and
+         verbal recall. *Society for Neuroscience Annual Meeting*. San Diego, CA.
+        image: sfn-2018.png
+      - type: poster
+        title: The utility of speech-to-text software for transcription of verbal response data
+        text: __Fitzpatrick P. C.__, Ziman K., Heusser A. C., Field C. E., Manning J. R. (2018). The utility of
+         speech-to-text software for transcription of verbal response data. *Wetterhahn Science Symposium*. Hanover, NH.
+        image: wetterhahn-2018a.png
+      - type: poster
+        title: Adaptive free recall&#58; Enhancing (or diminishing) memory
+        text: Lee M., Chacko R., Whitaker E., **Fitzpatrick P. C.**, Field C. E., Ziman K., Bollinger B., Heusser A. C., Manning J. R. (2018). Adaptive free recall&#58; Enhancing (or diminishing) memory. *Wetterhahn Science
+         Symposium*. Hanover, NH.
+        image: wetterhahn-2018b.png
+      - type: manuscript
+        title: Is automatic speech-to-text transcription ready for use in psychological experiments?
+        text: Ziman K., Heusser A. C., **Fitzpatrick P. C.**, Field C. E., Manning J. R. (2018). Is automatic
+         speech-to-text transcription ready for use in psychological experiments?. *Behavior Research Methods*, 1-9.
+        image: autofr-paper-white.png
+      - type: manuscript
+        title: Quail&#58; a Python toolbox for analyzing and plotting free recall data
+        text: Heusser A. C., **Fitzpatrick P. C.**, Field C. E., Ziman K., Manning J. R. (2017). Quail&#58; a Python
+         toolbox for analyzing and plotting free recall data. *The Journal of Open Source Software*, 2(18)&#58; 424.
+        image: quail-white.png
+                
 
   - type: services.html
     section_id: services
@@ -67,6 +173,16 @@ sections:
         text: Some not-so long text here.
         icon: fa-python
         icon_type: fab
+        
+  - type: call-to-action.html
+    section_id: action
+    background_style: bg-primary
+    title: We've got what you need!
+    text: Start Bootstrap has everything you need to get your new website up and running in no time! All of the templates and themes on Start Bootstrap are open source, free to download, and easy to use. No strings attached!
+    actions:
+      - title: Get Started!
+        url: '#'
+        class: btn-light
 
   - type: portfolio.html
     # this section has always ID 'portfolio'

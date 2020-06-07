@@ -31,6 +31,10 @@
   -o-animation-delay: $delay;
 }
 
+.masthead {
+  background: none;
+  position: relative;
+}
 .masthead .container-fluid .row {
   position: absolute;
   left: 0;
