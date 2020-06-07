@@ -137,8 +137,7 @@ sections:
       - type: manuscript
         title: Is automatic speech-to-text transcription ready for use in psychological experiments?
         text: Ziman K., Heusser A. C., **Fitzpatrick P. C.**, Field C. E., Manning J. R. (2018). Is automatic
-         speech-to-text transcription ready for use in psychological experiments?. *Behavior Research Methods
-         *, 1-9.
+         speech-to-text transcription ready for use in psychological experiments?. *Behavior Research Methods*, 1-9.
         image: autofr-paper-white.png
       - type: manuscript
         title: Quail&#58; a Python toolbox for analyzing and plotting free recall data
