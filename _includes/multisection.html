@@ -9,6 +9,22 @@
         {% endif %}
       </div>
     </div>
+    {% for subsection in section.subsections %}
+      <h3>{{ subsection.title }}</h3>
+      {% if subsection.before_text %}
+        <p>{{ subsection.before_text }}</p>
+      {% endif %}
+      {% for item in subsection.items %}
+        <div class="row">
+          <div class="col-auto">
+            <p><code>{{ item.title }}</code></p>
+            <blockquote><samp>{{ item.description | markdownify }}</samp></blockquote>
+          </div>
+        </div>
+      {% endfor %}
+      {% unless forloop.last %}
+        <hr class="divider my-4">
+      {% endunless %}
+    {% endfor %}
   </div>
-  
 </section>
