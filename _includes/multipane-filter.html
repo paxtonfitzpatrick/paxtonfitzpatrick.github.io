@@ -31,7 +31,7 @@
           {% endif %}
           {% include {{ section.pane_type }} section=section filter="all" %}
           {% if section.all_after_text %}
-            <p class="text-muted mb-4">{{ section.all_after_text }}</p>
+            <p class="text-muted mt-4">{{ section.all_after_text }}</p>
           {% endif %}
         </div>
         {% for pane in section.panes %}
