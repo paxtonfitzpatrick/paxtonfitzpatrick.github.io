@@ -10,8 +10,24 @@
   a {
     color: $fg-primary;
   }
-  a:hover, a:focus, button:hover, button:focus {
-    background-color: $bg-primary-hf;
+  a:hover, a:focus, a:active, button:hover,
+  button:focus button:active {
+    background-color: $bg-primary-hfa;
+  }
+  code {
+    color: $code-primary
+  }
+  blockquote {
+    border-left-color: $bg-primary-hfa;
+    a {
+      color: $fg-primary-link;
+      text-decoration: none;
+    }
+    a:hover, a:focus, a:active {
+      color: $fg-primary-link-hfa;
+      text-decoration: underline;
+      background-color: transparent;
+    }
   }
   .nav-pills .nav-link.active,
   .nav-pills .show > .nav-link {
@@ -29,8 +45,24 @@
   a {
     color: $fg-secondary;
   }
-  a:hover, a:focus, button:hover, button:focus {
-    background-color: $bg-secondary-hf;
+  a:hover, a:focus, a:active, button:hover,
+  button:focus button:active {
+    background-color: $bg-secondary-hfa;
+  }
+  code {
+    color: $code-secondary;
+  }
+  blockquote {
+    border-left-color: $bg-secondary-hfa;
+    a {
+      color: $fg-secondary-link;
+      text-decoration: none;
+    }
+    a:hover, a:focus, a:active {
+      color: $fg-secondary-link-hfa;
+      text-decoration: underline;
+      background-color: transparent;
+    }
   }
   .nav-pills .nav-link.active,
   .nav-pills .show > .nav-link {
