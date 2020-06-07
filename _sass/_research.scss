@@ -1,3 +1,18 @@
+.publication-cards {
+  max-height: 40em;
+  overflow-y: auto;
+}
+
+.publication-cards::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 8px;
+}
+.publication-cards::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-color: $bg-primary-hf;
+}
+
+
 .publication.row {
   min-height: 10em;
 }
