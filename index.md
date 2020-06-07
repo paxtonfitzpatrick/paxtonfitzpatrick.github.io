@@ -145,44 +145,50 @@ sections:
          toolbox for analyzing and plotting free recall data. *The Journal of Open Source Software*, 2(18)&#58; 424.
         image: quail-white.png
         
-  - type: multisection.html
+  - type: software.html
     section_id: software
     background_style: bg-secondary
     title: Software
     before_text: STATEMENT ABOUT SOFTWARE DEVELOPMENT HERE
     after_text: ...and of course [this website!](https://github.com/paxtonfitzpatrick/paxtonfitzpatrick.github.io)
-    subsections:
-      - main:
-        items:
-          - title: gittracker
-            description: some description about gittracker package
-          - title: quail
-            description: some description about quail package
-          - title: hypertools
-            description: hypertools description
-          - title: cluster-tools-dartmouth
-            description: cluster tools description
-          - title: autoFR
-            description: some description about autoFR package
-          - title: psiturk-example-template
-            description: psiturk example template description here
-          - title: Dockerfile template
-            description: Dockerfile template gist description here
-          - title: BIDS conversion
-            description: BIDS converter description here
-      - contributions:
-        before_text: CONTRIBUTIONS BEFORE TEXT
-        items:
-          - title: umap
-            description: UMAP description
-          - title: CDL-tutorials
-            description: CDL tutorials description
-          - title: lab-manual
-            description: CDL lab manual description
-          - title: CDL-bibliography
-            description: CDL bibliography description
-          - title: storytelling-with-data
-            description: open course/TAing description here
+    items:
+      - title: gittracker
+        role: sole developer, sole maintainer
+        description: some [description](https://www.google.com) about gittracker package some description about
+         gittracker package some description about gittracker package some description about gittracker package some
+         description about gittracker package some description about gittracker package some description about
+         gittracker package some description about gittracker package some description about gittracker package some
+         description about gittracker package some description about gittracker package
+      - title: quail
+        role: developer, lead maintainer
+        description: some description about quail package
+      - title: cluster-tools-dartmouth
+        role: developer, lead maintainer
+        description: cluster tools description
+      - title: autoFR
+        role: developer, lead maintainer
+        description: some description about autoFR package
+      - title: hypertools
+        role: lead maintainer
+        description: hypertools description
+      - title: umap
+        role: maintainer
+        description: UMAP description
+      - title: CDL-tutorials
+        role: developer, maintainer
+        description: CDL tutorials description
+      - title: lab-manual
+        role: developer, lead maintainer
+        description: CDL lab manual description
+      - title: CDL-bibliography
+        role: developer, maintainer
+        description: CDL bibliography description
+      - title: psiturk-experiment-template
+        role: sole developer, sole maintainer
+        description: psiturk example template description here
+      - title: Docker container template for reproducible Python analyses
+        role: (GitHub gist)
+        description: Dockerfile template gist description here
         
   - type: services.html
     section_id: services
