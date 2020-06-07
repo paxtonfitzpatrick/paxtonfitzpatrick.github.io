@@ -1,0 +1,26 @@
+blockquote {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 40px;
+  margin-inline-end: 40px;
+  padding-left: 15px;
+  border-left-width: 3px;
+  border-left-style: solid;
+}
+
+.software-cards {
+  padding-right: .5em;
+  max-height: 40em;
+  overflow-x: hidden;
+}
+
+.software-cards::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 8px;
+}
+
+.software-cards::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-color: $bg-secondary-hfa;
+}
