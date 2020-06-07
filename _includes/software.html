@@ -1,0 +1,14 @@
+<section id="{{ section.id }}" class="page-section {{ section.background_style }}">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center">
+        <h1 class="mt-0">{{ section.title }}</h1>
+        <hr class="divider my-4">
+        {% if section.before_text %}
+          <p class="text-muted mb-4">{{ section.before_text }}</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  
+</section>
