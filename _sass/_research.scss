@@ -7,11 +7,11 @@
   -webkit-appearance: none;
   width: 8px;
 }
+
 .publication-cards::-webkit-scrollbar-thumb {
   border-radius: 8px;
-  background-color: $bg-primary-hf;
+  background-color: $bg-primary-hfa;
 }
-
 
 .publication.row {
   min-height: 10em;

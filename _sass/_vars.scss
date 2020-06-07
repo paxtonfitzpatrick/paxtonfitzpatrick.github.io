@@ -1,13 +1,19 @@
 $bg-primary: #2d3b4d;
-$bg-primary-hf: #575c63;
+$bg-primary-hfa: #575c63;
 $fg-primary: #fff;
-$fg-primary-hf: #c4c2c2;
+$fg-primary-hfa: #c4c2c2;
+$fg-primary-link: #eb38e8;
+$fg-primary-link-hfa: #ff66fc;
+$code-primary: #C18401;
 $muted-primary: #aeb2b5;
 
 $bg-secondary: #f7f7f7;
-$bg-secondary-hf: #e2e2e2;
+$bg-secondary-hfa: #e2e2e2;
 $fg-secondary: $bg-primary;
-$fg-secondary-hf: $bg-primary-hf;
+$fg-secondary-hfa: $bg-primary-hfa;
+$fg-secondary-link: #1257b5;
+$fg-secondary-link-hfa: #1876f5;
+$code-secondary: $code-primary;
 
 $header-bg: $bg-primary;
 $header-fg: $fg-primary;

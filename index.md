@@ -144,8 +144,94 @@ sections:
         text: Heusser A. C., **Fitzpatrick P. C.**, Field C. E., Ziman K., Manning J. R. (2017). Quail&#58; a Python
          toolbox for analyzing and plotting free recall data. *The Journal of Open Source Software*, 2(18)&#58; 424.
         image: quail-white.png
-                
+        
+  - type: software.html
+    section_id: software
+    background_style: bg-secondary
+    title: Software
+    before_text: STATEMENT ABOUT SOFTWARE DEVELOPMENT HERE
+    after_text: ...and of course [this website!](https://github.com/paxtonfitzpatrick/paxtonfitzpatrick.github.io)
+    items:
+      - title: gittracker
+        role: sole developer, sole maintainer
+        description: some [description](https://www.google.com) about gittracker package some description about
+         gittracker package some description about gittracker package some description about gittracker package some
+         description about gittracker package some description about gittracker package some description about
+         gittracker package some description about gittracker package some description about gittracker package some
+         description about gittracker package some description about gittracker package
+      - title: quail
+        role: developer, lead maintainer
+        description: some description about quail package
+      - title: cluster-tools-dartmouth
+        role: developer, lead maintainer
+        description: cluster tools description
+      - title: autoFR
+        role: developer, lead maintainer
+        description: some description about autoFR package
+      - title: hypertools
+        role: lead maintainer
+        description: hypertools description
+      - title: umap
+        role: maintainer
+        description: UMAP description
+      - title: CDL-tutorials
+        role: developer, maintainer
+        description: CDL tutorials description
+      - title: lab-manual
+        role: developer, lead maintainer
+        description: CDL lab manual description
+      - title: CDL-bibliography
+        role: developer, maintainer
+        description: CDL bibliography description
+      - title: psiturk-experiment-template
+        role: sole developer, sole maintainer
+        description: psiturk example template description here
+      - title: Docker container template for reproducible Python analyses
+        role: (GitHub gist)
+        description: Dockerfile template gist description here
 
+  - type: contact.html
+    section_id: contacts
+    title: Let's Get In Touch!
+    text: >-
+      Ready to start your next project with us? Give us a call or send us an email
+      and we will get back to you as soon as possible!
+    actions:
+    - title: +1 (202) 555-014
+      icon: fa-phone
+    - title: E-Mail
+      icon: fa-envelope
+      url: mailto:contact@yourwebsite.com
+    - title: Twitter
+      icon: fa-twitter
+      icon_type: fab
+      url: '#'
+    - title: Facebook
+      icon: fa-facebook
+      icon_type: fab
+      url: '#'
+      
+  - type: timeline.html
+    section_id: timeline
+    title: Major Achievements!
+    background_style: bg-dark text-primary
+    last_image: assets/img/timeline-end.png
+    actions:
+      - image: assets/img/portfolio/thumbnails/1.jpg
+        title: >+
+          2017-2018
+          **Humble Beginnings**
+        text: >-
+          We begun with small group of people willing to work hard and make our
+          teaching skills worth , in front of all others!
+      - image: assets/img/portfolio/thumbnails/2.jpg
+        title: >+
+          November 2019
+          An Coaching started
+        text: >-
+          We started to gather like minded people and started our stategies
+          and future plans to them. As a result , interested people joined us!
+          
   - type: services.html
     section_id: services
     #background_style: bg-info
@@ -254,47 +340,5 @@ sections:
         text: PR.
         image: assets/img/members/person7.jpg
         url: '#'
-
-  - type: timeline.html
-    section_id: timeline
-    title: Major Achievements!
-    background_style: bg-dark text-primary
-    last_image: assets/img/timeline-end.png
-    actions:
-      - image: assets/img/portfolio/thumbnails/1.jpg
-        title: >+
-          2017-2018
-          **Humble Beginnings**
-        text: >-
-          We begun with small group of people willing to work hard and make our
-          teaching skills worth , in front of all others!
-      - image: assets/img/portfolio/thumbnails/2.jpg
-        title: >+
-          November 2019
-          An Coaching started
-        text: >-
-          We started to gather like minded people and started our stategies
-          and future plans to them. As a result , interested people joined us!
-
-  - type: contact.html
-    section_id: contacts
-    title: Let's Get In Touch!
-    text: >-
-      Ready to start your next project with us? Give us a call or send us an email
-      and we will get back to you as soon as possible!
-    actions:
-    - title: +1 (202) 555-014
-      icon: fa-phone
-    - title: E-Mail
-      icon: fa-envelope
-      url: mailto:contact@yourwebsite.com
-    - title: Twitter
-      icon: fa-twitter
-      icon_type: fab
-      url: '#'
-    - title: Facebook
-      icon: fa-facebook
-      icon_type: fab
-      url: '#'
 
 ---
