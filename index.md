@@ -55,6 +55,8 @@ sections:
             caption: Scikit-learn
           - image: matplotlib.png
             caption: Matplotlib
+          - image: seaborn.png
+            caption: Seaborn
           - image: psychopy.png
             caption: PsychoPy
           - image: jupyter.png
@@ -69,7 +71,7 @@ sections:
             caption: JavaScript
           - image: jspsych.png
             caption: jsPsych
-          - image: psiturk.jpg
+          - image: psiturk.png
             caption: psiTurk
           - image: docker.png
             caption: Docker
@@ -81,6 +83,12 @@ sections:
             caption: LaTeX
           - image: supercollider.png
             caption: SuperCollider
+          - image: illustrator.png
+            caption: Adobe Illustrator
+          - image: photoshop.png
+            caption: Adobe Photoshop
+          - image: superlab.png
+            caption: Cedrus SuperLab 5
       - type: bio-timeline.html
         title: Bio
         bio_text: BIO TEXT GOES HERE
@@ -110,9 +118,9 @@ sections:
         before_text: TEST POSTERS BEFORE TEXT
     items:
       - type: poster
-        title: Capturing the evolving geometric and neural structures of experiences and memories
-        text: __Fitzpatrick P. C.__, Heusser A. C., Manning J. R. (2019). Capturing the evolving geometric and neural
-         structures of experiences and memories. *Society for Neuroscience Annual Meeting*. Chicago, IL.
+        title: Exploring the evolving geometric structure of experiences and memories
+        text: __Fitzpatrick P. C.__, Heusser A. C., Manning J. R. (2019). Exploring the evolving geometric structure
+         of experiences and memories. *Society for Neuroscience Annual Meeting*. Chicago, IL.
         image: sfn-2019.png
       - type: manuscript
         title: How is experience transformed into memory?
@@ -124,6 +132,11 @@ sections:
         text: __Fitzpatrick P. C.__, Heusser A. C., Manning J. R. (2018). Mapping between naturalistic experience and
          verbal recall. *Society for Neuroscience Annual Meeting*. San Diego, CA.
         image: sfn-2018.png
+      - type: poster
+        title: Capturing the geometric structure of our experiences and how we remember them
+        text: Heusser A. C., __Fitzpatrick P. C.__, Manning J. R. (2018). Capturing the geometric structure of our
+         experiences and how we remember them. *Conference on Cognitive Computational Neuroscience*. Philadelphia, PA.
+        image: ccn-2018.png
       - type: poster
         title: The utility of speech-to-text software for transcription of verbal response data
         text: __Fitzpatrick P. C.__, Ziman K., Heusser A. C., Field C. E., Manning J. R. (2018). The utility of
