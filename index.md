@@ -189,27 +189,15 @@ sections:
       - title: Docker container template for reproducible Python analyses
         role: (GitHub gist)
         description: Dockerfile template gist description here
-
+        
   - type: contact.html
-    section_id: contacts
-    title: Let's Get In Touch!
-    text: >-
-      Ready to start your next project with us? Give us a call or send us an email
-      and we will get back to you as soon as possible!
-    actions:
-    - title: +1 (202) 555-014
-      icon: fa-phone
-    - title: E-Mail
-      icon: fa-envelope
-      url: mailto:contact@yourwebsite.com
-    - title: Twitter
-      icon: fa-twitter
-      icon_type: fab
-      url: '#'
-    - title: Facebook
-      icon: fa-facebook
-      icon_type: fab
-      url: '#'
+    section_id: contact
+    background_style: bg-primary
+    title: Contact
+    email: Paxton.C.Fitzpatrick@Dartmouth.edu
+    phone: (717) 439-3999
+    address: 416 Moore Hall, Dartmouth College, Hanover, NH 03755
+    map_embed: https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d721.038682728594!2d-72.28847647071619!3d43.70733339869497!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cb4c9c361e1ddb1%3A0x8b2bba0d5b098fa6!2sMoore%20Psychology%20Bldg%2C%20Hanover%2C%20NH%2003755!5e0!3m2!1sen!2sus!4v1591571050608!5m2!1sen!2sus
       
   - type: timeline.html
     section_id: timeline

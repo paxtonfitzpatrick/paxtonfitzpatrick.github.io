@@ -1,20 +1,31 @@
 <section id="{{ section.section_id }}" class="page-section {{ section.background_style }}">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-8 text-center">
-        <h2 class="mt-0">{{ section.title }}</h2>
-        <hr class="divider my-4">
-        <p class="text-muted mb-5">{{ section.text }}</p>
-      </div>
-    </div>
-    <div class="row justify-content-center">
-      {% for action in section.actions %}
-      {% assign fa = action.icon_type | default: "fas" %}
-      <div class="col ml-auto text-center">
-        <i class="{{ fa }} {{ action.icon }} fa-3x mb-3 text-muted"></i>
-        <a class="d-block" href="{{ action.url }}">{{ action.title }}</a>
-      </div>
-      {% endfor %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 text-center">
+      <h1 class="mt-0">{{ section.title }}</h1>
+      <hr class="divider my-4">
     </div>
   </div>
+  <div class="row text-left">
+    <div class="col-4">
+      <h3 class="text-bold">Contact Info</h3>
+      <p>
+        <i class="icon fa fa-envelope" aria-hidden="true"></i>
+        <a href="mailto:{{ section.email }}">{{ section.email }}</a>
+      </p>
+      <p>
+        <i class="icon fa fa-phone" aria-hidden="true"></i>
+        <a href="tel:{{ section.phone }}">{{ section.phone }}</a>
+      </p>
+      <p>
+        <i class="fa fa-map-marker" aria-hidden="true"></i>
+        {{ section.address }}
+      </p>
+    </div>
+    <div class="col-12 col-md-8 text-center">
+      <h3 class="text-bold">Where am I?</h3>
+      <iframe src="{{ section.map_embed }}" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
 </section>
