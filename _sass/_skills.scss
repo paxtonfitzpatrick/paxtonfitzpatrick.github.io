@@ -1,18 +1,11 @@
-//.skills.container {
-//  padding-left: 4vw;
-//  padding-right: 4vw;
-//}
-
-//@media (max-width: 768px) {
-//  .skills.container {
-//    margin-left: 4vw;
-//    margin-right: 4vw;
-//  }
-//}
-
 .skill-box {
+  width: 4em;
+  height: 4em;
+  margin-bottom: 1.5em;
+  line-height: 4em;
   img {
-    width: 80%;
-    height: 80%;
+    max-width: 100%;
+    max-height: 100%;
+    vertical-align: middle;
   }
 }
