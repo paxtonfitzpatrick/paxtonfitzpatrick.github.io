@@ -39,20 +39,13 @@
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 10%;
+  bottom: min(10%, 30px);
 }
 
 .masthead .container-fluid .row h1 {
-  font-size: 5vw;
+  font-size: min(5vw, 60px);
   @include anim-delay(2.5s);
 }
-
-@media (min-width: 1600px) {
-  .masthead .container-fluid .row h1 {
-    font-size: 80px;
-  }
-}
-
 
 .masthead .container-fluid .row .header-icons {
   @include anim-delay(3.25s);
