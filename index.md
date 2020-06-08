@@ -167,11 +167,11 @@ sections:
     items:
       - title: gittracker
         role: sole developer, sole maintainer
-        description: some [description](https://www.google.com) about gittracker package some description about
-         gittracker package some description about gittracker package some description about gittracker package some
-         description about gittracker package some description about gittracker package some description about
-         gittracker package some description about gittracker package some description about gittracker package some
-         description about gittracker package some description about gittracker package
+        description: a Python command-line application for tracking the states of all your local git repositories in
+         one place. Built on top of [GitPython](https://github.com/gitpython-developers/GitPython), GitTracker can be
+         run from anywhere on your computer to show `git status`-like information for each repository it's set to
+         track. It features simple `git`-like commands; colorful, intuitive output at multiple verbosity levels; ability 
+         to track nested submodules; and an automatic initial setup.
       - title: quail
         role: developer, lead maintainer
         description: some description about quail package
