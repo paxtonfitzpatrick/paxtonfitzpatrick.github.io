@@ -158,90 +158,115 @@ sections:
          toolbox for analyzing and plotting free recall data. *The Journal of Open Source Software*, 2(18)&#58; 424.
         image: quail-white.png
         
-  - type: software.html
+  - type: multipane.html
     section_id: software
     background_style: bg-secondary
     title: Software
     before_text: STATEMENT ABOUT SOFTWARE DEVELOPMENT HERE
     after_text: ...and of course [this website!](https://github.com/paxtonfitzpatrick/paxtonfitzpatrick.github.io)
-    items:
-      - title: gittracker
-        role: sole developer, sole maintainer
-        description: a Python command-line application for tracking the states of all your local git repositories in
-         one place. Built on top of [GitPython](https://github.com/gitpython-developers/GitPython), GitTracker can be
-         run from anywhere on your computer to show `git status`-like information for each repository it's set to
-         track. It features simple `git`-like commands; colorful, intuitive output at multiple verbosity levels; ability 
-         to track nested submodules; and an automatic initial setup.
-      - title: quail
-        role: developer, lead maintainer
-        description: a Python package that facilitates easy processing, analyzing, and visualizing free-recall data
-         from both list-learning and naturalistic memory experiments. Quail features a simple-yet-powerful data
-         structure for encoding and recall data (the `Egg`) with convenient methods for performing common analyses, 
-         generating beautiful plots, and easily filtering data in numerous ways. Quail also integrates with the
-         [Google Cloud Speech API](https://cloud.google.com/speech-to-text/) for rapid audio decoding and supports 
-         user-defined metrics for analyses in custom feature spaces.
-      - title: cluster-tools-dartmouth
-        role: developer, lead maintainer
-        description: a toolbox for easily deploying jobs on Dartmouth's high-performance computing cluster. Given a
-         single Python script, `cluster-tools` will create a PBS script for each desired parameter combination and
-         submit your jobs to run in parallel. Set values in a config file to pass commands to the Moab scheduler and
-         TORQUE resource manager. Using [spurplus](https://github.com/Parquery/spurplus), `cluster-tools` lets you
-         submit jobs directly from your local machine and automatically re-queue those that fail due to scheduler
-         issues.
-      - title: autoFR
-        role: developer, lead maintainer
-        description: a verbal free-recall experiment that incorporates automatic speech-to-text processing by
-         wrapping the [Google Cloud Speech API](https://cloud.google.com/speech-to-text/). The experiment is
-         implemented using [jsPsych](http://www.jspsych.org/) and [psiTurk](https://psiturk.org/), isolated in a
-         Docker container for easy deployment both locally and via 
-         [Amazon Mechanical Turk](https://www.mturk.com/mturk/welcome). See the 
-         [README](https://github.com/paxtonfitzpatrick/autoFR/blob/master/README.md) for instructions on how to run
-         the experiment and access the data.
-      - title: hypertools
-        role: lead maintainer
-        description: a Python package for visualizing and manipulating high-dimensional data. HyperTools was built
-         with two goals in mind&#58; quickly visualizing a dataset to gain intuitions about its structure, and
-         meticulously manipulating data to generate beautiful, animated, 3D figures. It features heavily customizable
-         functions for alignment, normalization, clustering, transformations, dimensionality reduction, and
-         plotting, while simultaneously allowing you to plot a corpus of text with a single function call. Hypertools
-         integrates many familiar libraries including [matplotlib](https://matplotlib.org/), 
-         [seaborn](https://seaborn.pydata.org/), and [scikit-learn](http://scikit-learn.org/), along with custom
-          implementations of powerful tools such as 
-          [hyperalignment](https://www.cell.com/neuron/fulltext/S0896-6273(11)00781-1?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0896627311007811%3Fshowall%3Dtrue) 
-          and the 
-          [Shared Response Model](https://papers.nips.cc/paper/5855-a-reduced-dimension-fmri-shared-response-model.pdf).
-      - title: umap
-        role: maintainer
-        description: a Python package implementing the 
-         [Uniform Manifold Approximation and Projection](https://arxiv.org/abs/1802.03426) algorithm. UMAP is a
-         general-purpose dimensionality reduction technique based on ideas from manifold learning and topological
-         data analysis, and is founded on three assumptions about the data&#58; **1**) the data is uniformly
-         distributed on a Riemannian manifold; **2**) the Riemannian metric is locally constant (or can be
-         approximated as such); and **3**) the manifold is locally connected. Given these assumptions, UMAP searches
-         for a low-dimensional projection of the data whose fuzzy topological structure best matches that of
-         the data in its original space. UMAP affords a number of notable advantages over similar techniques 
-         (e.g., [t-SNE](https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding)) such as
-         significantly greater speed and scalability, better preservation of the data's global structure, and the
-         ability to transform new data into an existing embedding space. The Python implementation additionally
-         supports a wide variety of metric and non-metric distance functions, supervised and semi-supervised
-         dimensionality reduction, and an inverse transformation.
-      - title: CDL-tutorials
-        role: developer, maintainer
-        description: a repository of useful, open-source tutorials on various computational tools, frameworks, 
-         Python packages, and concepts frequently used in the [Contextual Dynamics Lab](http://www.context-lab.com/). 
-         Visit the repository for a full list of available (or soon to be available) tutorials.
-      - title: lab-manual
-        role: developer, lead maintainer
-        description: CDL lab manual description
-      - title: CDL-bibliography
-        role: developer, maintainer
-        description: CDL bibliography description
-      - title: psiturk-experiment-template
-        role: sole developer, sole maintainer
-        description: psiturk example template description here
-      - title: Docker container template for reproducible Python analyses
-        role: (GitHub gist)
-        description: Dockerfile template gist description here
+    panes:
+      - type: software.html
+        title: Open Source Software
+        items:
+          - title: gittracker
+            role: sole developer, sole maintainer
+            description: _(in development)_ a Python command-line application for tracking the states of all your local git
+             repositories in
+             one place. Built on top of [GitPython](https://github.com/gitpython-developers/GitPython), GitTracker can be
+             run from anywhere on your computer to show `git status`-like information for each repository it's set to
+             track. It features simple `git`-like commands; colorful, intuitive output at multiple verbosity levels; ability 
+             to track nested submodules; and an automatic initial setup.
+          - title: quail
+            role: developer, lead maintainer
+            description: a Python package that facilitates easy processing, analysis, and visualizing free-recall data
+             from both list-learning and naturalistic memory experiments. Quail features a simple-yet-powerful data
+             structure for encoding and recall data (the `Egg`) with convenient methods for performing common analyses, 
+             generating beautiful plots, and easily filtering data in numerous ways. Quail also integrates with the
+             [Google Cloud Speech API](https://cloud.google.com/speech-to-text/) for rapid audio decoding and supports 
+             user-defined metrics for analyses in custom feature spaces.
+          - title: cluster-tools-dartmouth
+            role: developer, lead maintainer
+            description: _(in development)_ a toolbox for easily deploying jobs on Dartmouth's high-performance computing
+             cluster. Given a single Python script, `cluster-tools` will create a PBS script for each desired parameter
+             combination and submit your jobs to run in parallel. Set values in a config file to pass commands to the
+             Moab scheduler and TORQUE resource manager. Using [spurplus](https://github.com/Parquery/spurplus), 
+             `cluster-tools` lets you submit jobs directly from your local machine and automatically re-queue those that
+             fail due to scheduler issues.
+          - title: autoFR
+            role: developer, lead maintainer
+            description: a verbal free-recall experiment that incorporates automatic speech-to-text processing by
+             wrapping the [Google Cloud Speech API](https://cloud.google.com/speech-to-text/). The experiment is
+             implemented using [jsPsych](http://www.jspsych.org/) and [psiTurk](https://psiturk.org/), isolated in a
+             [Docker](https://www.docker.com/) container for easy deployment both locally and via 
+             [Amazon Mechanical Turk](https://www.mturk.com/mturk/welcome). See the 
+             [README](https://github.com/paxtonfitzpatrick/autoFR/blob/master/README.md) for instructions on how to run
+             the experiment and access the data.
+          - title: hypertools
+            role: lead maintainer
+            description: a Python package for visualizing and manipulating high-dimensional data. HyperTools was built
+             with two goals in mind&#58; quickly visualizing a dataset to gain intuitions about its structure, and
+             meticulously manipulating data to generate beautiful, animated, 3D figures. It features heavily customizable
+             functions for alignment, normalization, clustering, transformations, dimensionality reduction, and
+             plotting, while simultaneously allowing you to plot a corpus of text with a single function call. Hypertools
+             integrates many familiar libraries including [matplotlib](https://matplotlib.org/), 
+             [seaborn](https://seaborn.pydata.org/), and [scikit-learn](http://scikit-learn.org/), along with custom
+             implementations of powerful tools such as 
+             [hyperalignment](https://www.cell.com/neuron/fulltext/S0896-6273(11)00781-1?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0896627311007811%3Fshowall%3Dtrue) 
+             and the 
+             [Shared Response Model](https://papers.nips.cc/paper/5855-a-reduced-dimension-fmri-shared-response-model.pdf).
+          - title: umap
+            role: maintainer
+            description: a Python package implementing the 
+             [Uniform Manifold Approximation and Projection](https://arxiv.org/abs/1802.03426) algorithm. UMAP is a
+             general-purpose dimensionality reduction technique based on ideas from manifold learning and topological
+             data analysis, founded on three assumptions about the data&#58; **1**) the data is uniformly
+             distributed on a Riemannian manifold; **2**) the Riemannian metric is locally constant (or can be
+             approximated as such); and **3**) the manifold is locally connected. Given these assumptions, UMAP searches
+             for a low-dimensional projection of the data whose fuzzy topological structure best matches that of
+             the data in its original space. UMAP affords a number of notable advantages over similar techniques 
+             (e.g., [_t_-SNE](https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding)) such as
+             significantly greater speed and scalability, better preservation of the data's global structure, and the
+             ability to transform new data into an existing embedding space. The Python implementation additionally
+             supports a wide variety of metric and non-metric distance functions, supervised and semi-supervised
+             dimensionality reduction, and an inverse transformation.
+          - title: CDL-tutorials
+            role: developer, maintainer
+            description: a repository of useful, open-source tutorials on various computational tools, frameworks, 
+             Python packages, and concepts frequently used in the [Contextual Dynamics Lab](http://www.context-lab.com/). 
+             Check out the repo for a full list of available (or soon to be available) tutorials.
+          - title: lab-manual
+            role: developer, lead maintainer
+            description: lab manual and associated source code for the 
+             [Contextual Dynamics Lab](http://www.context-lab.com/) (PI&#58; 
+             [Jeremy Mannning](https://pbs.dartmouth.edu/people/jeremy-rothman-manning)). In addition to lab policies and
+             practices, it contains useful guides for tools and techniques frequently used in the CDL, as well as serves
+             as the lab's on-boarding platform for new members. We've chosen to share it publicly in the hopes that others
+             may find its format, content, or philosophy useful, or offer us feedback on how to improve.
+          - title: CDL-bibliography
+            role: maintainer
+            description: a `bibtex` file containing nearly 6,000 references related to psychology, neuroscience, math, and 
+             machine learning. The bibliography can be easily configured as a submodule for reference in LaTeX documents or
+             added to [Overleaf](https://www.overleaf.com/) projects, and is updated regularly. The CDL bibliography
+             is built off of a similar file created by the 
+             [Computational Memory Lab at the University of Pennsylvania](http://memory.psych.upenn.edu/) (PI&#58; 
+             [Mike Kahana](https://psychology.sas.upenn.edu/people/michael-kahana)).
+          - title: psiturk-experiment-template
+            role: sole developer, sole maintainer
+            description: _(in development)_ a repository with two adaptable, complimentary templates for a human behavioral
+             experiment, implemented via the [jsPsych](http://www.jspsych.org/) library and [psiTurk](https://psiturk.org/) 
+             platform, and served from an isolated [Docker](https://www.docker.com/) environment. The `deploy-local` branch 
+             provides a single, lightweight, [minbase debian image](https://hub.docker.com/_/debian) to house the
+             experiment and a [SQLite](https://www.sqlite.org/index.html) database for local deployment. The `deploy-mturk` 
+             branch offers a four-container setup ready for deployment via 
+             [Amazon Mechanical Turk](https://www.mturk.com/)&#58; a debian image for the psiTurk experiment, an 
+             [nginx](https://www.nginx.com/) server image for load balancing, a [MySQL](https://www.mysql.com/) image for
+             storing data, and an [Adminer](https://www.adminer.org/) image for easily viewing and accessing data.
+      - type: gists.html
+        title: GitHub Gists
+        items:
+          - title: Docker container template for reproducible Python analyses
+            description: Dockerfile template gist description here
+            id: f00dfcce1293bede0b9c1f87b456e1b6
         
   - type: contact.html
     section_id: contact
