@@ -366,10 +366,10 @@ sections:
              [Anaconda](https://www.anaconda.com/products/individual){:target="_blank"} Python distribution 
              (default&#58; 3.7.4) along with 
              [`jupyterlab`](https://jupyterlab.readthedocs.io/en/stable/){:target="_blank"}, some nifty 
-             [`jupyter notebook extensions`](https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/){:target="_blank"}, 
+             [`jupyter notebook` extensions](https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/){:target="_blank"}, 
              and whatever other packages you specify. It then exposes a port allowing you to run a `jupyter` server 
              from the container environment in a web browser.
-            id: f00dfcce1293bede0b9c1f87b456e1b6
+            url: https://gist.github.com/paxtonfitzpatrick/f00dfcce1293bede0b9c1f87b456e1b6
         
   - type: contact.html
     section_id: contact

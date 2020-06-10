@@ -49,10 +49,57 @@ blockquote {
     display: inline-block;
     text-align: center;
     margin-right: 0.75em;
+    color: $fg-secondary;
   }
-  a:hover {
+  a:hover, a:focus, a:active {
     text-decoration: none;
     color: $fg-secondary-hfa;
     background-color: transparent;
+  }
+}
+
+.gist-icons {
+  margin-inline-start: 40px;
+  padding-left: 18px;
+  a {
+    font-size: 2em;
+    vertical-align: middle;
+    margin-right: 0.75em;
+  }
+  a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: $fg-secondary-hfa;
+    background-color: transparent;
+  }
+}
+
+
+.gist-toggle.btn {
+  border-width: 0;
+  color: $fg-secondary;
+  background-color: $bg-secondary-hfa;
+  &:focus {
+    box-shadow: none;
+  }
+  &:before {
+    content: "Collapse";
+  }
+  .fa:before {
+    content: "\f077";
+  }
+}
+
+.gist-toggle.btn.collapsed {
+  color: $bg-secondary;
+  background-color: $fg-secondary;
+  &:hover {
+    color: $fg-secondary;
+    background-color: $bg-secondary-hfa;
+  }
+  &:before {
+    content: "Show gist";
+  }
+  .fa:before {
+    content: "\f078";
   }
 }
