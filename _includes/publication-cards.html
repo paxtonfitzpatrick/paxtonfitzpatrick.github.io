@@ -10,6 +10,23 @@
         <div class="col-xs-12 col-sm-8 text-left">
           <h4>{{ item.title | markdownify }}</h4>
           <p>{{ item.text | markdownify }}</p>
+          <div class="publication-icons mt-n2">
+            {% if item.pdf_url %}
+              <a aria-label="PDF" href="{{ item.pdf_url }}" target="_blank" rel="noopener noreferrer">
+                <i class="icon fas fa-file-pdf fa-fw" aria-hidden="true" title="PDF" data-toggle="tooltip" data-placement="bottom"></i>
+              </a>
+            {% endif %}
+            {% if item.code_url %}
+              <a aria-label="Code" href="{{ item.code_url }}" target="_blank" rel="noopener noreferrer">
+                <i class="icon fas fa-file-code fa-fw" aria-hidden="true" title="Code" data-toggle="tooltip" data-placement="bottom"></i>
+              </a>
+            {% endif %}
+            {% if item.data_url %}
+              <a aria-label="Data" href="{{ item.data_url }}" target="_blank" rel="noopener noreferrer">
+                <i class="icon fas fa-database fa-fw" aria-hidden="true" title="Data" data-toggle="tooltip" data-placement="bottom"></i>
+              </a>
+            {% endif %}
+          </div>
         </div>
       </div>
     {% endif %}
