@@ -28,3 +28,15 @@ blockquote {
   border-radius: 8px;
   background-color: $bg-secondary-hfa;
 }
+
+#software p {
+  a {
+    color: $fg-secondary-link;
+    text-decoration: none;
+  }
+  a:hover, a:focus, a:active {
+    color: $fg-secondary-link-hfa;
+    text-decoration: underline;
+    background-color: transparent;
+  }
+}
