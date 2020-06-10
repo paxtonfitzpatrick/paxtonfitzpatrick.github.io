@@ -1,11 +1,11 @@
-<div class="container">
+<div class="gist-cards text-left">
   {% for item in include.pane.items %}
     <div class="row mb-n4">
-       <div class="col-12">
-         <div class="float-left">
-           <p><code>{{ item.title }}</code></p>
-         </div>
-       </div>
+      <div class="col-12">
+        <div class="float-left">
+          <p><code>{{ item.title }}</code></p>
+        </div>
+      </div>
     </div>
     <div class="row">
       <div class="col-12">
@@ -13,10 +13,14 @@
       </div>
     </div>
     <div class="row mb-3">
-      {% capture gist_id %}#gist_{{ item.title | downcase | replace: ' ', '_' }}{% endcapture %}
-      <button type="button" class="btn btn-primary btn-block" data-toggle="collapse" data-target="{{ gist_id }}">button text</button>
-      <div class="collapse" id="{{ gist_id }}">
-        HELLO IT ME
+      <div class="col-12">
+        {% capture gist_id %}gist_{{ item.title | downcase | replace: ' ', '_' }}{% endcapture %}
+        <button type="button" class="btn btn-sm btn-block mb-1" data-toggle="collapse" data-target="#{{ gist_id }}">
+          Expand gist
+        </button>
+        <div class="collapse" id="{{ gist_id }}">
+          <script src="https://gist.github.com/paxtonfitzpatrick/{{ item.id }}.js"></script>
+        </div>
       </div>
     </div>
   {% endfor %}
