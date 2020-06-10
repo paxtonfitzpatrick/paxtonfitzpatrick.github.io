@@ -374,7 +374,7 @@ sections:
   - type: contact.html
     section_id: contact
     background_style: bg-primary
-    title: Contact
+    title: Get in touch
     email: Paxton.C.Fitzpatrick@Dartmouth.edu
     phone: (717) 439-3999
     address: 416 Moore Hall, Dartmouth College, Hanover, NH 03755
