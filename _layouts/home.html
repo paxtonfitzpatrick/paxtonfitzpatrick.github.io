@@ -11,7 +11,7 @@ layout: base
         <div class="header-icons fade-in">
           {% for icon in page.header.icons %}
           <a aria-label="{{ icon.title }}" href="{{ icon.url }}" target="_blank" rel="noopener noreferrer">
-            <i class="icon {{ icon.icon_type }} {{ icon.icon }}" aria-hidden="true" title="{{ icon.title }}" data-toggle="tooltip" data-placement="bottom"></i>
+            <i class="icon {{ icon.type }} {{ icon.icon }}" aria-hidden="true" title="{{ icon.title }}" data-toggle="tooltip" data-placement="bottom"></i>
           </a>
           {% endfor %}
         </div>
