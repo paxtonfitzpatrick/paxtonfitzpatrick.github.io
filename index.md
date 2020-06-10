@@ -294,7 +294,7 @@ sections:
                 url: https://umap-learn.readthedocs.io/en/latest/
               - icon: fa-file-pdf
                 type: fas
-                text: arxiv paper
+                text: arXiv paper
                 url: https://arxiv.org/pdf/1802.03426.pdf
           - title: CDL-tutorials
             role: developer, maintainer
@@ -321,6 +321,10 @@ sections:
                 type: fab
                 text: View on GitHub
                 url: https://github.com/contextlab/lab-manual
+              - icon: fa-file-pdf
+                type: fas
+                text: Download PDF
+                url: https://github.com/ContextLab/lab-manual/raw/master/lab_manual.pdf
           - title: CDL-bibliography
             role: maintainer
             description: a `bibtex` file containing nearly 6,000 references related to psychology, neuroscience, math, 
