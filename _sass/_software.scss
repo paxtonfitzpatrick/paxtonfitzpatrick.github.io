@@ -40,3 +40,19 @@ blockquote {
     background-color: transparent;
   }
 }
+
+.software-icons {
+  font-size: 1.75em;
+  margin-inline-start: 40px;
+  padding-left: 15px;
+  a {
+    display: inline-block;
+    text-align: center;
+    margin-right: 0.75em;
+  }
+  a:hover {
+    text-decoration: none;
+    color: $fg-secondary-hfa;
+    background-color: transparent;
+  }
+}
