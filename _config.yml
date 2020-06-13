@@ -29,7 +29,7 @@ safe: true
 markdown: kramdown
 sass:
   indentWidth: 4
-  style: compact
+  style: compressed
   precision: 10
 plugins:
   - jekyll-sitemap
