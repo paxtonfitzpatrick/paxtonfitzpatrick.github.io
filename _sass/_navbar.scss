@@ -2,23 +2,25 @@
   #mainNav {
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
     background-color: $header-bg;
-    .navbar-brand {
+
+    .navbar-brand, .navbar-nav .nav-item .nav-link {
       color: $header-fg;
-    }
-    .navbar-nav .nav-item .nav-link {
-      color: $header-fg;
+      &:hover {
+        color: $fg-primary-hfa;
+      }
     }
   }
 
   #mainNav.navbar-scrolled {
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
     background-color: rgba(255, 255, 255, 0.7);
-    .navbar-brand {
-      color: $bg-primary;
-    }
 
-    .navbar-nav .nav-item .nav-link {
-      color: $bg-primary;
+    .navbar-brand, .navbar-nav .nav-item .nav-link {
+      color: $header-bg;
+      &:hover {
+        color: $bg-primary-hfa;
+      }
     }
   }
 }
+
