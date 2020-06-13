@@ -10,12 +10,15 @@
     <div class="col-4">
       <h3 class="text-bold">Contact info</h3>
       <p>
-        <i class="icon fa fa-envelope" aria-hidden="true"></i>
-        <a href="mailto:{{ section.email }}">{{ section.email }}</a>
+        <a href="mailto:{{ section.email }}">
+          <i class="icon fa fa-envelope" aria-hidden="true"></i>
+          {{ section.email }}
+        </a>
       </p>
       <p>
-        <i class="icon fa fa-phone" aria-hidden="true"></i>
-        <a href="tel:{{ section.phone }}">{{ section.phone }}</a>
+        <a href="tel:{{ section.phone }}">
+          <i class="icon fa fa-phone" aria-hidden="true"></i>
+          {{ section.phone }}</a>
       </p>
       <p>
         <i class="fa fa-map-marker" aria-hidden="true"></i>
