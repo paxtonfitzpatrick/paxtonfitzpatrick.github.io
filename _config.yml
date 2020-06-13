@@ -18,7 +18,9 @@ linkedin: https://www.linkedin.com/in/paxton-fitzpatrick-962500132
 twitter: https://twitter.com/paxt0n4
 cv_path: '#'
 lab_website: https://www.context-lab.com/
-google_analytics_id:
+google_analytics:
+  id: UA-169319829-1
+  enabled: false
 
 
 
