@@ -22,8 +22,6 @@ google_analytics:
   id: UA-169319829-1
   enabled: false
 
-
-
 # Build settings
 safe: true
 markdown: kramdown
