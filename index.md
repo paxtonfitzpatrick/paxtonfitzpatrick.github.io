@@ -36,14 +36,24 @@ sections:
     background_style: bg-secondary
     title: About me
     panes:
-      - type: bio.html
+      - type: bio-timeline.html
         title: Bio
-        before_text: I'm a Lab Manager and Research Assistant in the 
-         [Contextual Dynamics Lab](https://context-lab.com/) at [Dartmouth College](https://home.dartmouth.edu/). My
-         work entails building computational models of how memories form and change over time, and creating software
-         tools for novel methods of neural and behavioral data analysis.
-        bio_text: Growing up, I lived in seven different places. Through frequently moving and meeting new people, I
-         became fascinated with the question of what makes people tick. 
+        overview: >+
+          I'm a Lab Manager and Research Assistant in the [Contextual Dynamics Lab](https://context-lab.com/) at
+          [Dartmouth College](https://home.dartmouth.edu/). 
+          
+          I build computational models of memory and create software tools for neural and behavioral data analysis.
+        bio_paragraphs:
+          - text: Growing up, I lived in seven different places before settling in Camp Hill, Pennsylvania. Through
+             frequently meeting new groups of people, I became fascinated by the idea that each person's experiences
+             and environment could lead to such different personalities, while at he same time each place seemed to
+             have something of a collective persona. 
+            image: dartmouth-logo.png
+        timeline:
+          start: 2013
+          end: 2022
+          before:
+            
       - type: skills.html
         before_text: SKILLS BEFORE TEXT HERE
         title: Skills
