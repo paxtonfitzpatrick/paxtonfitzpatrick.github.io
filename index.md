@@ -52,8 +52,11 @@ sections:
         timeline:
           start: 2013
           end: 2022
-          before:
-            
+          events:
+            - title: Student at Dartmouth College
+              start: 2015.75
+              end: 2019.5
+              image: dartmouth-logo.png
       - type: skills.html
         before_text: SKILLS BEFORE TEXT HERE
         title: Skills

@@ -20,7 +20,11 @@
       {% endfor %}
     </div>
     <div class="timeline col-md-6">
-
+      <ul class="timeline-events" data-start="{{ include.pane.timeline.start }}" data-end="{{ include.pane.timeline.end }}">
+        {% for event in include.pane.timeline.events %}
+          <li id="timeline-event-{{ event.title | replace: ' ', '_' }}" data-start="{{ event.start }}" data-end="{{ event.end }}" data-image="{{ event.image }}"></li>
+        {% endfor %}
+      </ul>
     </div>
   </div>
 </div>
