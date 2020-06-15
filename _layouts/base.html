@@ -10,23 +10,23 @@
   <title>{% assign title_is_not_empty = page.title | is_not_empty %}{% if title_is_not_empty %}{{ page.title }} - {% endif %}{{ site.title }}</title>
 
   <!-- Favicon -->
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon/favicon-16x16.png">
-  <link rel="manifest" href="assets/img/favicon/site.webmanifest">
-  <link rel="mask-icon" href="assets/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
-  <link rel="shortcut icon" href="assets/img/favicon/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ 'assets/img/favicon/apple-touch-icon.png' | relative_url }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ 'assets/img/favicon/favicon-32x32.png' | relative_url }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ 'assets/img/favicon/favicon-16x16.png' | relative_url }}">
+  <link rel="manifest" href="{{ 'assets/img/favicon/site.webmanifest' | relative_url }}">
+  <link rel="mask-icon" href="{{ 'assets/img/favicon/safari-pinned-tab.svg' | relative_url }}" color="#5bbad5">
+  <link rel="shortcut icon" href="{{ 'assets/img/favicon/favicon.ico' | relative_url }}">
   <meta name="msapplication-TileColor" content="#da532c">
-  <meta name="msapplication-config" content="assets/img/favicon/browserconfig.xml">
+  <meta name="msapplication-config" content="{{ 'assets/img/favicon/browserconfig.xml' | relative_url }}">
   <meta name="theme-color" content="#ffffff">
   <!-- Custom Fonts -->
 <!--  <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">-->
 <!--  <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>-->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" integrity="sha384-v8BU367qNbs/aIZIxuivaU55N5GPF89WBerHoGA4QTcbUjYiLQtKdrfXnqAcXyTv" crossorigin="anonymous">
   <!-- Theme CSS - Includes Bootstrap -->
-  <link href="assets/css/creative.css" rel="stylesheet">
+  <link href="{{ 'assets/css/creative.css' | relative_url }}" rel="stylesheet">
   <!-- Custom CSS -->
-  <link href="assets/css/main.css" rel="stylesheet">
+  <link href="{{ 'assets/css/main.css' | relative_url }}" rel="stylesheet">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -52,10 +52,11 @@
   <!-- Third-party plugins -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
   <!-- Custom scripts for this template -->
-  <script src="../assets/js/creative.min.js"></script>
+  <script src="{{ 'assets/js/creative.min.js' | relative_url }}"></script>
   {% if page.layout == "home" %}
-    <script type="text/javascript" src="../assets/js/particle-image.min.js"></script>
-    <script type="text/javascript" src="../assets/js/app.min.js"></script>
+    <script type="text/javascript" src="{{ 'assets/js/particle-image.min.js' | relative_url }}"></script>
+    <script type="text/javascript" src="{{ 'assets/js/app.min.js' | relative_url }}"></script>
+    <script type="text/javascript" src="{{ 'assets/js/timeline.js' | relative_url }}"></script>
   {% endif %}
   <!-- init script for tooltip plugin (from Popper.js) -->
   <script>
