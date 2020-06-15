@@ -1,3 +1,4 @@
+// primary section theme
 $bg-primary: #2d3b4d;
 $bg-primary-hfa: #575c63;
 $fg-primary: #fff;
@@ -7,6 +8,7 @@ $fg-primary-link-hfa: #ff66fc;
 $code-primary: #C18401;
 $muted-primary: #aeb2b5;
 
+// secondary section theme
 $bg-secondary: #f7f7f7;
 $bg-secondary-hfa: #e2e2e2;
 $fg-secondary: $bg-primary;
@@ -15,7 +17,9 @@ $fg-secondary-link: #1257b5;
 $fg-secondary-link-hfa: #1876f5;
 $code-secondary: $code-primary;
 
+// header style
 $header-bg: $bg-primary;
 $header-fg: $fg-primary;
-
 $fade-time: 3s;
+
+// timeline style (export for

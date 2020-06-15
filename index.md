@@ -48,7 +48,7 @@ sections:
              frequently meeting new groups of people, I became fascinated by the idea that each person's experiences
              and environment could lead to such different personalities, while at he same time each place seemed to
              have something of a collective persona. 
-            image: dartmouth-logo.png
+            image: assets/img/timeline/dartmouth-logo.png
         timeline:
           start: 2013
           end: 2022
@@ -56,56 +56,57 @@ sections:
             - title: Student at Dartmouth College
               start: 2015.75
               end: 2019.5
-              image: dartmouth-logo.png
+              color: #00693e
+              image: assets/img/timeline/dartmouth-logo.png
       - type: skills.html
         before_text: SKILLS BEFORE TEXT HERE
         title: Skills
         skills:
-          - image: python.png
+          - image: assets/img/skills/python.png
             caption: Python
-          - image: conda.png
+          - image: assets/img/skills/conda.png
             caption: Conda
-          - image: numpy.png
+          - image: assets/img/skills/numpy.png
             caption: NumPy
-          - image: pandas.png
+          - image: assets/img/skills/pandas.png
             caption: Pandas
-          - image: scikit-learn.png
+          - image: assets/img/skills/scikit-learn.png
             caption: Scikit-learn
-          - image: matplotlib.png
+          - image: assets/img/skills/matplotlib.png
             caption: Matplotlib
-          - image: seaborn.png
+          - image: assets/img/skills/seaborn.png
             caption: Seaborn
-          - image: psychopy.png
+          - image: assets/img/skills/psychopy.png
             caption: PsychoPy
-          - image: jupyter.png
+          - image: assets/img/skills/jupyter.png
             caption: Jupyter
-          - image: git.png
+          - image: assets/img/skills/git.png
             caption: Git/GitHub
-          - image: html.png
+          - image: assets/img/skills/html.png
             caption: HTML
-          - image: css.png
+          - image: assets/img/skills/css.png
             caption: CSS
-          - image: javascript.png
+          - image: assets/img/skills/javascript.png
             caption: JavaScript
-          - image: jspsych.png
+          - image: assets/img/skills/jspsych.png
             caption: jsPsych
-          - image: psiturk.png
+          - image: assets/img/skills/psiturk.png
             caption: psiTurk
-          - image: docker.png
+          - image: assets/img/skills/docker.png
             caption: Docker
-          - image: travis.png
+          - image: assets/img/skills/travis.png
             caption: Travis CI
-          - image: shell.png
+          - image: assets/img/skills/shell.png
             caption: Shell
-          - image: latex.png
+          - image: assets/img/skills/latex.png
             caption: LaTeX
-          - image: supercollider.png
+          - image: assets/img/skills/supercollider.png
             caption: SuperCollider
-          - image: illustrator.png
+          - image: assets/img/skills/illustrator.png
             caption: Adobe Illustrator
-          - image: photoshop.png
+          - image: assets/img/skills/photoshop.png
             caption: Adobe Photoshop
-          - image: superlab.png
+          - image: assets/img/skills/superlab.png
             caption: Cedrus SuperLab 5
             
   - type: multipane-filter.html
@@ -126,13 +127,13 @@ sections:
         title: Exploring the evolving geometric structure of experiences and memories
         text: __Fitzpatrick P. C.__, Heusser A. C., Manning J. R. (2019). Exploring the evolving geometric structure
          of experiences and memories. *Society for Neuroscience Annual Meeting*. Chicago, IL.
-        image: sfn-2019.png
+        image: assets/img/research/sfn-2019.png
         pdf_url: https://www.dropbox.com/sh/bpyk9gwpk8wexfe/AAASc1BGgX5I08xK07yrmJ96a/SFN_2019b.pdf?dl=0
       - type: manuscript
         title: How is experience transformed into memory?
         text: Heusser A. C.&dagger;, **Fitzpatrick P. C.**&dagger;, Manning J. R. (under revision). How is experience
          transformed into memory?. *bioRxiv*&#58; 409987.
-        image: sherlock-white.png
+        image: assets/img/research/sherlock-white.png
         pdf_url: https://www.biorxiv.org/content/10.1101/409987v2.full.pdf
         code_url: https://github.com/ContextLab/sherlock-topic-model-paper
         data_url: https://arks.princeton.edu/ark:/88435/dsp01nz8062179
@@ -140,33 +141,33 @@ sections:
         title: Mapping between naturalistic experience and verbal recall
         text: __Fitzpatrick P. C.__, Heusser A. C., Manning J. R. (2018). Mapping between naturalistic experience and
          verbal recall. *Society for Neuroscience Annual Meeting*. San Diego, CA.
-        image: sfn-2018.png
+        image: assets/img/research/sfn-2018.png
         pdf_url: https://www.dropbox.com/sh/bpyk9gwpk8wexfe/AABVGrxhxUar2cztUwSx7mBda?dl=0&preview=SFN_2018a.pdf
         data_url: https://arks.princeton.edu/ark:/88435/dsp01nz8062179
       - type: poster
         title: Capturing the geometric structure of our experiences and how we remember them
         text: Heusser A. C., __Fitzpatrick P. C.__, Manning J. R. (2018). Capturing the geometric structure of our
          experiences and how we remember them. *Conference on Cognitive Computational Neuroscience*. Philadelphia, PA.
-        image: ccn-2018.png
+        image: assets/img/research/ccn-2018.png
         pdf_url: https://www.dropbox.com/sh/bpyk9gwpk8wexfe/AABVGrxhxUar2cztUwSx7mBda?dl=0&preview=CCN_2018.pdf
         data_url: https://arks.princeton.edu/ark:/88435/dsp01nz8062179
       - type: poster
         title: The utility of speech-to-text software for transcription of verbal response data
         text: __Fitzpatrick P. C.__, Ziman K., Heusser A. C., Field C. E., Manning J. R. (2018). The utility of
          speech-to-text software for transcription of verbal response data. *Wetterhahn Science Symposium*. Hanover, NH.
-        image: wetterhahn-2018a.png
+        image: assets/img/research/wetterhahn-2018a.png
         pdf_url: https://www.dropbox.com/sh/bpyk9gwpk8wexfe/AABVGrxhxUar2cztUwSx7mBda?dl=0&preview=Wetterhahn_2018c.pdf
       - type: poster
         title: Adaptive free recall&#58; Enhancing (or diminishing) memory
         text: Lee M., Chacko R., Whitaker E., **Fitzpatrick P. C.**, Field C. E., Ziman K., Bollinger B., Heusser A. C., Manning J. R. (2018). Adaptive free recall&#58; Enhancing (or diminishing) memory. *Wetterhahn Science
          Symposium*. Hanover, NH.
-        image: wetterhahn-2018b.png
+        image: assets/img/research/wetterhahn-2018b.png
         pdf_url: https://www.dropbox.com/sh/bpyk9gwpk8wexfe/AABVGrxhxUar2cztUwSx7mBda?dl=0&preview=Wetterhahn_2018a.pdf
       - type: manuscript
         title: Is automatic speech-to-text transcription ready for use in psychological experiments?
         text: Ziman K., Heusser A. C., **Fitzpatrick P. C.**, Field C. E., Manning J. R. (2018). Is automatic
          speech-to-text transcription ready for use in psychological experiments?. *Behavior Research Methods*, 1-9.
-        image: autofr-paper-white.png
+        image: assets/img/research/autofr-paper-white.png
         pdf_url: https://link.springer.com/content/pdf/10.3758/s13428-018-1037-4.pdf
         code_url: https://github.com/ContextLab/AutoFR-analyses
         data_url: https://github.com/ContextLab/quail/tree/master/quail/data
@@ -174,7 +175,7 @@ sections:
         title: Quail&#58; a Python toolbox for analyzing and plotting free recall data
         text: Heusser A. C., **Fitzpatrick P. C.**, Field C. E., Ziman K., Manning J. R. (2017). Quail&#58; a Python
          toolbox for analyzing and plotting free recall data. *The Journal of Open Source Software*, 2(18)&#58; 424.
-        image: quail-white.png
+        image: assets/img/research/quail-white.png
         pdf_url: https://www.theoj.org/joss-papers/joss.00424/10.21105.joss.00424.pdf
         code_url: https://github.com/ContextLab/quail
         

@@ -1,7 +1,7 @@
 <div class="container">
   <h5>{{ include.pane.overview | newline_to_br | markdownify }}</h5>
   <div class="row">
-    <div class="bio col-md-6">
+    <div class="col-md-6">
       {% for paragraph in include.pane.bio_paragraphs %}
         <div class="row text-left">
           {% assign odd_num_row = forloop.index | modulo: 2 %}
@@ -9,20 +9,24 @@
             <div class="col-md-9">{{ paragraph.text }}</div>
             <div class="col-md-3">
               <div class="bio-img">
-                <img src="assets/img/timeline/{{ paragraph.image }}" alt="X">
+                <img src="{{ paragraph.image | relative_url }}" alt="X">
               </div>
             </div>
           {% else %}
-            <div class="col-md-3">{{ paragraph.image }}</div>
+            <div class="col-md-3">
+              <div class="bio-img">
+                <img src="{{ paragraph.image | relative_url }}" alt="X">
+              </div>
+            </div>
             <div class="col-md-9">{{ paragraph.text }}</div>
           {% endif %}
         </div>
       {% endfor %}
     </div>
-    <div class="timeline col-md-6">
+    <div class="col-md-6" id="timeline">
       <ul class="timeline-events" data-start="{{ include.pane.timeline.start }}" data-end="{{ include.pane.timeline.end }}">
         {% for event in include.pane.timeline.events %}
-          <li id="timeline-event-{{ event.title | replace: ' ', '_' }}" data-start="{{ event.start }}" data-end="{{ event.end }}" data-image="{{ event.image }}"></li>
+          <li id="timeline-event-{{ event.title | replace: ' ', '_' }}" data-start="{{ event.start }}" data-end="{{ event.end }}" data-image="{{ event.image | relative_url }}"></li>
         {% endfor %}
       </ul>
     </div>
