@@ -6,3 +6,12 @@
     max-height: 65%;
   }
 }
+
+#timeline {
+  // stores custom properties to be accessed by timeline.js
+  --background-color: $tl-bg-color;
+  --line-color: $tl-line-color;
+  --year-color: $tl-year-color;
+  --bar-width: $tl-bar-width;
+  --bar-offset: $tl-bar-offset;
+}
