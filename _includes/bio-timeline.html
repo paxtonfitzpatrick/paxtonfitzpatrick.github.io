@@ -26,7 +26,8 @@
     <div class="col-md-6" id="timeline">
       <ul class="timeline-events" data-start="{{ include.pane.timeline.start }}" data-end="{{ include.pane.timeline.end }}">
         {% for event in include.pane.timeline.events %}
-          <li id="timeline-event-{{ event.title | replace: ' ', '_' }}" data-start="{{ event.start }}" data-end="{{ event.end }}" data-image="{{ event.image | relative_url }}"></li>
+          <li id="timeline-event-{{ event.title | replace: ' ', '_' }}" data-start="{{ event.start }}"
+              data-end="{{ event.end }}" data-color="{{ event.color }}" data-image="{{ event.image | relative_url }}"></li>
         {% endfor %}
       </ul>
     </div>
