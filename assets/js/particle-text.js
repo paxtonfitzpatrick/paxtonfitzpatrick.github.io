@@ -637,7 +637,7 @@ const ParticleTextDisplayer = function(tag_id, params) {
         // draw line, use particle's color TODO: add opacity
         pText.canvas.context.strokeStyle = p.color;
         // don't let line be wider than particle
-        pText.canvas.context.lineWidth = Math.min(pText[`'${p_type}_particles'`].line_linked.width, p.radius * 2);
+        pText.canvas.context.lineWidth = Math.min(pText[`${p_type}_particles`].line_linked.width, p.radius * 2);
         pText.canvas.context.beginPath();
         pText.canvas.context.moveTo(p.x, p.y);
         pText.canvas.context.lineTo(pText.mouse.x, pText.mouse.y);
