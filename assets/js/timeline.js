@@ -9,6 +9,7 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
     end_year: parseInt(timeline_el.dataset.end),
     center_x: Math.floor(canvas.width / 2),
     years_ycoords: {},
+    occupied_grid: {},
     events: [],
     style: {},
     functions: {
@@ -24,10 +25,13 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
   ========================================
   */
   TL.functions.timeline.init = function() {
+    TL.functions.timeline.getStyle();
+    TL.functions.events.parseEvents();
     // compute y-coordinate for each 1/4 year included in the timeline
     const y_inc = TL.canvas.height / ((TL.end_year - TL.start_year) * 4);
     for (let year = TL.start_year, year_y = 0; year <= TL.end_year; year += 0.25, year_y += y_inc) {
       TL.years_ycoords[year] = Math.floor(year_y);
+      TL.occupied_grid[year] = Array(TL.events.length).fill(0);
     }
     // also need to load images and wait before moving on
   };
@@ -89,10 +93,6 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
       }
       offset_n ++;
     }
-
-    // object to record which columns are occupied for each year
-    const occupied_grid = {};
-    for (let year in TL.years_ycoords)
   };
 
   /*
