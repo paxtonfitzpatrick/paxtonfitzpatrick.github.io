@@ -43,9 +43,9 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
     TL.style.year_color = compStyles.getPropertyValue("--year-color");
     TL.style.year_fontsize = compStyles.getPropertyValue("--year-font-size");
     TL.style.gridline_color = compStyles.getPropertyValue("--gridline-color");
-    TL.style.gridline_width = compStyles.getPropertyValue("--gridline-width");
+    TL.style.gridline_width = parseInt(compStyles.getPropertyValue("--gridline-width"));
     TL.style.timeline_color = compStyles.getPropertyValue("--timeline-color");
-    TL.style.timeline_width = compStyles.getPropertyValue("--timeline-width");
+    TL.style.timeline_width = parseInt(compStyles.getPropertyValue("--timeline-width"));
     TL.style.event_width = compStyles.getPropertyValue("--event-width");
     TL.style.event_offset = compStyles.getPropertyValue("--event-offset");
   };
