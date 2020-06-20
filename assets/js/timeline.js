@@ -1,8 +1,4 @@
 const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
-
-  const events_list_el = document.querySelector(`#${tag_id} > .timeline-events`);
-
-
   this.timelineObj = {
     canvas: {
       el: canvas,
@@ -46,8 +42,8 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
     TL.style.gridline_width = parseInt(compStyles.getPropertyValue("--gridline-width"));
     TL.style.timeline_color = compStyles.getPropertyValue("--timeline-color");
     TL.style.timeline_width = parseInt(compStyles.getPropertyValue("--timeline-width"));
-    TL.style.event_width = compStyles.getPropertyValue("--event-width");
-    TL.style.event_offset = compStyles.getPropertyValue("--event-offset");
+    TL.style.event_width = parseInt(compStyles.getPropertyValue("--event-width"));
+    TL.style.event_offset = parseInt(compStyles.getPropertyValue("--event-offset"));
   };
 
   TL.functions.timeline.drawBase = function() {
@@ -80,7 +76,23 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
   };
 
   TL.functions.timeline.computeEventLayout = function() {
-    const 
+    // store x-coordinates for each possible column event bars can occupy
+    // (largest number of simultaneously occurring events we have to account for
+    // is the total number of events)
+    const event_col_xcoords = [TL.center_x];
+    let offset_n = 1;
+    while (event_col_xcoords.length < TL.events.length) {
+      const total_offset = offset_n * (TL.style.event_width + TL.style.event_offset);
+      event_col_xcoords.push(TL.center_x + total_offset);
+      if (event_col_xcoords.length < TL.events.length) {
+        event_col_xcoords.push(TL.center_x - total_offset);
+      }
+      offset_n ++;
+    }
+
+    // object to record which columns are occupied for each year
+    const occupied_grid = {};
+    for (let year in TL.years_ycoords)
   };
 
   /*
@@ -98,6 +110,13 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
 
   TL.functions.events.TimelineEvent.prototype.draw = function() {
     // ROUNDED CAPS HAVE A RADIUS OF 1/2 THE LINE'S WIDTH AND ADD THAT MUCH LENGTH TO THE LINE
+  };
+
+  TL.functions.events.parseEvents = function() {
+    const events_list = document.querySelector(`#${tag_id} > .timeline-events`).getElementsByTagName("li");
+    for (let event_li of events_list) {
+      TL.events.push(new TL.functions.events.TimelineEvent(event_li));
+    }
   };
 
 
