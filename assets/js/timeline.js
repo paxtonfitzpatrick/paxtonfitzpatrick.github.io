@@ -25,15 +25,13 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
   ========================================
   */
   TL.functions.timeline.init = function() {
-    TL.functions.timeline.getStyle();
-    TL.functions.events.parseEvents();
+    // also need to load images and wait before moving on
     // compute y-coordinate for each 1/4 year included in the timeline
     const y_inc = TL.canvas.height / ((TL.end_year - TL.start_year) * 4);
     for (let year = TL.start_year, year_y = 0; year <= TL.end_year; year += 0.25, year_y += y_inc) {
       TL.years_ycoords[year] = Math.floor(year_y);
       TL.occupied_grid[year] = Array(TL.events.length).fill(0);
     }
-    // also need to load images and wait before moving on
   };
 
   TL.functions.timeline.getStyle = function() {
@@ -50,35 +48,6 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
     TL.style.event_offset = parseInt(compStyles.getPropertyValue("--event-offset"));
   };
 
-  TL.functions.timeline.drawBase = function() {
-    // draw main vertical timeline
-    TL.canvas.ctx.beginPath();
-    TL.canvas.ctx.moveTo(Math.round(TL.canvas.width / 2), 0);
-    TL.canvas.ctx.lineTo(Math.round(TL.canvas.width / 2), TL.canvas.height);
-    TL.canvas.ctx.lineWidth = TL.style.timeline_width;
-    TL.canvas.ctx.strokeStyle = TL.style.timeline_color;
-    // TL.canvas.ctx.lineCap = 'round';
-    TL.canvas.ctx.stroke();
-    // draw years and horizontal grid lines
-    TL.canvas.ctx.fillStyle = TL.style.year_color;
-    TL.canvas.ctx.font = `${TL.style.year_fontsize} sans-serif`;
-    TL.canvas.ctx.textAlign = "right";
-    // all digits are equal width, so this will work for the next ~8,000 years
-    // use 5 digits to get small gap between year and line
-    const gridline_offset = TL.canvas.ctx.measureText("00000").width;
-    TL.canvas.ctx.beginPath();
-    TL.canvas.ctx.strokeStyle = TL.style.gridline_color;
-    TL.canvas.lineWidth = TL.style.gridline_width;
-    for (let year in TL.years_ycoords) {
-      if (Number.isInteger(year)) {
-        TL.canvas.ctx.fillText(year, TL.canvas.width, TL.years_ycoords[year]);
-        TL.canvas.ctx.moveTo(0, TL.years_ycoords[year]);
-        TL.canvas.ctx.lineTo(gridline_offset, TL.years_ycoords[year]);
-      }
-    }
-    TL.canvas.ctx.stroke();
-  };
-
   TL.functions.timeline.computeEventLayout = function() {
     // store x-coordinates for each possible column event bars can occupy
     // (largest number of simultaneously occurring events we have to account for
@@ -93,6 +62,47 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
       }
       offset_n ++;
     }
+
+    // for each timeline event
+    for (let event_n in TL.events) {
+      const event = TL.events[event_n],
+        // get the index of the center-most column not occupied at its start start year
+        first_open_col = TL.occupied_grid[event.start_year].indexOf(0);
+      // set the x-coordinate of the column where the event will be drawn
+      event.x_coord = event_col_xcoords[first_open_col];
+      // mark that column as occupied for the duration of the event
+      for (let year = event.start_year; year < event.end_year; year += 0.25) {
+        TL.occupied_grid[year][first_open_col] = 1;
+      }
+    }
+  };
+
+  TL.functions.timeline.drawBase = function() {
+    // draw main vertical timeline
+    TL.canvas.ctx.beginPath();
+    TL.canvas.ctx.moveTo(Math.round(TL.canvas.width / 2), 0);
+    TL.canvas.ctx.lineTo(Math.round(TL.canvas.width / 2), TL.canvas.height);
+    TL.canvas.ctx.lineWidth = TL.style.timeline_width;
+    TL.canvas.ctx.strokeStyle = TL.style.timeline_color;
+    TL.canvas.ctx.stroke();
+    // draw years and horizontal grid lines
+    TL.canvas.ctx.beginPath();
+    TL.canvas.ctx.fillStyle = TL.style.year_color;
+    TL.canvas.ctx.textAlign = "right";
+    TL.canvas.ctx.font = `${TL.style.year_fontsize} sans-serif`;
+    TL.canvas.ctx.strokeStyle = TL.style.gridline_color;
+    TL.canvas.lineWidth = TL.style.gridline_width;
+    // all digits are equal width, so this will work for the next ~8,000 years
+    // use 5 digits to get small gap between year and line
+    const gridline_offset = TL.canvas.ctx.measureText("00000").width;
+    for (let year in TL.years_ycoords) {
+      if (Number.isInteger(year)) {
+        TL.canvas.ctx.fillText(year, TL.canvas.width, TL.years_ycoords[year]);
+        TL.canvas.ctx.moveTo(0, TL.years_ycoords[year]);
+        TL.canvas.ctx.lineTo(gridline_offset, TL.years_ycoords[year]);
+      }
+    }
+    TL.canvas.ctx.stroke();
   };
 
   /*
@@ -109,7 +119,14 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
   };
 
   TL.functions.events.TimelineEvent.prototype.draw = function() {
-    // ROUNDED CAPS HAVE A RADIUS OF 1/2 THE LINE'S WIDTH AND ADD THAT MUCH LENGTH TO THE LINE
+    TL.canvas.ctx.beginPath();
+    TL.canvas.ctx.lineWidth = TL.style.event_width;
+    TL.canvas.ctx.strokeStyle = this.color;
+    TL.canvas.ctx.lineCap = "round";
+    // rounded caps have a radius of 1/2 the line's width and add that much length to the line
+    TL.canvas.ctx.moveTo(this.x_coord, TL.years_ycoords[this.start_year] + (TL.style.event_width / 2));
+    TL.canvas.ctx.lineTo(this.x_coord, TL.years_ycoords[this.end_year] - (TL.style.event_width / 2));
+    TL.canvas.ctx.stroke();
   };
 
   TL.functions.events.parseEvents = function() {
@@ -119,15 +136,23 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
     }
   };
 
-
-
   /*
   ========================================
   =           LAUNCH FUNCTIONS           =
   ========================================
   */
+  TL.functions.launch = function() {
+    TL.functions.timeline.init();
+    TL.functions.timeline.getStyle();
+    TL.functions.events.parseEvents();
+    Tl.functions.timeline.computeEventLayout();
+    TL.functions.timeline.drawBase();
+    for (let event of TL.events) {
+      event.draw();
+    }
+  }
 
-
+  TL.functions.launch();
 };
 
 
