@@ -46,8 +46,8 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
     TL.style.gridline_width = compStyles.getPropertyValue("--gridline-width");
     TL.style.timeline_color = compStyles.getPropertyValue("--timeline-color");
     TL.style.timeline_width = compStyles.getPropertyValue("--timeline-width");
-    TL.style.bar_width = compStyles.getPropertyValue("--bar-width");
-    TL.style.bar_offset = compStyles.getPropertyValue("--bar-offset");
+    TL.style.event_width = compStyles.getPropertyValue("--event-width");
+    TL.style.event_offset = compStyles.getPropertyValue("--event-offset");
   };
 
   TL.functions.timeline.drawBase = function() {
@@ -57,7 +57,7 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
     TL.canvas.ctx.lineTo(Math.round(TL.canvas.width / 2), TL.canvas.height);
     TL.canvas.ctx.lineWidth = TL.style.timeline_width;
     TL.canvas.ctx.strokeStyle = TL.style.timeline_color;
-    TL.canvas.ctx.lineCap = 'round';
+    // TL.canvas.ctx.lineCap = 'round';
     TL.canvas.ctx.stroke();
     // draw years and horizontal grid lines
     TL.canvas.ctx.fillStyle = TL.style.year_color;
@@ -77,7 +77,11 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
       }
     }
     TL.canvas.ctx.stroke();
-  }
+  };
+
+  TL.functions.timeline.computeEventLayout = function() {
+    const 
+  };
 
   /*
   ========================================
@@ -92,8 +96,8 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
     this.image_path = event_li.dataset.image;
   };
 
-  TL.functions.events.TimelineEvent.prototype.computePosition = function() {
-    // compute veritcal and horizontal position of event bar
+  TL.functions.events.TimelineEvent.prototype.draw = function() {
+    // ROUNDED CAPS HAVE A RADIUS OF 1/2 THE LINE'S WIDTH AND ADD THAT MUCH LENGTH TO THE LINE
   };
 
 
