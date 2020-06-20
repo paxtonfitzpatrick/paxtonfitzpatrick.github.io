@@ -53,11 +53,16 @@ sections:
           start: 2013
           end: 2022
           events:
-            - title: Student at Dartmouth College
+            - title: Undergraduate at Dartmouth College
               start: 2015.75
               end: 2019.5
               color: #00693e
               image: assets/img/timeline/dartmouth-logo.png
+            - title: Dartmouth Brain Imaging Center
+              start: 2016.75
+              end: 2019.5
+              color: #56C2F3
+              
       - type: skills.html
         before_text: SKILLS BEFORE TEXT HERE
         title: Skills
