@@ -18,9 +18,10 @@
   --gridline-width: #{$tl-gridline-width};
   --event-width: #{$tl-event-width};
   --event-offset: #{$tl-event-offset};
-  //position: absolute;
-}
 
-//#timeline .timeline-canvas-el {
-//  position: absolute;
-//}
+  min-height: 100%;
+
+  ul {
+    display: none;
+  }
+}

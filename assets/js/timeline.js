@@ -79,14 +79,6 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
   };
 
   TL.functions.timeline.drawBase = function() {
-    // draw main vertical timeline
-    TL.canvas.ctx.clearRect(0, 0, TL.canvas.el.width, TL.canvas.el.height);
-    TL.canvas.ctx.beginPath();
-    TL.canvas.ctx.moveTo(Math.round(TL.canvas.width / 2), 0);
-    TL.canvas.ctx.lineTo(Math.round(TL.canvas.width / 2), TL.canvas.height);
-    TL.canvas.ctx.lineWidth = TL.style.timeline_width;
-    TL.canvas.ctx.strokeStyle = TL.style.timeline_color;
-    TL.canvas.ctx.stroke();
     // draw years and horizontal grid lines
     TL.canvas.ctx.beginPath();
     TL.canvas.ctx.fillStyle = TL.style.year_color;
@@ -96,14 +88,26 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
     TL.canvas.lineWidth = TL.style.gridline_width;
     // all digits are equal width, so this will work for the next ~8,000 years
     // use 5 digits to get small gap between year and line
-    const gridline_offset = TL.canvas.ctx.measureText("00000").width;
-    for (let year in TL.years_ycoords) {
+    const gridline_x_offset = TL.canvas.ctx.measureText("00000").width,
+      // for vertically aligning center of text with gridline
+      text_y_offset = parseInt(TL.style.year_fontsize) / 2;
+    for (let year_str in TL.years_ycoords) {
+      const year = Number(year_str);
       if (Number.isInteger(year)) {
-        TL.canvas.ctx.fillText(year, TL.canvas.width, TL.years_ycoords[year]);
+        console.log(year, TL.canvas.el.width, TL.years_ycoords[year]);
+        TL.canvas.ctx.fillText(year, TL.canvas.el.width, TL.years_ycoords[year] + text_y_offset);
         TL.canvas.ctx.moveTo(0, TL.years_ycoords[year]);
-        TL.canvas.ctx.lineTo(gridline_offset, TL.years_ycoords[year]);
+        TL.canvas.ctx.lineTo(TL.canvas.el.width - gridline_x_offset, TL.years_ycoords[year]);
       }
     }
+    TL.canvas.ctx.stroke();
+    // draw main vertical timeline
+    // TL.canvas.ctx.clearRect(0, 0, TL.canvas.el.width, TL.canvas.el.height);
+    TL.canvas.ctx.beginPath();
+    TL.canvas.ctx.moveTo(Math.round(TL.canvas.el.width / 2), 0);
+    TL.canvas.ctx.lineTo(Math.round(TL.canvas.el.width / 2), TL.canvas.el.height);
+    TL.canvas.ctx.lineWidth = TL.style.timeline_width;
+    TL.canvas.ctx.strokeStyle = TL.style.timeline_color;
     TL.canvas.ctx.stroke();
   };
 
@@ -167,8 +171,8 @@ window.timelineDisplay = function(tag_id) {
   const timeline_el = document.getElementById(tag_id),
     canvas_el = document.createElement('canvas');
   canvas_el.className = 'timeline-canvas-el';
-  canvas_el.style.width = "100%";
-  canvas_el.style.height = "100%";
+  canvas_el.width = timeline_el.offsetWidth;
+  canvas_el.height = timeline_el.offsetHeight;
   const canvas = timeline_el.appendChild(canvas_el);
 
   // launch display
