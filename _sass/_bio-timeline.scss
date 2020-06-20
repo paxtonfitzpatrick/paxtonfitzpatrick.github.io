@@ -9,13 +9,18 @@
 
 #timeline {
   // stores custom properties to be accessed by timeline.js
-  --background-color: $tl-bg-color;
-  --timeline-color: $tl-timeline-color;
-  --timeline-width: $tl-timeline-width;
-  --year-color: $tl-year-color;
-  --year-font-size: $tl-year-font-size;
-  --gridline-color: $tl-gridline-color;
-  --gridline-width: $tl-gridline-width;
-  --event-width: $tl-event-width;
-  --event-offset: $tl-event-offset;
+  --background-color: #{$tl-bg-color};
+  --timeline-color: #{$tl-timeline-color};
+  --timeline-width: #{$tl-timeline-width};
+  --year-color: #{$tl-year-color};
+  --year-font-size: #{$tl-year-font-size};
+  --gridline-color: #{$tl-gridline-color};
+  --gridline-width: #{$tl-gridline-width};
+  --event-width: #{$tl-event-width};
+  --event-offset: #{$tl-event-offset};
+  //position: absolute;
 }
+
+//#timeline .timeline-canvas-el {
+//  position: absolute;
+//}
