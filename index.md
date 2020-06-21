@@ -49,19 +49,52 @@ sections:
              and environment could lead to such different personalities, while at he same time each place seemed to
              have something of a collective persona. 
             image: assets/img/timeline/dartmouth-logo.png
+          - text: Growing up, I lived in seven different places before settling in Camp Hill, Pennsylvania. Through
+             frequently meeting new groups of people, I became fascinated by the idea that each person's experiences
+             and environment could lead to such different personalities, while at he same time each place seemed to
+             have something of a collective persona. 
+            image: assets/img/timeline/dartmouth-logo.png
+          - text: Growing up, I lived in seven different places before settling in Camp Hill, Pennsylvania. Through
+             frequently meeting new groups of people, I became fascinated by the idea that each person's experiences
+             and environment could lead to such different personalities, while at he same time each place seemed to
+             have something of a collective persona. 
+            image: assets/img/timeline/dartmouth-logo.png
         timeline:
-          start: 2013
-          end: 2022
+          start: 2015
+          end: 2021
           events:
-            - title: Undergraduate at Dartmouth College
+            - title: Undergraduate, Dartmouth College
               start: 2015.75
               end: 2019.5
-              color: #00693e
-              image: assets/img/timeline/dartmouth-logo.png
-            - title: Dartmouth Brain Imaging Center
+              color: 00693e
+            - title: Research Assistant, Dartmouth Brain Imaging Center
               start: 2016.75
               end: 2019.5
-              color: #56C2F3
+              color: 56C2F3
+            - title: Research Assistant, Contextual Dynamics Lab
+              start: 2017.25
+              end: 2018.5
+              color: 24ed67
+            - title: Research Assistant, Bregman Media Labs
+              start: 2017.25
+              end: 2018
+              color: d807e3
+            - title: Lab Manager, Contextual Dynamics Lab
+              start: 2018.5
+              end: 2020.5
+              color: 17ad46
+            - title: Private Tutor, Intro Computer Science
+              start: 2018.75
+              end: 2019.5
+              color: d9af1a
+            - title: Teaching Assistant, Human Memory
+              start: 2019.75
+              end: 2020
+              color: 100f70
+            - title: Teaching Assistant, Storytelling with Data
+              start: 2020.25
+              end: 2020.5
+              color: fa0011
               
       - type: skills.html
         before_text: SKILLS BEFORE TEXT HERE
