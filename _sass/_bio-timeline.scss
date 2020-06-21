@@ -23,6 +23,12 @@
   --gridline-width: #{$tl-gridline-width};
   --event-width: #{$tl-event-width};
   --event-offset: #{$tl-event-offset};
+  --info-line-width: #{$tl-info-line-width};
+  --info-x-offset: #{$tl-info-x-offset};
+  --info-y-offset: #{$tl-info-y-offset};
+  --info-font-size: #{$tl-info-font-size};
+  --info-font-color: #{$tl-info-font-color};
+  --info-font-alpha: #{$tl-info-font-alpha};
 
   min-height: 100%;
 
