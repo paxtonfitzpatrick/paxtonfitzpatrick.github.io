@@ -6,7 +6,7 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
     // get start and end years from element dataset
     start_year: parseInt(timeline_el.dataset.start),
     end_year: parseInt(timeline_el.dataset.end),
-    center_x: Math.floor(canvas.width / 2),
+    // center_x: Math.floor(canvas.width / 2),
     years_ycoords: {},
     occupied_grid: {},
     events: [],
@@ -107,9 +107,6 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
     const text_measurements = TL.functions.utils.getTextMeasurements("00000"),
       gridline_x_offset = text_measurements.width,
       text_y_offset = text_measurements.height / 2;
-    // const gridline_x_offset = TL.canvas.ctx.measureText("00000").width,
-      // for vertically aligning center of text with gridline
-      // text_y_offset = parseInt(TL.style.year_fontsize) / 2;
     for (let year_str in TL.years_ycoords) {
       const year = Number(year_str);
       if (Number.isInteger(year)) {
@@ -119,6 +116,7 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
       }
     }
     TL.canvas.ctx.stroke();
+    TL.center_x = Math.floor((TL.canvas.el.width - gridline_x_offset) / 2);
   };
 
   /*
@@ -152,7 +150,7 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
 
     for (let event of TL.events) {
       TL.canvas.ctx.beginPath();
-      // stroke properties
+      // line properties
       TL.canvas.ctx.strokeStyle = event.color;
       TL.canvas.ctx.lineWidth = TL.style.info_line_width;
       // text properties
@@ -175,7 +173,11 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
       for (let line_ix in event.info) {
         TL.canvas.ctx.fillText(event.info[line_ix], text_x, TL.years_ycoords[event.start_year] - text_height * 1.3 * (event.info.length - 1 - line_ix))
       }
-      TL.canvas.ctx.moveTo(event.x_coord, TL.years_ycoords[event.start_year + TL.style.info_y_offset]);
+      let line_start_y = TL.years_ycoords[event.start_year + TL.style.info_y_offset];
+      if (event.end_year - event.start_year <= TL.style.info_y_offset) {
+        line_start_y = Math.floor((TL.years_ycoords[event.end_year] + TL.years_ycoords[event.start_year]) / 2);
+      }
+      TL.canvas.ctx.moveTo(event.x_coord, line_start_y);
       TL.canvas.ctx.lineTo(text_x, TL.years_ycoords[event.start_year] + text_height * 0.2);
       TL.canvas.ctx.lineTo(underline_x, TL.years_ycoords[event.start_year] + text_height * 0.2)
       TL.canvas.ctx.stroke();
@@ -218,8 +220,8 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
   */
   TL.functions.launch = function() {
     TL.functions.timeline.init();
-    TL.functions.timeline.computeEventLayout();
     TL.functions.timeline.drawBase();
+    TL.functions.timeline.computeEventLayout();
     for (let event of TL.events) {
       event.draw();
     }
