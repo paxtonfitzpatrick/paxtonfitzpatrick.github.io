@@ -116,7 +116,7 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
       }
     }
     TL.canvas.ctx.stroke();
-    TL.center_x = Math.floor((TL.canvas.el.width - gridline_x_offset) / 2);
+    TL.center_x = Math.floor(TL.canvas.el.width  / 2 - gridline_x_offset);
   };
 
   /*
