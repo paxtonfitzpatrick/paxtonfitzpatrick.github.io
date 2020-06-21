@@ -48,6 +48,10 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
     TL.style.timeline_width = parseInt(compStyles.getPropertyValue("--timeline-width"));
     TL.style.event_width = parseInt(compStyles.getPropertyValue("--event-width"));
     TL.style.event_offset = parseInt(compStyles.getPropertyValue("--event-offset"));
+    TL.style.info_line_width = parseInt(compStyles.getPropertyValue("--info-line-width"));
+    TL.style.info_x_offset = parseInt(compStyles.getPropertyValue("--info-x-offset"));
+    TL.style.info_y_offset = parseFloat(compStyles.getPropertyValue("--info-y-offset"));
+    TL.style.info_fontsize = compStyles.getPropertyValue("--info-font-size").trim();
     const background_color = compStyles.getPropertyValue("--background-color").trim(),
       background_alpha = parseFloat(compStyles.getPropertyValue("--background-alpha")),
       timeline_color = compStyles.getPropertyValue("--timeline-color").trim(),
@@ -55,11 +59,14 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
       year_color = compStyles.getPropertyValue("--year-color").trim(),
       year_alpha = parseFloat(compStyles.getPropertyValue("--year-alpha")),
       gridline_color = compStyles.getPropertyValue("--gridline-color").trim(),
-      gridline_alpha = parseFloat(compStyles.getPropertyValue("--gridline-alpha"));
+      gridline_alpha = parseFloat(compStyles.getPropertyValue("--gridline-alpha")),
+      info_font_color = compStyles.getPropertyValue("--info-font-color").trim(),
+      info_font_alpha = parseInt(compStyles.getPropertyValue("--info-font-alpha"));
     TL.style.background_color = TL.functions.utils.hexToRGBA(background_color, background_alpha);
     TL.style.timeline_color = TL.functions.utils.hexToRGBA(timeline_color, timeline_alpha);
     TL.style.year_color = TL.functions.utils.hexToRGBA(year_color, year_alpha);
     TL.style.gridline_color = TL.functions.utils.hexToRGBA(gridline_color, gridline_alpha);
+    TL.style.info_font_color = TL.functions.utils.hexToRGBA(info_font_color, info_font_alpha);
   };
 
   TL.functions.timeline.computeEventLayout = function() {
@@ -101,9 +108,12 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
     TL.canvas.lineWidth = TL.style.gridline_width;
     // all digits are equal width, so this will work for the next ~8,000 years
     // use 5 digits to get small gap between year and line
-    const gridline_x_offset = TL.canvas.ctx.measureText("00000").width,
+    const text_measurements = TL.functions.utils.getTextMeasurements("00000"),
+      gridline_x_offset = text_measurements.width,
+      text_y_offset = text_measurements.height / 2;
+    // const gridline_x_offset = TL.canvas.ctx.measureText("00000").width,
       // for vertically aligning center of text with gridline
-      text_y_offset = parseInt(TL.style.year_fontsize) / 2;
+      // text_y_offset = parseInt(TL.style.year_fontsize) / 2;
     for (let year_str in TL.years_ycoords) {
       const year = Number(year_str);
       if (Number.isInteger(year)) {
@@ -113,13 +123,6 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
       }
     }
     TL.canvas.ctx.stroke();
-    // draw main vertical timeline
-    TL.canvas.ctx.beginPath();
-    TL.canvas.ctx.moveTo(Math.round(TL.canvas.el.width / 2), TL.top_y);
-    TL.canvas.ctx.lineTo(Math.round(TL.canvas.el.width / 2), TL.bottom_y);
-    TL.canvas.ctx.lineWidth = TL.style.timeline_width;
-    TL.canvas.ctx.strokeStyle = TL.style.timeline_color;
-    TL.canvas.ctx.stroke();
   };
 
   /*
@@ -128,7 +131,7 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
   ========================================
   */
   TL.functions.events.TimelineEvent = function(event_li) {
-    this.title = event_li.id.replace("timeline-event", "").replace("_", " ");
+    this.info = event_li.id.replace("timeline-event-", "").replace(/_/g, " ").replace(', ', ',DELIM ').split('DELIM ');
     this.start_year = parseFloat(event_li.dataset.start);
     this.end_year = parseFloat(event_li.dataset.end);
     this.color = `#${event_li.dataset.color}`;
@@ -146,6 +149,43 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
     TL.canvas.ctx.stroke();
   };
 
+  TL.functions.events.drawInfo = function() {
+    // get x-coordinates for info on left and right
+    const info_right_xcoord = Math.max.apply(Math, TL.events.map(function(ev){return ev.x_coord;})) + TL.style.info_x_offset,
+      info_left_xcoord = Math.min.apply(Math, TL.events.map(function(ev){return ev.x_coord;})) - TL.style.info_x_offset;
+
+    for (let event of TL.events) {
+      TL.canvas.ctx.beginPath();
+      // stroke properties
+      TL.canvas.ctx.strokeStyle = event.color;
+      TL.canvas.ctx.lineWidth = TL.style.info_line_width;
+      // text properties
+      TL.canvas.ctx.fillStyle = TL.style.info_font_color;
+      TL.canvas.ctx.font = `${TL.style.info_fontsize} sans-serif`;
+      TL.canvas.ctx.textBaseline = "bottom";
+      const text_width = Math.max.apply(Math, event.info.map(line => TL.functions.utils.getTextMeasurements(line).width)),
+        text_height = TL.functions.utils.getTextMeasurements(event.info[0]).height;
+      // options for text on right vs left of timeline
+      let text_x, underline_x;
+      if (event.x_coord >= TL.center_x) {
+        text_x = info_right_xcoord;
+        underline_x = text_x + text_width
+        TL.canvas.ctx.textAlign = "left";
+      } else {
+        text_x = info_left_xcoord;
+        underline_x = text_x - text_width;
+        TL.canvas.ctx.textAlign = "right";
+      }
+      for (let line_ix in event.info) {
+        TL.canvas.ctx.fillText(event.info[line_ix], text_x, TL.years_ycoords[event.start_year] - text_height * 1.3 * (event.info.length - 1 - line_ix))
+      }
+      TL.canvas.ctx.moveTo(event.x_coord, TL.years_ycoords[event.start_year + TL.style.info_y_offset]);
+      TL.canvas.ctx.lineTo(text_x, TL.years_ycoords[event.start_year] + text_height * 0.2);
+      TL.canvas.ctx.lineTo(underline_x, TL.years_ycoords[event.start_year] + text_height * 0.2)
+      TL.canvas.ctx.stroke();
+    }
+  };
+
   TL.functions.events.parseEvents = function() {
     const events_list = document.querySelector(`#${tag_id} > .timeline-events`).getElementsByTagName("li");
     for (let event_li of events_list) {
@@ -155,7 +195,7 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
 
   /*
   ========================================
-  =           LAUNCH FUNCTIONS           =
+  =            UTIL FUNCTIONS            =
   ========================================
   */
   TL.functions.utils.hexToRGBA = function(hex, opacity = 1) {
@@ -165,7 +205,15 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
       b = parseInt(tempHex.substring(4, 6), 16);
 
     return `rgba(${r},${g},${b},${opacity})`;
-  }
+  };
+
+  TL.functions.utils.getTextMeasurements = function(text) {
+    const metrics = TL.canvas.ctx.measureText(text);
+    return {
+      width: Math.floor(metrics.width),
+      height: Math.floor(metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent)
+    }
+  };
 
   /*
   ========================================
@@ -179,7 +227,9 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
     for (let event of TL.events) {
       event.draw();
     }
+    TL.functions.events.drawInfo();
   };
+
   TL.functions.launch();
 };
 
