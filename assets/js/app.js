@@ -157,3 +157,5 @@ particleImageDisplay('particle-animation',
     "disabled": true
   }
 );
+
+timelineDisplay('timeline');

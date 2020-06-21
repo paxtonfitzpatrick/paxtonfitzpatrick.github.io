@@ -23,12 +23,17 @@ $header-fg: $fg-primary;
 $fade-time: 3s;
 
 // timeline style
-$tl-bg-color: $bg-secondary;
+$tl-vertical-padding: 10px;
+$tl-background-color: $bg-secondary;
+$tl-background-alpha: 1;
+$tl-timeline-color: #000000;
+$tl-timeline-alpha: 1;
+$tl-timeline-width: 2px;
 $tl-year-color: #868686;
+$tl-year-alpha: 1;
 $tl-year-font-size: 12px;
 $tl-gridline-color: $tl-year-color;
-$tl-gridline-width: 4px;
-$tl-timeline-color: #000000;
-$tl-timeline-width: 4px;
+$tl-gridline-alpha: 0.3;
+$tl-gridline-width: 2px;
 $tl-event-width: 12px;
 $tl-event-offset: 0px;

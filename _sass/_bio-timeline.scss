@@ -9,12 +9,17 @@
 
 #timeline {
   // stores custom properties to be accessed by timeline.js
-  --background-color: #{$tl-bg-color};
+  --vertical-padding: #{$tl-vertical-padding};
+  --background-color: #{$tl-background-color};
+  --background-alpha: #{$tl-background-alpha};
   --timeline-color: #{$tl-timeline-color};
+  --timeline-alpha: #{$tl-timeline-alpha};
   --timeline-width: #{$tl-timeline-width};
   --year-color: #{$tl-year-color};
+  --year-alpha: #{$tl-year-alpha};
   --year-font-size: #{$tl-year-font-size};
   --gridline-color: #{$tl-gridline-color};
+  --gridline-alpha: #{$tl-gridline-alpha};
   --gridline-width: #{$tl-gridline-width};
   --event-width: #{$tl-event-width};
   --event-offset: #{$tl-event-offset};
