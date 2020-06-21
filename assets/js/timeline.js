@@ -30,7 +30,6 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
     TL.top_y = TL.style.vertical_padding;
     TL.bottom_y = TL.canvas.el.height - TL.style.vertical_padding;
     TL.functions.events.parseEvents();
-    // also need to load images and wait before moving on
     // compute y-coordinate for each 1/4 year included in the timeline
     const y_inc = (TL.bottom_y - TL.top_y) / ((TL.end_year - TL.start_year) * 4);
     for (let year = TL.start_year, year_y = TL.top_y; year <= TL.end_year; year += 0.25, year_y += y_inc) {
@@ -129,7 +128,6 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
     this.start_year = parseFloat(event_li.dataset.start);
     this.end_year = parseFloat(event_li.dataset.end);
     this.color = `#${event_li.dataset.color}`;
-    // this.image_path = event_li.dataset.image;
   };
 
   TL.functions.events.TimelineEvent.prototype.draw = function() {

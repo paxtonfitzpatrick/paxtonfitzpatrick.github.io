@@ -48,17 +48,17 @@ sections:
              frequently meeting new groups of people, I became fascinated by the idea that each person's experiences
              and environment could lead to such different personalities, while at he same time each place seemed to
              have something of a collective persona. 
-            image: assets/img/timeline/dartmouth-logo.png
+            image: assets/img/bio/dartmouth-logo.png
           - text: Growing up, I lived in seven different places before settling in Camp Hill, Pennsylvania. Through
              frequently meeting new groups of people, I became fascinated by the idea that each person's experiences
              and environment could lead to such different personalities, while at he same time each place seemed to
              have something of a collective persona. 
-            image: assets/img/timeline/dartmouth-logo.png
+            image: assets/img/bio/dartmouth-logo.png
           - text: Growing up, I lived in seven different places before settling in Camp Hill, Pennsylvania. Through
              frequently meeting new groups of people, I became fascinated by the idea that each person's experiences
              and environment could lead to such different personalities, while at he same time each place seemed to
              have something of a collective persona. 
-            image: assets/img/timeline/dartmouth-logo.png
+            image: assets/img/bio/dartmouth-logo.png
         timeline:
           start: 2015
           end: 2021
