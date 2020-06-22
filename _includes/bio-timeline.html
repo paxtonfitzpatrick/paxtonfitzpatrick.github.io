@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-sm-7">
       {% for paragraph in include.pane.bio_paragraphs %}
-        <div class="row text-justify my-2">
+        <div class="row text-justify my-3">
           {% assign odd_num_row = forloop.index | modulo: 2 %}
           {% if odd_num_row == 1 %}
             {% assign float_cls = "float-right" %}
@@ -14,7 +14,7 @@
             {% assign text_cls = "text-left" %}
             {% assign padding_cls = "pr-3" %}
           {% endif %}
-            <div class="col-sm-12">
+            <div class="bio-paragraph col-sm-12">
               <div class="bio-img {{ float_cls }} {{ text_cls }} {{ padding_cls }}">
                 <img class="img-fluid" src="{{ paragraph.image | relative_url }}" alt="X">
               </div>

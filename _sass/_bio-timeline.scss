@@ -1,6 +1,11 @@
-.bio-img {
-  width: 10em;
-  height: 10em;
+.bio-paragraph {
+  p {
+    margin-top: -5px;
+  }
+  .bio-img {
+    max-width: 9em;
+    max-height: 9em;
+  }
 }
 
 #timeline {
