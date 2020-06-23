@@ -39,8 +39,9 @@ sections:
       - type: bio-timeline.html
         title: Bio
         overview: >+
-          I'm a Lab Manager and Research Assistant in the [Contextual Dynamics Lab](https://context-lab.com/) at
-          [Dartmouth College](https://home.dartmouth.edu/). 
+          I'm a Lab Manager and Research Assistant in the
+          [Contextual Dynamics Lab](https://context-lab.com/){:target="_blank"} at
+          [Dartmouth College](https://home.dartmouth.edu/){:target="_blank"}. 
           
           I build computational models of memory and create software tools for neural and behavioral data analysis.
         bio_paragraphs:
@@ -50,19 +51,20 @@ sections:
              personalities and beliefs.
             image: assets/img/bio/map-pins.png
           - text: These interests led me to pursue a degree in Neuroscience at Dartmouth College, and quickly fall in
-             love with research. I began working for the 
-             [Dartmouth Brain Imaging Center](https://www.dartmouth.edu/dbic/), collecting and processing fMRI data,
-             as well as [Bregman Media Labs](http://bregman.dartmouth.edu/), where I worked with 
-             [Dr. Michael Casey](https://faculty-directory.dartmouth.edu/michael-casey) to create the first EEG
-             sonification-based musical ensemble.
+             love with research. I began working for the
+             [Dartmouth Brain Imaging Center](https://www.dartmouth.edu/dbic/){:target="_blank"}, collecting and
+             processing fMRI data, as well as
+             [Bregman Media Labs](http://bregman.dartmouth.edu/){:target="_blank"}, where I worked with
+             [Dr. Michael Casey](https://faculty-directory.dartmouth.edu/michael-casey){:target="_blank"} to create the
+             first EEG sonification-based musical ensemble.
             image: assets/img/bio/eeg-headset.jpeg
-          - text: I then joined the [Contextual Dynamics Lab](https://www.context-lab.com/) (PI&#58;
-             [Dr. Jeremy Manning](https://pbs.dartmouth.edu/people/jeremy-rothman-manning)) and discovered passions
-             for computational memory research and software development. I developed a love for mentoring others, and
-             after my junior year of college I began managing the CDL and serving as a tutor and TA for various
-             neuroscience and computer science classes.  I wrote my honors thesis on a computational framework for
-             modeling how episodic memories deform over time and inferring neural representations of their semantic
-             content.
+          - text: I then joined the [Contextual Dynamics Lab](https://www.context-lab.com/){:target="_blank"} 
+             (PI&#58; [Dr. Jeremy Manning](https://pbs.dartmouth.edu/people/jeremy-rothman-manning){:target="_blank"})
+             and discovered passions for computational memory research and software development. I developed a love
+             for mentoring others, and after my junior year of college I began managing the CDL and serving as a
+             tutor and TA for various neuroscience and computer science classes.  I wrote my honors thesis on a
+             computational framework for modeling how episodic memories deform over time and inferring neural
+             representations of their semantic content.
             image: assets/img/bio/cdl-logo.png
           - text: Since I graduated from Dartmouth in 2019, I've continued managing the CDL, working on memory
              research, writing software, and mentoring students. My current research uses natural language processing
