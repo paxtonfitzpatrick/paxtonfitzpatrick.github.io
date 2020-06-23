@@ -9,7 +9,7 @@
         </div>
         <div class="col-xs-12 col-sm-8 text-left">
           <h4>{{ item.title | markdownify }}</h4>
-          <p>{{ item.text | markdownify }}</p>
+          {{ item.text | markdownify }}
           <div class="publication-icons mt-n2">
             {% if item.pdf_url %}
               <a aria-label="PDF" href="{{ item.pdf_url }}" target="_blank" rel="noopener noreferrer">
