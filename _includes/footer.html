@@ -8,9 +8,9 @@
       <div class="row">
         {% for credit in footer.credits %}
           <div class="col-xs-12 col-md-3 m-auto">
-            <a aria-label="{{ credit.text }}" href="{{ credit.url }}" target="_blank" rel="noopener noreferrer">
+            <p><a aria-label="{{ credit.text }}" href="{{ credit.url }}" target="_blank" rel="noopener noreferrer">
               {{ credit.text }}
-            </a>
+            </a></p>
           </div>
         {% endfor %}
       </div>
