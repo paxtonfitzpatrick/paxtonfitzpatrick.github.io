@@ -1,15 +1,17 @@
-blockquote {
-  display: block;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 40px;
-  margin-inline-end: 40px;
-  padding-left: 15px;
-  border-left-width: 3px;
-  border-left-style: solid;
-  code {
-    color: #858585 !important;
-    font-weight: bold;
+#software {
+  blockquote {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 40px;
+    margin-inline-end: 40px;
+    padding-left: 15px;
+    border-left-width: 3px;
+    border-left-style: solid;
+    code {
+      color: #858585 !important;
+      font-weight: bold;
+    }
   }
 }
 
@@ -17,88 +19,65 @@ blockquote {
   padding-right: .5em;
   max-height: 40em;
   overflow-x: hidden;
-}
-
-.software-cards::-webkit-scrollbar {
-  -webkit-appearance: none;
-  width: 8px;
-}
-
-.software-cards::-webkit-scrollbar-thumb {
-  border-radius: 8px;
-  background-color: $bg-secondary-hfa;
-}
-
-#software p {
-  a {
-    color: $fg-secondary-link;
-    text-decoration: none;
+  &::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 8px;
   }
-  a:hover, a:focus, a:active {
-    color: $fg-secondary-link-hfa;
-    text-decoration: underline;
-    background-color: transparent;
+  &::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: $bg-secondary-hfa;
   }
-}
-
-.software-icons {
-  font-size: 1.75em;
-  margin-inline-start: 40px;
-  padding-left: 15px;
-  a {
-    display: inline-block;
-    text-align: center;
-    color: $fg-secondary;
-  }
-  a:hover, a:focus, a:active {
-    text-decoration: none;
-    color: $fg-secondary-hfa;
-    background-color: transparent;
+  .software-icons {
+    font-size: 1.75em;
+    margin-inline-start: 40px;
+    padding-left: 15px;
   }
 }
 
 .gist-icons {
   margin-inline-start: 40px;
   padding-left: 18px;
-  a {
+  a i {
     font-size: 2em;
     vertical-align: middle;
-    margin-right: 0.75em;
+    &:hover, &:focus, &:active {
+      text-decoration: none;
+      color: $fg-secondary-hfa;
+      background-color: transparent;
+    }
   }
-  a:hover, a:focus, a:active {
-    text-decoration: none;
-    color: $fg-secondary-hfa;
-    background-color: transparent;
-  }
-}
-
-
-.gist-toggle.btn {
-  border-width: 0;
-  color: $fg-secondary;
-  background-color: $bg-secondary-hfa;
-  &:focus {
-    box-shadow: none;
-  }
-  &:before {
-    content: "Collapse";
-  }
-  .fa:before {
-    content: "\f077";
-  }
-}
-
-.gist-toggle.btn.collapsed {
-  color: $bg-secondary;
-  background-color: $fg-secondary;
-  &:hover {
+  .gist-toggle {
+    border-width: 0;
     color: $fg-secondary;
     background-color: $bg-secondary-hfa;
-  }
-  &:before {
-    content: "Show gist";
-  }
-  .fa:before {
-    content: "\f078";
+    &:focus {
+      box-shadow: none;
+    }
+    &:before {
+      content: "Collapse";
+    }
+    i:before {
+      content: "\f077";
+    }
+    &.collapsed {
+      color: $bg-secondary;
+      background-color: $fg-secondary;
+      &:hover {
+        color: $fg-secondary;
+        background-color: $bg-secondary-hfa;
+        i {
+          color: $fg-secondary;
+        }
+      }
+      &:before {
+        content: "Show gist";
+      }
+      i {
+        color: $bg-secondary;
+        &:before {
+          content: "\f078";
+        }
+      }
+    }
   }
 }
