@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-sm-7">
       {% for paragraph in include.pane.bio_paragraphs %}
-        <div class="row text-justify my-3">
+        <div class="row text-justify mt-2">
           {% assign odd_num_row = forloop.index | modulo: 2 %}
           {% if odd_num_row == 1 %}
             {% assign float_cls = "float-right" %}
