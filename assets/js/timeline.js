@@ -165,7 +165,7 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
         line_start_y = Math.floor((TL.years_ycoords[event.end_year] + TL.years_ycoords[event.start_year]) / 2);
       }
       TL.canvas.ctx.moveTo(event.x_coord, line_start_y);
-      TL.canvas.ctx.lineTo(info_layout.x, TL.years_ycoords[event.start_year] + info_layout.line_height * 0.2);
+      TL.canvas.ctx.lineTo(info_layout.x, TL.years_ycoords[event.start_year] + info_layout.line_height * 0.3);
       TL.canvas.ctx.lineTo(info_layout.underline_x, TL.years_ycoords[event.start_year] + info_layout.line_height * 0.3)
       TL.canvas.ctx.stroke();
     }
@@ -220,6 +220,10 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
   =            UTIL FUNCTIONS            =
   ========================================
   */
+  TL.functions.utils.onResize = function() {
+
+  };
+
   TL.functions.utils.hexToRGBA = function(hex, opacity = 1) {
     const tempHex = hex.replace('#', ''),
       r = parseInt(tempHex.substring(0, 2), 16),
@@ -259,7 +263,7 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
 */
 window.timelineDom = [];
 
-window.timelineDisplay = function(tag_id, min_height = null) {
+window.timelineDisplay = function(tag_id) {
   // get target element by ID, add a full-size canvas as a child
   const timeline_el = document.getElementById(tag_id),
     canvas_el = document.createElement('canvas');
