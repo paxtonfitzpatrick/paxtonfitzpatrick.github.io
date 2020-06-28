@@ -6,7 +6,6 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
     // get start and end years from element dataset
     start_year: parseInt(timeline_el.dataset.start),
     end_year: parseInt(timeline_el.dataset.end),
-    // center_x: Math.floor(canvas.width / 2),
     years_ycoords: {},
     occupied_grid: {},
     events: [],
@@ -103,9 +102,10 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
     TL.canvas.lineWidth = TL.style.gridline_width;
     // all digits are equal width, so this will work for the next ~8,000 years
     // use 5 digits to get small gap between year and line
-    const text_measurements = TL.functions.utils.getTextMeasurements("00000"),
-      gridline_x_offset = text_measurements.width,
-      text_y_offset = text_measurements.height / 2;
+    const gridline_x_offset = TL.canvas.ctx.measureText("00000").width,
+      text_y_offset = TL.functions.utils.getTextLineHeight("0") / 2;
+    // need to save this for text-wrapping computations in drawInfo function
+    TL.canvas.gridline_x_offset = gridline_x_offset;
     for (let year_str in TL.years_ycoords) {
       const year = Number(year_str);
       if (Number.isInteger(year)) {
@@ -124,7 +124,7 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
   ========================================
   */
   TL.functions.events.TimelineEvent = function(event_li) {
-    this.info = event_li.id.replace("timeline-event-", "").replace(/_/g, " ").replace(', ', ',DELIM ').split('DELIM ');
+    this.info = event_li.id.replace("timeline-event-", "").replace(/_/g, " ");
     this.start_year = parseFloat(event_li.dataset.start);
     this.end_year = parseFloat(event_li.dataset.end);
     this.color = `#${event_li.dataset.color}`;
@@ -143,8 +143,8 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
 
   TL.functions.events.drawInfo = function() {
     // get x-coordinates for info on left and right
-    const info_right_xcoord = Math.max.apply(Math, TL.events.map(function(ev){return ev.x_coord;})) + TL.style.info_x_offset,
-      info_left_xcoord = Math.min.apply(Math, TL.events.map(function(ev){return ev.x_coord;})) - TL.style.info_x_offset;
+    const info_left_xcoord = Math.min.apply(Math, TL.events.map(function(ev){return ev.x_coord;})) - TL.style.info_x_offset,
+      info_right_xcoord = Math.max.apply(Math, TL.events.map(function(ev){return ev.x_coord;})) + TL.style.info_x_offset;
 
     for (let event of TL.events) {
       TL.canvas.ctx.beginPath();
@@ -155,31 +155,57 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
       TL.canvas.ctx.fillStyle = TL.style.info_font_color;
       TL.canvas.ctx.font = `${TL.style.info_fontsize} sans-serif`;
       TL.canvas.ctx.textBaseline = "bottom";
-      const text_width = Math.max.apply(Math, event.info.map(line => TL.functions.utils.getTextMeasurements(line).width)),
-        text_height = TL.functions.utils.getTextMeasurements(event.info[0]).height;
-      // options for text on right vs left of timeline
-      let text_x, underline_x;
-      if (event.x_coord >= TL.center_x) {
-        text_x = info_right_xcoord;
-        underline_x = text_x + text_width
-        TL.canvas.ctx.textAlign = "left";
-      } else {
-        text_x = info_left_xcoord;
-        underline_x = text_x - text_width;
-        TL.canvas.ctx.textAlign = "right";
-      }
-      for (let line_ix in event.info) {
-        TL.canvas.ctx.fillText(event.info[line_ix], text_x, TL.years_ycoords[event.start_year] - text_height * 1.3 * (event.info.length - 1 - line_ix))
+      const info_layout = TL.functions.events.formatInfoLayout(event, info_left_xcoord, info_right_xcoord);
+      TL.canvas.ctx.textAlign = info_layout.alignment;
+      for (let line_ix in info_layout.line_arr) {
+        TL.canvas.ctx.fillText(info_layout.line_arr[line_ix], info_layout.x, TL.years_ycoords[event.start_year] - (info_layout.line_height * 1.3) * (info_layout.line_arr.length - 1 - line_ix))
       }
       let line_start_y = TL.years_ycoords[event.start_year + TL.style.info_y_offset];
       if (event.end_year - event.start_year <= TL.style.info_y_offset) {
         line_start_y = Math.floor((TL.years_ycoords[event.end_year] + TL.years_ycoords[event.start_year]) / 2);
       }
       TL.canvas.ctx.moveTo(event.x_coord, line_start_y);
-      TL.canvas.ctx.lineTo(text_x, TL.years_ycoords[event.start_year] + text_height * 0.2);
-      TL.canvas.ctx.lineTo(underline_x, TL.years_ycoords[event.start_year] + text_height * 0.2)
+      TL.canvas.ctx.lineTo(info_layout.x, TL.years_ycoords[event.start_year] + info_layout.line_height * 0.2);
+      TL.canvas.ctx.lineTo(info_layout.underline_x, TL.years_ycoords[event.start_year] + info_layout.line_height * 0.3)
       TL.canvas.ctx.stroke();
     }
+  };
+
+  TL.functions.events.formatInfoLayout = function(event, info_left_xcoord, info_right_xcoord) {
+    // set left vs right placement & alignment
+    let text_layout = {},
+      words = event.info.split(' '),
+      curr_line = words[0],
+      text_max_width;
+
+    if (event.x_coord >= TL.center_x) {
+      text_layout.x = info_right_xcoord;
+      text_layout.alignment = "left";
+      text_max_width = TL.canvas.el.width - text_layout.x;
+    } else {
+      text_layout.x = info_left_xcoord;
+      text_layout.alignment = "right";
+      text_max_width = text_layout.x;
+    }
+
+    // iteratively add words to current line and re-measure, start new line when line length exceeds max
+    text_layout.line_arr = [];
+    for (let next_word of words.slice(1)) {
+      const with_next_word = `${curr_line} ${next_word}`,
+        width_with_next_word = TL.canvas.ctx.measureText(with_next_word).width;
+      // always split on comma regardless of current line length
+      if (width_with_next_word > text_max_width || curr_line.endsWith(',')) {
+        text_layout.line_arr.push(curr_line);
+        curr_line = next_word
+      } else {
+        curr_line = with_next_word;
+      }
+    }
+    text_layout.line_arr.push(curr_line);
+    text_layout.width = Math.max.apply(Math, text_layout.line_arr.map(line => TL.canvas.ctx.measureText(line).width));
+    text_layout.line_height = TL.functions.utils.getTextLineHeight(text_layout.line_arr[0]);
+    text_layout.underline_x = text_layout.alignment === "left" ? text_layout.x + text_layout.width : text_layout.x - text_layout.width;
+    return text_layout;
   };
 
   TL.functions.events.parseEvents = function() {
@@ -203,12 +229,9 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
     return `rgba(${r},${g},${b},${opacity})`;
   };
 
-  TL.functions.utils.getTextMeasurements = function(text) {
+  TL.functions.utils.getTextLineHeight = function(text) {
     const metrics = TL.canvas.ctx.measureText(text);
-    return {
-      width: Math.floor(metrics.width),
-      height: Math.floor(metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent)
-    }
+    return Math.floor(metrics.actualBoundingBoxAscent);
   };
 
   /*
@@ -236,7 +259,7 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
 */
 window.timelineDom = [];
 
-window.timelineDisplay = function(tag_id) {
+window.timelineDisplay = function(tag_id, min_height = null) {
   // get target element by ID, add a full-size canvas as a child
   const timeline_el = document.getElementById(tag_id),
     canvas_el = document.createElement('canvas');
