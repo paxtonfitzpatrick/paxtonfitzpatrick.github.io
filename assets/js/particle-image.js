@@ -181,7 +181,7 @@ const ParticleImageDisplayer = function(tag_id, params) {
     pImg.image.obj.width = pImg.functions.utils.clamp(Math.round(pImg.canvas.w * pImg.image.size.width_pct / 100), pImg.image.size.min_px, pImg.image.size.max_px);
     pImg.image.obj.height = Math.round(pImg.image.obj.width * pImg.image.ratio);
     pImg.image.x = pImg.canvas.w  / 2 - pImg.image.obj.width / 2;
-    pImg.image.y = pImg.canvas.h / 2.25 - pImg.image.obj.width / 2;
+    pImg.image.y = pImg.canvas.h / 2 - pImg.image.obj.width / 2;
   };
 
   pImg.functions.image.init = function() {

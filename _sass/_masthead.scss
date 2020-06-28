@@ -35,19 +35,19 @@ header.masthead {
   background: none;
   position: relative;
 }
-header.masthead .container-fluid .row {
+header.masthead .row {
   position: absolute;
   left: 0;
   right: 0;
   bottom: min(10%, 30px);
 }
 
-header.masthead .container-fluid .row h1 {
+header.masthead .row h1 {
   font-size: min(5vw, 60px);
   @include anim-delay(2.5s);
 }
 
-header.masthead .container-fluid .row .header-icons {
+header.masthead .row .header-icons {
   @include anim-delay(3.25s);
 }
 
