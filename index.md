@@ -35,15 +35,14 @@ sections:
     section_id: about
     background_style: bg-secondary
     title: About me
+    before_text: I build computational models of learning and memory, and create software tools for neural and
+     behavioral data analysis.
     panes:
       - type: bio-timeline.html
         title: Bio
-        overview: >+
-          I'm a Lab Manager and Research Assistant in the
-          [Contextual Dynamics Lab](https://context-lab.com/){:target="_blank"} at
-          [Dartmouth College](https://home.dartmouth.edu/){:target="_blank"}. 
-          
-          I build computational models of memory and create software tools for neural and behavioral data analysis.
+        before_text: I graduated from [Dartmouth College](https://home.dartmouth.edu/){:target="_blank"} in 2019.
+         Currently, I'm a Lab Manager and Research Assistant in the
+         [Contextual Dynamics Lab](https://context-lab.com/){:target="_blank"}.
         bio_paragraphs:
           - text: I've always been fascinated by how and why people think the way they do. Growing up, I lived in
              seven different places before settling in Camp Hill, Pennsylvania. Through constantly meeting new people, 
@@ -66,7 +65,7 @@ sections:
              computational framework for modeling how episodic memories deform over time and inferring neural
              representations of their semantic content.
             image: assets/img/bio/cdl-logo.png
-          - text: Since I graduated from Dartmouth in 2019, I've continued managing the CDL, working on memory
+          - text: Since graduating in 2019, I've continued managing the CDL, working on memory
              research, writing software, and mentoring students. My current research uses natural language processing
              and other machine learning techniques to study how we understand the world around us and create
              technologies to help us better learn from it. 
