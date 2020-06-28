@@ -1,11 +1,11 @@
 <section id="{{ section.section_id }}" class="page-section {{ section.background_style }}">
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-lg-8 text-center">
+      <div class="col-lg-12 text-center">
         <h1 class="mt-0">{{ section.title }}</h1>
         <hr class="divider my-4">
         {% if section.before_text %}
-          <h4>{{ section.before_text | newline_to_br | markdownify }}</h4>
+          <h5>{{ section.before_text | newline_to_br | markdownify }}</h5>
         {% endif %}
       </div>
     </div>
