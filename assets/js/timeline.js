@@ -1,9 +1,15 @@
 const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
   this.timelineObj = {
     canvas: {
-      el: canvas
+      el: canvas,
+      curr_height: canvas.height,
+      curr_width: canvas.width
     },
     // get start and end years from element dataset
+    timeline_el: {
+      el: timeline_el,
+      curr_height: timeline_el.offsetHeight
+    },
     start_year: parseInt(timeline_el.dataset.start),
     end_year: parseInt(timeline_el.dataset.end),
     years_ycoords: {},
@@ -26,6 +32,10 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
   TL.functions.timeline.init = function() {
     TL.canvas.ctx = TL.canvas.el.getContext('2d');
     TL.functions.timeline.getStyle();
+    TL.functions.timeline.computeTimelineLayout();
+  };
+
+  TL.functions.timeline.computeTimelineLayout = function() {
     TL.top_y = TL.style.vertical_padding;
     TL.bottom_y = TL.canvas.el.height - TL.style.vertical_padding;
     TL.functions.events.parseEvents();
@@ -221,7 +231,24 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
   ========================================
   */
   TL.functions.utils.onResize = function() {
-
+    const new_height = TL.timeline_el.el.clientHeight;
+    if (new_height !== TL.timeline_el.curr_height) {
+      TL.canvas.ctx.clearRect(0, 0, TL.canvas.curr_width, TL.canvas.curr_height);
+      TL.canvas.el.height = new_height;
+      TL.canvas.el.width = TL.timeline_el.el.clientWidth;
+      TL.events = [];
+      TL.occupied_grid = {};
+      TL.functions.timeline.computeTimelineLayout();
+      TL.functions.timeline.drawBase();
+      TL.functions.timeline.computeEventLayout();
+      for (let event of TL.events) {
+        event.draw();
+      }
+      TL.functions.events.drawInfo();
+      TL.timeline_el.curr_height = new_height;
+      TL.canvas.curr_width = TL.canvas.el.width;
+      TL.canvas.curr_height = TL.canvas.el.height;
+    }
   };
 
   TL.functions.utils.hexToRGBA = function(hex, opacity = 1) {
@@ -251,6 +278,7 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
       event.draw();
     }
     TL.functions.events.drawInfo();
+    window.addEventListener('resize', TL.functions.utils.onResize);
   };
 
   TL.functions.launch();
@@ -268,8 +296,11 @@ window.timelineDisplay = function(tag_id) {
   const timeline_el = document.getElementById(tag_id),
     canvas_el = document.createElement('canvas');
   canvas_el.className = 'timeline-canvas-el';
-  canvas_el.width = timeline_el.offsetWidth;
-  canvas_el.height = timeline_el.offsetHeight;
+  canvas_el.width = timeline_el.clientWidth;
+  canvas_el.height = timeline_el.clientHeight;
+  canvas_el.style.width = "100%";
+  canvas_el.style.height = "100%";
+  canvas_el.style.position = "absolute";
   const canvas = timeline_el.appendChild(canvas_el);
 
   // launch display
