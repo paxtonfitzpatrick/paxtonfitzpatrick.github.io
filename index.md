@@ -163,7 +163,12 @@ sections:
     background_style: bg-primary
     title: Research
     pane_type: publication-cards.html
-    before_text: STATEMENT ABOUT RESEARCH INTERESTS & FOCUS HERE
+    before_text: >+
+     My research uses natural language processing and other machine learning techniques to study learning
+     and memory. 
+     
+     I'm particularly interested in how episodic memories change over time, and how different features of an experience
+     impact how well we remember it.
     all_after_text: '&dagger;denotes equal contribution'
     panes:
       - title: Manuscripts
