@@ -25,7 +25,7 @@
         {% for pane in section.panes %}
           <div class="tab-pane fade {% if forloop.first %}active show{% endif %}" id="{{ pane.title | downcase | replace: ' ', '_' }}">
             {% if pane.before_text %}
-              <h6>{{ pane.before_text | markdownify }}</h6>
+              <h6 class="mt-4">{{ pane.before_text | markdownify }}</h6>
             {% endif %}
             {% include {{ pane.type }} pane=pane %}
             {% if pane.after_text %}
