@@ -308,3 +308,5 @@ window.timelineDisplay = function(tag_id) {
     timelineDom.push(new TimelineDisplayer(tag_id, timeline_el, canvas));
   }
 };
+
+timelineDisplay('timeline');
