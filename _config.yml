@@ -20,7 +20,7 @@ cv_path: '#'
 lab_website: https://www.context-lab.com/
 google_analytics:
   id: UA-169319829-1
-  enabled: false
+  enabled: true
 
 # Build settings
 safe: true
