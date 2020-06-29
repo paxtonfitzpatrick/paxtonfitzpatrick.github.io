@@ -44,7 +44,7 @@ particleImageDisplay('particle-animation',
       }
     },
     "retina_detect": false,
-    "disabled": true
+    "disabled": false
   }
 );
 
