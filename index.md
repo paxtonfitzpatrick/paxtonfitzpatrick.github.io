@@ -2,7 +2,6 @@
 layout: home
 header:
   title: Paxton Fitzpatrick
-  image: assets/img/brain-medium.png
   icons:
     - title: Email
       icon: fa-envelope
