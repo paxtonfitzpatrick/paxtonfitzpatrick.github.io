@@ -108,7 +108,6 @@ sections:
               color: fa0011
               
       - type: skills.html
-        before_text: SKILLS BEFORE TEXT HERE
         title: Skills
         skills:
           - image: assets/img/skills/python.png
