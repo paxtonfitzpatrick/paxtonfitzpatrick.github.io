@@ -1,0 +1,42 @@
+.bio-paragraph {
+  p {
+    margin-top: -5px;
+  }
+  .bio-img {
+    max-width: 8em;
+    max-height: 8em;
+  }
+}
+
+#timeline {
+  // stores custom properties to be accessed by timeline.js
+  --vertical-padding: #{$tl-vertical-padding};
+  --background-color: #{$tl-background-color};
+  --background-alpha: #{$tl-background-alpha};
+  --year-color: #{$tl-year-color};
+  --year-alpha: #{$tl-year-alpha};
+  --year-font-size: #{$tl-year-font-size};
+  --gridline-color: #{$tl-gridline-color};
+  --gridline-alpha: #{$tl-gridline-alpha};
+  --gridline-width: #{$tl-gridline-width};
+  --event-width: #{$tl-event-width};
+  --event-offset: #{$tl-event-offset};
+  --info-line-width: #{$tl-info-line-width};
+  --info-x-offset: #{$tl-info-x-offset};
+  --info-y-offset: #{$tl-info-y-offset};
+  --info-font-size: #{$tl-info-font-size};
+  --info-font-color: #{$tl-info-font-color};
+  --info-font-alpha: #{$tl-info-font-alpha};
+
+  min-height: 475px;
+  max-height: 100%;
+  min-width: 10vw;
+  max-width: 90vw;
+  text-align: initial;
+
+  ul {
+    display: none;
+    margin: 0;
+    padding: 0;
+  }
+}

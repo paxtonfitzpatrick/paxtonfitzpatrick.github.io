@@ -1,0 +1,12 @@
+background_style: 'bg-secondary'
+base_credit: 'Built using [jekyll](https://jekyllrb.com/){:target="_blank"} from the
+ [New Creative Theme](https://github.com/vvalchev/creative-theme-jekyll-new){:target="_blank"}.'
+credits:
+  - text: particles.js
+    url: https://github.com/VincentGarreau/particles.js
+  - text: Text to particles
+    url: https://codepen.io/Mamboleoo/pen/obWGYr
+  - text: eshinjolly.com
+    url: https://eshinjolly.com/
+  - text: andrewheusser.github.io
+    url: http://andrewheusser.github.io/

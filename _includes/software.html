@@ -1,0 +1,33 @@
+<div class="software-cards text-left">
+  {% for item in include.pane.items %}
+    <div class="row mb-n4">
+      <div class="col-12">
+        <div class="float-left">
+          <p><code>{{ item.title }}</code></p>
+        </div>
+        <div class="float-right">
+         <p><code class="text-muted"># {{ item.role }}</code></p>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-12">
+        <blockquote><samp>{{ item.description | markdownify }}</samp></blockquote>
+        <div class="software-icons mt-n3">
+          {% for icon in item.icons %}
+            {% assign target = "_blank" %}
+            {% assign rel = "noopener noreferrer" %}
+            {% assign text_lower = icon.text | downcase %}
+            {% if text_lower contains "download" %}
+              {% assign target = "" %}
+              {% assign rel = "" %}
+            {% endif %}
+            <a aria-label="{{ icon.text }}" href="{{ icon.url }}" target= "{{ target }}" rel="{{ rel }}">
+              <i class="icon {{ icon.type }} {{ icon.icon }} fa-fw" aria-hidden="true" title="{{ icon.text }}" data-toggle="tooltip" data-placement="bottom"></i>
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>

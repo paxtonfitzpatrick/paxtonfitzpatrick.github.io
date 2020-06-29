@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-7">
+      {% for paragraph in include.pane.bio_paragraphs %}
+        <div class="row text-justify mt-2">
+          {% assign odd_num_row = forloop.index | modulo: 2 %}
+          {% if odd_num_row == 1 %}
+            {% assign float_cls = "float-right" %}
+            {% assign text_cls = "text-right" %}
+            {% assign padding_cls = "pl-3" %}
+          {% else %}
+            {% assign float_cls = "float-left" %}
+            {% assign text_cls = "text-left" %}
+            {% assign padding_cls = "pr-3" %}
+          {% endif %}
+            <div class="bio-paragraph col-sm-12">
+              <div class="bio-img {{ float_cls }} {{ text_cls }} {{ padding_cls }}">
+                <img class="img-fluid" src="{{ paragraph.image | relative_url }}" alt="X">
+              </div>
+                {{ paragraph.text | markdownify }}
+            </div>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="col-sm-5" id="timeline" data-start="{{ include.pane.timeline.start }}" data-end="{{ include.pane.timeline.end }}">
+      <ul class="timeline-events">
+        {% for event in include.pane.timeline.events %}
+          <li id="timeline-event-{{ event.title | replace: ' ', '_' }}" data-start="{{ event.start }}"
+              data-end="{{ event.end }}" data-color="{{ event.color }}"></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+// primary section theme
+$bg-primary: #2d3b4d;
+$bg-primary-hfa: #575c63;
+$fg-primary: #fff;
+$fg-primary-hfa: #c4c2c2;
+$fg-primary-link: #eb38e8;
+$fg-primary-link-hfa: #ff66fc;
+$code-primary: #C18401;
+$muted-primary: #aeb2b5;
+
+// secondary section theme
+$bg-secondary: #f7f7f7;
+$bg-secondary-hfa: #e2e2e2;
+$fg-secondary: $bg-primary;
+$fg-secondary-hfa: $bg-primary-hfa;
+$fg-secondary-link: #1257b5;
+$fg-secondary-link-hfa: #1876f5;
+$code-secondary: $code-primary;
+$muted-secondary: #6c757d;
+
+// header style
+$header-bg: $bg-primary;
+$header-fg: $fg-primary;
+$fade-time: 3s;
+
+// timeline style
+$tl-vertical-padding: 10px;
+$tl-background-color: $bg-secondary;
+$tl-background-alpha: 1;
+$tl-year-color: #868686;
+$tl-year-alpha: 1;
+$tl-year-font-size: 12px;
+$tl-gridline-color: $tl-year-color;
+$tl-gridline-alpha: 0.3;
+$tl-gridline-width: 2px;
+$tl-event-width: 12px;
+$tl-event-offset: 5px;
+$tl-info-line-width: 2px;
+$tl-info-x-offset: 30px;
+$tl-info-y-offset: 0.25;
+$tl-info-font-size: 12px;
+$tl-info-font-color: $tl-year-color;
+$tl-info-font-alpha: 1;

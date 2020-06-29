@@ -1,0 +1,29 @@
+---
+layout: base
+---
+
+<header class="masthead vh-100">
+  <div id="particle-animation" data-img=" {{ page.header.image | relative_url }}"></div>
+    <div class="row ml-0 mr-0 align-items-center justify-content-center text-center">
+      <div class="col-auto">
+        <h1 class="text-uppercase text-white font-weight-bold fade-in">{{ page.header.title }}</h1>
+        <div class="header-icons fade-in">
+          {% for icon in page.header.icons %}
+            {% assign href = site[icon.site_data] %}
+            {% if icon.title == "Email" %}
+              {% assign href = href | prepend: "mailto:" %}
+            {% endif %}
+            <a aria-label="{{ icon.title }}" href="{{ href }}" target="_blank" rel="noopener noreferrer">
+              <i class="icon {{ icon.type }} {{ icon.icon }}" aria-hidden="true" title="{{ icon.title }}" data-toggle="tooltip" data-placement="top"></i>
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+</header>
+
+{% for section in page.sections %}
+  {% include {{ section.type }} section=section site=site page=page %}
+{% endfor %}
+
+{{ content }}

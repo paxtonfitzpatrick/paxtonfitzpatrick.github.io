@@ -1,0 +1,83 @@
+#software {
+  blockquote {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 40px;
+    margin-inline-end: 40px;
+    padding-left: 15px;
+    border-left-width: 3px;
+    border-left-style: solid;
+    code {
+      color: #858585 !important;
+      font-weight: bold;
+    }
+  }
+}
+
+.software-cards {
+  padding-right: .5em;
+  max-height: 40em;
+  overflow-x: hidden;
+  &::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: $bg-secondary-hfa;
+  }
+  .software-icons {
+    font-size: 1.75em;
+    margin-inline-start: 40px;
+    padding-left: 15px;
+  }
+}
+
+.gist-icons {
+  margin-inline-start: 40px;
+  padding-left: 18px;
+  a i {
+    font-size: 2em;
+    vertical-align: middle;
+    &:hover, &:focus, &:active {
+      text-decoration: none;
+      color: $fg-secondary-hfa;
+      background-color: transparent;
+    }
+  }
+  .gist-toggle {
+    border-width: 0;
+    color: $fg-secondary;
+    background-color: $bg-secondary-hfa;
+    &:focus {
+      box-shadow: none;
+    }
+    &:before {
+      content: "Collapse";
+    }
+    i:before {
+      content: "\f077";
+    }
+    &.collapsed {
+      color: $bg-secondary;
+      background-color: $fg-secondary;
+      &:hover {
+        color: $fg-secondary;
+        background-color: $bg-secondary-hfa;
+        i {
+          color: $fg-secondary;
+        }
+      }
+      &:before {
+        content: "Show gist";
+      }
+      i {
+        color: $bg-secondary;
+        &:before {
+          content: "\f078";
+        }
+      }
+    }
+  }
+}

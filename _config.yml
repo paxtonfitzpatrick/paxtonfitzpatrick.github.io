@@ -1,43 +1,40 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
-
 # Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
+# Values are accessed from HTML files via {{ site.value }}
 title: Paxton Fitzpatrick
-email: Paxton.C.Fitzpatrick@Dartmouth.edu
-description: >- # this means to ignore newlines until "baseurl:"
+description: >- # ignore newlines until "baseurl:"
   Write an awesome description for your new site here. You can edit this
   line in _config.yml. It will appear in your document head meta (for
   Google search results) and in your feed.xml site description.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: jekyllrb
-github_username:  jekyll
+baseurl: "" # site subpath, e.g. /blog
+url: "" # base hostname & protocol, e.g. http://example.com
+lang: en_US
+
+author: 'Paxton Fitzpatrick &copy; 2020'
+email: Paxton.C.Fitzpatrick@Dartmouth.edu
+phone: (717) 439-3999
+address: 416 Moore Hall, Dartmouth College, Hanover, NH 03755
+github: https://github.com/paxtonfitzpatrick
+linkedin: https://www.linkedin.com/in/paxton-fitzpatrick-962500132
+twitter: https://twitter.com/paxt0n4
+cv_path: '#'
+lab_website: https://www.context-lab.com/
+google_analytics:
+  id: UA-169319829-1
+  enabled: true
 
 # Build settings
+safe: true
 markdown: kramdown
-theme: minima
+sass:
+  indentWidth: 4
+  style: compressed
+  precision: 10
 plugins:
-  - jekyll-feed
-
-# Exclude from processing.
-# The following items will not be processed, by default. Create a custom list
-# to override the default setting.
-# exclude:
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+  - jekyll-sitemap
+  - jekyll-seo-tag
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - .idea
+  - node_modules

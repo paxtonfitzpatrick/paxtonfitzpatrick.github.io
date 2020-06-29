@@ -1,0 +1,60 @@
+@keyframes fadeIn { from {opacity:0; } to { opacity:1; } }
+@-webkit-keyframes fadeIn { from {opacity:0; } to { opacity:1; } }
+@-moz-keyframes fadeIn { from {opacity:0; } to { opacity:1; } }
+@-o-keyframes fadeIn { from {opacity:0; } to { opacity:1; } }
+
+@mixin anim($anim, $anim-timing-function) {
+  animation: $anim, $anim-timing-function;
+  -webkit-animation: $anim, $anim-timing-function;
+  -moz-animation: $anim, $anim-timing-function;
+  -o-animation: $anim, $anim-timing-function;
+}
+
+@mixin anim-duration($duration) {
+  animation-duration: $duration;
+  -webkit-animation-duration: $duration;
+  -moz-animation-duration: $duration;
+  -o-animation-duration: $duration;
+}
+
+@mixin anim-fill-mode($fill-mode) {
+  animation-fill-mode: $fill-mode;
+  -webkit-animation-fill-mode: $fill-mode;
+  -moz-animation-fill-mode: $fill-mode;
+  -o-animation-fill-mode: $fill-mode;
+}
+
+@mixin anim-delay($delay) {
+  animation-delay: $delay;
+  -webkit-animation-delay: $delay;
+  -moz-animation-delay: $delay;
+  -o-animation-delay: $delay;
+}
+
+header.masthead {
+  background: none;
+  position: relative;
+}
+header.masthead .row {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: min(10%, 30px);
+}
+
+header.masthead .row h1 {
+  font-size: min(5vw, 60px);
+  @include anim-delay(2.5s);
+}
+
+header.masthead .row .header-icons {
+  @include anim-delay(3.25s);
+}
+
+.fade-in {
+  opacity: 0;
+  opacity: 1 \9;  // don't animate on IE <= 9
+  @include anim(fadeIn, ease-in);
+  @include anim-fill-mode(forwards);
+  @include anim-duration($fade-time);
+}

@@ -1,0 +1,34 @@
+<div class="publication-cards container">
+  {% for item in section.items %}
+    {% if include.filter == "all" or include.filter == item.type %}
+      <div class="publication row">
+        <div class="col-auto col-sm-4">
+          <div class="research-img">
+            <img src="{{ item.image | relative_url }}" alt="X">
+          </div>
+        </div>
+        <div class="col-auto col-sm-8 text-left">
+          <h4>{{ item.title | markdownify }}</h4>
+          {{ item.text | markdownify }}
+          <div class="publication-icons mt-n2">
+            {% if item.pdf_url %}
+              <a aria-label="PDF" href="{{ item.pdf_url }}" target="_blank" rel="noopener noreferrer">
+                <i class="icon fas fa-file-pdf fa-fw" aria-hidden="true" title="PDF" data-toggle="tooltip" data-placement="bottom"></i>
+              </a>
+            {% endif %}
+            {% if item.code_url %}
+              <a aria-label="Code" href="{{ item.code_url }}" target="_blank" rel="noopener noreferrer">
+                <i class="icon fas fa-file-code fa-fw" aria-hidden="true" title="Code" data-toggle="tooltip" data-placement="bottom"></i>
+              </a>
+            {% endif %}
+            {% if item.data_url %}
+              <a aria-label="Data" href="{{ item.data_url }}" target="_blank" rel="noopener noreferrer">
+                <i class="icon fas fa-database fa-fw" aria-hidden="true" title="Data" data-toggle="tooltip" data-placement="bottom"></i>
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>

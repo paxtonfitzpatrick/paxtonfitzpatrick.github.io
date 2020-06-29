@@ -1,30 +1,48 @@
+# SOURCES
+# standard source for rubygems packages
 source "https://rubygems.org"
 
-# Hello! This is where you manage which Jekyll version is used to run.
-# When you want to use a different version, change it below, save the
-# file and run `bundle install`. Run Jekyll with `bundle exec`, like so:
+# safe work-around for Bundler bug with GitHub repo source
+# Bundler will attempt to download gems declared as:
 #
-#     bundle exec jekyll serve
+#	"gem 'foo', :GitHub => 'foo'
 #
-# This will help ensure the proper Jekyll version is running.
-# Happy Jekylling!
-# gem "jekyll", "~> 3.8.5"
+# from https://github.com/foo/foo.git, and gems declared as:
+#
+# 	"gem 'foo_bar', :github => 'foo/bar'
+#
+# from https://github.com/foo/bar.git
+git_source(:github) do |repo_name|
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  "https://github.com/#{repo_name}.git"
+end
+# ========================================
 
-# This is the default theme for new Jekyll sites. You may change this to anything you like.
-gem "minima", "~> 2.0"
 
-# If you want to use GitHub Pages, remove the "gem "jekyll"" above and
-# uncomment the line below. To upgrade, run `bundle update github-pages`.
+# PLUGINS
+# alternate jekyll gem or using GitHub Pages
 gem "github-pages", "~> 204", group: :jekyll_plugins
 
-# If you have any plugins, put them here!
-group :jekyll_plugins do
-  gem "jekyll-feed", "~> 0.6"
+# basic plugins
+group :noupdate do
+  gem "ffi", "= 1.12.2"
+  gem "nokogiri", "= 1.10.9"
 end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+# jekyll plugins
+group :jekyll_plugins do
+  gem "jekyll-feed", "~> 0.6"
+  gem "jekyll-sitemap", "~> 1.2"
+  gem "jekyll-seo-tag", "~> 2.5"
+
+end
+# ========================================
+
+
+# WINDOWS-SPECIFIC-STUFF
+# (Windows does not include zoneinfo files, so bundle the tzinfo-data gem)
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-# Performance-booster for watching directories on Windows
+# (Performance-booster for watching directories on Windows)
 gem "wdm", "~> 0.1.0" if Gem.win_platform?
 

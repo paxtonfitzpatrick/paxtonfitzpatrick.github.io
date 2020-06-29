@@ -1,0 +1,87 @@
+.bg-primary {
+  background-color: $bg-primary !important;
+  color: $fg-primary;
+  .text-muted {
+    color: $muted-primary !important;
+  }
+  .nav-pills .nav-link {
+    color: $fg-primary;
+    &:hover, &:focus, &:active {
+      background-color: $bg-primary-hfa;
+    }
+    &.active {
+      color: $bg-primary;
+      background-color: $fg-primary;
+    }
+  }
+  hr.divider {
+    border-color: $fg-primary;
+  }
+  p a {
+    color: $fg-primary-link;
+    text-decoration: none;
+    &:hover, &:focus, &:active {
+      color: $fg-primary-link-hfa;
+      text-decoration: underline;
+      background-color: transparent;
+    }
+  }
+  i {
+    color: $fg-primary;
+    &:hover, &:focus, &:active {
+      color: $fg-primary-hfa;
+      text-decoration: none;
+      background-color: transparent;
+    }
+  }
+  code {
+    color: $code-primary
+  }
+  blockquote {
+    border-left-color: $bg-primary-hfa;
+  }
+}
+
+.bg-secondary {
+  background-color: $bg-secondary !important;
+  color: $fg-secondary;
+  .text-muted {
+    color: $muted-secondary !important;
+  }
+  .nav-pills .nav-link {
+    color: $fg-secondary;
+    &:hover, &:focus, &:active {
+      background-color: $bg-secondary-hfa;
+    }
+    &.active {
+      color: $bg-secondary;
+      background-color: $fg-secondary;
+    }
+  }
+  hr.divider {
+    border-color: $fg-secondary;
+  }
+  p a {
+    color: $fg-secondary-link;
+    text-decoration: none;
+    &:hover, &:focus, &:active {
+      color: $fg-secondary-link-hfa;
+      text-decoration: underline;
+      background-color: transparent;
+    }
+  }
+  i {
+    color: $fg-secondary;
+    &:hover, &:focus, &:active {
+      color: $fg-secondary-hfa;
+      text-decoration: none;
+      background-color: transparent;
+    }
+  }
+  code {
+    color: $code-secondary;
+  }
+  blockquote {
+    border-left-color: $bg-secondary-hfa;
+  }
+}

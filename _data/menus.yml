@@ -1,0 +1,12 @@
+# Sets content of navbar
+header:
+- title: About me
+  url: /#about
+- title: Research
+  url: /#research
+- title: Software
+  url: /#software
+- title: Contact
+  url: /#contact
+- title: CV
+  url: /#

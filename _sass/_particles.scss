@@ -1,0 +1,15 @@
+#particle-animation {
+  background-color: $header-bg;
+  position: absolute;
+  padding-top: 72px;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+#particle-animation .particle-image-canvas-el {
+  position: absolute;
+}

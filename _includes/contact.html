@@ -1,0 +1,34 @@
+<section id="{{ section.section_id }}" class="page-section {{ section.background_style }}">
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 text-center">
+      <h1 class="mt-0">{{ section.title }}</h1>
+      <hr class="divider my-4">
+    </div>
+  </div>
+  <div class="row text-left">
+    <div class="col-auto col-lg-4" id="contact-info">
+      <h3 class="text-bold">Contact info</h3>
+      <p>
+        <a href="mailto:{{ site.email }}">
+          <i class="icon fa fa-envelope" aria-hidden="true"></i>
+          {{ site.email }}
+        </a>
+      </p>
+      <p>
+        <a href="tel:{{ site.phone }}">
+          <i class="icon fa fa-phone" aria-hidden="true"></i>
+          {{ site.phone }}</a>
+      </p>
+      <p>
+        <i class="fa fa-map-marker" aria-hidden="true"></i>
+        {{ site.address }}
+      </p>
+    </div>
+    <div class="col-12 col-lg-8 text-center">
+      <h3 class="text-bold">Where am I?</h3>
+      <iframe src="{{ section.map_embed }}" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+</section>

@@ -1,0 +1,50 @@
+.publication-cards {
+  max-height: 40em;
+  overflow-y: auto;
+}
+
+.publication-cards::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 8px;
+}
+
+.publication-cards::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-color: $bg-primary-hfa;
+}
+
+.publication.row {
+  margin-bottom: 1em;
+}
+
+.research-img {
+  width: 65%;
+  height: 65%;
+  img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+
+.publication-icons {
+  font-size: 1.5em;
+  a {
+    display: inline-block;
+    text-align: center;
+    margin-right: 0.75em;
+    color: $fg-primary;
+  }
+  a:hover {
+    text-decoration: none;
+    color: $fg-primary-hfa;
+    background-color: transparent;
+  }
+}
+
+@media (max-width: 576px) {
+  .research-img {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15%;
+  }
+}

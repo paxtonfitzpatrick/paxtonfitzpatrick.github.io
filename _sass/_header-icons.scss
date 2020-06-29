@@ -1,0 +1,64 @@
+.header-icons {
+  display: inline-block;
+  justify-content: center;
+  text-align: center;
+}
+
+.header-icons a:hover {
+  text-decoration: none;
+}
+
+.header-icons .icon {
+  display: inline-block;
+  font-size: 2em;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 2em;
+  color: $header-fg;
+  width: 2em;
+  height: 2em;
+  border: 2px solid $header-fg;
+  border-radius: 50%;
+  margin: .5em;
+  transition: all .7s;
+
+  &:hover {
+    color: $header-bg;
+    background: $header-fg;
+    text-underline: none;
+  }
+
+  &:active {
+    color: $header-bg;
+    background: $header-fg;
+  }
+}
+
+@media (max-width: 992px) {
+  .header-icons .icon {
+    font-size: 4vw;
+    margin: 1vw;
+  }
+}
+
+.cdl-logo:before {
+  content: "\e901";
+  font-weight: 900;
+}
+
+[class^="custom"], [class*=" custom"] {
+//a[class="custom"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  //font-size: 2em;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
