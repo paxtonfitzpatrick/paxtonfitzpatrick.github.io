@@ -14,14 +14,37 @@
 }
 
 .publication.row {
-  min-height: 10em;
+  margin-bottom: 1em;
 }
 
 .research-img {
-  width: 100%;
-  height: 100%;
+  width: 65%;
+  height: 65%;
   img {
-    max-width: 60%;
-    max-height: 60%;
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+
+.publication-icons {
+  font-size: 1.5em;
+  a {
+    display: inline-block;
+    text-align: center;
+    margin-right: 0.75em;
+    color: $fg-primary;
+  }
+  a:hover {
+    text-decoration: none;
+    color: $fg-primary-hfa;
+    background-color: transparent;
+  }
+}
+
+@media (max-width: 576px) {
+  .research-img {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15%;
   }
 }

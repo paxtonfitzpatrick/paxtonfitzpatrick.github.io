@@ -1,0 +1,34 @@
+<div class="gist-cards text-left">
+  {% for item in include.pane.items %}
+    <div class="row mb-n4">
+      <div class="col-12">
+        <div class="float-left">
+          <p><code>{{ item.title }}</code></p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <blockquote><samp>{{ item.description | markdownify }}</samp></blockquote>
+      </div>
+    </div>
+    <div class="row mt-n1">
+      <div class="col-12">
+        <div class="gist-icons">
+          {% capture gist_id %}gist_{{ item.title | downcase | replace: ' ', '_' }}{% endcapture %}
+          <button type="button" class="gist-toggle btn btn-sm collapsed" data-toggle="collapse" data-target="#{{ gist_id }}">
+            <i class="fa"></i>
+          </button>
+          <a aria-label="View on GitHub" href="{{ item.url }}" target= "_blank" rel="noopener noreferrer">
+            <i class="icon fab fa-github-square fa-fw" aria-hidden="true" title="View on GitHub" data-toggle="tooltip" data-placement="bottom"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+      <div class="row">
+        <div class="col-9 m-auto collapse" id="{{ gist_id }}">
+          <script src="{{ item.url }}.js"></script>
+        </div>
+      </div>
+  {% endfor %}
+</div>

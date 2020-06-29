@@ -7,20 +7,27 @@ description: >- # ignore newlines until "baseurl:"
   Google search results) and in your feed.xml site description.
 baseurl: "" # site subpath, e.g. /blog
 url: "" # base hostname & protocol, e.g. http://example.com
-author: Copyright &copy; 2019 - Start Bootstrap
 lang: en_US
 
+author: 'Paxton Fitzpatrick &copy; 2020'
+email: Paxton.C.Fitzpatrick@Dartmouth.edu
+phone: (717) 439-3999
+address: 416 Moore Hall, Dartmouth College, Hanover, NH 03755
+github: https://github.com/paxtonfitzpatrick
+linkedin: https://www.linkedin.com/in/paxton-fitzpatrick-962500132
+twitter: https://twitter.com/paxt0n4
+cv_path: '#'
 lab_website: https://www.context-lab.com/
-google_analytics_id:
-
-
+google_analytics:
+  id: UA-169319829-1
+  enabled: true
 
 # Build settings
 safe: true
 markdown: kramdown
 sass:
   indentWidth: 4
-  style: compact
+  style: compressed
   precision: 10
 plugins:
   - jekyll-sitemap

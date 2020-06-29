@@ -7,22 +7,25 @@
     </div>
   </div>
   <div class="row text-left">
-    <div class="col-4">
-      <h3 class="text-bold">Contact Info</h3>
+    <div class="col-auto col-lg-4" id="contact-info">
+      <h3 class="text-bold">Contact info</h3>
       <p>
-        <i class="icon fa fa-envelope" aria-hidden="true"></i>
-        <a href="mailto:{{ section.email }}">{{ section.email }}</a>
+        <a href="mailto:{{ site.email }}">
+          <i class="icon fa fa-envelope" aria-hidden="true"></i>
+          {{ site.email }}
+        </a>
       </p>
       <p>
-        <i class="icon fa fa-phone" aria-hidden="true"></i>
-        <a href="tel:{{ section.phone }}">{{ section.phone }}</a>
+        <a href="tel:{{ site.phone }}">
+          <i class="icon fa fa-phone" aria-hidden="true"></i>
+          {{ site.phone }}</a>
       </p>
       <p>
         <i class="fa fa-map-marker" aria-hidden="true"></i>
-        {{ section.address }}
+        {{ site.address }}
       </p>
     </div>
-    <div class="col-12 col-md-8 text-center">
+    <div class="col-12 col-lg-8 text-center">
       <h3 class="text-bold">Where am I?</h3>
       <iframe src="{{ section.map_embed }}" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
     </div>

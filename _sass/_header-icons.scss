@@ -2,7 +2,6 @@
   display: inline-block;
   justify-content: center;
   text-align: center;
-  margin-top: 2vh;
 }
 
 .header-icons a:hover {
@@ -45,19 +44,6 @@
 .cdl-logo:before {
   content: "\e901";
   font-weight: 900;
-}
-
-
-@font-face {
-  font-family: 'icomoon';
-  src:  url('../fonts/icomoon.eot?7x9kdc');
-  src:  url('../fonts/icomoon.eot?7x9kdc#iefix') format('embedded-opentype'),
-    url('../fonts/icomoon.ttf?7x9kdc') format('truetype'),
-    url('../fonts/icomoon.woff?7x9kdc') format('woff'),
-    url('../fonts/icomoon.svg?7x9kdc#icomoon') format('svg');
-  font-weight: normal;
-  font-style: normal;
-  font-display: block;
 }
 
 [class^="custom"], [class*=" custom"] {
