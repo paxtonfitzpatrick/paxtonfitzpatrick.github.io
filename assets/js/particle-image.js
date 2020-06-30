@@ -14,7 +14,6 @@ const ParticleImageDisplayer = function(tag_id, canvas_el, params) {
         restless: {
           enabled: false,
           value: 10,
-          sync: false
         }
       },
       interactivity: {
@@ -42,6 +41,9 @@ const ParticleImageDisplayer = function(tag_id, canvas_el, params) {
         canvas_pct: 60,
         min_px: 50,
         max_px: 800
+      },
+      bottom_constraint: {
+        el: document.getElementById("header-content")
       }
     },
     interactions: {
@@ -61,7 +63,8 @@ const ParticleImageDisplayer = function(tag_id, canvas_el, params) {
     canvas: {
       el: canvas_el,
       w: canvas_el.offsetWidth,
-      h: canvas_el.offsetHeight
+      h: canvas_el.offsetHeight,
+      offset_top: 72
     },
     functions: {
       particles: {},
@@ -92,7 +95,8 @@ const ParticleImageDisplayer = function(tag_id, canvas_el, params) {
     pImg.canvas.context = pImg.canvas.el.getContext('2d');
     pImg.canvas.el.width = pImg.canvas.w;
     pImg.canvas.el.height = pImg.canvas.h;
-    pImg.canvas.aspect_ratio = pImg.canvas.w / pImg.canvas.h;
+    pImg.image.height_available = pImg.image.bottom_constraint.el.offsetTop - pImg.canvas.offset_top;
+    pImg.canvas.aspect_ratio = pImg.canvas.w / pImg.image.height_available;
     window.addEventListener('resize', pImg.functions.utils.debounce(pImg.functions.canvas.onResize, 200));
   };
 
@@ -101,7 +105,8 @@ const ParticleImageDisplayer = function(tag_id, canvas_el, params) {
     pImg.canvas.h = pImg.canvas.el.offsetHeight;
     pImg.canvas.el.width = pImg.canvas.w;
     pImg.canvas.el.height = pImg.canvas.h;
-    pImg.canvas.aspect_ratio = pImg.canvas.w / pImg.canvas.h;
+    pImg.image.height_available = pImg.image.bottom_constraint.el.offsetTop - pImg.canvas.offset_top;
+    pImg.canvas.aspect_ratio = pImg.canvas.w / pImg.image.height_available;
     pImg.particles.array = [];
     pImg.functions.image.resize();
     const image_pixels = pImg.functions.canvas.getImagePixels();
@@ -128,7 +133,7 @@ const ParticleImageDisplayer = function(tag_id, canvas_el, params) {
   pImg.functions.image.resize = function() {
     if (pImg.image.aspect_ratio < pImg.canvas.aspect_ratio) {
       // canvas height constrains image size
-      pImg.image.obj.height = pImg.functions.utils.clamp(Math.round(pImg.canvas.h * pImg.image.size.canvas_pct / 100), pImg.image.size.min_px, pImg.image.size.max_px);
+      pImg.image.obj.height = pImg.functions.utils.clamp(Math.round(pImg.image.height_available * pImg.image.size.canvas_pct / 100), pImg.image.size.min_px, pImg.image.size.max_px);
       pImg.image.obj.width = Math.round(pImg.image.obj.height * pImg.image.aspect_ratio);
     } else {
       // canvas width constrains image size
@@ -137,7 +142,7 @@ const ParticleImageDisplayer = function(tag_id, canvas_el, params) {
     }
     // set x,y coords to center image on canvas
     pImg.image.x = pImg.canvas.w  / 2 - pImg.image.obj.width / 2;
-    pImg.image.y = pImg.canvas.h / 2.5 - pImg.image.obj.height / 2;
+    pImg.image.y = pImg.image.height_available / 2 - pImg.image.obj.height / 2;
   };
 
   pImg.functions.image.init = function() {
