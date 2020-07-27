@@ -8,5 +8,9 @@ header:
   url: /#software
 - title: Contact
   url: /#contact
-- title: CV
-  url: /#
+
+# NOTE: additional item added last in _includes/nav.html:
+#  - title: CV
+#    url: site.data.cv_path
+
+# can't reference site variables in data files

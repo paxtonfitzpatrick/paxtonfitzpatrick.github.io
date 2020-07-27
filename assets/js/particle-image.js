@@ -1,39 +1,19 @@
-const ParticleImageDisplayer = function(tag_id, params) {
+const ParticleImageDisplayer = function(tag_id, canvas_el, params) {
   "use strict";
-  // get canvas element
-  const canvas_el = document.querySelector('#' + tag_id + ' > .particle-image-canvas-el');
-
   this.pImageConfig = {
     particles: {
       array: [],
-      density: 300,
+      density: 100,
       color: '#fff',
-      opacity: {
-        value: 1,
-        random: false,
-        animate: {
-          enabled: false,
-          speed: 1,
-          min: 0,
-          sync: false
-        }
-      },
       size: {
-        value: 5,
+        value: 2,
         random: false,
-        animate: {
-          enabled: false,
-          speed: 20,
-          min: 0,
-          sync: false
-        }
       },
       movement: {
         speed: 1,
         restless: {
           enabled: false,
           value: 10,
-          sync: false
         }
       },
       interactivity: {
@@ -53,34 +33,38 @@ const ParticleImageDisplayer = function(tag_id, params) {
       }
     },
     image: {
-      x: 0,
-      y: 0,
+      src: {
+        path: null,
+        is_external: false
+      },
       size: {
-        width_pct: 40,
+        canvas_pct: 60,
         min_px: 50,
-        max_px: 400
+        max_px: 800
+      },
+      bottom_constraint: {
+        el: document.getElementById("header-content")
       }
     },
     interactions: {
       repulse: {
         distance: 100,
-        strength: 100
+        strength: 200
       },
       big_repulse: {
         distance: 100,
-        strength: 100
+        strength: 500
       },
       grab: {
         distance: 100,
         line_width: 1,
-        line_opacity: 1
       }
     },
     canvas: {
       el: canvas_el,
       w: canvas_el.offsetWidth,
       h: canvas_el.offsetHeight,
-      pxratio: 1
+      offset_top: 72
     },
     functions: {
       particles: {},
@@ -95,27 +79,12 @@ const ParticleImageDisplayer = function(tag_id, params) {
       click_x: null,
       click_y: null
     },
-    retina_detect: true
   };
 
   const pImg = this.pImageConfig;
-  if (params) Object.deepExtend(pImg, params);
-
-  pImg.tmp = {
-    particles: {
-      size: pImg.particles.size.value,
-      size_anim_speed: pImg.particles.size.animate.speed,
-      move_speed: pImg.particles.movement.speed,
-      restless_val: pImg.particles.movement.restless.value
-    },
-    retina: false,
-    retina_detect: pImg.retina_detect,
-    grab_distance: pImg.interactions.grab.distance,
-    repulse_distance: pImg.interactions.repulse.distance,
-    repulse_strength: pImg.interactions.repulse.strength,
-    big_repulse_distance: pImg.interactions.big_repulse.distance,
-    big_repulse_strength: pImg.interactions.big_repulse.distance
-  };
+  if (params) {
+    Object.deepExtend(pImg, params);
+  }
 
   /*
   ========================================
@@ -123,36 +92,21 @@ const ParticleImageDisplayer = function(tag_id, params) {
   ========================================
   */
   pImg.functions.canvas.init = function() {
-    pImg.functions.canvas.retinaInit();
     pImg.canvas.context = pImg.canvas.el.getContext('2d');
     pImg.canvas.el.width = pImg.canvas.w;
     pImg.canvas.el.height = pImg.canvas.h;
+    pImg.image.height_available = pImg.image.bottom_constraint.el.offsetTop - pImg.canvas.offset_top;
+    pImg.canvas.aspect_ratio = pImg.canvas.w / pImg.image.height_available;
     window.addEventListener('resize', pImg.functions.utils.debounce(pImg.functions.canvas.onResize, 200));
   };
 
-  pImg.functions.canvas.retinaInit = function() {
-    if (pImg.retina_detect && window.devicePixelRatio > 1) {
-      pImg.tmp.retina = true;
-      pImg.canvas.pxratio = window.devicePixelRatio;
-      pImg.canvas.w *= pImg.canvas.pxratio;
-      pImg.canvas.h *= pImg.canvas.pxratio;
-    }
-    pImg.particles.size.value = pImg.tmp.particles.size * pImg.canvas.pxratio;
-    pImg.particles.size.animate.speed = pImg.tmp.particles.size_anim_speed * pImg.canvas.pxratio;
-    pImg.particles.movement.speed = pImg.tmp.particles.move_speed * pImg.canvas.pxratio;
-    pImg.particles.movement.restless.value = pImg.tmp.particles.restless_val * pImg.canvas.pxratio;
-    pImg.interactions.grab.distance = pImg.tmp.grab_distance * pImg.canvas.pxratio;
-    pImg.interactions.repulse.distance = pImg.tmp.repulse_distance * pImg.canvas.pxratio;
-    pImg.interactions.repulse.strength = pImg.tmp.repulse_strength * pImg.canvas.pxratio;
-    pImg.interactions.big_repulse.distance = pImg.tmp.big_repulse_distance * pImg.canvas.pxratio;
-    pImg.interactions.big_repulse.strength = pImg.tmp.big_repulse_strength * pImg.canvas.pxratio;
-  };
-
   pImg.functions.canvas.onResize = function() {
-    pImg.canvas.w = pImg.canvas.el.offsetWidth * pImg.canvas.pxratio;
-    pImg.canvas.h = pImg.canvas.el.offsetHeight * pImg.canvas.pxratio;
+    pImg.canvas.w = pImg.canvas.el.offsetWidth;
+    pImg.canvas.h = pImg.canvas.el.offsetHeight;
     pImg.canvas.el.width = pImg.canvas.w;
     pImg.canvas.el.height = pImg.canvas.h;
+    pImg.image.height_available = pImg.image.bottom_constraint.el.offsetTop - pImg.canvas.offset_top;
+    pImg.canvas.aspect_ratio = pImg.canvas.w / pImg.image.height_available;
     pImg.particles.array = [];
     pImg.functions.image.resize();
     const image_pixels = pImg.functions.canvas.getImagePixels();
@@ -177,24 +131,36 @@ const ParticleImageDisplayer = function(tag_id, params) {
   ========================================
   */
   pImg.functions.image.resize = function() {
-    // resize the image and set x,y coords to align in the center of the canvas
-    pImg.image.obj.width = pImg.functions.utils.clamp(Math.round(pImg.canvas.w * pImg.image.size.width_pct / 100), pImg.image.size.min_px, pImg.image.size.max_px);
-    pImg.image.obj.height = Math.round(pImg.image.obj.width * pImg.image.ratio);
+    if (pImg.image.aspect_ratio < pImg.canvas.aspect_ratio) {
+      // canvas height constrains image size
+      pImg.image.obj.height = pImg.functions.utils.clamp(Math.round(pImg.image.height_available * pImg.image.size.canvas_pct / 100), pImg.image.size.min_px, pImg.image.size.max_px);
+      pImg.image.obj.width = Math.round(pImg.image.obj.height * pImg.image.aspect_ratio);
+    } else {
+      // canvas width constrains image size
+      pImg.image.obj.width = pImg.functions.utils.clamp(Math.round(pImg.canvas.w * pImg.image.size.canvas_pct / 100), pImg.image.size.min_px, pImg.image.size.max_px);
+      pImg.image.obj.height = Math.round(pImg.image.obj.width / pImg.image.aspect_ratio);
+    }
+    // set x,y coords to center image on canvas
     pImg.image.x = pImg.canvas.w  / 2 - pImg.image.obj.width / 2;
-    pImg.image.y = pImg.canvas.h / 2 - pImg.image.obj.width / 2;
+    pImg.image.y = pImg.image.height_available / 2 - pImg.image.obj.height / 2;
   };
 
   pImg.functions.image.init = function() {
     pImg.image.obj = new Image();
     pImg.image.obj.addEventListener('load', function() {
       // get aspect ratio (only have to compute once on initial load)
-      pImg.image.ratio = pImg.image.obj.height / pImg.image.obj.width;
+      pImg.image.aspect_ratio = pImg.image.obj.width / pImg.image.obj.height;
       pImg.functions.image.resize();
       const img_pixels = pImg.functions.canvas.getImagePixels();
       pImg.functions.particles.createImageParticles(img_pixels);
       pImg.functions.particles.animateParticles();
     });
-    pImg.image.obj.src = pImg.src_path;
+    let src_path = pImg.image.src.path;
+    if (pImg.image.src.is_external) {
+      src_path = `https://cors-anywhere.herokuapp.com/${pImg.image.src.path}`;
+      pImg.image.obj.crossOrigin = "anonymous";
+    }
+    pImg.image.obj.src = src_path;
   };
 
   /*
@@ -224,13 +190,6 @@ const ParticleImageDisplayer = function(tag_id, params) {
       this.color = pImg.particles.color;
     }
     this.radius = Math.round((pImg.particles.size.random ? Math.max(Math.random(), 0.5) : 1) * pImg.particles.size.value);
-    if (pImg.particles.size.animate.enabled) {
-      this.grow = false;
-      this.resize_speed = pImg.particles.size.animate.speed / 100;
-      if (!pImg.particles.size.animate.sync) {
-        this.resize_speed *= Math.random();
-      }
-    }
   };
 
   pImg.functions.particles.SingleImageParticle.prototype.draw = function() {
@@ -267,9 +226,7 @@ const ParticleImageDisplayer = function(tag_id, params) {
         p.x += p.vx;
         p.y += p.vy;
       }
-      if (pImg.particles.size.animate.enabled) {
-        pImg.functions.particles.updateParticleSize(p);
-      }
+
       pImg.functions.interactivity.interactWithClient(p);
     }
   };
@@ -279,23 +236,6 @@ const ParticleImageDisplayer = function(tag_id, params) {
     p.y += p.restlessness.y_jitter;
     if (Math.sqrt((p.dest_x - p.x) ** 2 + (p.dest_y - p.y) ** 2) >= pImg.particles.movement.restless.value) {
       p.restlessness.on_curr_frame = false;
-    }
-  };
-
-  pImg.functions.particles.updateParticleSize = function(p) {
-    if (p.grow) {
-      p.radius += p.resize_speed;
-      if (p.radius >= pImg.particles.size.value) {
-        p.grow = false;
-      }
-    } else {
-      p.radius -= p.resize_speed;
-      if (p.radius <= pImg.particles.size.animate.min) {
-        p.grow = true;
-      }
-    }
-    if (p.radius < 0) {
-      p.radius = 0;
     }
   };
 
@@ -332,16 +272,13 @@ const ParticleImageDisplayer = function(tag_id, params) {
           dy_mouse = p.y - pImg.mouse.y,
           mouse_dist = Math.sqrt(dx_mouse * dx_mouse + dy_mouse * dy_mouse);
     if (mouse_dist <= args.distance) {
-      const opacity = args.line_opacity - (mouse_dist / (1 / args.line_opacity)) - args.distance;
-      if (opacity > 0) {
-        pImg.canvas.context.strokeStyle = p.color;
-        pImg.canvas.context.lineWidth = Math.min(args.line_width, p.radius * 2);
-        pImg.canvas.context.beginPath();
-        pImg.canvas.context.moveTo(p.x, p.y);
-        pImg.canvas.context.lineTo(pImg.mouse.x, pImg.mouse.y);
-        pImg.canvas.context.stroke();
-        pImg.canvas.context.closePath();
-      }
+      pImg.canvas.context.strokeStyle = p.color;
+      pImg.canvas.context.lineWidth = Math.min(args.line_width, p.radius * 2);
+      pImg.canvas.context.beginPath();
+      pImg.canvas.context.moveTo(p.x, p.y);
+      pImg.canvas.context.lineTo(pImg.mouse.x, pImg.mouse.y);
+      pImg.canvas.context.stroke();
+      pImg.canvas.context.closePath();
     }
   };
 
@@ -354,8 +291,6 @@ const ParticleImageDisplayer = function(tag_id, params) {
   pImg.functions.interactivity.onMouseClick = function(func, args, p) {
     if (pImg.mouse.click_x != null && pImg.mouse.click_y != null) {
       func(p, args);
-      pImg.mouse.click_x = null;
-      pImg.mouse.click_y = null;
     }
   };
 
@@ -364,8 +299,8 @@ const ParticleImageDisplayer = function(tag_id, params) {
       pImg.canvas.el.addEventListener('mousemove', function(e) {
         let pos_x = e.offsetX || e.clientX,
             pos_y = e.offsetY || e.clientY;
-        pImg.mouse.x = pos_x * pImg.canvas.pxratio;
-        pImg.mouse.y = pos_y * pImg.canvas.pxratio;
+        pImg.mouse.x = pos_x;
+        pImg.mouse.y = pos_y;
       });
       pImg.canvas.el.addEventListener('mouseleave', function(e) {
         pImg.mouse.x = null;
@@ -374,9 +309,13 @@ const ParticleImageDisplayer = function(tag_id, params) {
       pImg.functions.utils.addEventActions('on_hover');
     }
     if (pImg.particles.interactivity.on_click.enabled) {
-      pImg.canvas.el.addEventListener('click', function(e) {
+      pImg.canvas.el.addEventListener('mousedown', function(e) {
         pImg.mouse.click_x = pImg.mouse.x;
         pImg.mouse.click_y = pImg.mouse.y;
+      });
+      pImg.canvas.el.addEventListener('mouseup', function(e) {
+        pImg.mouse.click_x = null;
+        pImg.mouse.click_y = null;
       });
       pImg.functions.utils.addEventActions('on_click');
     }
@@ -384,8 +323,8 @@ const ParticleImageDisplayer = function(tag_id, params) {
       pImg.canvas.el.addEventListener('touchmove', function(e) {
         let pos_x = e.touches[0].clientX,
             pos_y = e.touches[0].clientY;
-        pImg.mouse.x = pos_x * pImg.canvas.pxratio;
-        pImg.mouse.y = pos_y * pImg.canvas.pxratio;
+        pImg.mouse.x = pos_x;
+        pImg.mouse.y = pos_y;
       });
       pImg.canvas.el.addEventListener('touchend', function(e) {
         pImg.mouse.x = null;
@@ -421,7 +360,7 @@ const ParticleImageDisplayer = function(tag_id, params) {
       timer = setTimeout(func, min_interval, event);
     };
   };
-  
+
   pImg.functions.utils.addEventActions = function(event) {
     const action_funcs = {
       repulse: pImg.functions.interactivity.repulseParticle,
@@ -494,7 +433,7 @@ window.cancelRequestAnimFrame = (function() {
 
 window.pImgDom = [];
 
-window.particleImageDisplay = function(tag_id, params) {
+window.particleImageDisplay = function(tag_id) {
   // get target element by ID, check for existing canvases
   const pImage_el = document.getElementById(tag_id),
       canvas_classname = 'particle-image-canvas-el',
@@ -514,13 +453,24 @@ window.particleImageDisplay = function(tag_id, params) {
   canvas_el.style.height = "100%";
   const canvas = document.getElementById(tag_id).appendChild(canvas_el);
 
-  // get image to be "particlized" from element dataobject
-  if(pImage_el.hasAttribute("data-img")){
-    params.src_path = pImage_el.getAttribute("data-img");
-  }
 
-  // launch display
   if(canvas != null){
-    pImgDom.push(new ParticleImageDisplayer(tag_id, params));
+    // get params.json filepath from load parameters from element's data-params-src property
+    const params_json = pImage_el.dataset.paramsSrc,
+      xhr = new XMLHttpRequest();
+    xhr.overrideMimeType("application/json")
+    xhr.open("GET", params_json, false);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        // parse parameters & launch display
+        const params = JSON.parse(xhr.responseText);
+        pImgDom.push(new ParticleImageDisplayer(tag_id, canvas, params));
+      } else {
+        console.log(`failed to load params.json. XMLHTTPRequest status: ${xhr.statusText}`);
+      }
+    };
+    xhr.send();
   }
 };
+
+window.particleImageDisplay("particle-image");
