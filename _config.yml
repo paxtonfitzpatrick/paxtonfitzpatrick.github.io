@@ -9,10 +9,10 @@ baseurl: "" # site subpath, e.g. /blog
 url: "" # base hostname & protocol, e.g. http://example.com
 lang: en_US
 
-author: 'Paxton Fitzpatrick &copy; 2020'
+author: 'Paxton Fitzpatrick &copy; 2021'
 email: Paxton.C.Fitzpatrick@Dartmouth.edu
 phone: (717) 439-3999
-address: 416 Moore Hall, Dartmouth College, Hanover, NH 03755
+address: 416 Moore Hall, Dartmouth College&#013;Hanover, NH 03755
 github: https://github.com/paxtonfitzpatrick
 linkedin: https://www.linkedin.com/in/paxtonfitzpatrick
 twitter: https://twitter.com/paxt0n4

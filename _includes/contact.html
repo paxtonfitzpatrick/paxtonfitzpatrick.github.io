@@ -16,9 +16,9 @@
         </a>
       </p>
       <p>
-        <a href="tel:{{ site.phone }}">
-          <i class="icon fa fa-phone" aria-hidden="true"></i>
-          {{ site.phone }}</a>
+        <a href="{{ site.twitter }}" target="_blank" rel="noopener noreferrer">
+          <i class="icon fab fa-twitter" aria-hidden="true"></i>
+          @{{ site.twitter | split: "/" | last }}</a>
       </p>
       <p>
         <i class="fa fa-map-marker" aria-hidden="true"></i>
