@@ -109,31 +109,27 @@ sections:
       - type: skills.html
         title: Skills
         categories:
-          - title: Programming Languages
+          - title: Programming & web development
             skills:
               - image: assets/img/skills/python.png
                 caption: Python
               - image: assets/img/skills/javascript.png
                 caption: JavaScript
-              - image: assets/img/skills/shell.png
-                caption: Shell (Bash/Zsh)
-              - image: assets/img/skills/latex.png
-                caption: TeX/LaTeX
-              - image: assets/img/skills/supercollider.png
-                caption: SuperCollider
-          - title: Web Development
-            skills:
               - image: assets/img/skills/html.png
                 caption: HTML
               - image: assets/img/skills/css.png
                 caption: CSS
+              - image: assets/img/skills/shell.png
+                caption: Shell
+              - image: assets/img/skills/latex.png
+                caption: TeX/LaTeX
+              - image: assets/img/skills/supercollider.png
+                caption: SuperCollider
               - image: assets/img/skills/bootstrap.png
                 caption: Bootstrap
               - image: assets/img/skills/jekyll.png
                 caption: Jekyll
-              - image: assets/img/skills/markdown.png
-                caption: Markdown
-          - title: Development Tools
+          - title: Development tools
             skills:
               - image: assets/img/skills/git.png
                 caption: Git/GitHub
@@ -141,15 +137,21 @@ sections:
                 caption: Docker
               - image: assets/img/skills/db.png
                 caption: SQLite/MySQL/SQLAlchemy
-              - image: assets/img/skills/travis.png
-                caption: Travis CI
+              - image: assets/img/skills/hpc.png
+                caption: High-performance computing (Moab/Torque)
               - image: assets/img/skills/conda.png
                 caption: Conda
+              - image: assets/img/skills/pytest.png
+                caption: pytest
+              - image: assets/img/skills/travis.png
+                caption: Travis CI
+              - image: assets/img/skills/github-actions.png
+                caption: GitHub Actions
               - image: assets/img/skills/jupyter.png
-                caption: Jupyter/Colaboratory/IPython
+                caption: Jupyter/IPython/ Colaboratory
               - image: assets/img/skills/packaging.png
-                caption: Python packaging (setuptools, pytest, pip)
-          - title: Experimental Design & Stimulus Presentation
+                caption: Python packaging
+          - title: Experimental design & data collection
             skills:
               - image: assets/img/skills/jspsych.png
                 caption: jsPsych
@@ -165,7 +167,7 @@ sections:
                 caption: OpenSesame
               - image: assets/img/skills/morphx.png
                 caption: Norkross MorphX
-          - title: Data Analysis
+          - title: Data analysis & visualization
             skills:
               - image: assets/img/skills/scipy.png
                 caption: SciPy
@@ -173,6 +175,16 @@ sections:
                 caption: NumPy
               - image: assets/img/skills/pandas.png
                 caption: Pandas
+              - image: assets/img/skills/nltk.png
+                caption: NLTK
+              - image: assets/img/skills/matplotlib.png
+                caption: Matplotlib
+              - image: assets/img/skills/seaborn.png
+                caption: Seaborn
+              - image: assets/img/skills/plotly.png
+                caption: Plotly
+              - image: assets/img/skills/hypertools.png
+                caption: Hypertools
               - image: assets/img/skills/statsmodels.png
                 caption: statsmodels
               - image: assets/img/skills/sklearn.png
@@ -185,18 +197,6 @@ sections:
                 caption: BORIS
               - image: assets/img/skills/anvil.png
                 caption: ANVIL
-              - image: assets/img/skills/hpc.png
-                caption: high-performance computing (Moab, TORQUE, Portable Batch System)
-          - title: Data Visualization
-            skills:
-              - image: assets/img/skills/matplotlib.png
-                caption: Matplotlib
-              - image: assets/img/skills/seaborn.png
-                caption: Seaborn
-              - image: assets/img/skills/plotly.png
-                caption: Plotly
-              - image: assets/img/skills/hypertools.png
-                caption: Hypertools
           - title: Non-technical
             skills:
               - image: assets/img/skills/illustrator.png
@@ -204,7 +204,7 @@ sections:
               - image: assets/img/skills/photoshop.png
                 caption: Adobe Photoshop
               - image: assets/img/skills/french.png
-                caption: French (fluent)
+                caption: French
               - image: assets/img/skills/writing.png
                 caption: Scientific & expository writing
               - image: assets/img/skills/speaking.png
