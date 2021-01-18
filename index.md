@@ -231,20 +231,20 @@ sections:
       - title: Posters
         filter: poster
     items:
+      - type: manuscript
+        title: Geometric models reveal behavioral and neural signatures of transforming experiences into memories
+        text: Heusser A. C.&dagger;, **Fitzpatrick P. C.**&dagger;, Manning J. R. (in press). Geometric models reveal
+         behavioral and neural signatures of transforming experiences into memories. *Nature Human Behaviour*.
+        image: assets/img/research/sherlock-white.png
+        pdf_url: https://www.biorxiv.org/content/10.1101/409987v3.full.pdf
+        code_url: https://github.com/ContextLab/sherlock-topic-model-paper
+        data_url: https://arks.princeton.edu/ark:/88435/dsp01nz8062179
       - type: poster
         title: Exploring the evolving geometric structure of experiences and memories
         text: __Fitzpatrick P. C.__, Heusser A. C., Manning J. R. (2019). Exploring the evolving geometric structure
          of experiences and memories. *Society for Neuroscience Annual Meeting*. Chicago, IL.
         image: assets/img/research/sfn-2019.png
         pdf_url: https://www.dropbox.com/sh/bpyk9gwpk8wexfe/AAASc1BGgX5I08xK07yrmJ96a/SFN_2019b.pdf?dl=0
-      - type: manuscript
-        title: How is experience transformed into memory?
-        text: Heusser A. C.&dagger;, **Fitzpatrick P. C.**&dagger;, Manning J. R. (under revision). How is experience
-         transformed into memory?. *bioRxiv*&#58; 409987.
-        image: assets/img/research/sherlock-white.png
-        pdf_url: https://www.biorxiv.org/content/10.1101/409987v2.full.pdf
-        code_url: https://github.com/ContextLab/sherlock-topic-model-paper
-        data_url: https://arks.princeton.edu/ark:/88435/dsp01nz8062179
       - type: poster
         title: Mapping between naturalistic experience and verbal recall
         text: __Fitzpatrick P. C.__, Heusser A. C., Manning J. R. (2018). Mapping between naturalistic experience and
@@ -299,7 +299,7 @@ sections:
         title: Open Source Software
         items:
           - title: gittracker
-            role: sole developer, sole maintainer
+            role: developer, maintainer
             description: _(in development)_ a Python command-line application for tracking the states of all your local git
              repositories in
              one place. Built on top of [GitPython](https://github.com/gitpython-developers/GitPython){:target="_blank"}, 
