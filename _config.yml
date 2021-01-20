@@ -2,21 +2,19 @@
 # Values are accessed from HTML files via {{ site.value }}
 title: Paxton Fitzpatrick
 description: >- # ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+  My personal website
 baseurl: "" # site subpath, e.g. /blog
 url: "" # base hostname & protocol, e.g. http://example.com
 lang: en_US
 
-author: 'Paxton Fitzpatrick &copy; 2020'
+author: 'Paxton Fitzpatrick &copy; 2021'
 email: Paxton.C.Fitzpatrick@Dartmouth.edu
 phone: (717) 439-3999
-address: 416 Moore Hall, Dartmouth College, Hanover, NH 03755
+address: 416 Moore Hall, Dartmouth College<br>Hanover, NH 03755
 github: https://github.com/paxtonfitzpatrick
 linkedin: https://www.linkedin.com/in/paxtonfitzpatrick
 twitter: https://twitter.com/paxt0n4
-cv_path: assets/files/CV.pdf
+cv_path: assets/files/CV-paxton-fitzpatrick.pdf
 lab_website: https://www.context-lab.com/
 google_analytics:
   id: UA-169319829-1

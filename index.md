@@ -91,7 +91,7 @@ sections:
               color: d807e3
             - title: Lab Manager, Contextual Dynamics Lab
               start: 2018.5
-              end: 2020.5
+              end: 2021
               color: 17ad46
             - title: Private Tutor, Intro Computer Science
               start: 2018.75
@@ -109,31 +109,27 @@ sections:
       - type: skills.html
         title: Skills
         categories:
-          - title: Programming Languages
+          - title: Programming & web development
             skills:
               - image: assets/img/skills/python.png
                 caption: Python
               - image: assets/img/skills/javascript.png
                 caption: JavaScript
-              - image: assets/img/skills/shell.png
-                caption: Shell (Bash/Zsh)
-              - image: assets/img/skills/latex.png
-                caption: TeX/LaTeX
-              - image: assets/img/skills/supercollider.png
-                caption: SuperCollider
-          - title: Web Development
-            skills:
               - image: assets/img/skills/html.png
                 caption: HTML
               - image: assets/img/skills/css.png
                 caption: CSS
+              - image: assets/img/skills/shell.png
+                caption: Shell
+              - image: assets/img/skills/latex.png
+                caption: TeX/LaTeX
+              - image: assets/img/skills/supercollider.png
+                caption: SuperCollider
               - image: assets/img/skills/bootstrap.png
                 caption: Bootstrap
               - image: assets/img/skills/jekyll.png
                 caption: Jekyll
-              - image: assets/img/skills/markdown.png
-                caption: Markdown
-          - title: Development Tools
+          - title: Development tools
             skills:
               - image: assets/img/skills/git.png
                 caption: Git/GitHub
@@ -141,15 +137,21 @@ sections:
                 caption: Docker
               - image: assets/img/skills/db.png
                 caption: SQLite/MySQL/SQLAlchemy
-              - image: assets/img/skills/travis.png
-                caption: Travis CI
+              - image: assets/img/skills/hpc.png
+                caption: High-performance computing (Moab/TORQUE)
               - image: assets/img/skills/conda.png
                 caption: Conda
+              - image: assets/img/skills/pytest.png
+                caption: pytest
+              - image: assets/img/skills/travis.png
+                caption: Travis CI
+              - image: assets/img/skills/github-actions.png
+                caption: GitHub Actions
               - image: assets/img/skills/jupyter.png
-                caption: Jupyter/Colaboratory/IPython
+                caption: Jupyter/IPython/ Colaboratory
               - image: assets/img/skills/packaging.png
-                caption: Python packaging (setuptools, pytest, pip)
-          - title: Experimental Design & Stimulus Presentation
+                caption: Python packaging
+          - title: Experimental design & data collection
             skills:
               - image: assets/img/skills/jspsych.png
                 caption: jsPsych
@@ -165,7 +167,7 @@ sections:
                 caption: OpenSesame
               - image: assets/img/skills/morphx.png
                 caption: Norkross MorphX
-          - title: Data Analysis
+          - title: Data analysis & visualization
             skills:
               - image: assets/img/skills/scipy.png
                 caption: SciPy
@@ -173,6 +175,16 @@ sections:
                 caption: NumPy
               - image: assets/img/skills/pandas.png
                 caption: Pandas
+              - image: assets/img/skills/nltk.png
+                caption: NLTK
+              - image: assets/img/skills/matplotlib.png
+                caption: Matplotlib
+              - image: assets/img/skills/seaborn.png
+                caption: Seaborn
+              - image: assets/img/skills/plotly.png
+                caption: Plotly
+              - image: assets/img/skills/hypertools.png
+                caption: Hypertools
               - image: assets/img/skills/statsmodels.png
                 caption: statsmodels
               - image: assets/img/skills/sklearn.png
@@ -185,18 +197,6 @@ sections:
                 caption: BORIS
               - image: assets/img/skills/anvil.png
                 caption: ANVIL
-              - image: assets/img/skills/hpc.png
-                caption: high-performance computing (Moab, TORQUE, Portable Batch System)
-          - title: Data Visualization
-            skills:
-              - image: assets/img/skills/matplotlib.png
-                caption: Matplotlib
-              - image: assets/img/skills/seaborn.png
-                caption: Seaborn
-              - image: assets/img/skills/plotly.png
-                caption: Plotly
-              - image: assets/img/skills/hypertools.png
-                caption: Hypertools
           - title: Non-technical
             skills:
               - image: assets/img/skills/illustrator.png
@@ -204,7 +204,7 @@ sections:
               - image: assets/img/skills/photoshop.png
                 caption: Adobe Photoshop
               - image: assets/img/skills/french.png
-                caption: French (fluent)
+                caption: French
               - image: assets/img/skills/writing.png
                 caption: Scientific & expository writing
               - image: assets/img/skills/speaking.png
@@ -231,20 +231,20 @@ sections:
       - title: Posters
         filter: poster
     items:
+      - type: manuscript
+        title: Geometric models reveal behavioral and neural signatures of transforming experiences into memories
+        text: Heusser A. C.&dagger;, **Fitzpatrick P. C.**&dagger;, Manning J. R. (in press). Geometric models reveal
+         behavioral and neural signatures of transforming experiences into memories. *Nature Human Behaviour*.
+        image: assets/img/research/sherlock-white.png
+        pdf_url: https://www.biorxiv.org/content/10.1101/409987v3.full.pdf
+        code_url: https://github.com/ContextLab/sherlock-topic-model-paper
+        data_url: https://arks.princeton.edu/ark:/88435/dsp01nz8062179
       - type: poster
         title: Exploring the evolving geometric structure of experiences and memories
         text: __Fitzpatrick P. C.__, Heusser A. C., Manning J. R. (2019). Exploring the evolving geometric structure
          of experiences and memories. *Society for Neuroscience Annual Meeting*. Chicago, IL.
         image: assets/img/research/sfn-2019.png
         pdf_url: https://www.dropbox.com/sh/bpyk9gwpk8wexfe/AAASc1BGgX5I08xK07yrmJ96a/SFN_2019b.pdf?dl=0
-      - type: manuscript
-        title: How is experience transformed into memory?
-        text: Heusser A. C.&dagger;, **Fitzpatrick P. C.**&dagger;, Manning J. R. (under revision). How is experience
-         transformed into memory?. *bioRxiv*&#58; 409987.
-        image: assets/img/research/sherlock-white.png
-        pdf_url: https://www.biorxiv.org/content/10.1101/409987v2.full.pdf
-        code_url: https://github.com/ContextLab/sherlock-topic-model-paper
-        data_url: https://arks.princeton.edu/ark:/88435/dsp01nz8062179
       - type: poster
         title: Mapping between naturalistic experience and verbal recall
         text: __Fitzpatrick P. C.__, Heusser A. C., Manning J. R. (2018). Mapping between naturalistic experience and
@@ -296,29 +296,71 @@ sections:
      [this website](https://github.com/paxtonfitzpatrick/paxtonfitzpatrick.github.io){:target="_blank"}!
     panes:
       - type: software.html
-        title: Open Source Software
+        title: "Things I've made"
         items:
+          - title: cluster-tools-dartmouth
+            role: developer, maintainer
+            description: _(in development)_ a Python package for interfacing with a TORQUE-based high-performance
+             computing cluster entirely from your local machine. The `Cluster` class provides full `pathlib`- and 
+             `subprocess`-like interfaces for reading, writing, uploading, and downloading remote files; spawning 
+             remote processes; and creating and managing `Project`s. The `Project` class allows you to interactively 
+             create, submit, and monitor batches of jobs remotely. Write your job script locally in any supported 
+             language, supply its path, and manipulate the `Project`'s attributes to set TORQUE directives, create 
+             a runtime environment, parameterize individual jobs, and more. `clustertools` will automatically 
+             create a remote directory structure, upload your script, write `.pbs` wrapper files for each job, submit 
+             them to the scheduler, and monitor their progress. `clustertools` can also run additional scripts before 
+             job submission and after completion, email you about various changes in job status, and resubmit jobs that 
+             are aborted due to scheduler issues. `clustertools` is specifically geared toward Dartmouth's
+             [Discovery](https://rc.dartmouth.edu/index.php/discovery-overview/){:target="_blank"} cluster, but with 
+             minor tweaks will work with any similar HPC system.
+            icons:
+              - icon: fa-github-square
+                type: fab
+                text: View on GitHub
+                url: https://github.com/paxtonfitzpatrick/cluster-tools-dartmouth
           - title: gittracker
-            role: sole developer, sole maintainer
-            description: _(in development)_ a Python command-line application for tracking the states of all your local git
-             repositories in
-             one place. Built on top of [GitPython](https://github.com/gitpython-developers/GitPython){:target="_blank"}, 
-             GitTracker can be run from anywhere on your computer to show `git status`-like information for each 
-             repository it's set to track. It features simple `git`-like commands; colorful, intuitive output at 
-             multiple verbosity levels; ability to track nested submodules; and an automatic initial setup.
+            role: developer, maintainer
+            description: _(in development)_ a Python command-line application for tracking the states of all your local 
+             git repositories in one place. `gittracker` can be run from anywhere on your computer to show 
+             `git status`-like information for each repository it's configured to track. It features simple `git`-like 
+             commands; colorful, intuitive output at multiple verbosity levels; ability to track nested submodules; 
+             and an automatic initial setup.
             icons:
               - icon: fa-github-square
                 type: fab
                 text: View on GitHub
                 url: https://github.com/paxtonfitzpatrick/gittracker
+          - title: CDL-docker-stacks
+            role: developer, maintainer
+            description: a collection of hierarchically built Docker images for common neuro/data science applications. 
+             Modeled after 
+             [Jupyter Docker Stacks](https://jupyter-docker-stacks.readthedocs.io/en/latest/){:target="_blank"}, these 
+             images provide lightweight, standardized environments useful for various research purposes. Each image is 
+             available pre-built on [Docker Hub](https://hub.docker.com/u/contextlab){:target="_blank"} to pull and run 
+             as-is or use as a base for custom images. Pre-built images that install Python support `3.6`, `3.7`, and 
+             `3.8` tags for different Python versions 
+             ([miniconda](https://docs.conda.io/en/latest/miniconda.html){:target="_blank"} distribution). Additionally, 
+             `Dockerfile`s for each image are available on GitHub and support `--build-arg`s that allow customizing 
+             features like the Linux distro, Python version, and [MTurk](https://www.mturk.com/){:target="_blank"} 
+             compatibility; installing additional software through package managers including `apt`, `conda`, and `pip`; 
+             and configuring the IP address and port for a Jupyter notebook server (as applicable).
+            icons:
+              - icon: fa-github-square
+                type: fab
+                text: View on GitHub
+                url: https://github.com/ContextLab/CDL-docker-stacks
+              - icon: fa-docker
+                type: fab
+                text: View on Docker Hub
+                url: https://hub.docker.com/u/contextlab
           - title: quail
-            role: developer, lead maintainer
-            description: a Python package that facilitates easy processing, analysis, and visualizing free-recall data
-             from both list-learning and naturalistic memory experiments. Quail features a simple-yet-powerful data
-             structure for encoding and recall data (the `Egg`) with convenient methods for performing common analyses, 
-             generating beautiful plots, and easily filtering data in numerous ways. Quail also integrates with the
+            role: co-developer, maintainer
+            description: a Python toolbox for easily processing, analyzing, and visualizing free-recall data from both 
+             list-learning and naturalistic memory experiments. Quail features a simple-yet-powerful data structure for 
+             encoding and recall data (the `Egg`) with convenient methods for performing common analyses, generating 
+             beautiful plots, and filtering data in numerous ways. Quail also integrates with the
              [Google Cloud Speech API](https://cloud.google.com/speech-to-text/){:target="_blank"} for rapid audio
-             decoding and supports user-defined metrics for analyses in custom feature spaces.
+             transcription and supports user-defined metrics for analyses in custom feature spaces.
             icons:
               - icon: fa-github-square
                 type: fab
@@ -328,21 +370,31 @@ sections:
                 type: fas
                 text: documentation
                 url: https://cdl-quail.readthedocs.io/en/latest/index.html
-          - title: cluster-tools-dartmouth
-            role: developer, lead maintainer
-            description: _(in development)_ a toolbox for easily deploying jobs on Dartmouth's high-performance 
-             computing cluster. Given a single Python script, `cluster-tools` will create a PBS script for each
-             desired parameter combination and submit your jobs to run in parallel. Set values in a config file to
-             pass commands to the Moab scheduler and TORQUE resource manager. Using 
-             [spurplus](https://github.com/Parquery/spurplus){:target="_blank"}, `cluster-tools` lets you submit jobs
-             directly from your local machine and automatically re-queue those that fail due to scheduler issues.
+          - title: psiturk-experiment-template
+            role: developer, maintainer
+            description: An adaptable template for a behavioral experiment, ready to be run locally or deployed online 
+             via [Amazon Mechanical Turk](https://www.mturk.com/){:target="_blank"}. The experiment is implemented 
+             using the [jsPsych](http://www.jspsych.org/){:target="_blank"} library and 
+             [psiTurk](https://psiturk.org/){:target="_blank"} platform, and isolated within a
+             [Docker](https://www.docker.com/){:target="_blank"} application. The Docker application runs four networked
+             containers&#58; a [Debian 9 ("stretch")](https://www.debian.org/releases/stretch/){:target="_blank"} 
+             container to house the experiment code and psiTurk server; an 
+             [nginx](https://www.nginx.com/){:target="_blank"} server for load balancing, 
+             [MySQL](https://www.mysql.com/){:target="_blank"} for saving data; and 
+             [Adminer](https://www.adminer.org/){:target="_blank"} for more easily accessing and downloading data. This 
+             repository accompanied a tutorial on online data collection presented to the 
+             [EPSCoR Attention Consortium](https://www.attentioninthebrain.com/){:target="_blank"}. 
             icons:
               - icon: fa-github-square
                 type: fab
                 text: View on GitHub
-                url: https://github.com/paxtonfitzpatrick/cluster-tools-dartmouth/tree/remote_submit
+                url: https://github.com/paxtonfitzpatrick/psiturk-experiment-template
+              - icon: fa-sticky-note
+                type: fas
+                text: Slides
+                url: https://github.com/paxtonfitzpatrick/psiturk-experiment-template/tree/master/slides
           - title: autoFR
-            role: developer, lead maintainer
+            role: co-developer, maintainer
             description: a verbal free-recall experiment that incorporates automatic speech-to-text processing by
              wrapping the [Google Cloud Speech API](https://cloud.google.com/speech-to-text/){:target="_blank"}. The 
              experiment is implemented using [jsPsych](http://www.jspsych.org/){:target="_blank"} and
@@ -356,16 +408,20 @@ sections:
                 type: fab
                 text: View on GitHub
                 url: https://github.com/ContextLab/AutoFR
+      - type: software.html
+        title: Things I contribute to
+        items:
           - title: hypertools
-            role: lead maintainer
+            role: maintainer
             description: a Python package for visualizing and manipulating high-dimensional data. HyperTools was built
              with two goals in mind&#58; quickly visualizing a dataset to gain intuitions about its structure, and
              meticulously manipulating data to generate beautiful, animated, 3D figures. It features heavily customizable
              functions for alignment, normalization, clustering, transformations, dimensionality reduction, and
              plotting, while simultaneously allowing you to plot a corpus of text with a single function call. Hypertools
-             integrates many familiar libraries including [matplotlib](https://matplotlib.org/){:target="_blank"}, 
-             [seaborn](https://seaborn.pydata.org/){:target="_blank"}, and [scikit-learn](http://scikit-learn.org/){:target="_blank"}, 
-             along with custom implementations of powerful tools such as 
+             integrates many familiar libraries including [`matplotlib`](https://matplotlib.org/){:target="_blank"}, 
+             [`seaborn`](https://seaborn.pydata.org/){:target="_blank"}, and 
+             [`scikit-learn`](http://scikit-learn.org/){:target="_blank"}, along with custom implementations of 
+             powerful tools such as 
              [hyperalignment](https://www.cell.com/neuron/fulltext/S0896-6273(11)00781-1?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0896627311007811%3Fshowall%3Dtrue){:target="_blank"} 
              and the 
              [Shared Response Model](https://papers.nips.cc/paper/5855-a-reduced-dimension-fmri-shared-response-model.pdf){:target="_blank"}.
@@ -382,8 +438,8 @@ sections:
                 type: fas
                 text: JMLR paper
                 url: http://jmlr.org/papers/volume18/17-434/17-434.pdf
-          - title: umap
-            role: maintainer
+          - title: umap-learn
+            role: co-maintainer
             description: a Python package implementing the 
              [Uniform Manifold Approximation and Projection](https://arxiv.org/abs/1802.03426){:target="_blank"} 
              algorithm. UMAP is a general-purpose dimensionality reduction technique based on ideas from manifold
@@ -412,7 +468,7 @@ sections:
                 text: arXiv paper
                 url: https://arxiv.org/pdf/1802.03426.pdf
           - title: CDL-tutorials
-            role: developer, maintainer
+            role: co-developer, co-maintainer
             description: a repository of useful, open-source tutorials on various computational tools, frameworks, 
              Python packages, and concepts frequently used in the 
              [Contextual Dynamics Lab](http://www.context-lab.com/){:target="_blank"}. Check out the GitHub repo for a
@@ -423,7 +479,7 @@ sections:
                 text: View on GitHub
                 url: https://github.com/contextlab/cdl-tutorials
           - title: lab-manual
-            role: developer, lead maintainer
+            role: co-developer, maintainer
             description: lab manual and associated source code for the 
              [Contextual Dynamics Lab](http://www.context-lab.com/){:target="_blank"} (PI&#58; 
              [Jeremy Mannning](https://pbs.dartmouth.edu/people/jeremy-rothman-manning){:target="_blank"}). In addition 
@@ -441,7 +497,7 @@ sections:
                 text: Download PDF
                 url: https://github.com/ContextLab/lab-manual/raw/master/lab_manual.pdf
           - title: CDL-bibliography
-            role: maintainer
+            role: co-maintainer
             description: a `bibtex` file containing nearly 6,000 references related to psychology, neuroscience, math, 
              and machine learning. The bibliography can be easily configured as a submodule for reference in LaTeX 
              documents or added to [Overleaf](https://www.overleaf.com/){:target="_blank"} projects, and is updated
@@ -453,38 +509,6 @@ sections:
                 type: fab
                 text: View on GitHub
                 url: https://github.com/contextlab/cdl-bibliography
-          - title: psiturk-experiment-template
-            role: sole developer, sole maintainer
-            description: _(in development)_ a repository with two adaptable, complimentary templates for a human 
-             behavioral experiment, implemented via the [jsPsych](http://www.jspsych.org/){:target="_blank"} library
-             and [psiTurk](https://psiturk.org/){:target="_blank"} platform, and served from an isolated 
-             [Docker](https://www.docker.com/){:target="_blank"} environment. The `deploy-local` branch provides a 
-             single, lightweight, [minbase Debian image](https://hub.docker.com/_/debian){:target="_blank"} to house 
-             the experiment and a [SQLite](https://www.sqlite.org/index.html){:target="_blank"} database for local
-             deployment. The `deploy-mturk` branch offers a four-container setup ready for deployment via 
-             [Amazon Mechanical Turk](https://www.mturk.com/){:target="_blank"}&#58; a debian image for the psiTurk 
-             experiment, an [nginx](https://www.nginx.com/){:target="_blank"} server image for load balancing, a 
-             [MySQL](https://www.mysql.com/){:target="_blank"} image for storing data, and an 
-             [Adminer](https://www.adminer.org/){:target="_blank"} image for easily viewing and accessing data.
-            icons:
-              - icon: fa-github-square
-                type: fab
-                text: View on GitHub
-                url: https://github.com/paxtonfitzpatrick/psiturk-experiment-template
-      - type: gists.html
-        title: GitHub Gists
-        items:
-          - title: Dockerfile-analyses-template
-            description: a template Dockerfile for reproducible data analysis in Python, following a workflow I find
-             useful for isolating project environments and publishing or sharing code.  The template builds a simple
-             Debian (default&#58; v9.12) image with some common command line tools and installs an 
-             [Anaconda](https://www.anaconda.com/products/individual){:target="_blank"} Python distribution 
-             (default&#58; 3.7.4) along with 
-             [`jupyterlab`](https://jupyterlab.readthedocs.io/en/stable/){:target="_blank"}, some nifty 
-             [`jupyter notebook` extensions](https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/){:target="_blank"}, 
-             and whatever other packages you specify. It then exposes a port allowing you to run a `jupyter` server 
-             from the container environment in a web browser.
-            url: https://gist.github.com/paxtonfitzpatrick/f00dfcce1293bede0b9c1f87b456e1b6
         
   - type: contact.html
     section_id: contact
