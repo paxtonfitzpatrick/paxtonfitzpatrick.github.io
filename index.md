@@ -505,8 +505,8 @@ sections:
                 type: fab
                 text: View on GitHub
                 url: https://github.com/contextlab/cdl-bibliography
-      - type: gists.html
-        title: GitHub Gists
+      - type: snippets.html
+        title: Snippets
         items:
           - title: Dockerfile-analyses-template
             description: a template Dockerfile for reproducible data analysis in Python, following a workflow I find
