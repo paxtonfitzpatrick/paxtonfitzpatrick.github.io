@@ -91,7 +91,7 @@ sections:
               color: d807e3
             - title: Lab Manager, Contextual Dynamics Lab
               start: 2018.5
-              end: 2020.5
+              end: 2021
               color: 17ad46
             - title: Private Tutor, Intro Computer Science
               start: 2018.75
