@@ -296,7 +296,7 @@ sections:
      [this website](https://github.com/paxtonfitzpatrick/paxtonfitzpatrick.github.io){:target="_blank"}!
     panes:
       - type: software.html
-        title: Open Source Software
+        title: "Things I've made"
         items:
           - title: cluster-tools-dartmouth
             role: developer, maintainer
@@ -331,7 +331,7 @@ sections:
                 text: View on GitHub
                 url: https://github.com/paxtonfitzpatrick/gittracker
           - title: CDL-docker-stacks
-            roles: developer, maintainer
+            role: developer, maintainer
             description: a collection of hierarchically built Docker images for common neuro/data science applications. 
              Modeled after 
              [Jupyter Docker Stacks](https://jupyter-docker-stacks.readthedocs.io/en/latest/){:target="_blank"}, these 
@@ -377,9 +377,10 @@ sections:
              using the [jsPsych](http://www.jspsych.org/){:target="_blank"} library and 
              [psiTurk](https://psiturk.org/){:target="_blank"} platform, and isolated within a
              [Docker](https://www.docker.com/){:target="_blank"} application. The Docker application runs four networked
-             containers: a [Debian 9 ("stretch")](https://www.debian.org/releases/stretch/){:target="_blank"} container 
-             to house the experiment code and psiTurk server; an [nginx](https://www.nginx.com/){:target="_blank"} 
-             server for load balancing, [MySQL](https://www.mysql.com/){:target="_blank"} for saving data; and 
+             containers&#58; a [Debian 9 ("stretch")](https://www.debian.org/releases/stretch/){:target="_blank"} 
+             container to house the experiment code and psiTurk server; an 
+             [nginx](https://www.nginx.com/){:target="_blank"} server for load balancing, 
+             [MySQL](https://www.mysql.com/){:target="_blank"} for saving data; and 
              [Adminer](https://www.adminer.org/){:target="_blank"} for more easily accessing and downloading data. This 
              repository accompanied a tutorial on online data collection presented to the 
              [EPSCoR Attention Consortium](https://www.attentioninthebrain.com/){:target="_blank"}. 
@@ -392,6 +393,24 @@ sections:
                 type: fas
                 text: Slides
                 url: https://github.com/paxtonfitzpatrick/psiturk-experiment-template/tree/master/slides
+          - title: autoFR
+            role: co-developer, maintainer
+            description: a verbal free-recall experiment that incorporates automatic speech-to-text processing by
+             wrapping the [Google Cloud Speech API](https://cloud.google.com/speech-to-text/){:target="_blank"}. The 
+             experiment is implemented using [jsPsych](http://www.jspsych.org/){:target="_blank"} and
+             [psiTurk](https://psiturk.org/){:target="_blank"}, isolated in a
+             [Docker](https://www.docker.com/){:target="_blank"} container for easy deployment both locally and via 
+             [Amazon Mechanical Turk](https://www.mturk.com/mturk/welcome){:target="_blank"}. See the 
+             [README](https://github.com/paxtonfitzpatrick/autoFR/blob/master/README.md){:target="_blank"} for 
+             instructions on how to run the experiment and access the data.
+            icons:
+              - icon: fa-github-square
+                type: fab
+                text: View on GitHub
+                url: https://github.com/ContextLab/AutoFR
+      - type: software.html
+        title: Things I contribute to
+        items:
           - title: hypertools
             role: maintainer
             description: a Python package for visualizing and manipulating high-dimensional data. HyperTools was built
@@ -419,21 +438,6 @@ sections:
                 type: fas
                 text: JMLR paper
                 url: http://jmlr.org/papers/volume18/17-434/17-434.pdf
-          - title: autoFR
-            role: co-developer, maintainer
-            description: a verbal free-recall experiment that incorporates automatic speech-to-text processing by
-             wrapping the [Google Cloud Speech API](https://cloud.google.com/speech-to-text/){:target="_blank"}. The 
-             experiment is implemented using [jsPsych](http://www.jspsych.org/){:target="_blank"} and
-             [psiTurk](https://psiturk.org/){:target="_blank"}, isolated in a
-             [Docker](https://www.docker.com/){:target="_blank"} container for easy deployment both locally and via 
-             [Amazon Mechanical Turk](https://www.mturk.com/mturk/welcome){:target="_blank"}. See the 
-             [README](https://github.com/paxtonfitzpatrick/autoFR/blob/master/README.md){:target="_blank"} for 
-             instructions on how to run the experiment and access the data.
-            icons:
-              - icon: fa-github-square
-                type: fab
-                text: View on GitHub
-                url: https://github.com/ContextLab/AutoFR
           - title: umap-learn
             role: co-maintainer
             description: a Python package implementing the 
@@ -505,20 +509,6 @@ sections:
                 type: fab
                 text: View on GitHub
                 url: https://github.com/contextlab/cdl-bibliography
-      - type: snippets.html
-        title: Snippets
-        items:
-          - title: Dockerfile-analyses-template
-            description: a template Dockerfile for reproducible data analysis in Python, following a workflow I find
-             useful for isolating project environments and publishing or sharing code.  The template builds a simple
-             Debian (default&#58; v9.12) image with some common command line tools and installs an 
-             [Anaconda](https://www.anaconda.com/products/individual){:target="_blank"} Python distribution 
-             (default&#58; 3.7.4) along with 
-             [`jupyterlab`](https://jupyterlab.readthedocs.io/en/stable/){:target="_blank"}, some nifty 
-             [`jupyter notebook` extensions](https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/){:target="_blank"}, 
-             and whatever other packages you specify. It then exposes a port allowing you to run a `jupyter` server 
-             from the container environment in a web browser.
-            url: https://gist.github.com/paxtonfitzpatrick/f00dfcce1293bede0b9c1f87b456e1b6
         
   - type: contact.html
     section_id: contact
