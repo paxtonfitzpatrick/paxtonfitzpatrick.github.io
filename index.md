@@ -138,7 +138,7 @@ sections:
               - image: assets/img/skills/db.png
                 caption: SQLite/MySQL/SQLAlchemy
               - image: assets/img/skills/hpc.png
-                caption: High-performance computing (Moab/Torque)
+                caption: High-performance computing (Moab/TORQUE)
               - image: assets/img/skills/conda.png
                 caption: Conda
               - image: assets/img/skills/pytest.png
@@ -298,27 +298,69 @@ sections:
       - type: software.html
         title: Open Source Software
         items:
+          - title: cluster-tools-dartmouth
+            role: developer, maintainer
+            description: _(in development)_ a Python package for interfacing with a TORQUE-based high-performance
+             computing cluster entirely from your local machine. The `Cluster` class provides full `pathlib`- and 
+             `subprocess`-like interfaces for reading, writing, uploading, and downloading remote files; spawning 
+             remote processes; and creating and managing `Project`s. The `Project` class allows you to interactively 
+             create, submit, and monitor batches of jobs remotely. Write your job script locally in any supported 
+             language, supply its path, and manipulate the `Project`'s attributes to set TORQUE directives, create 
+             a runtime environment, parameterize individual jobs, and more. `clustertools` will automatically 
+             create a remote directory structure, upload your script, write `.pbs` wrapper files for each job, submit 
+             them to the scheduler, and monitor their progress. `clustertools` can also run additional scripts before 
+             job submission and after completion, email you about various changes in job status, and resubmit jobs that 
+             are aborted due to scheduler issues. `clustertools` is specifically geared toward Dartmouth's
+             [Discovery](https://rc.dartmouth.edu/index.php/discovery-overview/){:target="_blank"} cluster, but with 
+             minor tweaks will work with any similar HPC system.
+            icons:
+              - icon: fa-github-square
+                type: fab
+                text: View on GitHub
+                url: https://github.com/paxtonfitzpatrick/cluster-tools-dartmouth
           - title: gittracker
             role: developer, maintainer
-            description: _(in development)_ a Python command-line application for tracking the states of all your local git
-             repositories in
-             one place. Built on top of [GitPython](https://github.com/gitpython-developers/GitPython){:target="_blank"}, 
-             GitTracker can be run from anywhere on your computer to show `git status`-like information for each 
-             repository it's set to track. It features simple `git`-like commands; colorful, intuitive output at 
-             multiple verbosity levels; ability to track nested submodules; and an automatic initial setup.
+            description: _(in development)_ a Python command-line application for tracking the states of all your local 
+             git repositories in one place. `gittracker` can be run from anywhere on your computer to show 
+             `git status`-like information for each repository it's configured to track. It features simple `git`-like 
+             commands; colorful, intuitive output at multiple verbosity levels; ability to track nested submodules; 
+             and an automatic initial setup.
             icons:
               - icon: fa-github-square
                 type: fab
                 text: View on GitHub
                 url: https://github.com/paxtonfitzpatrick/gittracker
+          - title: CDL-docker-stacks
+            roles: developer, maintainer
+            description: a collection of hierarchically built Docker images for common neuro/data science applications. 
+             Modeled after 
+             [Jupyter Docker Stacks](https://jupyter-docker-stacks.readthedocs.io/en/latest/){:target="_blank"}, these 
+             images provide lightweight, standardized environments useful for various research purposes. Each image is 
+             available pre-built on [Docker Hub](https://hub.docker.com/u/contextlab){:target="_blank"} to pull and run 
+             as-is or use as a base for custom images. Pre-built images that install Python support `3.6`, `3.7`, and 
+             `3.8` tags for different Python versions 
+             ([miniconda](https://docs.conda.io/en/latest/miniconda.html){:target="_blank"} distribution). Additionally, 
+             `Dockerfile`s for each image are available on GitHub and support `--build-arg`s that allow customizing 
+             features like the Linux distro, Python version, and [MTurk](https://www.mturk.com/){:target="_blank"} 
+             compatibility; installing additional software through package managers including `apt`, `conda`, and `pip`; 
+             and configuring the IP address and port for a Jupyter notebook server (as applicable).
+            icons:
+              - icon: fa-github-square
+                type: fab
+                text: View on GitHub
+                url: https://github.com/ContextLab/CDL-docker-stacks
+              - icon: fa-docker
+                type: fab
+                text: View on Docker Hub
+                url: https://hub.docker.com/u/contextlab
           - title: quail
-            role: developer, lead maintainer
-            description: a Python package that facilitates easy processing, analysis, and visualizing free-recall data
-             from both list-learning and naturalistic memory experiments. Quail features a simple-yet-powerful data
-             structure for encoding and recall data (the `Egg`) with convenient methods for performing common analyses, 
-             generating beautiful plots, and easily filtering data in numerous ways. Quail also integrates with the
+            role: co-developer, maintainer
+            description: a Python toolbox for easily processing, analyzing, and visualizing free-recall data from both 
+             list-learning and naturalistic memory experiments. Quail features a simple-yet-powerful data structure for 
+             encoding and recall data (the `Egg`) with convenient methods for performing common analyses, generating 
+             beautiful plots, and filtering data in numerous ways. Quail also integrates with the
              [Google Cloud Speech API](https://cloud.google.com/speech-to-text/){:target="_blank"} for rapid audio
-             decoding and supports user-defined metrics for analyses in custom feature spaces.
+             transcription and supports user-defined metrics for analyses in custom feature spaces.
             icons:
               - icon: fa-github-square
                 type: fab
@@ -328,44 +370,39 @@ sections:
                 type: fas
                 text: documentation
                 url: https://cdl-quail.readthedocs.io/en/latest/index.html
-          - title: cluster-tools-dartmouth
-            role: developer, lead maintainer
-            description: _(in development)_ a toolbox for easily deploying jobs on Dartmouth's high-performance 
-             computing cluster. Given a single Python script, `cluster-tools` will create a PBS script for each
-             desired parameter combination and submit your jobs to run in parallel. Set values in a config file to
-             pass commands to the Moab scheduler and TORQUE resource manager. Using 
-             [spurplus](https://github.com/Parquery/spurplus){:target="_blank"}, `cluster-tools` lets you submit jobs
-             directly from your local machine and automatically re-queue those that fail due to scheduler issues.
+          - title: psiturk-experiment-template
+            role: developer, maintainer
+            description: An adaptable template for a behavioral experiment, ready to be run locally or deployed online 
+             via [Amazon Mechanical Turk](https://www.mturk.com/){:target="_blank"}. The experiment is implemented 
+             using the [jsPsych](http://www.jspsych.org/){:target="_blank"} library and 
+             [psiTurk](https://psiturk.org/){:target="_blank"} platform, and isolated within a
+             [Docker](https://www.docker.com/){:target="_blank"} application. The Docker application runs four networked
+             containers: a [Debian 9 ("stretch")](https://www.debian.org/releases/stretch/){:target="_blank"} container 
+             to house the experiment code and psiTurk server; an [nginx](https://www.nginx.com/){:target="_blank"} 
+             server for load balancing, [MySQL](https://www.mysql.com/){:target="_blank"} for saving data; and 
+             [Adminer](https://www.adminer.org/){:target="_blank"} for more easily accessing and downloading data. This 
+             repository accompanied a tutorial on online data collection presented to the 
+             [EPSCoR Attention Consortium](https://www.attentioninthebrain.com/){:target="_blank"}. 
             icons:
               - icon: fa-github-square
                 type: fab
                 text: View on GitHub
-                url: https://github.com/paxtonfitzpatrick/cluster-tools-dartmouth/tree/remote_submit
-          - title: autoFR
-            role: developer, lead maintainer
-            description: a verbal free-recall experiment that incorporates automatic speech-to-text processing by
-             wrapping the [Google Cloud Speech API](https://cloud.google.com/speech-to-text/){:target="_blank"}. The 
-             experiment is implemented using [jsPsych](http://www.jspsych.org/){:target="_blank"} and
-             [psiTurk](https://psiturk.org/){:target="_blank"}, isolated in a
-             [Docker](https://www.docker.com/){:target="_blank"} container for easy deployment both locally and via 
-             [Amazon Mechanical Turk](https://www.mturk.com/mturk/welcome){:target="_blank"}. See the 
-             [README](https://github.com/paxtonfitzpatrick/autoFR/blob/master/README.md){:target="_blank"} for 
-             instructions on how to run the experiment and access the data.
-            icons:
-              - icon: fa-github-square
-                type: fab
-                text: View on GitHub
-                url: https://github.com/ContextLab/AutoFR
+                url: https://github.com/paxtonfitzpatrick/psiturk-experiment-template
+              - icon: fa-sticky-note
+                type: fas
+                text: Slides
+                url: https://github.com/paxtonfitzpatrick/psiturk-experiment-template/tree/master/slides
           - title: hypertools
-            role: lead maintainer
+            role: maintainer
             description: a Python package for visualizing and manipulating high-dimensional data. HyperTools was built
              with two goals in mind&#58; quickly visualizing a dataset to gain intuitions about its structure, and
              meticulously manipulating data to generate beautiful, animated, 3D figures. It features heavily customizable
              functions for alignment, normalization, clustering, transformations, dimensionality reduction, and
              plotting, while simultaneously allowing you to plot a corpus of text with a single function call. Hypertools
-             integrates many familiar libraries including [matplotlib](https://matplotlib.org/){:target="_blank"}, 
-             [seaborn](https://seaborn.pydata.org/){:target="_blank"}, and [scikit-learn](http://scikit-learn.org/){:target="_blank"}, 
-             along with custom implementations of powerful tools such as 
+             integrates many familiar libraries including [`matplotlib`](https://matplotlib.org/){:target="_blank"}, 
+             [`seaborn`](https://seaborn.pydata.org/){:target="_blank"}, and 
+             [`scikit-learn`](http://scikit-learn.org/){:target="_blank"}, along with custom implementations of 
+             powerful tools such as 
              [hyperalignment](https://www.cell.com/neuron/fulltext/S0896-6273(11)00781-1?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0896627311007811%3Fshowall%3Dtrue){:target="_blank"} 
              and the 
              [Shared Response Model](https://papers.nips.cc/paper/5855-a-reduced-dimension-fmri-shared-response-model.pdf){:target="_blank"}.
@@ -382,8 +419,23 @@ sections:
                 type: fas
                 text: JMLR paper
                 url: http://jmlr.org/papers/volume18/17-434/17-434.pdf
-          - title: umap
-            role: maintainer
+          - title: autoFR
+            role: co-developer, maintainer
+            description: a verbal free-recall experiment that incorporates automatic speech-to-text processing by
+             wrapping the [Google Cloud Speech API](https://cloud.google.com/speech-to-text/){:target="_blank"}. The 
+             experiment is implemented using [jsPsych](http://www.jspsych.org/){:target="_blank"} and
+             [psiTurk](https://psiturk.org/){:target="_blank"}, isolated in a
+             [Docker](https://www.docker.com/){:target="_blank"} container for easy deployment both locally and via 
+             [Amazon Mechanical Turk](https://www.mturk.com/mturk/welcome){:target="_blank"}. See the 
+             [README](https://github.com/paxtonfitzpatrick/autoFR/blob/master/README.md){:target="_blank"} for 
+             instructions on how to run the experiment and access the data.
+            icons:
+              - icon: fa-github-square
+                type: fab
+                text: View on GitHub
+                url: https://github.com/ContextLab/AutoFR
+          - title: umap-learn
+            role: co-maintainer
             description: a Python package implementing the 
              [Uniform Manifold Approximation and Projection](https://arxiv.org/abs/1802.03426){:target="_blank"} 
              algorithm. UMAP is a general-purpose dimensionality reduction technique based on ideas from manifold
@@ -412,7 +464,7 @@ sections:
                 text: arXiv paper
                 url: https://arxiv.org/pdf/1802.03426.pdf
           - title: CDL-tutorials
-            role: developer, maintainer
+            role: co-developer, co-maintainer
             description: a repository of useful, open-source tutorials on various computational tools, frameworks, 
              Python packages, and concepts frequently used in the 
              [Contextual Dynamics Lab](http://www.context-lab.com/){:target="_blank"}. Check out the GitHub repo for a
@@ -423,7 +475,7 @@ sections:
                 text: View on GitHub
                 url: https://github.com/contextlab/cdl-tutorials
           - title: lab-manual
-            role: developer, lead maintainer
+            role: co-developer, maintainer
             description: lab manual and associated source code for the 
              [Contextual Dynamics Lab](http://www.context-lab.com/){:target="_blank"} (PI&#58; 
              [Jeremy Mannning](https://pbs.dartmouth.edu/people/jeremy-rothman-manning){:target="_blank"}). In addition 
@@ -441,7 +493,7 @@ sections:
                 text: Download PDF
                 url: https://github.com/ContextLab/lab-manual/raw/master/lab_manual.pdf
           - title: CDL-bibliography
-            role: maintainer
+            role: co-maintainer
             description: a `bibtex` file containing nearly 6,000 references related to psychology, neuroscience, math, 
              and machine learning. The bibliography can be easily configured as a submodule for reference in LaTeX 
              documents or added to [Overleaf](https://www.overleaf.com/){:target="_blank"} projects, and is updated
@@ -453,24 +505,6 @@ sections:
                 type: fab
                 text: View on GitHub
                 url: https://github.com/contextlab/cdl-bibliography
-          - title: psiturk-experiment-template
-            role: sole developer, sole maintainer
-            description: _(in development)_ a repository with two adaptable, complimentary templates for a human 
-             behavioral experiment, implemented via the [jsPsych](http://www.jspsych.org/){:target="_blank"} library
-             and [psiTurk](https://psiturk.org/){:target="_blank"} platform, and served from an isolated 
-             [Docker](https://www.docker.com/){:target="_blank"} environment. The `deploy-local` branch provides a 
-             single, lightweight, [minbase Debian image](https://hub.docker.com/_/debian){:target="_blank"} to house 
-             the experiment and a [SQLite](https://www.sqlite.org/index.html){:target="_blank"} database for local
-             deployment. The `deploy-mturk` branch offers a four-container setup ready for deployment via 
-             [Amazon Mechanical Turk](https://www.mturk.com/){:target="_blank"}&#58; a debian image for the psiTurk 
-             experiment, an [nginx](https://www.nginx.com/){:target="_blank"} server image for load balancing, a 
-             [MySQL](https://www.mysql.com/){:target="_blank"} image for storing data, and an 
-             [Adminer](https://www.adminer.org/){:target="_blank"} image for easily viewing and accessing data.
-            icons:
-              - icon: fa-github-square
-                type: fab
-                text: View on GitHub
-                url: https://github.com/paxtonfitzpatrick/psiturk-experiment-template
       - type: gists.html
         title: GitHub Gists
         items:
