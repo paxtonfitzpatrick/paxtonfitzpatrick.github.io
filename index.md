@@ -233,10 +233,11 @@ sections:
     items:
       - type: manuscript
         title: Geometric models reveal behavioral and neural signatures of transforming experiences into memories
-        text: Heusser A. C.&dagger;, **Fitzpatrick P. C.**&dagger;, Manning J. R. (in press). Geometric models reveal
-         behavioral and neural signatures of transforming experiences into memories. *Nature Human Behaviour*.
+        text: Heusser A. C.&dagger;, **Fitzpatrick P. C.**&dagger;, Manning J. R. (2021). Geometric models reveal
+         behavioural and neural signatures of transforming experiences into memories. *Nature Human Behaviour*. 
+         doi:10.1038/s41562-021-01051-6
         image: assets/img/research/sherlock-white.png
-        pdf_url: https://www.biorxiv.org/content/10.1101/409987v3.full.pdf
+        pdf_url: https://rdcu.be/cfeFb
         code_url: https://github.com/ContextLab/sherlock-topic-model-paper
         data_url: https://arks.princeton.edu/ark:/88435/dsp01nz8062179
       - type: poster
