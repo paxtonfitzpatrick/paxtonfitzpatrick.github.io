@@ -26,7 +26,7 @@ gem "github-pages", "~> 204", group: :jekyll_plugins
 # basic plugins
 group :noupdate do
   gem "ffi", "= 1.12.2"
-  gem "nokogiri", "= 1.10.9"
+  gem "nokogiri", "1.13.6"
 end
 
 # jekyll plugins
