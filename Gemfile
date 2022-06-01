@@ -4,6 +4,6 @@ source 'https://rubygems.org'
 # in deployment so local dev environment always matches production environment
 require 'json'
 require 'open-uri'
-versions = JSON.parse(URI.open('https://pages.github.com/versions.json').read)
+versions = JSON.parse((URI('https://pages.github.com/versions.json').open).read)
 
 gem 'github-pages', versions['github-pages']
