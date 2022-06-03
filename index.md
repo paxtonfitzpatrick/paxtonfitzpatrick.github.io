@@ -27,11 +27,6 @@ header:
       icon: fa-file-alt
       type: fa
       site_data: cv_path
-    - title: CDL
-      icon: cdl-logo
-      type: custom
-      site_data: lab_website
-
 
 sections:
   - type: multipane.html
