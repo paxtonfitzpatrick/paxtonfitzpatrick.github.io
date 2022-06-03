@@ -19,6 +19,10 @@ header:
       icon: fa-twitter
       type: fab
       site_data: twitter
+    - title: Google Scholar
+      icon: google-scholar
+      type: custom
+      site_data: google_scholar
     - title: CV
       icon: fa-file-alt
       type: fa

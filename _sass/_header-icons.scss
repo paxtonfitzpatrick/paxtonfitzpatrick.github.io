@@ -26,11 +26,19 @@
     color: $header-bg;
     background: $header-fg;
     text-underline: none;
+    
+    svg {
+      fill: $header-bg;
+    }
   }
 
   &:active {
     color: $header-bg;
     background: $header-fg;
+    
+    svg {
+      fill: $header-bg;
+    }
   }
 }
 
@@ -61,4 +69,11 @@
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon.custom > svg {
+  height: 1em;
+  width: 1em;
+  vertical-align: -0.0667em;  // based on fontawesome's .fa-lg
+  fill: $header-fg;
 }
