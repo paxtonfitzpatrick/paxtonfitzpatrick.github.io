@@ -184,14 +184,8 @@ sections:
                 caption: Plotly
               - image: assets/img/skills/hypertools.png
                 caption: Hypertools
-              - image: assets/img/skills/statsmodels.png
-                caption: statsmodels
-              - image: assets/img/skills/sklearn.png
-                caption: Scikit-learn
-              - image: assets/img/skills/nilearn.png
-                caption: Nilearn
-              - image: assets/img/skills/fsl.png
-                caption: FSL
+              - image: assets/img/skills/freesurfer.png
+                caption: FreeSurfer
               - image: assets/img/skills/boris.png
                 caption: BORIS
               - image: assets/img/skills/anvil.png
