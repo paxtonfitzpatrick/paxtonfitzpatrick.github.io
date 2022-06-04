@@ -2,56 +2,46 @@
   display: inline-block;
   justify-content: center;
   text-align: center;
-}
 
-.header-icons a:hover {
-  text-decoration: none;
-}
+  .icon {
+    display: inline-block;
+    font-size: 2em;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 2em;
+    color: $header-fg;
+    width: 2em;
+    height: 2em;
+    border: 2px solid $header-fg;
+    border-radius: 50%;
+    margin: 0.5em;
+    transition: all 0.7s;
 
-.header-icons .icon {
-  display: inline-block;
-  font-size: 2em;
-  text-align: center;
-  vertical-align: middle;
-  line-height: 2em;
-  color: $header-fg;
-  width: 2em;
-  height: 2em;
-  border: 2px solid $header-fg;
-  border-radius: 50%;
-  margin: .5em;
-  transition: all .7s;
+    @media (max-width: 992px) {
+      font-size: 4vw;
+      margin: 1vw;
+    }
 
-  &:hover {
-    color: $header-bg;
-    background: $header-fg;
-    text-underline: none;
-    
-    svg {
-      fill: $header-bg;
+    &.custom > svg {
+      height: 1em;
+      width: 1em;
+      vertical-align: -0.0667em;  // based on fontawesome's .fa-lg
+      fill: $header-fg;
+    }
+
+    &:hover,
+    &:active {
+      color: $header-bg;
+      background: $header-fg;
+      text-underline: none;
+
+      svg {
+        fill: $header-bg;
+      }
     }
   }
 
-  &:active {
-    color: $header-bg;
-    background: $header-fg;
-    
-    svg {
-      fill: $header-bg;
-    }
+  a:hover {
+    text-decoration: none;
   }
-}
-
-@media (max-width: 992px) {
-  .header-icons .icon {
-    font-size: 4vw;
-    margin: 1vw;
-  }
-}
-
-.icon.custom > svg {
-  height: 1em;
-  width: 1em;
-  vertical-align: -0.0667em;  // based on fontawesome's .fa-lg
-  fill: $header-fg;
 }
