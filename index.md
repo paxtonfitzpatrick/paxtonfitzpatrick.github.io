@@ -166,6 +166,8 @@ sections:
                 caption: OpenSesame
               - image: assets/img/skills/morphx.png
                 caption: Norkross MorphX
+              - image: assets/img/skills/qualtrics.png
+                caption: Qualtrics
           - title: Data analysis & visualization
             skills:
               - image: assets/img/skills/scipy.png
