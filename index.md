@@ -70,7 +70,7 @@ sections:
             image: assets/img/bio/brain-scan.jpg
         timeline:
           start: 2015
-          end: 2021
+          end: 2023
           events:
             - title: Undergraduate, Dartmouth College
               start: 2015.75
@@ -88,11 +88,11 @@ sections:
               start: 2017.25
               end: 2018
               color: d807e3
-            - title: Lab Manager, Contextual Dynamics Lab
+            - title: Laboratory & Research Manager, Contextual Dynamics Lab
               start: 2018.5
               end: 2021
               color: 17ad46
-            - title: Private Tutor, Intro Computer Science
+            - title: Peer Tutor, Intro Computer Science
               start: 2018.75
               end: 2019.5
               color: d9af1a
@@ -100,10 +100,26 @@ sections:
               start: 2019.75
               end: 2020
               color: 100f70
+            - title: Teaching Assistant & Guest Lecturer, Intro to Programming for Psychological Scientists
+              start: 2020
+              end: 2020.25
+              color: ff0000
             - title: Teaching Assistant, Storytelling with Data
               start: 2020.25
               end: 2020.5
-              color: fa0011
+              color: 
+            - title: Teaching Assistant, Intro to Programming for Psychological Scientists
+              start: 2021
+              end: 2021.25
+              color: 
+            - title: Ph.D. Student, Dartmouth College
+              start: 2021.75
+              end: 2022.5
+              color: 
+            - title: Teaching Assistant, Laboratory in Experimental Psychology
+              start: 2022.25
+              end: 2022.5
+              color: 
               
       - type: skills.html
         title: Skills
