@@ -162,6 +162,8 @@ sections:
                 caption: PsychoPy
               - image: assets/img/skills/superlab.png
                 caption: Cedrus SuperLab
+              - image: assets/img/skills/openbci.png
+                caption: OpenBCI
               - image: assets/img/skills/opensesame.png
                 caption: OpenSesame
               - image: assets/img/skills/morphx.png
