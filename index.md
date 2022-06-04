@@ -180,6 +180,14 @@ sections:
                 caption: Pandas
               - image: assets/img/skills/nltk.png
                 caption: NLTK
+              - image: assets/img/skills/statsmodels.png
+                caption: statsmodels
+              - image: assets/img/skills/sklearn.png
+                caption: Scikit-learn
+              - image: assets/img/skills/nilearn.png
+                caption: Nilearn
+              - image: assets/img/skills/graphia.png
+                caption: Graphia
               - image: assets/img/skills/matplotlib.png
                 caption: Matplotlib
               - image: assets/img/skills/seaborn.png
