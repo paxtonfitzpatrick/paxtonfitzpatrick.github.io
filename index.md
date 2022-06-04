@@ -136,8 +136,8 @@ sections:
                 caption: Docker
               - image: assets/img/skills/db.png
                 caption: SQLite/MySQL/SQLAlchemy
-              - image: assets/img/skills/hpc.png
-                caption: High-performance computing (Moab/TORQUE)
+              - image: assets/img/skills/moab-torque.png
+                caption: Moab-TORQUE
               - image: assets/img/skills/conda.png
                 caption: Conda
               - image: assets/img/skills/pytest.png
