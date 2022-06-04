@@ -186,6 +186,8 @@ sections:
                 caption: Scikit-learn
               - image: assets/img/skills/nilearn.png
                 caption: Nilearn
+              - image: assets/img/skills/igraph.png
+                caption: igraph
               - image: assets/img/skills/graphia.png
                 caption: Graphia
               - image: assets/img/skills/matplotlib.png
