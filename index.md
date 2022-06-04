@@ -126,6 +126,8 @@ sections:
                 caption: CSS
               - image: assets/img/skills/sass.png
                 caption: Sass/SCSS
+              - image: assets/img/skills/liquid.png
+                caption: Liquid
               - image: assets/img/skills/jekyll.png
                 caption: Jekyll
           - title: Development tools
