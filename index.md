@@ -114,18 +114,18 @@ sections:
                 caption: Python
               - image: assets/img/skills/javascript.png
                 caption: JavaScript
+              - image: assets/img/skills/shell.png
+                caption: Bash/Zsh
+              - image: assets/img/skills/latex.png
+                caption: LaTeX
+              - image: assets/img/skills/supercollider.png
+                caption: SuperCollider
               - image: assets/img/skills/html.png
                 caption: HTML
               - image: assets/img/skills/css.png
                 caption: CSS
-              - image: assets/img/skills/shell.png
-                caption: Shell
-              - image: assets/img/skills/latex.png
-                caption: TeX/LaTeX
-              - image: assets/img/skills/supercollider.png
-                caption: SuperCollider
-              - image: assets/img/skills/bootstrap.png
-                caption: Bootstrap
+              - image: assets/img/skills/sass.png
+                caption: Sass/SCSS
               - image: assets/img/skills/jekyll.png
                 caption: Jekyll
           - title: Development tools
