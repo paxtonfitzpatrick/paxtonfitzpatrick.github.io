@@ -293,6 +293,13 @@ sections:
         pdf_url: https://rdcu.be/cfeFb
         code_url: https://github.com/ContextLab/sherlock-topic-model-paper
         data_url: https://arks.princeton.edu/ark:/88435/dsp01nz8062179
+      - type: talk
+        title: Web-based behavioral experiments for online data collection
+        text: "**Fitzpatrick P. C.** (2020). Web-based behavioral experiments for online data collection. *EPSCoR 
+         Attention Consortium meeting*. Virtual."
+        image: assets/img/research/epscor-talk.png
+        slides_url: https://github.com/paxtonfitzpatrick/psiturk-experiment-template/blob/master/slides/slides.pdf
+        code_url: https://github.com/paxtonfitzpatrick/psiturk-experiment-template
       - type: poster
         title: Exploring the evolving geometric structure of experiences and memories
         text: __Fitzpatrick P. C.__, Heusser A. C., Manning J. R. (2019). Exploring the evolving geometric structure
