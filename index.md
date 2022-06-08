@@ -263,6 +263,14 @@ sections:
         pdf_url: https://www.dropbox.com/s/vasgv6qlyfiimih/FitzMann22.pdf
         code_url: https://github.com/ContextLab/davos
       - type: manuscript
+        title: Fitness tracking reveals task-specific associations between memory, mental health, and exercise
+        text: Manning J. R., Notaro G. M., Chen E., **Fitzpatrick P. C.** (2022). Fitness tracking reveals task-specific 
+         associations between memory, mental health, and exercise. (*under revision*).
+        image: assets/img/research/fitwit-white.png
+        pdf_url: https://www.biorxiv.org/content/10.1101/2021.10.22.465441
+        code_url: https://github.com/ContextLab/brainfit-paper
+        data_url: https://github.com/ContextLab/brainfit-paper/tree/main/data
+      - type: manuscript
         title: Geometric models reveal behavioral and neural signatures of transforming experiences into memories
         text: Heusser A. C.&dagger;, **Fitzpatrick P. C.**&dagger;, Manning J. R. (2021). Geometric models reveal
          behavioural and neural signatures of transforming experiences into memories. *Nature Human Behaviour*. 
