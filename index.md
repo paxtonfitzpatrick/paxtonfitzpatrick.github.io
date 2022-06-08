@@ -271,6 +271,12 @@ sections:
         code_url: https://github.com/ContextLab/brainfit-paper
         data_url: https://github.com/ContextLab/brainfit-paper/tree/main/data
       - type: poster
+        title: A geometric approach to modeling knowledge and learning from Khan Academy course videos
+        text: "**Fitzpatrick P. C.**, Heusser A. C., Manning J. R. (2022). A geometric approach to modeling knowledge and learning 
+         from Khan Academy course videos. *Context and Episodic Memory Symposium*. Philadelphia, PA."
+        image: assets/img/research/cems-2022-v2.png
+        pdf_url: https://www.dropbox.com/s/6h621wefszdxv46/CEMS_2022.pdf?dl=0
+      - type: poster
         title: Cognitive tasks as a diagnostic tool for mental health
         text: Jain S., Schreder N., **Fitzpatrick P. C.**, Ziman K., Manning J. R. (2021). Cognitive tasks as a diagnostic 
          tool for mental health. *Trends in Psychology Summit*. Cambridge, MA.
