@@ -290,33 +290,33 @@ sections:
         text: __Fitzpatrick P. C.__, Heusser A. C., Manning J. R. (2019). Exploring the evolving geometric structure
          of experiences and memories. *Society for Neuroscience Annual Meeting*. Chicago, IL.
         image: assets/img/research/sfn-2019.png
-        pdf_url: https://www.dropbox.com/sh/bpyk9gwpk8wexfe/AAASc1BGgX5I08xK07yrmJ96a/SFN_2019b.pdf?dl=0
+        pdf_url: https://www.dropbox.com/s/7y6q9gsi2ywkdbm/SFN_2019b.pdf?dl=0
       - type: poster
         title: Mapping between naturalistic experience and verbal recall
         text: __Fitzpatrick P. C.__, Heusser A. C., Manning J. R. (2018). Mapping between naturalistic experience and
          verbal recall. *Society for Neuroscience Annual Meeting*. San Diego, CA.
         image: assets/img/research/sfn-2018.png
-        pdf_url: https://www.dropbox.com/sh/bpyk9gwpk8wexfe/AABVGrxhxUar2cztUwSx7mBda?dl=0&preview=SFN_2018a.pdf
+        pdf_url: https://www.dropbox.com/s/rv86ve80zjis91t/SFN_2018a.pdf?dl=0
         data_url: https://arks.princeton.edu/ark:/88435/dsp01nz8062179
       - type: poster
         title: Capturing the geometric structure of our experiences and how we remember them
         text: Heusser A. C., __Fitzpatrick P. C.__, Manning J. R. (2018). Capturing the geometric structure of our
          experiences and how we remember them. *Conference on Cognitive Computational Neuroscience*. Philadelphia, PA.
         image: assets/img/research/ccn-2018.png
-        pdf_url: https://www.dropbox.com/sh/bpyk9gwpk8wexfe/AABVGrxhxUar2cztUwSx7mBda?dl=0&preview=CCN_2018.pdf
+        pdf_url: https://www.dropbox.com/s/zmcc74w6z6pow0t/CCN_2018.pdf?dl=0
         data_url: https://arks.princeton.edu/ark:/88435/dsp01nz8062179
       - type: poster
         title: The utility of speech-to-text software for transcription of verbal response data
         text: __Fitzpatrick P. C.__, Ziman K., Heusser A. C., Field C. E., Manning J. R. (2018). The utility of
          speech-to-text software for transcription of verbal response data. *Wetterhahn Science Symposium*. Hanover, NH.
         image: assets/img/research/wetterhahn-2018a.png
-        pdf_url: https://www.dropbox.com/sh/bpyk9gwpk8wexfe/AABVGrxhxUar2cztUwSx7mBda?dl=0&preview=Wetterhahn_2018c.pdf
+        pdf_url: https://www.dropbox.com/s/kd72y0qh0bsm3mr/Wetterhahn_2018c.pdf?dl=0
       - type: poster
         title: Adaptive free recall&#58; Enhancing (or diminishing) memory
         text: Lee M., Chacko R., Whitaker E., **Fitzpatrick P. C.**, Field C. E., Ziman K., Bollinger B., Heusser A. C., Manning J. R. (2018). Adaptive free recall&#58; Enhancing (or diminishing) memory. *Wetterhahn Science
          Symposium*. Hanover, NH.
         image: assets/img/research/wetterhahn-2018b.png
-        pdf_url: https://www.dropbox.com/sh/bpyk9gwpk8wexfe/AABVGrxhxUar2cztUwSx7mBda?dl=0&preview=Wetterhahn_2018a.pdf
+        pdf_url: https://www.dropbox.com/s/qmrzr0bc00p7hqv/Wetterhahn_2018a.pdf?dl=0
       - type: manuscript
         title: Is automatic speech-to-text transcription ready for use in psychological experiments?
         text: Ziman K., Heusser A. C., **Fitzpatrick P. C.**, Field C. E., Manning J. R. (2018). Is automatic
