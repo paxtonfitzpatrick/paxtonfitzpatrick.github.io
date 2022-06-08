@@ -294,6 +294,12 @@ sections:
         code_url: https://github.com/ContextLab/sherlock-topic-model-paper
         data_url: https://arks.princeton.edu/ark:/88435/dsp01nz8062179
       - type: talk
+        title: Docker for scientific research
+        text: "**Fitzpatrick P. C.** (2021). Docker for scientific research. *Dartmouth College*. Hanover, NH."
+        image: assets/img/research/docker-talk.png
+        slides_url: https://github.com/paxtonfitzpatrick/docker-tutorial/blob/master/slides/docker-tutorial.pdf
+        code_url: https://github.com/paxtonfitzpatrick/docker-tutorial
+      - type: talk
         title: Web-based behavioral experiments for online data collection
         text: "**Fitzpatrick P. C.** (2020). Web-based behavioral experiments for online data collection. *EPSCoR 
          Attention Consortium meeting*. Virtual."
