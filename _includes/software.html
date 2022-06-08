@@ -5,9 +5,11 @@
         <div class="float-left">
           <p><code>{{ item.title }}</code></p>
         </div>
-        <div class="float-right">
-         <p><code class="text-muted"># {{ item.role }}</code></p>
-        </div>
+        {% if item.role %}
+          <div class="float-right">
+           <p><code class="text-muted"># {{ item.role }}</code></p>
+          </div>
+        {% endif %}
       </div>
     </div>
     <div class="row mb-3">
