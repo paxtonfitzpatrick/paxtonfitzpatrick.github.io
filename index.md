@@ -257,6 +257,12 @@ sections:
         filter: poster
     items:
       - type: manuscript
+        title: Davos&#58; The Python package smuggler
+        text: "**Fitzpatrick P. C.**, Manning J. R. (2022). Davos&#58; The Python package smuggler. (*under revision*)."
+        image: assets/img/research/davos-white.png
+        pdf_url: https://www.dropbox.com/s/vasgv6qlyfiimih/FitzMann22.pdf
+        code_url: https://github.com/ContextLab/davos
+      - type: manuscript
         title: Geometric models reveal behavioral and neural signatures of transforming experiences into memories
         text: Heusser A. C.&dagger;, **Fitzpatrick P. C.**&dagger;, Manning J. R. (2021). Geometric models reveal
          behavioural and neural signatures of transforming experiences into memories. *Nature Human Behaviour*. 
