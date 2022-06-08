@@ -284,6 +284,11 @@ sections:
          tool for mental health. *Trends in Psychology Summit*. Cambridge, MA.
         image: assets/img/research/tips-2021.png
         pdf_url: https://www.dropbox.com/s/e87wwac4o5rpzn1/TIPS_2021.pdf?dl=0
+      - type: talk
+        title: Capturing the geometric and neural structures of experiences and memories
+        text: "**Fitzpatrick P. C.** (2022). Capturing the geometric and neural structures of experiences and memories. 
+         *Dartmouth College*. Hanover, NH."
+        image: assets/img/research/thesis-talk.png
       - type: manuscript
         title: Geometric models reveal behavioral and neural signatures of transforming experiences into memories
         text: Heusser A. C.&dagger;, **Fitzpatrick P. C.**&dagger;, Manning J. R. (2021). Geometric models reveal
