@@ -16,6 +16,11 @@
                 <i class="icon fas fa-file-pdf fa-fw" aria-hidden="true" title="PDF" data-toggle="tooltip" data-placement="bottom"></i>
               </a>
             {% endif %}
+            {% if item.slides_url %}
+              <a aria-label="Slides" href="{{ item.slides_url }}" target="_blank" rel="noopener noreferrer">
+                <i class="icon fas fa-chalkboard fa-fw" aria-hidden="true" title="Slides" data-toggle="tooltip" data-placement="bottom"></i>
+              </a>
+            {% endif %}
             {% if item.code_url %}
               <a aria-label="Code" href="{{ item.code_url }}" target="_blank" rel="noopener noreferrer">
                 <i class="icon fas fa-file-code fa-fw" aria-hidden="true" title="Code" data-toggle="tooltip" data-placement="bottom"></i>

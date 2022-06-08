@@ -253,6 +253,8 @@ sections:
       - title: Manuscripts
         filter: manuscript
         after_text: '&dagger;denotes equal contribution'
+      - title: Talks
+        filter: talk
       - title: Posters
         filter: poster
     items:
