@@ -427,7 +427,7 @@ sections:
             description: A template behavioral experiment ready to be deployed locally or online via
              [Amazon Mechanical Turk](https://www.mturk.com/){:target="_blank"}. Implemented using the
              [psiTurk](https://psiturk.org/){:target="_blank"} platform and 
-             [jsPsych](http://www.jspsych.org/){:target="_blank"} library, and isolated within four networked
+             [jsPsych](https://www.jspsych.org/){:target="_blank"} library, and isolated within four networked
              [Docker](https://www.docker.com/){:target="_blank"} containers&#58; a 
              [Debian 9](https://www.debian.org/releases/stretch/){:target="_blank"} container to house the experiment 
              code and psiTurk server, an [nginx](https://www.nginx.com/){:target="_blank"} server for load balancing, a
@@ -446,7 +446,7 @@ sections:
             description: A verbal free recall experiment that incorporates automated speech decoding. Uses
              [quail](https://github.com/contextlab/quail){:target="_blank"} to automatically obtain recall transcripts, 
              onset/offset times, IRTs, confidence scores, and other metadata. Provides a custom 
-             [jsPsych](http://www.jspsych.org/){:target="_blank"} plugin for collecting and saving verbal recall data.
+             [jsPsych](https://www.jspsych.org/){:target="_blank"} plugin for collecting and saving verbal recall data.
             icons:
               - icon: fa-github-square
                 type: fab
@@ -477,7 +477,7 @@ sections:
               - icon: fa-file-pdf
                 type: fas
                 text: JMLR paper
-                url: http://jmlr.org/papers/volume18/17-434/17-434.pdf
+                url: https://jmlr.org/papers/volume18/17-434/17-434.pdf
           - title: umap-learn
             role: core maintainer
             description: Python implementation of 
