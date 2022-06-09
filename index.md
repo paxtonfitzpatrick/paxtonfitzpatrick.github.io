@@ -370,6 +370,18 @@ sections:
       - type: software.html
         title: Things I've created
         items:
+          - title: davos
+            description: Import Python packages even if they aren't installed. Enables the "`smuggle`" statement&#58; 
+             a drop-in replacement for [`import`](https://docs.python.org/3/reference/import.html) that handles missing
+             packages on the fly. Add "*onion comments*" alongside `smuggle` statements specify package versions and 
+             additional options. Can be used to turn [Jupyter](https://jupyter.org/) or 
+             [Colab](https://colab.research.google.com/) notebooks into self-contained, reproducible Python environments 
+             that manage dependencies at runtime.
+            icons:
+              - icon: fa-github-square
+                type: fab
+                text: View on GitHub
+                url: https://github.com/ContextLab/davos
           - title: cluster-tools-dartmouth
             description: A Python toolbox for remotely interacting with Dartmouth's 
              [Discovery](https://rc.dartmouth.edu/index.php/discovery-overview/){:target="_blank"} HPC cluster. 
