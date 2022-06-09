@@ -434,9 +434,9 @@ sections:
                 type: fab
                 text: View on GitHub
                 url: https://github.com/paxtonfitzpatrick/psiturk-experiment-template
-              - icon: fa-sticky-note
+              - icon: fa-chalkboard
                 type: fas
-                text: Slides
+                text: Tutorial slides
                 url: https://github.com/paxtonfitzpatrick/psiturk-experiment-template/tree/master/slides
           - title: autoFR
             description: A verbal free recall experiment that incorporates automated speech decoding. Uses
