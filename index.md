@@ -452,6 +452,10 @@ sections:
                 type: fab
                 text: View on GitHub
                 url: https://github.com/ContextLab/AutoFR
+              - icon: fa-file-pdf
+                type: fas
+                text: BRM paper
+                url: https://link.springer.com/article/10.3758/s13428-018-1037-4
       - type: software.html
         title: Things I contribute to
         items:
