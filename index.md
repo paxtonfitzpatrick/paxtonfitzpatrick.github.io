@@ -371,51 +371,30 @@ sections:
         title: "Things I've made"
         items:
           - title: cluster-tools-dartmouth
-            role: developer, maintainer
-            description: _(in development)_ a Python package for interfacing with a TORQUE-based high-performance
-             computing cluster entirely from your local machine. The `Cluster` class provides full `pathlib`- and 
-             `subprocess`-like interfaces for reading, writing, uploading, and downloading remote files; spawning 
-             remote processes; and creating and managing `Project`s. The `Project` class allows you to interactively 
-             create, submit, and monitor batches of jobs remotely. Write your job script locally in any supported 
-             language, supply its path, and manipulate the `Project`'s attributes to set TORQUE directives, create 
-             a runtime environment, parameterize individual jobs, and more. `clustertools` will automatically 
-             create a remote directory structure, upload your script, write `.pbs` wrapper files for each job, submit 
-             them to the scheduler, and monitor their progress. `clustertools` can also run additional scripts before 
-             job submission and after completion, email you about various changes in job status, and resubmit jobs that 
-             are aborted due to scheduler issues. `clustertools` is specifically geared toward Dartmouth's
-             [Discovery](https://rc.dartmouth.edu/index.php/discovery-overview/){:target="_blank"} cluster, but with 
-             minor tweaks will work with any similar HPC system.
+            description: A Python toolbox for remotely interacting with Dartmouth's 
+             [Discovery](https://rc.dartmouth.edu/index.php/discovery-overview/){:target="_blank"} HPC cluster. 
+             Automatically generates PBS scripts, submits jobs to the scheduler, monitors progress, and compiles results 
+             when finished. Can easily be configured to work with any Moab/TORQUE system.
             icons:
               - icon: fa-github-square
                 type: fab
                 text: View on GitHub
                 url: https://github.com/paxtonfitzpatrick/cluster-tools-dartmouth
           - title: gittracker
-            role: developer, maintainer
-            description: _(in development)_ a Python command-line application for tracking the states of all your local 
-             git repositories in one place. `gittracker` can be run from anywhere on your computer to show 
-             `git status`-like information for each repository it's configured to track. It features simple `git`-like 
-             commands; colorful, intuitive output at multiple verbosity levels; ability to track nested submodules; 
-             and an automatic initial setup.
+            description: A CLI app for tracking the states of all your local Git repositories in one place. Run a single
+             command from any directory to display `git status`-like information for each repo `gittracker` is 
+             configured to track. Supports arbitrarily nested submodules, multiple verbosity levels, and automatic 
+             discovery of local repos.
             icons:
               - icon: fa-github-square
                 type: fab
                 text: View on GitHub
                 url: https://github.com/paxtonfitzpatrick/gittracker
           - title: CDL-docker-stacks
-            role: developer, maintainer
-            description: a collection of hierarchically built Docker images for common neuro/data science applications. 
-             Modeled after 
-             [Jupyter Docker Stacks](https://jupyter-docker-stacks.readthedocs.io/en/latest/){:target="_blank"}, these 
-             images provide lightweight, standardized environments useful for various research purposes. Each image is 
-             available pre-built on [Docker Hub](https://hub.docker.com/u/contextlab){:target="_blank"} to pull and run 
-             as-is or use as a base for custom images. Pre-built images that install Python support `3.6`, `3.7`, and 
-             `3.8` tags for different Python versions 
-             ([miniconda](https://docs.conda.io/en/latest/miniconda.html){:target="_blank"} distribution). Additionally, 
-             `Dockerfile`s for each image are available on GitHub and support `--build-arg`s that allow customizing 
-             features like the Linux distro, Python version, and [MTurk](https://www.mturk.com/){:target="_blank"} 
-             compatibility; installing additional software through package managers including `apt`, `conda`, and `pip`; 
-             and configuring the IP address and port for a Jupyter notebook server (as applicable).
+            description: A collection of optimized, extensible, hierarchically built Docker images for common 
+             neuro/data science tasks. Pre-built images are available on 
+             [Docker Hub](https://hub.docker.com/u/contextlab){:target="_blank"} in Python 3.6, 3.7, and 3.8 
+             variants.
             icons:
               - icon: fa-github-square
                 type: fab
@@ -426,13 +405,11 @@ sections:
                 text: View on Docker Hub
                 url: https://hub.docker.com/u/contextlab
           - title: quail
-            role: co-developer, maintainer
-            description: a Python toolbox for easily processing, analyzing, and visualizing free-recall data from both 
-             list-learning and naturalistic memory experiments. Quail features a simple-yet-powerful data structure for 
-             encoding and recall data (the `Egg`) with convenient methods for performing common analyses, generating 
-             beautiful plots, and filtering data in numerous ways. Quail also integrates with the
-             [Google Cloud Speech API](https://cloud.google.com/speech-to-text/){:target="_blank"} for rapid audio
-             transcription and supports user-defined metrics for analyses in custom feature spaces.
+            description: A Python toolbox for processing, analyzing, and visualizing free recall data. Provides a common
+             interface for working with data from both list-learning and naturalistic memory experiments. 
+             Integrates with the 
+             [Google Cloud Speech-to-Text](https://cloud.google.com/speech-to-text/){:target="_blank"} API for 
+             rapid, on-the-fly audio transcription.
             icons:
               - icon: fa-github-square
                 type: fab
@@ -443,19 +420,15 @@ sections:
                 text: documentation
                 url: https://cdl-quail.readthedocs.io/en/latest/index.html
           - title: psiturk-experiment-template
-            role: developer, maintainer
-            description: An adaptable template for a behavioral experiment, ready to be run locally or deployed online 
-             via [Amazon Mechanical Turk](https://www.mturk.com/){:target="_blank"}. The experiment is implemented 
-             using the [jsPsych](http://www.jspsych.org/){:target="_blank"} library and 
-             [psiTurk](https://psiturk.org/){:target="_blank"} platform, and isolated within a
-             [Docker](https://www.docker.com/){:target="_blank"} application. The Docker application runs four networked
-             containers&#58; a [Debian 9 ("stretch")](https://www.debian.org/releases/stretch/){:target="_blank"} 
-             container to house the experiment code and psiTurk server; an 
-             [nginx](https://www.nginx.com/){:target="_blank"} server for load balancing, 
-             [MySQL](https://www.mysql.com/){:target="_blank"} for saving data; and 
-             [Adminer](https://www.adminer.org/){:target="_blank"} for more easily accessing and downloading data. This 
-             repository accompanied a tutorial on online data collection presented to the 
-             [EPSCoR Attention Consortium](https://www.attentioninthebrain.com/){:target="_blank"}. 
+            description: A template behavioral experiment ready to be deployed locally or online via
+             [Amazon Mechanical Turk](https://www.mturk.com/){:target="_blank"}. Implemented using the
+             [psiTurk](https://psiturk.org/){:target="_blank"} platform and 
+             [jsPsych](http://www.jspsych.org/){:target="_blank"} library, and isolated within four networked
+             [Docker](https://www.docker.com/){:target="_blank"} containers&#58; a 
+             [Debian 9](https://www.debian.org/releases/stretch/){:target="_blank"} container to house the experiment 
+             code and psiTurk server, an [nginx](https://www.nginx.com/){:target="_blank"} server for load balancing, a
+             [MySQL](https://www.mysql.com/){:target="_blank"} database for storing data, and 
+             [Adminer](https://www.adminer.org/){:target="_blank"} for inspecting and downloading data.
             icons:
               - icon: fa-github-square
                 type: fab
@@ -466,15 +439,10 @@ sections:
                 text: Slides
                 url: https://github.com/paxtonfitzpatrick/psiturk-experiment-template/tree/master/slides
           - title: autoFR
-            role: co-developer, maintainer
-            description: a verbal free-recall experiment that incorporates automatic speech-to-text processing by
-             wrapping the [Google Cloud Speech API](https://cloud.google.com/speech-to-text/){:target="_blank"}. The 
-             experiment is implemented using [jsPsych](http://www.jspsych.org/){:target="_blank"} and
-             [psiTurk](https://psiturk.org/){:target="_blank"}, isolated in a
-             [Docker](https://www.docker.com/){:target="_blank"} container for easy deployment both locally and via 
-             [Amazon Mechanical Turk](https://www.mturk.com/mturk/welcome){:target="_blank"}. See the 
-             [README](https://github.com/paxtonfitzpatrick/autoFR/blob/master/README.md){:target="_blank"} for 
-             instructions on how to run the experiment and access the data.
+            description: A verbal free recall experiment that incorporates automated speech decoding. Uses
+             [quail](https://github.com/contextlab/quail){:target="_blank"} to automatically obtain recall transcripts, 
+             onset/offset times, IRTs, confidence scores, and other metadata. Provides a custom 
+             [jsPsych](http://www.jspsych.org/){:target="_blank"} plugin for collecting and saving verbal recall data.
             icons:
               - icon: fa-github-square
                 type: fab
