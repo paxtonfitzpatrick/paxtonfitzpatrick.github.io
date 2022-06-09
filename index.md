@@ -419,6 +419,10 @@ sections:
                 type: fas
                 text: documentation
                 url: https://cdl-quail.readthedocs.io/en/latest/index.html
+              - icon: fa-file-pdf
+                type: fas
+                text: JOSS paper
+                url: https://www.theoj.org/joss-papers/joss.00424/10.21105.joss.00424.pdf
           - title: psiturk-experiment-template
             description: A template behavioral experiment ready to be deployed locally or online via
              [Amazon Mechanical Turk](https://www.mturk.com/){:target="_blank"}. Implemented using the
