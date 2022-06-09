@@ -368,7 +368,7 @@ sections:
      [this website](https://github.com/paxtonfitzpatrick/paxtonfitzpatrick.github.io){:target="_blank"}!
     panes:
       - type: software.html
-        title: "Things I've made"
+        title: Things I've created
         items:
           - title: cluster-tools-dartmouth
             description: A Python toolbox for remotely interacting with Dartmouth's 
@@ -417,7 +417,7 @@ sections:
                 url: https://github.com/contextlab/quail
               - icon: fa-book
                 type: fas
-                text: documentation
+                text: Documentation
                 url: https://cdl-quail.readthedocs.io/en/latest/index.html
               - icon: fa-file-pdf
                 type: fas
@@ -457,22 +457,14 @@ sections:
                 text: BRM paper
                 url: https://link.springer.com/article/10.3758/s13428-018-1037-4
       - type: software.html
-        title: Things I contribute to
+        title: Other things I maintain
         items:
           - title: hypertools
-            role: maintainer
-            description: a Python package for visualizing and manipulating high-dimensional data. HyperTools was built
-             with two goals in mind&#58; quickly visualizing a dataset to gain intuitions about its structure, and
-             meticulously manipulating data to generate beautiful, animated, 3D figures. It features heavily customizable
-             functions for alignment, normalization, clustering, transformations, dimensionality reduction, and
-             plotting, while simultaneously allowing you to plot a corpus of text with a single function call. Hypertools
-             integrates many familiar libraries including [`matplotlib`](https://matplotlib.org/){:target="_blank"}, 
-             [`seaborn`](https://seaborn.pydata.org/){:target="_blank"}, and 
-             [`scikit-learn`](http://scikit-learn.org/){:target="_blank"}, along with custom implementations of 
-             powerful tools such as 
-             [hyperalignment](https://www.cell.com/neuron/fulltext/S0896-6273(11)00781-1?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0896627311007811%3Fshowall%3Dtrue){:target="_blank"} 
-             and the 
-             [Shared Response Model](https://papers.nips.cc/paper/5855-a-reduced-dimension-fmri-shared-response-model.pdf){:target="_blank"}.
+            role: lead maintainer
+            description: A Python package for visualizing and manipulating high-dimensional data. Transform, align, 
+             normalize, interpolate, cluster, reduce, and plot numeric or text data with a single function call or in 
+             individual steps. Save full analysis pipelines including data and trained models as `DataGeometry` 
+             objects for later reuse. Designed to be fully customizable with reasonable defaults.
             icons:
               - icon: fa-github-square
                 type: fab
@@ -480,28 +472,21 @@ sections:
                 url: https://github.com/ContextLab/hypertools
               - icon: fa-book
                 type: fas
-                text: documentation
+                text: Documentation
                 url: https://hypertools.readthedocs.io/en/latest/
               - icon: fa-file-pdf
                 type: fas
                 text: JMLR paper
                 url: http://jmlr.org/papers/volume18/17-434/17-434.pdf
           - title: umap-learn
-            role: co-maintainer
-            description: a Python package implementing the 
-             [Uniform Manifold Approximation and Projection](https://arxiv.org/abs/1802.03426){:target="_blank"} 
-             algorithm. UMAP is a general-purpose dimensionality reduction technique based on ideas from manifold
-             learning and topological data analysis, founded on three assumptions about the data&#58; **1**) the data
-             is uniformly distributed on a Riemannian manifold; **2**) the Riemannian metric is locally constant (or
-             can be approximated as such); and **3**) the manifold is locally connected. Given these assumptions, UMAP 
-             searches for a low-dimensional projection of the data whose fuzzy topological structure best matches
-             that of the data in its original space. UMAP affords a number of notable advantages over similar techniques 
-             (e.g., 
-             [_t_-SNE](https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding){:target="_blank"}) 
-             such as significantly greater speed and scalability, better preservation of the data's global structure, 
-             and the ability to transform new data into an existing embedding space. The Python implementation
-             additionally supports a wide variety of metric and non-metric distance functions, supervised and 
-             semi-supervised dimensionality reduction, and an inverse transformation.
+            role: core maintainer
+            description: Python implementation of 
+             [Uniform Manifold Approximation and Projection](https://arxiv.org/abs/1802.03426){:target="_blank"}.
+             A general-purpose non-linear dimensionality reduction algorithm based on finding a low-dimensional 
+             projection of the data that best preserves its fuzzy topological structure. The Python package also 
+             implements supervised, semi-supervised, aligned, and parametric UMAP variants, an inverse transform, 
+             [densMAP](https://www.biorxiv.org/content/10.1101/2020.05.12.077776v1){:target="_blank"}, and a 
+             plotting library.
             icons:
               - icon: fa-github-square
                 type: fab
@@ -509,7 +494,7 @@ sections:
                 url: https://github.com/lmcinnes/umap
               - icon: fa-book
                 type: fas
-                text: documentation
+                text: Documentation
                 url: https://umap-learn.readthedocs.io/en/latest/
               - icon: fa-file-pdf
                 type: fas
@@ -545,18 +530,29 @@ sections:
                 text: Download PDF
                 url: https://github.com/ContextLab/lab-manual/raw/master/lab_manual.pdf
           - title: CDL-bibliography
-            role: co-maintainer
-            description: a `bibtex` file containing nearly 6,000 references related to psychology, neuroscience, math, 
-             and machine learning. The bibliography can be easily configured as a submodule for reference in LaTeX 
-             documents or added to [Overleaf](https://www.overleaf.com/){:target="_blank"} projects, and is updated
-             regularly. The CDL bibliography is built off of a similar file created by the 
-             [Computational Memory Lab at the University of Pennsylvania](http://memory.psych.upenn.edu/){:target="_blank"} 
-             (PI&#58; [Mike Kahana](https://psychology.sas.upenn.edu/people/michael-kahana){:target="_blank"}).
+            role: core contributor
+            description: A shared `bibtex` file containing references for ~6,000 psychology, neuroscience, math, 
+             and machine learning papers.
             icons:
               - icon: fa-github-square
                 type: fab
                 text: View on GitHub
                 url: https://github.com/contextlab/cdl-bibliography
+          - title: lab-manual
+            role: core maintainer
+            description: Lab manual and associated source code for the 
+             [Contextual Dynamics Lab](https://www.context-lab.com/){:target="_blank"} at 
+             [Dartmouth College](https://home.dartmouth.edu/){:target="_blank"}.
+            icons:
+              - icon: fa-github-square
+                type: fab
+                text: View on GitHub
+                url: https://github.com/contextlab/lab-manual
+              - icon: fa-file-pdf
+                type: fas
+                text: PDF
+                url: https://github.com/ContextLab/lab-manual/blob/master/lab_manual.pdf
+          
         
   - type: contact.html
     section_id: contact
