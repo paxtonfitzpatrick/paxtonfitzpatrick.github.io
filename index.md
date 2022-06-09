@@ -500,35 +500,6 @@ sections:
                 type: fas
                 text: arXiv paper
                 url: https://arxiv.org/pdf/1802.03426.pdf
-          - title: CDL-tutorials
-            role: co-developer, co-maintainer
-            description: a repository of useful, open-source tutorials on various computational tools, frameworks, 
-             Python packages, and concepts frequently used in the 
-             [Contextual Dynamics Lab](http://www.context-lab.com/){:target="_blank"}. Check out the GitHub repo for a
-             full list of available (or soon to be available) tutorials.
-            icons:
-              - icon: fa-github-square
-                type: fab
-                text: View on GitHub
-                url: https://github.com/contextlab/cdl-tutorials
-          - title: lab-manual
-            role: co-developer, maintainer
-            description: lab manual and associated source code for the 
-             [Contextual Dynamics Lab](http://www.context-lab.com/){:target="_blank"} (PI&#58; 
-             [Jeremy Mannning](https://pbs.dartmouth.edu/people/jeremy-rothman-manning){:target="_blank"}). In addition 
-             to lab policies and practices, it contains useful guides for tools and techniques frequently used in the
-             CDL, as well as serves as the lab's on-boarding platform for new members. We've chosen to share it
-             publicly in the hopes that others may find its format, content, or philosophy useful, or offer us
-             feedback on how to improve.
-            icons:
-              - icon: fa-github-square
-                type: fab
-                text: View on GitHub
-                url: https://github.com/contextlab/lab-manual
-              - icon: fa-file-pdf
-                type: fas
-                text: Download PDF
-                url: https://github.com/ContextLab/lab-manual/raw/master/lab_manual.pdf
           - title: CDL-bibliography
             role: core contributor
             description: A shared `bibtex` file containing references for ~6,000 psychology, neuroscience, math, 
