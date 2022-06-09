@@ -372,11 +372,12 @@ sections:
         items:
           - title: davos
             description: Import Python packages even if they aren't installed. Enables the "`smuggle`" statement&#58; 
-             a drop-in replacement for [`import`](https://docs.python.org/3/reference/import.html) that handles missing
-             packages on the fly. Add "*onion comments*" alongside `smuggle` statements specify package versions and 
-             additional options. Can be used to turn [Jupyter](https://jupyter.org/) or 
-             [Colab](https://colab.research.google.com/) notebooks into self-contained, reproducible Python environments 
-             that manage dependencies at runtime.
+             a drop-in replacement for [`import`](https://docs.python.org/3/reference/import.html){:target="_blank"} 
+             that handles missing packages on the fly. Add "*onion comments*" alongside `smuggle` statements specify 
+             package versions and additional options. Can be used to turn 
+             [Jupyter](https://jupyter.org){:target="_blank"} or 
+             [Colab](https://colab.research.google.com/){:target="_blank"} notebooks into self-contained, reproducible 
+             Python environments that manage dependencies at runtime.
             icons:
               - icon: fa-github-square
                 type: fab
