@@ -562,6 +562,23 @@ sections:
                 type: fas
                 text: Nature Comms paper
                 url: https://www.nature.com/articles/s41467-021-25876-x
+          - title: SuperEEG
+            role: core contributor
+            description: Infer activity throughout the brain from a small(ish) 
+             number of electrodes using Gaussian process regression
+            icons:
+              - icon: fa-github-square
+                type: fab
+                text: View on GitHub
+                url: https://github.com/ContextLab/supereeg
+              - icon: fa-book
+                type: fas
+                text: Documentation 
+                url: https://supereeg.readthedocs.io/en/latest
+              - icon: fa-file-pdf
+                type: fas
+                text: Cerebral Cortex paper
+                url: https://academic.oup.com/cercor/article/30/10/5333/5851264
           - title: CDL-bibliography
             role: core contributor
             description: A shared `bibtex` file containing references for ~6,000 psychology, neuroscience, math, 
