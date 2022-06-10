@@ -543,6 +543,25 @@ sections:
                 type: fas
                 text: arXiv paper
                 url: https://arxiv.org/pdf/1802.03426.pdf
+          - title: TimeCorr
+            role: core contributor
+            description: A Python toolbox for exploring higher-order structure in multivariate timeseries data. 
+             Iteratively computes dynamic correlations and reduces dimensionality to approximate higher-order dynamic 
+             correlations in a computationally tractable way. Also supports computing various dynamic graph theoretic 
+             measures.
+            icons:
+              - icon: fa-github-square
+                type: fab
+                text: View on GitHub
+                url: https://github.com/ContextLab/timecorr
+              - icon: fa-book
+                type: fas
+                text: Documentation 
+                url: https://timecorr.readthedocs.io/en/latest
+              - icon: fa-file-pdf
+                type: fas
+                text: Nature Comms paper
+                url: https://www.nature.com/articles/s41467-021-25876-x
           - title: CDL-bibliography
             role: core contributor
             description: A shared `bibtex` file containing references for ~6,000 psychology, neuroscience, math, 
