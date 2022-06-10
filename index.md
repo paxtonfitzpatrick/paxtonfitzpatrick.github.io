@@ -38,9 +38,9 @@ sections:
     panes:
       - type: bio-timeline.html
         title: Bio
-        before_text: I graduated from [Dartmouth College](https://home.dartmouth.edu/){:target="_blank"} in 2019.
+        before_text: I graduated from [Dartmouth College](https://home.dartmouth.edu){:target="_blank"} in 2019.
          Currently, I'm a Lab Manager and Research Assistant in the
-         [Contextual Dynamics Lab](https://context-lab.com/){:target="_blank"}.
+         [Contextual Dynamics Lab](https://context-lab.com){:target="_blank"}.
         bio_paragraphs:
           - text: I've always been fascinated by how and why people think the way they do. Growing up, I lived in
              seven different places before settling in Camp Hill, Pennsylvania. Through constantly meeting new people, 
@@ -49,13 +49,13 @@ sections:
             image: assets/img/bio/map-pins.png
           - text: These interests led me to pursue a degree in Neuroscience at Dartmouth College, and quickly fall in
              love with research. I began working for the
-             [Dartmouth Brain Imaging Center](https://www.dartmouth.edu/dbic/){:target="_blank"}, collecting and
+             [Dartmouth Brain Imaging Center](https://www.dartmouth.edu/dbic){:target="_blank"}, collecting and
              processing fMRI data, as well as
-             [Bregman Media Labs](http://bregman.dartmouth.edu/){:target="_blank"}, where I worked with
+             [Bregman Media Labs](http://bregman.dartmouth.edu){:target="_blank"}, where I worked with
              [Dr. Michael Casey](https://faculty-directory.dartmouth.edu/michael-casey){:target="_blank"} to create the
              first EEG sonification-based musical ensemble.
             image: assets/img/bio/eeg-headset.jpeg
-          - text: I then joined the [Contextual Dynamics Lab](https://www.context-lab.com/){:target="_blank"} 
+          - text: I then joined the [Contextual Dynamics Lab](https://www.context-lab.com){:target="_blank"} 
              (PI&#58; [Dr. Jeremy Manning](https://pbs.dartmouth.edu/people/jeremy-rothman-manning){:target="_blank"})
              and discovered passions for computational memory research and software development. I developed a love
              for mentoring others, and after my junior year of college I began managing the CDL and serving as a
@@ -376,7 +376,7 @@ sections:
              that handles missing packages on the fly. Add "*onion comments*" alongside `smuggle` statements specify 
              package versions and additional options. Can be used to turn 
              [Jupyter](https://jupyter.org){:target="_blank"} or 
-             [Colab](https://colab.research.google.com/){:target="_blank"} notebooks into self-contained, reproducible 
+             [Colab](https://colab.research.google.com){:target="_blank"} notebooks into self-contained, reproducible 
              Python environments that manage dependencies at runtime.
             icons:
               - icon: fa-github-square
@@ -385,7 +385,7 @@ sections:
                 url: https://github.com/ContextLab/davos
           - title: cluster-tools-dartmouth
             description: A Python toolbox for remotely interacting with Dartmouth's 
-             [Discovery](https://rc.dartmouth.edu/index.php/discovery-overview/){:target="_blank"} HPC cluster. 
+             [Discovery](https://rc.dartmouth.edu/index.php/discovery-overview){:target="_blank"} HPC cluster. 
              Automatically generates PBS scripts, submits jobs to the scheduler, monitors progress, and compiles results 
              when finished. Can easily be configured to work with any Moab/TORQUE system.
             icons:
@@ -421,7 +421,7 @@ sections:
             description: A Python toolbox for processing, analyzing, and visualizing free recall data. Provides a common
              interface for working with data from both list-learning and naturalistic memory experiments. 
              Integrates with the 
-             [Google Cloud Speech-to-Text](https://cloud.google.com/speech-to-text/){:target="_blank"} API for 
+             [Google Cloud Speech-to-Text](https://cloud.google.com/speech-to-text){:target="_blank"} API for 
              rapid, on-the-fly audio transcription.
             icons:
               - icon: fa-github-square
@@ -438,14 +438,14 @@ sections:
                 url: https://www.theoj.org/joss-papers/joss.00424/10.21105.joss.00424.pdf
           - title: psiturk-experiment-template
             description: A template behavioral experiment ready to be deployed locally or online via
-             [Amazon Mechanical Turk](https://www.mturk.com/){:target="_blank"}. Implemented using the
-             [psiTurk](https://psiturk.org/){:target="_blank"} platform and 
-             [jsPsych](https://www.jspsych.org/){:target="_blank"} library, and isolated within four networked
-             [Docker](https://www.docker.com/){:target="_blank"} containers&#58; a 
-             [Debian 9](https://www.debian.org/releases/stretch/){:target="_blank"} container to house the experiment 
-             code and psiTurk server, an [nginx](https://www.nginx.com/){:target="_blank"} server for load balancing, a
-             [MySQL](https://www.mysql.com/){:target="_blank"} database for storing data, and 
-             [Adminer](https://www.adminer.org/){:target="_blank"} for inspecting and downloading data.
+             [Amazon Mechanical Turk](https://www.mturk.com){:target="_blank"}. Implemented using the
+             [psiTurk](https://psiturk.org){:target="_blank"} platform and 
+             [jsPsych](https://www.jspsych.org){:target="_blank"} library, and isolated within four networked
+             [Docker](https://www.docker.com){:target="_blank"} containers&#58; a 
+             [Debian 9](https://www.debian.org/releases/stretch){:target="_blank"} container to house the experiment 
+             code and psiTurk server, an [nginx](https://www.nginx.com){:target="_blank"} server for load balancing, a
+             [MySQL](https://www.mysql.com){:target="_blank"} database for storing data, and 
+             [Adminer](https://www.adminer.org){:target="_blank"} for inspecting and downloading data.
             icons:
               - icon: fa-github-square
                 type: fab
@@ -459,7 +459,7 @@ sections:
             description: A verbal free recall experiment that incorporates automated speech decoding. Uses
              [quail](https://github.com/contextlab/quail){:target="_blank"} to automatically obtain recall transcripts, 
              onset/offset times, IRTs, confidence scores, and other metadata. Provides a custom 
-             [jsPsych](https://www.jspsych.org/){:target="_blank"} plugin for collecting and saving verbal recall data.
+             [jsPsych](https://www.jspsych.org){:target="_blank"} plugin for collecting and saving verbal recall data.
             icons:
               - icon: fa-github-square
                 type: fab
@@ -525,8 +525,8 @@ sections:
           - title: lab-manual
             role: core maintainer
             description: Lab manual and associated source code for the 
-             [Contextual Dynamics Lab](https://www.context-lab.com/){:target="_blank"} at 
-             [Dartmouth College](https://home.dartmouth.edu/){:target="_blank"}.
+             [Contextual Dynamics Lab](https://www.context-lab.com){:target="_blank"} at 
+             [Dartmouth College](https://home.dartmouth.edu){:target="_blank"}.
             icons:
               - icon: fa-github-square
                 type: fab
