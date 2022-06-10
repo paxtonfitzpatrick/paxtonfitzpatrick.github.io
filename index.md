@@ -383,6 +383,23 @@ sections:
                 type: fab
                 text: View on GitHub
                 url: https://github.com/ContextLab/davos
+          - title: docker-tutorial
+            description: Walkthroughs and template code for running experiments and analyzing data from within 
+             [Docker](https://www.docker.com){:target="_blank"} containers. Pre-built images are available on 
+             [Docker Hub](https://hub.docker.com){:target="_blank"}.
+            icons:
+              - icon: fa-github-square
+                type: fab
+                text: View on GitHub
+                url: https://github.com/paxtonfitzpatrick/docker-tutorial
+              - icon: fa-docker
+                type: fab
+                text: View on Docker Hub
+                url: https://hub.docker.com/repository/docker/paxtonfitzpatrick/tutorial-image
+              - icon: fa-chalkboard
+                type: fas
+                text: Tutorial slides
+                url: https://github.com/paxtonfitzpatrick/docker-tutorial/blob/main/slides/docker-tutorial.pdf
           - title: cluster-tools-dartmouth
             description: A Python toolbox for remotely interacting with Dartmouth's 
              [Discovery](https://rc.dartmouth.edu/index.php/discovery-overview){:target="_blank"} HPC cluster. 
