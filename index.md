@@ -383,6 +383,10 @@ sections:
                 type: fab
                 text: View on GitHub
                 url: https://github.com/ContextLab/davos
+              - icon: fa-book
+                type: fas
+                text: Documentation
+                url: https://github.com/ContextLab/davos#readme
           - title: docker-tutorial
             description: Walkthroughs and template code for running experiments and analyzing data from within 
              [Docker](https://www.docker.com){:target="_blank"} containers. Pre-built images are available on 
@@ -409,6 +413,10 @@ sections:
                 type: fab
                 text: View on GitHub
                 url: https://github.com/paxtonfitzpatrick/particle-image
+              - icon: fa-book
+                type: fas
+                text: Documentation
+                url: https://github.com/paxtonfitzpatrick/particle-image#readme
               - icon: fa-codepen
                 type: fab
                 text: CodePen demo
@@ -428,6 +436,10 @@ sections:
                 type: fab
                 text: View on GitHub
                 url: https://github.com/paxtonfitzpatrick/psiturk-experiment-template
+              - icon: fa-book
+                type: fas
+                text: Documentation
+                url: https://github.com/paxtonfitzpatrick/psiturk-experiment-template#readme
               - icon: fa-chalkboard
                 type: fas
                 text: Tutorial slides
@@ -466,6 +478,10 @@ sections:
                 type: fab
                 text: View on GitHub
                 url: https://github.com/paxtonfitzpatrick/gittracker
+              - icon: fa-video
+                type: fas
+                text: Demo video
+                url: https://user-images.githubusercontent.com/26118297/124789467-50a2fc80-df18-11eb-9454-01c0341bf50e.gif
           - title: quail
             description: A Python toolbox for processing, analyzing, and visualizing free recall data. Provides a common
              interface for working with data from both list-learning and naturalistic memory experiments. 
@@ -495,6 +511,10 @@ sections:
                 type: fab
                 text: View on GitHub
                 url: https://github.com/ContextLab/AutoFR
+              - icon: fa-book
+                type: fas
+                text: Documentation
+                url: https://github.com/ContextLab/AutoFR#readme
               - icon: fa-file-pdf
                 type: fas
                 text: BRM paper
