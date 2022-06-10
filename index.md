@@ -400,59 +400,19 @@ sections:
                 type: fas
                 text: Tutorial slides
                 url: https://github.com/paxtonfitzpatrick/docker-tutorial/blob/main/slides/docker-tutorial.pdf
-          - title: cluster-tools-dartmouth
-            description: A Python toolbox for remotely interacting with Dartmouth's 
-             [Discovery](https://rc.dartmouth.edu/index.php/discovery-overview){:target="_blank"} HPC cluster. 
-             Automatically generates PBS scripts, submits jobs to the scheduler, monitors progress, and compiles results 
-             when finished. Can easily be configured to work with any Moab/TORQUE system.
+          - title: particle-image
+            description: Animate a particlized image in vanilla JavaScript. Turn an image from the web into an animated 
+             swarm of interactive particles. Set parameters to control particle color, size, density, speed, 
+             hover/click/touch interactions, and more. 
             icons:
               - icon: fa-github-square
                 type: fab
                 text: View on GitHub
-                url: https://github.com/paxtonfitzpatrick/cluster-tools-dartmouth
-          - title: gittracker
-            description: A CLI app for tracking the states of all your local Git repositories in one place. Run a single
-             command from any directory to display `git status`-like information for each repo `gittracker` is 
-             configured to track. Supports arbitrarily nested submodules, multiple verbosity levels, and automatic 
-             discovery of local repos.
-            icons:
-              - icon: fa-github-square
+                url: https://github.com/paxtonfitzpatrick/particle-image
+              - icon: fa-codepen
                 type: fab
-                text: View on GitHub
-                url: https://github.com/paxtonfitzpatrick/gittracker
-          - title: CDL-docker-stacks
-            description: A collection of optimized, extensible, hierarchically built Docker images for common 
-             neuro/data science tasks. Pre-built images are available on 
-             [Docker Hub](https://hub.docker.com/u/contextlab){:target="_blank"} in Python 3.6, 3.7, and 3.8 
-             variants.
-            icons:
-              - icon: fa-github-square
-                type: fab
-                text: View on GitHub
-                url: https://github.com/ContextLab/CDL-docker-stacks
-              - icon: fa-docker
-                type: fab
-                text: View on Docker Hub
-                url: https://hub.docker.com/u/contextlab
-          - title: quail
-            description: A Python toolbox for processing, analyzing, and visualizing free recall data. Provides a common
-             interface for working with data from both list-learning and naturalistic memory experiments. 
-             Integrates with the 
-             [Google Cloud Speech-to-Text](https://cloud.google.com/speech-to-text){:target="_blank"} API for 
-             rapid, on-the-fly audio transcription.
-            icons:
-              - icon: fa-github-square
-                type: fab
-                text: View on GitHub
-                url: https://github.com/contextlab/quail
-              - icon: fa-book
-                type: fas
-                text: Documentation
-                url: https://cdl-quail.readthedocs.io/en/latest/index.html
-              - icon: fa-file-pdf
-                type: fas
-                text: JOSS paper
-                url: https://www.theoj.org/joss-papers/joss.00424/10.21105.joss.00424.pdf
+                text: CodePen demo
+                url: https://codepen.io/paxtonfitzpatrick/pen/GRoMQgb
           - title: psiturk-experiment-template
             description: A template behavioral experiment ready to be deployed locally or online via
              [Amazon Mechanical Turk](https://www.mturk.com){:target="_blank"}. Implemented using the
