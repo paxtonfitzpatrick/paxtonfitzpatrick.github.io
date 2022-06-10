@@ -431,7 +431,60 @@ sections:
               - icon: fa-chalkboard
                 type: fas
                 text: Tutorial slides
-                url: https://github.com/paxtonfitzpatrick/psiturk-experiment-template/tree/master/slides
+                url: https://github.com/paxtonfitzpatrick/psiturk-experiment-template/blob/master/slides/slides.pdf
+          - title: CDL-docker-stacks
+            description: A collection of optimized, extensible, hierarchically built Docker images for common 
+             neuro/data science tasks. Pre-built images are available on 
+             [Docker Hub](https://hub.docker.com){:target="_blank"} in Python 3.6, 3.7, and 3.8 
+             variants.
+            icons:
+              - icon: fa-github-square
+                type: fab
+                text: View on GitHub
+                url: https://github.com/ContextLab/CDL-docker-stacks
+              - icon: fa-docker
+                type: fab
+                text: View on Docker Hub
+                url: https://hub.docker.com/u/contextlab
+          - title: cluster-tools-dartmouth
+            description: A Python toolbox for remotely interacting with Dartmouth's 
+             [Discovery](https://rc.dartmouth.edu/index.php/discovery-overview){:target="_blank"} HPC cluster. 
+             Automatically generates PBS scripts, submits jobs to the scheduler, monitors progress, and compiles results 
+             when finished. Can easily be configured to work with any Moab/TORQUE system.
+            icons:
+              - icon: fa-github-square
+                type: fab
+                text: View on GitHub
+                url: https://github.com/paxtonfitzpatrick/cluster-tools-dartmouth
+          - title: gittracker
+            description: A CLI app for tracking the states of all your local Git repositories in one place. Run a single
+             command from any directory to display `git status`-like information for each repo `gittracker` is 
+             configured to track. Supports arbitrarily nested submodules, multiple verbosity levels, and automatic 
+             discovery of local repos.
+            icons:
+              - icon: fa-github-square
+                type: fab
+                text: View on GitHub
+                url: https://github.com/paxtonfitzpatrick/gittracker
+          - title: quail
+            description: A Python toolbox for processing, analyzing, and visualizing free recall data. Provides a common
+             interface for working with data from both list-learning and naturalistic memory experiments. 
+             Integrates with the 
+             [Google Cloud Speech-to-Text](https://cloud.google.com/speech-to-text){:target="_blank"} API for 
+             rapid, on-the-fly audio transcription.
+            icons:
+              - icon: fa-github-square
+                type: fab
+                text: View on GitHub
+                url: https://github.com/contextlab/quail
+              - icon: fa-book
+                type: fas
+                text: Documentation
+                url: https://cdl-quail.readthedocs.io/en/latest/index.html
+              - icon: fa-file-pdf
+                type: fas
+                text: JOSS paper
+                url: https://www.theoj.org/joss-papers/joss.00424/10.21105.joss.00424.pdf
           - title: autoFR
             description: A verbal free recall experiment that incorporates automated speech decoding. Uses
              [quail](https://github.com/contextlab/quail){:target="_blank"} to automatically obtain recall transcripts, 
