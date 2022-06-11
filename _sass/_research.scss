@@ -1,6 +1,13 @@
 .publication-cards {
   max-height: 40em;
   overflow-y: auto;
+
+  .footnote {
+    font-size: 0.9em;
+    // rem instead of em because creative.scss uses rem for all p's
+    margin-top: -1rem;
+    padding-left: 1rem;
+  }
 }
 
 .publication-cards::-webkit-scrollbar {
