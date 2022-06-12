@@ -2,12 +2,10 @@
   {% for item in section.items %}
     {% if include.filter == "all" or include.filter == item.type %}
       <div class="publication row">
-        <div class="col-auto col-sm-4">
-          <div class="research-img">
-            <img src="{{ item.image | relative_url }}" alt="X">
-          </div>
+        <div class="col-sm-3">
+          <img src="{{ item.image | relative_url }}" alt="X">
         </div>
-        <div class="col-auto col-sm-8 text-left">
+        <div class="col-sm-9 text-left">
           <h4>{{ item.title | markdownify }}</h4>
           {{ item.text | markdownify }}
           <div class="publication-icons mt-n2">
