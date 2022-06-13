@@ -21,6 +21,7 @@ google_analytics:
   enabled: true
 
 # Build settings
+theme: null
 safe: true
 markdown: kramdown
 sass:
