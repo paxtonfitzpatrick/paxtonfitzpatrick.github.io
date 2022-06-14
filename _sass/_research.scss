@@ -12,6 +12,10 @@
 
   max-height: 40em;
   overflow-y: auto;
+  // account for width of vertical scrollbar to avoid horizontal scrollbar and
+  // keep text from being awkwardly close to it (unlike overflow-x: hidden;).
+  // 15px comes from -15px margin of .row children
+  padding-right: 15px;
 
   .footnote {
     font-size: 0.9em;
