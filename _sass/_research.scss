@@ -1,4 +1,15 @@
 .publication-cards {
+  // Note: "@import" is deprecated in favor of "@use" and slated for removal in
+  // 2022. But since Ruby sass/sassc/LibSass are all EOL or deprecated, it's
+  // only available in Dart Sass, and Dart Sass can't be used with GitHub pages
+  // builds yet (without some more complex workarounds) because the github-pages
+  // gem still depends on an old version of the jekyll-sass-converter gem that
+  // didn't support Dart Sass
+
+  // once that's all fixed, this will work (also see _mixins.scss):
+  // @use mixins.scrollbar($size: 8px, $fg-color: $bg-primary-hfa, $bg-color: transparent);
+  @include scrollbar(8px, $bg-primary-hfa, transparent);
+
   max-height: 40em;
   overflow-y: auto;
 
@@ -8,16 +19,6 @@
     margin-top: -1rem;
     padding-left: 1rem;
   }
-}
-
-.publication-cards::-webkit-scrollbar {
-  -webkit-appearance: none;
-  width: 8px;
-}
-
-.publication-cards::-webkit-scrollbar-thumb {
-  border-radius: 8px;
-  background-color: $bg-primary-hfa;
 }
 
 .publication.row {
