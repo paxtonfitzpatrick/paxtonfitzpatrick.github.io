@@ -1,5 +1,5 @@
 // consistent scrollbars across browsers/user agents
-@mixin scrollbar(
+@mixin styled-scrollbar(
   $size,      // width for vertical scrollbars, height for horizontal scrollbars
   $fg-color,  // scrollbar thumb color
   $bg-color   // scrollbar track color

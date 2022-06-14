@@ -11,7 +11,7 @@
 
   // once that's all fixed, this will work (also see _mixins.scss):
   // @use mixins.scrollbar($size: 8px, $fg-color: $bg-primary-hfa, $bg-color: transparent);
-  @include scrollbar(8px, $bg-primary-hfa, transparent);
+  @include styled-scrollbar(8px, $bg-primary-hfa, transparent);
 
   max-height: 40em;
   overflow-y: auto;
