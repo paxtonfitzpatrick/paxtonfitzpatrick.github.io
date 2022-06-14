@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 
-# programmatically get version of github-pages gem (and all dependencies) used 
+# programmatically get version of github-pages gem (and all dependencies) used
 # in deployment so local dev environment always matches production environment
+# current versions: https://pages.github.com/versions
 require 'json'
 require 'open-uri'
 versions = JSON.parse((URI('https://pages.github.com/versions.json').open).read)
