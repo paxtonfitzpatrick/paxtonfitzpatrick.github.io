@@ -1,4 +1,6 @@
 .header-icons {
+  @include fade-in($duration: $header-fade-in-duration, $delay: 3.25s, $timing-func: $header-fade-in-timing);
+
   display: inline-block;
   justify-content: center;
   text-align: center;
