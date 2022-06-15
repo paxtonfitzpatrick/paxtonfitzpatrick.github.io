@@ -160,6 +160,8 @@ sections:
                 caption: Conda
               - image: assets/img/skills/pytest.png
                 caption: pytest
+              - image: assets/img/skills/selenium.png
+                caption: Selenium WebDriver
               - image: assets/img/skills/travis.png
                 caption: Travis CI
               - image: assets/img/skills/github-actions.png

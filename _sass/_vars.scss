@@ -5,7 +5,7 @@ $fg-primary: #fff;
 $fg-primary-hfa: #c4c2c2;
 $fg-primary-link: #eb38e8;
 $fg-primary-link-hfa: #ff66fc;
-$code-primary: #C18401;
+$code-primary: #c18401;
 $muted-primary: #aeb2b5;
 
 // secondary section theme
@@ -21,7 +21,8 @@ $muted-secondary: #6c757d;
 // header style
 $header-bg: $bg-primary;
 $header-fg: $fg-primary;
-$fade-time: 3s;
+$header-fade-in-duration: 3s;
+$header-fade-in-timing: ease-in;
 
 // timeline style
 $tl-vertical-padding: 10px;
