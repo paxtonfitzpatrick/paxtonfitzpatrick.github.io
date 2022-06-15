@@ -1,0 +1,19 @@
+{
+  "stylelint": {
+    "extends": [
+      "stylelint-config-standard-scss",
+      "stylelint-config-sass-guidelines"
+    ]
+  },
+  "devDependencies": {
+    "install": "^0.13.0",
+    "npm": "^8.12.1",
+    "postcss": "^8.4.14",
+    "stylelint": "^14.8.5",
+    "stylelint-config-sass-guidelines": "^9.0.1",
+    "stylelint-config-standard": "^25.0.0",
+    "stylelint-config-standard-scss": "^4.0.0",
+    "stylelint-order": "^5.0.0",
+    "terser": "^5.14.1"
+  }
+}
