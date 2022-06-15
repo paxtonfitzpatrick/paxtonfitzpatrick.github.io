@@ -12,6 +12,8 @@
   scrollbar-color: $fg-color $bg-color;
 
   // webkit/blink (Chrome, Safari, Edge, Opera)
+  //   Note: starting with iOS 14, iOS Safari no longer supports custom CSS
+  //   scrollbars. Desktop Safari still does as of v15.2.
   &::-webkit-scrollbar {
     appearance: none;
     // needed for older Safari versions
