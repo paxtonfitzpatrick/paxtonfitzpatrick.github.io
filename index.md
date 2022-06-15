@@ -33,14 +33,15 @@ sections:
     section_id: about
     background_style: bg-secondary
     title: About me
-    before_text: I build computational models of learning and memory, and create software tools for neural and
-     behavioral data analysis.
+    before_text: >
+     I build computational models of human learning and memory, and create software tools for research, data science, 
+     and education.<br/><br/>I'm currently a Ph.D. student in cognitive neuroscience at 
+     [Dartmouth College](https://home.dartmouth.edu){:target="_blank"}, working with 
+     [Dr. Jeremy Manning](https://pbs.dartmouth.edu/people/jeremy-rothman-manning){:target="_blank"} and 
+     [Dr. Luke Chang](https://pbs.dartmouth.edu/people/luke-j-chang-0){:target="_blank"}.
     panes:
       - type: bio-timeline.html
         title: Bio
-        before_text: I graduated from [Dartmouth College](https://home.dartmouth.edu){:target="_blank"} in 2019.
-         Currently, I'm a Lab Manager and Research Assistant in the
-         [Contextual Dynamics Lab](https://context-lab.com){:target="_blank"}.
         bio_paragraphs:
           - text: I've always been fascinated by how and why people think the way they do. Growing up, I lived in
              seven different places before settling in Camp Hill, Pennsylvania. Through constantly meeting new people, 
