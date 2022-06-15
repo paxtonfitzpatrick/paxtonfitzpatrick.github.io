@@ -6,8 +6,8 @@ layout: base
   <div id="particle-image" data-params-src=" {{ 'assets/js/params.json' | relative_url }}"></div>
   <div class="row ml-0 mr-0 align-items-center justify-content-center text-center" id="header-content">
     <div class="col-auto">
-      <h1 class="text-uppercase text-white font-weight-bold fade-in">{{ page.header.title }}</h1>
-      <div class="header-icons fade-in">
+      <h1 class="text-uppercase text-white font-weight-bold">{{ page.header.title }}</h1>
+      <div class="header-icons">
         {% for icon in page.header.icons %}
           {% assign href = site[icon.site_data] %}
           {% if icon.title == "Email" %}
