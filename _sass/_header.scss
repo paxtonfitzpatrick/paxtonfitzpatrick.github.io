@@ -1,35 +1,3 @@
-@keyframes fadeIn { from {opacity:0; } to { opacity:1; } }
-@-webkit-keyframes fadeIn { from {opacity:0; } to { opacity:1; } }
-
-
-@mixin anim($anim, $anim-timing-function) {
-  animation: $anim, $anim-timing-function;
-  -webkit-animation: $anim, $anim-timing-function;
-  -moz-animation: $anim, $anim-timing-function;
-  -o-animation: $anim, $anim-timing-function;
-}
-
-@mixin anim-duration($duration) {
-  animation-duration: $duration;
-  -webkit-animation-duration: $duration;
-  -moz-animation-duration: $duration;
-  -o-animation-duration: $duration;
-}
-
-@mixin anim-fill-mode($fill-mode) {
-  animation-fill-mode: $fill-mode;
-  -webkit-animation-fill-mode: $fill-mode;
-  -moz-animation-fill-mode: $fill-mode;
-  -o-animation-fill-mode: $fill-mode;
-}
-
-@mixin anim-delay($delay) {
-  animation-delay: $delay;
-  -webkit-animation-delay: $delay;
-  -moz-animation-delay: $delay;
-  -o-animation-delay: $delay;
-}
-
 header {
   // 100% instead of 100vh to account for iOS safari tab bar bug
   height: 100%;
@@ -42,21 +10,9 @@ header {
     bottom: min(10%, 30px);
 
     h1 {
-      @include anim-delay(2.5s);
+      @include fade-in($duration: $header-fade-in-duration, $delay: 2.5s, $timing-func: $header-fade-in-timing);
 
       font-size: min(5vw, 60px);
     }
   }
-}
-
-.fade-in {
-  opacity: 0;
-  opacity: 1 \9;  // don't animate on IE <= 9
-  @include anim(fadeIn, ease-in);
-  @include anim-fill-mode(forwards);
-  @include anim-duration($fade-time);
-}
-
-.header-icons {
-  @include anim-delay(3.25s);
 }
