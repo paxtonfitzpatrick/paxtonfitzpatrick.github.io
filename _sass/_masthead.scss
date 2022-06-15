@@ -34,23 +34,22 @@
 header.masthead {
   // 100% instead of 100vh to account for iOS safari tab bar bug
   height: 100%;
-  position: relative;
-  background: none;
-}
-header.masthead .row {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: min(10%, 30px);
-}
+  min-height: 40rem;
+  // position: relative;
+  // background: none;
 
-header.masthead .row h1 {
-  font-size: min(5vw, 60px);
-  @include anim-delay(2.5s);
-}
+  .row {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: min(10%, 30px);
 
-header.masthead .row .header-icons {
-  @include anim-delay(3.25s);
+    h1 {
+      @include anim-delay(2.5s);
+
+      font-size: min(5vw, 60px);
+    }
+  }
 }
 
 .fade-in {
@@ -59,4 +58,8 @@ header.masthead .row .header-icons {
   @include anim(fadeIn, ease-in);
   @include anim-fill-mode(forwards);
   @include anim-duration($fade-time);
+}
+
+.header-icons {
+  @include anim-delay(3.25s);
 }
