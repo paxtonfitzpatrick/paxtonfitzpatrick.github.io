@@ -434,6 +434,7 @@ window.cancelRequestAnimFrame = (function() {
 window.pImgDom = [];
 
 window.particleImageDisplay = function(tag_id) {
+  "use strict";
   // get target element by ID, check for existing canvases
   const pImage_el = document.getElementById(tag_id),
       canvas_classname = 'particle-image-canvas-el',

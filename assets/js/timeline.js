@@ -1,4 +1,5 @@
 const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
+  "use strict";
   this.timelineObj = {
     canvas: {
       el: canvas,
@@ -292,6 +293,7 @@ const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
 window.timelineDom = [];
 
 window.timelineDisplay = function(tag_id) {
+  "use strict";
   // get target element by ID, add a full-size canvas as a child
   const timeline_el = document.getElementById(tag_id),
     canvas_el = document.createElement('canvas');
