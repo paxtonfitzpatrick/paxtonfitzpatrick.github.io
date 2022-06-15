@@ -32,8 +32,10 @@
 }
 
 header.masthead {
-  background: none;
+  // 100% instead of 100vh to account for iOS safari tab bar bug
+  height: 100%;
   position: relative;
+  background: none;
 }
 header.masthead .row {
   position: absolute;
