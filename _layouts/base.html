@@ -41,7 +41,7 @@
   {% endif %}
 </head>
 
-<body id="page-top" class="{% if page.layout == site.landing_template %}landing {% endif %}">
+<body id="page-top">
   {% include nav.html    section=section site=site page=page %}
   {{ content }}
   {% include footer.html section=section site=site page=page %}
