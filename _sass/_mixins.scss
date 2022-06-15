@@ -16,7 +16,7 @@
   $timing-func: ease  // animation-timing-function (various keywords/functions)
 ) {
   // element needs to start with opacity 0 so it doesn't appear during delay period
-  opacity: 0 !important;
+  opacity: 0;
   animation: fade-in-anim $duration $timing-func $delay forwards;
   // stylelint-disable-next-line property-no-vendor-prefix
   -webkit-animation: fade-in-anim $duration $timing-func $delay forwards;
