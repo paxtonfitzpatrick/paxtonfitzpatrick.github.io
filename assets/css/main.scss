@@ -4,6 +4,8 @@
 @charset "utf-8";
 
 // Import partials from `sass_dir` (defaults to `_sass`)
+// TODO: change to @use once github-pages supports it (or switching to custom
+//  deploy action)
 @import
         "vars",
         "style",
