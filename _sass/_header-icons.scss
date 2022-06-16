@@ -7,7 +7,7 @@
 
   .icon {
     display: inline-block;
-    font-size: 2em;
+    font-size: 4vw;
     text-align: center;
     vertical-align: middle;
     line-height: 2em;
@@ -16,12 +16,12 @@
     height: 2em;
     border: 2px solid $header-fg;
     border-radius: 50%;
-    margin: 0.5em;
+    margin: 1vw;
     transition: all 0.7s;
 
-    @media (max-width: 992px) {
-      font-size: 4vw;
-      margin: 1vw;
+    @media (min-width: 992px) {
+      font-size: 2em;
+      margin: 0.5em;
     }
 
     &.custom > svg {
