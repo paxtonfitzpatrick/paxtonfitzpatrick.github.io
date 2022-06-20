@@ -12,7 +12,7 @@ header {
     h1 {
       @include fade-in($duration: $header-fade-in-duration, $delay: 2.5s, $timing-func: $header-fade-in-timing);
 
-      font-size: min(5vw, 60px);
+      font-size: min(8vw, 60px);
     }
   }
 }
