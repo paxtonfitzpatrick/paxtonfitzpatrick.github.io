@@ -17,7 +17,7 @@
     border: 2px solid $header-fg;
     border-radius: 50%;
     margin: 1vw;
-    transition: all 0.7s;
+    transition: color 0.7s, background 0.7s;
 
     @media (min-width: 768px) {
       font-size: 2em;
