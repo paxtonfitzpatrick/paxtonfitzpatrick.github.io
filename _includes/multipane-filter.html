@@ -16,8 +16,9 @@
             <a class="nav-link active" data-toggle="pill" href="#{{ section.section_id }}_all">All</a>
           </li>
           {% for pane in section.panes %}
+            {% assign href = pane.title | downcase | replace: ' ', '_' | replace: "'", 'x' %}
             <li class="nav-item">
-              <a class="nav-link" data-toggle="pill" href="#{{ pane.title | downcase | replace: ' ', '_' }}">
+              <a class="nav-link" data-toggle="pill" href="#{{ href }}">
                 {{ pane.title }}
               </a>
             </li>
