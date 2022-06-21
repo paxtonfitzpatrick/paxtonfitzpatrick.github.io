@@ -2,16 +2,16 @@
   <div class="container">
     <div class="row">
       <div class="col-12 text-center">
-        <h1 class="mt-0">{{ section.title }}</h1>
+        <h1>{{ section.title }}</h1>
         <hr class="divider my-4">
         {% if section.before_text %}
-          <h5>{{ section.before_text | newline_to_br | markdownify | remove: '<p>' | remove: '</p>' }}</h5>
+          <h5 class="mb-0">{{ section.before_text | newline_to_br | markdownify | remove: '<p>' | remove: '</p>' }}</h5>
         {% endif %}
       </div>
     </div>
     <div class="row">
       <div class="col-12">
-        <ul class="nav nav-pills justify-content-center mb-4" role="tablist">
+        <ul class="nav nav-pills justify-content-center my-4" role="tablist">
           <li class="nav-item">
             <a class="nav-link active" data-toggle="pill" href="#{{ section.section_id }}_all">All</a>
           </li>
