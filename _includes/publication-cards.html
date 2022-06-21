@@ -6,7 +6,7 @@
           <img src="{{ item.image | relative_url }}" alt="X">
         </div>
         <div class="col-sm-9 text-left">
-          <h4>{{ item.title | markdownify }}</h4>
+          <h4>{{ item.title | markdownify | remove: '<p>' | remove: '</p>' }}</h4>
           {{ item.text | markdownify }}
           <div class="publication-icons mt-n2">
             {% if item.pdf_url %}

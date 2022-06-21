@@ -9,7 +9,7 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <blockquote><samp>{{ item.description | markdownify }}</samp></blockquote>
+        <blockquote><samp>{{ item.description | markdownify | remove: '<p>' | remove: '</p>' }}</samp></blockquote>
       </div>
     </div>
     <div class="row mt-n1">

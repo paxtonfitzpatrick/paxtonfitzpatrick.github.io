@@ -5,7 +5,7 @@
         <h1 class="mt-0">{{ section.title }}</h1>
         <hr class="divider my-4">
         {% if section.before_text %}
-          <h5>{{ section.before_text | newline_to_br | markdownify }}</h5>
+          <h5>{{ section.before_text | newline_to_br | markdownify | remove: '<p>' | remove: '</p>' }}</h5>
         {% endif %}
       </div>
     </div>
@@ -31,21 +31,22 @@
         <div class="tab-content mb-4">
           <div class="tab-pane fade active show" id="{{ section.section_id }}_all">
             {% if section.all_before_text %}
-              <h6 class="mt-4">{{ section.all_before_text | markdownify }}</h6>
+              <h6 class="mt-4">{{ section.all_before_text | markdownify | remove: '<p>' | remove: '</p>' }}</h6>
             {% endif %}
             {% include {{ section.pane_type }} section=section filter="all" %}
             {% if section.all_after_text %}
-              <h6>{{ section.all_after_text | markdownify }}</h6>
+              <p class="text-muted mt-4">{{ section.all_after_text | markdownify | remove: '<p>' | remove: '</p>' }}</p>
             {% endif %}
           </div>
           {% for pane in section.panes %}
-            <div class="tab-pane fade" id="{{ pane.title | downcase | replace: ' ', '_' }}">
+            {% assign href = pane.title | downcase | replace: ' ', '_' | replace: "'", 'x' %}
+            <div class="tab-pane fade" id="{{ href }}">
               {% if pane.before_text %}
-                <h6 class="mt-4">{{ pane.before_text | markdownify }}</h6>
+                <h6 class="mt-4">{{ pane.before_text | markdownify | remove: '<p>' | remove: '</p>' }}</h6>
               {% endif %}
               {% include {{ section.pane_type }} section=section filter=pane.filter %}
               {% if pane.after_text %}
-                {{ pane.after_text | markdownify }}
+                <p class="text-muted mt-4">{{ pane.after_text | markdownify | remove: '<p>' | remove: '</p>' }}</p>
               {% endif %}
             </div>
           {% endfor %}
@@ -54,9 +55,9 @@
     </div>
     {% if section.after_text %}
       <div class="row justify-content-center">
-        <div class="col-lg-8 text-center">
-          <hr class="divider mt-0 mb-4">
-          {{ section.after_text | markdownify }}
+        <div class="col-12 text-center">
+          <hr class="divider my-4">
+          <p class="mb-4">{{ section.after_text | markdownify | remove: '<p>' | remove: '</p>' }}</p>
         </div>
       </div>
     {% endif %}

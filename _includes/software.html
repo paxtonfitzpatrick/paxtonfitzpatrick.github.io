@@ -15,7 +15,7 @@
     <div class="row mb-3">
       <div class="col-12">
         <blockquote>
-          <samp>{{ item.description | markdownify }}</samp>
+          <samp>{{ item.description | markdownify | remove: '<p>' | remove: '</p>' }}</samp>
           <div class="software-icons mt-n3">
             {% for icon in item.icons %}
               {% assign target = "_blank" %}
