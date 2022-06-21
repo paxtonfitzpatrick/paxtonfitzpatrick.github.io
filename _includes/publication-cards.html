@@ -1,11 +1,11 @@
 <div class="publication-cards">
   {% for item in section.items %}
     {% if include.filter == "all" or include.filter == item.type %}
-      <div class="publication row align-items-center mb-5">
-        <div class="col-2 pr-0 text-center">
+      <div class="publication row align-items-center mb-3 mb-md-5">
+        <div class="col-md-2 mb-2 mb-md-0 pr-md-0 text-center">
           <img src="{{ item.image | relative_url }}" alt="X">
         </div>
-        <div class="col-10 pl-5 text-left">
+        <div class="col-md-10 pl-md-5 text-left">
           <h4>{{ item.title | markdownify | remove: '<p>' | remove: '</p>' }}</h4>
           {{ item.text | markdownify }}
           <div class="publication-icons mt-n2">
