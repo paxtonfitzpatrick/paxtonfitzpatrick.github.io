@@ -1,47 +1,51 @@
 <section id="{{ section.section_id }}" class="page-section {{ section.background_style }}">
   <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-12 text-center">
-        <h1 class="mt-0">{{ section.title }}</h1>
+    <div class="row">
+      <div class="col-12 text-center">
+        <h1>{{ section.title }}</h1>
         <hr class="divider my-4">
         {% if section.before_text %}
-          <h5>{{ section.before_text | newline_to_br | markdownify }}</h5>
+          <h5 class="mb-0">{{ section.before_text | newline_to_br | markdownify | remove: '<p>' | remove: '</p>' }}</h5>
         {% endif %}
       </div>
     </div>
-    <div class="row justify-content-center">
-      <ul class="nav nav-pills mb-4" role="tablist">
-        {% for pane in section.panes %}
-          {% assign href = pane.title | downcase | replace: ' ', '_' | replace: "'", 'x' %}
-          <li class="nav-item">
-            <a class="nav-link {% if forloop.first %}active{% endif %}" data-toggle="pill" href="#{{ href }}">
-              {{ pane.title }}
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
+    <div class="row">
+      <div class="col-12">
+        <ul class="nav nav-pills justify-content-center my-4" role="tablist">
+          {% for pane in section.panes %}
+            {% assign href = pane.title | downcase | replace: ' ', '_' | replace: "'", 'x' %}
+            <li class="nav-item">
+              <a class="nav-link {% if forloop.first %}active{% endif %}" data-toggle="pill" href="#{{ href }}">
+                {{ pane.title }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
     </div>
-    <div class="row justify-content-center text-center">
-      <div class="tab-content mb-4 w-100">
-        {% for pane in section.panes %}
-          {% assign href = pane.title | downcase | replace: ' ', '_' | replace: "'", 'x' %}
-          <div class="tab-pane fade {% if forloop.first %}active show{% endif %}" id="{{ href }}">
-            {% if pane.before_text %}
-              <h6 class="mt-4">{{ pane.before_text | markdownify }}</h6>
-            {% endif %}
-            {% include {{ pane.type }} pane=pane %}
-            {% if pane.after_text %}
-              <p class="text-muted mt-4">{{ pane.after_text | markdownify }}</p>
-            {% endif %}
-          </div>
-        {% endfor %}
+    <div class="row">
+      <div class="col-12">
+        <div class="tab-content mb-4">
+          {% for pane in section.panes %}
+            {% assign href = pane.title | downcase | replace: ' ', '_' | replace: "'", 'x' %}
+            <div class="tab-pane fade {% if forloop.first %}active show{% endif %}" id="{{ href }}">
+              {% if pane.before_text %}
+                <h6 class="mt-4">{{ pane.before_text | markdownify | remove: '<p>' | remove: '</p>' }}</h6>
+              {% endif %}
+              {% include {{ pane.type }} pane=pane %}
+              {% if pane.after_text %}
+                <p class="text-muted mt-4">{{ pane.after_text | markdownify | remove: "<p>" | remove: "</p>" }}</p>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
       </div>
     </div>
     {% if section.after_text %}
-      <div class="row justify-content-center">
-        <div class="col-lg-8 text-center">
-          <hr class="divider mt-0 mb-4">
-          <p class="text-muted mb-4">{{ section.after_text | markdownify }}</p>
+      <div class="row">
+        <div class="col-12 text-center">
+          <hr class="divider my-4">
+          <p class="mb-0">{{ section.after_text | markdownify | remove: '<p>' | remove: '</p>' }}</p>
         </div>
       </div>
     {% endif %}
