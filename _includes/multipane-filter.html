@@ -54,10 +54,10 @@
       </div>
     </div>
     {% if section.after_text %}
-      <div class="row justify-content-center">
+      <div class="row">
         <div class="col-12 text-center">
           <hr class="divider my-4">
-          <p class="mb-4">{{ section.after_text | markdownify | remove: '<p>' | remove: '</p>' }}</p>
+          <p class="mb-0">{{ section.after_text | markdownify | remove: '<p>' | remove: '</p>' }}</p>
         </div>
       </div>
     {% endif %}
