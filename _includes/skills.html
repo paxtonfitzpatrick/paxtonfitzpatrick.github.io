@@ -6,7 +6,7 @@
       <div class="row align-items-center">
         {% for skill in category.skills %}
           <div class="col-3 col-sm-2">
-            <img src="{{ skill.image | relative_url }}" alt="{{ skill.caption }}" title="{{ skill.caption }}" data-toggle="tooltip" data-placement="bottom">
+            <img src="{{ skill.image | relative_url }}" alt="{{ skill.caption }}" title="{{ skill.caption }}" data-toggle="tooltip" data-placement="top" data-offset="0,-15px">
           </div>
         {% endfor %}
       </div>
