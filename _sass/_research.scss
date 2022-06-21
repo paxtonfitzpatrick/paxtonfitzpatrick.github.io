@@ -27,12 +27,10 @@
   }
 }
 
-.publication.row {
-  margin-bottom: 3em;
-
-  img {
-    max-width: 66.6667%;
-  }
+.publication img {
+  max-width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
 }
 
 .publication-icons {
@@ -50,10 +48,3 @@
   }
 }
 
-@media (max-width: 576px) {
-  .research-img {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 15%;
-  }
-}
