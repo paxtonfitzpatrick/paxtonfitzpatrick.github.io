@@ -245,13 +245,11 @@ sections:
     background_style: bg-primary
     title: Research
     pane_type: publication-cards.html
-    before_text: >+
-     My research uses natural language processing and other machine learning techniques to study learning
-     and memory. 
-     
-     I'm particularly interested in how episodic memories change over time, and how different features of an experience
-     impact how well we remember it.
-    all_after_text: '&dagger;denotes equal contribution'
+    before_text: >
+     My research uses language models to capture how our memories preserve, distort, and compress the external world,
+     and to identify the neural mechanisms that compute these transformations.<br/><br/>I'm particularly interested in
+     how episodic memory compresses the temporal structure of an experience, and how that compression is warped over 
+     time.
     panes:
       - title: Manuscripts
         filter: manuscript
