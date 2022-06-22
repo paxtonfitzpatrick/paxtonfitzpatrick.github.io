@@ -97,6 +97,8 @@
           ]
         },
         {
+          "emptyLineBefore": "threshold",
+          "noEmptyLineBetween": true,
           "properties": [
             "position",
             "inset",
@@ -110,12 +112,16 @@
           ]
         },
         {
+          "emptyLineBefore": "threshold",
+          "noEmptyLineBetween": true,
           "properties": [
             "box-sizing",
             "display"
           ]
         },
         {
+          "emptyLineBefore": "threshold",
+          "noEmptyLineBetween": true,
           "properties": [
             "flex",
             "flex-basis",
@@ -127,6 +133,8 @@
           ]
         },
         {
+          "emptyLineBefore": "threshold",
+          "noEmptyLineBetween": true,
           "properties": [
             "grid",
             "grid-area",
@@ -149,6 +157,8 @@
           ]
         },
         {
+          "emptyLineBefore": "threshold",
+          "noEmptyLineBetween": true,
           "properties": [
             "gap",
             "row-gap",
@@ -156,6 +166,8 @@
           ]
         },
         {
+          "emptyLineBefore": "threshold",
+          "noEmptyLineBetween": true,
           "properties": [
             "place-content",
             "place-items",
@@ -169,11 +181,15 @@
           ]
         },
         {
+          "emptyLineBefore": "threshold",
+          "noEmptyLineBetween": true,
           "properties": [
             "order"
           ]
         },
         {
+          "emptyLineBefore": "threshold",
+          "noEmptyLineBetween": true,
           "properties": [
             "float",
             "width",
@@ -223,6 +239,8 @@
           ]
         },
         {
+          "emptyLineBefore": "threshold",
+          "noEmptyLineBetween": true,
           "properties": [
             "font",
             "font-family",
@@ -299,6 +317,8 @@
           ]
         },
         {
+          "emptyLineBefore": "threshold",
+          "noEmptyLineBetween": true,
           "properties": [
             "pointer-events",
             "-ms-touch-action",
@@ -325,6 +345,8 @@
           ]
         },
         {
+          "emptyLineBefore": "threshold",
+          "noEmptyLineBetween": true,
           "properties": [
             "background",
             "background-color",
@@ -410,6 +432,8 @@
           ]
         },
         {
+          "emptyLineBefore": "threshold",
+          "noEmptyLineBetween": true,
           "properties": [
             "alignment-baseline",
             "baseline-shift",
@@ -446,6 +470,8 @@
           ]
         },
         {
+          "emptyLineBefore": "threshold",
+          "noEmptyLineBetween": true,
           "properties": [
             "transition",
             "transition-delay",
