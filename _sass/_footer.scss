@@ -1,8 +1,12 @@
 .footer p {
   margin-bottom: 0;
+
   a {
     color: $fg-secondary;
-    &:hover, &:focus, &:active {
+
+    &:hover,
+    &:focus,
+    &:active {
       color: $fg-secondary;
     }
   }

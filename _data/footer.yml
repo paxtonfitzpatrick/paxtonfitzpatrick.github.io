@@ -1,12 +1,7 @@
-background_style: 'bg-secondary'
-base_credit: 'Built using [jekyll](https://jekyllrb.com/){:target="_blank"} from the
- [New Creative Theme](https://github.com/vvalchev/creative-theme-jekyll-new){:target="_blank"}.'
+background_style: bg-secondary
 credits:
-  - text: particles.js
-    url: https://github.com/VincentGarreau/particles.js
-  - text: Text to particles
-    url: https://codepen.io/Mamboleoo/pen/obWGYr
-  - text: eshinjolly.com
-    url: https://eshinjolly.com/
-  - text: andrewheusser.github.io
-    url: http://andrewheusser.github.io/
+  - Built with [jekyll](https://jekyllrb.com/){:target="_blank"} and 
+    [GitHub Pages](https://pages.github.com/){:target="_blank"}.
+  - Site source code available on GitHub, [here](https://github.com/paxtonfitzpatrick/paxtonfitzpatrick.github.io){:target="_blank"}
+  - Particle animation source code available on GitHub, [here](https://github.com/paxtonfitzpatrick/particle-image){:target="_blank"}
+  - Graphics for manuscripts by [Talia Manning](https://www.chamstudios.com/about){:target="_blank"}

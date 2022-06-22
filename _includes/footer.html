@@ -1,19 +1,9 @@
 {% assign footer = site.data.footer %}
 <footer class="footer py-4 {{ footer.background_style }}">
-  <div class="container">
-    <div class="small text-center text-muted">
-      {{ site.author }}
-      {{ footer.base_credit | markdownify }}
-      <p>With inspiration from:</p>
-      <div class="row">
-        {% for credit in footer.credits %}
-          <div class="col-xs-12 col-md-3 m-auto">
-            <p><a aria-label="{{ credit.text }}" href="{{ credit.url }}" target="_blank">
-              {{ credit.text }}
-            </a></p>
-          </div>
-        {% endfor %}
-      </div>
-    </div>
+  <div class="container small text-center text-muted">
+    <p class="mb-1">&copy; {{ site.year_created }}&ndash;{{ site.year_last_updated }} {{ site.author }}</p>
+    {% for credit in footer.credits %}
+      {{ credit | markdownify }}
+    {% endfor %}
   </div>
 </footer>
