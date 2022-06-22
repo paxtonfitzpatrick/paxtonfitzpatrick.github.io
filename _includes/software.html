@@ -1,4 +1,6 @@
 <div class="software-cards container text-left">
+  <!-- TODO: fix veritcal margins -->
+  <!-- TODO: clean up this whole setup so each item is its own row-->
   {% for item in include.pane.items %}
     <div class="row mb-n4">
       <div class="col-12">
@@ -18,14 +20,13 @@
           <samp>{{ item.description | markdownify | remove: '<p>' | remove: '</p>' }}</samp>
           <div class="software-icons mt-n3">
             {% for icon in item.icons %}
-              {% assign target = "_blank" %}
-              {% assign rel = "noopener noreferrer" %}
               {% assign text_lower = icon.text | downcase %}
               {% if text_lower contains "download" %}
                 {% assign target = "" %}
-                {% assign rel = "" %}
+              {% else %}
+                {% assign target = "_blank" %}
               {% endif %}
-              <a aria-label="{{ icon.text }}" href="{{ icon.url }}" target= "{{ target }}" rel="{{ rel }}">
+              <a aria-label="{{ icon.text }}" href="{{ icon.url }}" target="{{ target }}">
                 <i class="icon {{ icon.type }} {{ icon.icon }} fa-fw" aria-hidden="true" title="{{ icon.text }}" data-toggle="tooltip" data-placement="bottom"></i>
               </a>
             {% endfor %}
