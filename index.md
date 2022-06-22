@@ -67,7 +67,7 @@ sections:
           - text: Since graduating in 2019, I've continued managing the CDL, working on memory
              research, writing software, and mentoring students. My current research uses natural language processing
              and other machine learning techniques to study how we understand the world around us and create
-             technologies to help us better learn from it. 
+             technologies to help us better learn from it.
             image: assets/img/bio/brain-scan.jpg
         timeline:
           start: 2015
@@ -122,7 +122,7 @@ sections:
               start: 2022.25
               end: 2022.5
               color: 00fdcf
-              
+
       - type: skills.html
         title: Skills
         categories:
@@ -240,7 +240,7 @@ sections:
                 caption: Public speaking
               - image: assets/img/skills/leadership.png
                 caption: Organizational leadership
-            
+
   - type: multipane-filter.html
     section_id: research
     background_style: bg-primary
@@ -361,12 +361,12 @@ sections:
         image: assets/img/research/quail-white.png
         pdf_url: https://www.theoj.org/joss-papers/joss.00424/10.21105.joss.00424.pdf
         code_url: https://github.com/ContextLab/quail
-        
+
   - type: multipane.html
     section_id: software
     background_style: bg-secondary
     title: Software
-    before_text: I also regularly develop, maintain, and contribute to a number of open-source software projects. 
+    before_text: I also regularly develop, maintain, and contribute to a number of open-source software projects.
     after_text: ...and of course 
      [this website](https://github.com/paxtonfitzpatrick/paxtonfitzpatrick.github.io){:target="_blank"}!
     panes:
@@ -410,7 +410,7 @@ sections:
           - title: particle-image
             description: Animate a particlized image in vanilla JavaScript. Turn an image from the web into an animated 
              swarm of interactive particles. Set parameters to control particle color, size, density, speed, 
-             hover/click/touch interactions, and more. 
+             hover/click/touch interactions, and more.
             icons:
               - icon: fa-github-square
                 type: fab
@@ -523,7 +523,7 @@ sections:
                 text: BRM paper
                 url: https://link.springer.com/article/10.3758/s13428-018-1037-4
       - type: software.html
-        title: Other things I contribute to
+        title: Other things I work on
         items:
           - title: hypertools
             role: lead maintainer
@@ -579,7 +579,7 @@ sections:
                 url: https://github.com/ContextLab/timecorr
               - icon: fa-book
                 type: fas
-                text: Documentation 
+                text: Documentation
                 url: https://timecorr.readthedocs.io/en/latest
               - icon: fa-file-pdf
                 type: fas
@@ -596,7 +596,7 @@ sections:
                 url: https://github.com/ContextLab/supereeg
               - icon: fa-book
                 type: fas
-                text: Documentation 
+                text: Documentation
                 url: https://supereeg.readthedocs.io/en/latest
               - icon: fa-file-pdf
                 type: fas
@@ -625,11 +625,10 @@ sections:
                 type: fas
                 text: PDF
                 url: https://github.com/ContextLab/lab-manual/blob/master/lab_manual.pdf
-              
+
   - type: contact.html
     section_id: contact
     background_style: bg-primary
     title: Get in touch
     map_embed: https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d721.038682728594!2d-72.28847647071619!3d43.70733339869497!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cb4c9c361e1ddb1%3A0x8b2bba0d5b098fa6!2sMoore%20Psychology%20Bldg%2C%20Hanover%2C%20NH%2003755!5e0!3m2!1sen!2sus!4v1591571050608!5m2!1sen!2sus
-      
 ---
