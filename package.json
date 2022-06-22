@@ -17,25 +17,5 @@
   },
   "scripts": {
     "stylelint-find-rules": "stylelint-find-new-rules"
-  },
-  "stylelint": {
-    "extends": [
-      "stylelint-config-standard-scss",
-      "stylelint-config-sass-guidelines",
-      "stylelint-config-recess-order"
-    ],
-    "plugins": [
-      "stylelint-declaration-block-no-ignored-properties",
-      "stylelint-group-selectors"
-    ],
-    "processors": [
-      "stylelint-processor-ignore-front-matter"
-    ],
-    "rules": {
-      "selector-max-id": 1,
-      "order/properties-alphabetical-order": null,
-      "plugin/declaration-block-no-ignored-properties": true,
-      "plugin/stylelint-group-selectors": true
-    }
   }
 }
