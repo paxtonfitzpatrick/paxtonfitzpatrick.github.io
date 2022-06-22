@@ -27,10 +27,15 @@
           "name": "include",
           "hasBlock": false
         },
+        "at-rules",
         "declarations",
         {
           "type": "at-rule",
           "name": "keyframes"
+        },
+        {
+          "type": "at-rule",
+          "name": "supports"
         },
         {
           "type": "at-rule",
