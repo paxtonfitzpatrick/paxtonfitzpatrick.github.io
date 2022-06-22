@@ -76,52 +76,52 @@ sections:
             - title: Undergraduate, Dartmouth College
               start: 2015.75
               end: 2019.5
-              color: 00693e
+              color: d60000
             - title: Research Assistant, Dartmouth Brain Imaging Center
               start: 2016.75
               end: 2019.5
-              color: 56C2F3
+              color: 8c3bff
             - title: Research Assistant, Contextual Dynamics Lab
               start: 2017.25
               end: 2018.5
-              color: 24ed67
+              color: 018700
             - title: Research Assistant, Bregman Media Labs
               start: 2017.25
               end: 2018
-              color: d807e3
+              color: 00acc6
             - title: Laboratory & Research Manager, Contextual Dynamics Lab
               start: 2018.5
               end: 2021.75
-              color: 17ad46
+              color: 97ff00
             - title: Peer Tutor, Intro Computer Science
               start: 2018.75
               end: 2019.5
-              color: d9af1a
+              color: ff7ed1
             - title: Teaching Assistant, Human Memory
               start: 2019.75
               end: 2020
-              color: 100f70
+              color: 6b004f
             - title: Teaching Assistant & Guest Lecturer, Intro to Programming 
                for Psychological Scientists
               start: 2020
               end: 2020.25
-              color: ff0000
+              color: ffa52f
             - title: Teaching Assistant, Storytelling with Data
               start: 2020.25
               end: 2020.5
-              color: 
+              color: 573b00
             - title: Teaching Assistant, Intro to Programming for Psychological Scientists
               start: 2021
               end: 2021.25
-              color: 
+              color: 005659
             - title: Ph.D. Student, Dartmouth College
               start: 2021.75
               end: 2022.5
-              color: 
+              color: 0000dd
             - title: Teaching Assistant, Laboratory in Experimental Psychology
               start: 2022.25
               end: 2022.5
-              color: 
+              color: 00fdcf
               
       - type: skills.html
         title: Skills
