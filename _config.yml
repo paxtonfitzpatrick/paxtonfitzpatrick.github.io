@@ -1,13 +1,13 @@
-# Site settings
-# Values are accessed from HTML files via {{ site.value }}
 title: Paxton Fitzpatrick
-description: >- # ignore newlines until "baseurl:"
+description: >-
   My personal website
-baseurl: "" # site subpath, e.g. /blog
-url: "" # base hostname & protocol, e.g. http://example.com
+baseurl: ""
+url: https://paxtonfitzpatrick.me
 lang: en_US
+year_created: 2020
+year_last_updated: 2022
 
-author: 'Paxton Fitzpatrick &copy; 2021'
+author: Paxton Fitzpatrick
 email: Paxton.C.Fitzpatrick.GR@Dartmouth.edu
 address: 416 Moore Hall, Dartmouth College<br>Hanover, NH 03755
 github: https://github.com/paxtonfitzpatrick
@@ -19,7 +19,7 @@ google_analytics:
   id: UA-169319829-1
   enabled: true
 
-# Build settings
+# Jekyll build settings
 theme: null
 safe: true
 markdown: kramdown
