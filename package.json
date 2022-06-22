@@ -1,21 +1,4 @@
 {
-  "stylelint": {
-    "extends": [
-      "stylelint-config-standard-scss",
-      "stylelint-config-sass-guidelines",
-      "stylelint-config-recess-order"
-    ],
-    "plugins": [
-      "stylelint-declaration-block-no-ignored-properties",
-      "stylelint-group-selectors"
-    ],
-    "processors": ["stylelint-processor-ignore-front-matter"],
-    "rules": {
-      "order/properties-alphabetical-order": null,
-      "plugin/declaration-block-no-ignored-properties": true,
-      "plugin/stylelint-group-selectors": true
-    }
-  },
   "devDependencies": {
     "install": "^0.13.0",
     "npm": "^8.12.1",
@@ -26,9 +9,33 @@
     "stylelint-config-standard": "^25.0.0",
     "stylelint-config-standard-scss": "^4.0.0",
     "stylelint-declaration-block-no-ignored-properties": "^2.5.0",
+    "stylelint-find-new-rules": "^4.0.0",
     "stylelint-group-selectors": "^1.0.9",
     "stylelint-order": "^5.0.0",
     "stylelint-processor-ignore-front-matter": "^1.0.3",
     "terser": "^5.14.1"
+  },
+  "scripts": {
+    "stylelint-find-rules": "stylelint-find-new-rules"
+  },
+  "stylelint": {
+    "extends": [
+      "stylelint-config-standard-scss",
+      "stylelint-config-sass-guidelines",
+      "stylelint-config-recess-order"
+    ],
+    "plugins": [
+      "stylelint-declaration-block-no-ignored-properties",
+      "stylelint-group-selectors"
+    ],
+    "processors": [
+      "stylelint-processor-ignore-front-matter"
+    ],
+    "rules": {
+      "selector-max-id": 1,
+      "order/properties-alphabetical-order": null,
+      "plugin/declaration-block-no-ignored-properties": true,
+      "plugin/stylelint-group-selectors": true
+    }
   }
 }
