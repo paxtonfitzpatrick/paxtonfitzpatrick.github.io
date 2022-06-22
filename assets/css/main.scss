@@ -1,23 +1,40 @@
 ---
 ---
 
-@charset "utf-8";
+// don't complain about @charset not being on the first line -- need to include
+// front matter first so jekyll knows to parse the file
+// noinspection CssInvalidCharsetRule
+@charset 'UTF-8';
+
+// Note: "@import" is deprecated in favor of "@use" and slated for removal in
+// 2022. But since Ruby sass/sassc/LibSass are all EOL or deprecated, it's
+// only available in Dart Sass, and Dart Sass can't be used with GitHub pages
+// builds yet (without some more complex workarounds) because the github-pages
+// gem still depends on an old version of the jekyll-sass-converter gem that
+// didn't support Dart Sass. Until then, import order matters here because
+// everything is globally scoped when using old @import rule
+// TODO: change to @use & reorganize once github-pages allows
+//  jekyll-sass-converter >=2.2
+
+// -----------------------------------------------------------------------------
 
 // Import partials from `sass_dir` (defaults to `_sass`)
-// TODO: change to @use once github-pages supports it (or switching to custom
-//  deploy action)
+
+// global variables & mixins
 @import
-        "vars",
-        "mixins",
-        "style",
-        "navbar",
-        "particles",
-        "header",
-        "header-icons",
-        "bio-timeline",
-        "skills",
-        "research",
-        "software",
-        "contact",
-        "footer"
+  'abstracts/vars',
+  'abstracts/mixins';
+
+@import
+  'style',
+  'navbar',
+  'particles',
+  'header',
+  'header-icons',
+  'bio-timeline',
+  'skills',
+  'research',
+  'software',
+  'contact',
+  'footer'
 ;
