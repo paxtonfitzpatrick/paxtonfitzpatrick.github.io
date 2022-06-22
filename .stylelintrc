@@ -13,6 +13,60 @@
   ],
   "rules": {
     "selector-max-id": 1,
+    "order/order": [
+      [
+        "custom-properties",
+        "dollar-variables",
+        {
+          "type": "at-rule",
+          "name": "extend"
+        },
+        {
+          "type": "at-rule",
+          "name": "include",
+          "hasBlock": false
+        },
+        "declarations",
+        {
+          "type": "at-rule",
+          "name": "keyframes"
+        },
+        {
+          "type": "at-rule",
+          "name": "media"
+        },
+        {
+          "type": "rule",
+          "selector": "^&:(hover|focus|active)$"
+        },
+        {
+          "type": "rule",
+          "selector": "^&::(before|after)$"
+        },
+        {
+          "type": "rule",
+          "selector": "^&::\\w+$"
+        },
+        {
+          "type": "rule",
+          "selector": "^&--[\\w-]+$"
+        },
+        {
+          "type": "rule",
+          "selector": "^&\\.[\\w-]+$"
+        },
+        {
+          "type": "rule",
+          "selector": "^&\\[.+\\]$"
+        },
+        {
+          "type": "at-rule",
+          "name": "include",
+          "hasBlock": true
+        },
+        "rules"
+      ]
+    ],
     "order/properties-alphabetical-order": null,
     "plugin/declaration-block-no-ignored-properties": true,
     "plugin/stylelint-group-selectors": true
