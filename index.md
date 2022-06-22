@@ -91,7 +91,7 @@ sections:
               color: d807e3
             - title: Laboratory & Research Manager, Contextual Dynamics Lab
               start: 2018.5
-              end: 2021
+              end: 2021.75
               color: 17ad46
             - title: Peer Tutor, Intro Computer Science
               start: 2018.75
@@ -101,7 +101,8 @@ sections:
               start: 2019.75
               end: 2020
               color: 100f70
-            - title: Teaching Assistant & Guest Lecturer, Intro to Programming for Psychological Scientists
+            - title: Teaching Assistant & Guest Lecturer, Intro to Programming 
+               for Psychological Scientists
               start: 2020
               end: 2020.25
               color: ff0000
@@ -132,7 +133,7 @@ sections:
               - image: assets/img/skills/javascript.png
                 caption: JavaScript
               - image: assets/img/skills/shell.png
-                caption: Bash/Zsh
+                caption: Unix shell
               - image: assets/img/skills/latex.png
                 caption: LaTeX
               - image: assets/img/skills/supercollider.png
@@ -162,7 +163,7 @@ sections:
               - image: assets/img/skills/pytest.png
                 caption: pytest
               - image: assets/img/skills/selenium.png
-                caption: Selenium WebDriver
+                caption: Selenium
               - image: assets/img/skills/travis.png
                 caption: Travis CI
               - image: assets/img/skills/github-actions.png
@@ -276,7 +277,7 @@ sections:
         title: A geometric approach to modeling knowledge and learning from Khan Academy course videos
         text: "**Fitzpatrick P. C.**, Heusser A. C., Manning J. R. (2022). A geometric approach to modeling knowledge and learning 
          from Khan Academy course videos. *Context and Episodic Memory Symposium*. Philadelphia, PA."
-        image: assets/img/research/cems-2022-v2.png
+        image: assets/img/research/cems-2022.png
         pdf_url: https://www.dropbox.com/s/6h621wefszdxv46/CEMS_2022.pdf?dl=0
       - type: poster
         title: Cognitive tasks as a diagnostic tool for mental health
@@ -522,7 +523,7 @@ sections:
                 text: BRM paper
                 url: https://link.springer.com/article/10.3758/s13428-018-1037-4
       - type: software.html
-        title: Other things I maintain
+        title: Other things I contribute to
         items:
           - title: hypertools
             role: lead maintainer
@@ -563,9 +564,9 @@ sections:
                 url: https://umap-learn.readthedocs.io/en/latest/
               - icon: fa-file-pdf
                 type: fas
-                text: arXiv paper
+                text: arXiv preprint
                 url: https://arxiv.org/pdf/1802.03426.pdf
-          - title: TimeCorr
+          - title: timecorr
             role: core contributor
             description: A Python toolbox for exploring higher-order structure in multivariate timeseries data. 
              Iteratively computes dynamic correlations and reduces dimensionality to approximate higher-order dynamic 
@@ -624,8 +625,7 @@ sections:
                 type: fas
                 text: PDF
                 url: https://github.com/ContextLab/lab-manual/blob/master/lab_manual.pdf
-          
-        
+              
   - type: contact.html
     section_id: contact
     background_style: bg-primary
