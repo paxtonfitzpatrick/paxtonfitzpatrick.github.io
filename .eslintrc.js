@@ -1,9 +1,10 @@
+/* eslint-env node */
 module.exports = {
-  extends: 'airbnb-base',
+  extends: ['airbnb-base', 'plugin:compat/recommended'],
   env: {
     browser: true,
     es6: true,
-    node: false,
     jquery: true,
+    node: false,
   },
 };
