@@ -4,14 +4,14 @@ module.exports = {
   extends: [
     'stylelint-config-standard-scss',
     'stylelint-config-sass-guidelines',
-    'stylelint-config-recess-order'
+    'stylelint-config-recess-order',
   ],
   plugins: [
     'stylelint-declaration-block-no-ignored-properties',
-    'stylelint-group-selectors'
+    'stylelint-group-selectors',
   ],
   processors: [
-    'stylelint-processor-ignore-front-matter'
+    'stylelint-processor-ignore-front-matter',
   ],
   rules: {
     'declaration-empty-line-before': null,
@@ -22,89 +22,135 @@ module.exports = {
         'custom-properties',
         'dollar-variables',
         {
+          // @extend at-rules
           type: 'at-rule',
-          name: 'extend'
+          name: 'extend',
         },
         {
+          // @includes for mixins without arguments or @content blocks
           type: 'at-rule',
           name: 'include',
           hasBlock: false,
-          parameter: /^[^(]+$/
+          parameter: /^[^(]+$/,
         },
         {
+          // @includes for mixins that take arguments
           type: 'at-rule',
           name: 'include',
-          hasBlock: false
+          hasBlock: false,
         },
+        // regular property declarations
         'declarations',
         {
+          // feature queries
           type: 'at-rule',
-          name: 'supports'
+          name: 'supports',
         },
         {
+          // media queries
           type: 'at-rule',
-          name: 'media'
+          name: 'media',
         },
+        // other at-rules
         'at-rules',
         {
+          // parent tag selectors
           type: 'rule',
-          selector: /^&:(hover|focus|active)$/
+          selector: /^[a-zA-Z].+ &$/,
+          name: 'parent tag selector',
         },
         {
+          // parent class selectors
           type: 'rule',
-          selector: /^&::(before|after)$/
+          selector: /^\.[a-zA-Z].+ &$/,
+          name: 'parent class selector',
         },
         {
+          // parent id selectors
           type: 'rule',
-          selector: /^&::\w+$/
+          selector: /^#[a-zA-Z].+ &$/,
+          name: 'parent id selector',
         },
         {
+          // user-action pseudo-classes
+          // TODO: add more of these after? https://developer.mozilla.org/en-US/docs/Learn/Forms/UI_pseudo-classes
           type: 'rule',
-          selector: /^&\[.+]$/
+          selector: /^(?:&:(?:hover|focus|focus-visible|focus-within|active),\s*)*&:(?:hover|focus|focus-visible|focus-within|active)$/,
+          name: 'user-action pseudo-class',
         },
         {
+          // other state- or position-based pseudo-classes
           type: 'rule',
-          selector: /^&\.[\w-]+$/
+          selector: /^&:[\w-]+$/,
+          name: 'non-user-action pseudo-class',
         },
         {
+          // BEM modifier classes
           type: 'rule',
-          selector: /^&:[\w-]+$/
+          selector: /^&--[\w-]+$/,
+          name: 'BEM modifier class',
         },
         {
+          // other modifier classes
           type: 'rule',
-          selector: /^&--[\w-]+$/
+          selector: /^&\.[a-zA-Z].+$/,
+          name: 'additional class',
         },
         {
+          // attribute selectors
+          type: 'rule',
+          selector: /^&\[.+]$/,
+          name: 'attribute selector',
+        },
+        {
+          // ::before and ::after pseudo-elements
+          type: 'rule',
+          selector: /^&::(before|after)$/,
+          name: '::before/::after pseudo-element',
+        },
+        {
+          // other pseudo-elements
+          type: 'rule',
+          selector: /^&::\w+$/,
+          name: 'pseudo-element',
+        },
+        {
+          // @includes that take @content blocks
           type: 'at-rule',
           name: 'include',
-          hasBlock: true
+          hasBlock: true,
         },
         {
+          // nested tag selectors (w/wo additional selectors)
           type: 'rule',
-          selector: /^[^.#]+$/,
-          name: 'tag selector'
+          selector: /^[a-zA-Z].+$/,
+          name: 'tag selector',
         },
         {
+          // nested class selectors (w/wo additional selectors)
           type: 'rule',
-          selector: /^\.[\w-]+$/,
-          name: 'class selector'
+          selector: /^\.[a-zA-Z].+$/,
+          name: 'class selector',
         },
         {
+          // nested id selectors (w/wo additional selectors)
           type: 'rule',
-          selector: /^#[\w-]+$/,
-          name: 'id selector'
-        }
+          selector: /^#[a-zA-Z].+$/,
+          name: 'id selector',
+        },
       ],
       {
-        unspecified: 'top'
-      }
+        // don't actually want unspecified items at the top, but use this warning to catch items
+        // missed by the rules above
+        unspecified: 'top',
+      },
     ],
     'order/properties-order': [
       [
         {
           properties: [
-            'all'
-          ]
+            'all',
+          ],
         },
         {
           emptyLineBefore: 'threshold',
@@ -118,16 +164,16 @@ module.exports = {
             'right',
             'bottom',
             'left',
-            'z-index'
-          ]
+            'z-index',
+          ],
         },
         {
           emptyLineBefore: 'threshold',
           noEmptyLineBetween: true,
           properties: [
             'box-sizing',
-            'display'
-          ]
+            'display',
+          ],
         },
         {
           emptyLineBefore: 'threshold',
@@ -139,8 +185,8 @@ module.exports = {
             'flex-flow',
             'flex-grow',
             'flex-shrink',
-            'flex-wrap'
-          ]
+            'flex-wrap',
+          ],
         },
         {
           emptyLineBefore: 'threshold',
@@ -164,7 +210,7 @@ module.exports = {
             'grid-gap',
             'grid-row-gap',
             'grid-column-gap'
-          ]
+          ],
         },
         {
           emptyLineBefore: 'threshold',
@@ -173,7 +219,7 @@ module.exports = {
             'gap',
             'row-gap',
             'column-gap'
-          ]
+          ],
         },
         {
           emptyLineBefore: 'threshold',
@@ -188,14 +234,14 @@ module.exports = {
             'justify-content',
             'justify-items',
             'justify-self'
-          ]
+          ],
         },
         {
           emptyLineBefore: 'threshold',
           noEmptyLineBetween: true,
           properties: [
             'order'
-          ]
+          ],
         },
         {
           emptyLineBefore: 'threshold',
@@ -246,7 +292,7 @@ module.exports = {
             'clip',
             'clip-path',
             'clear'
-          ]
+          ],
         },
         {
           emptyLineBefore: 'threshold',
@@ -324,7 +370,7 @@ module.exports = {
             'ascent-override',
             'descent-override',
             'line-gap-override'
-          ]
+          ],
         },
         {
           emptyLineBefore: 'threshold',
@@ -352,7 +398,7 @@ module.exports = {
             'nav-right',
             'nav-down',
             'nav-left'
-          ]
+          ],
         },
         {
           emptyLineBefore: 'threshold',
@@ -439,7 +485,7 @@ module.exports = {
             '-ms-filter:\'progid:DXImageTransform.Microsoft.Alpha',
             'opacity',
             '-ms-interpolation-mode'
-          ]
+          ],
         },
         {
           emptyLineBefore: 'threshold',
@@ -477,7 +523,7 @@ module.exports = {
             'shape-rendering',
             'stop-color',
             'stop-opacity'
-          ]
+          ],
         },
         {
           emptyLineBefore: 'threshold',
@@ -498,7 +544,7 @@ module.exports = {
             'animation-delay',
             'animation-iteration-count',
             'animation-direction'
-          ]
+          ],
         }
       ],
       {
