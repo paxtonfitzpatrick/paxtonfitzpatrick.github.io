@@ -1,4 +1,4 @@
-{
+exports = {
   "extends": [
     "stylelint-config-standard-scss",
     "stylelint-config-sass-guidelines",
@@ -12,6 +12,7 @@
     "stylelint-processor-ignore-front-matter"
   ],
   "rules": {
+    "declaration-empty-line-before": null,
     "max-nesting-depth": 3,
     "selector-max-id": 1,
     "order/order": [
@@ -25,14 +26,15 @@
         {
           "type": "at-rule",
           "name": "include",
-          "hasBlock": false
+          "hasBlock": false,
+          "parameter": "^[^(]+$"
         },
-        "at-rules",
-        "declarations",
         {
           "type": "at-rule",
-          "name": "keyframes"
+          "name": "include",
+          "hasBlock": false
         },
+        "declarations",
         {
           "type": "at-rule",
           "name": "supports"
@@ -41,6 +43,7 @@
           "type": "at-rule",
           "name": "media"
         },
+        "at-rules",
         {
           "type": "rule",
           "selector": "^&:(hover|focus|active)$"
