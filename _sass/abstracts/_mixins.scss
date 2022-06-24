@@ -3,13 +3,6 @@
   100% { opacity: 1; }
 }
 
-// probably worth including a little longer (https://caniuse.com/mdn-css_at-rules_keyframes)
-// stylelint-disable-next-line at-rule-no-vendor-prefix
-@-webkit-keyframes fade-in {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-}
-
 @mixin fade-in(
   $duration,          // animation-duration (Xs or Xms)
   $delay,             // animation-delay (Xs or Xms)
@@ -18,8 +11,6 @@
   // element needs to start with opacity 0 so it doesn't appear during delay period
   opacity: 0;
   animation: fade-in-anim $duration $timing-func $delay forwards;
-  // stylelint-disable-next-line property-no-vendor-prefix
-  -webkit-animation: fade-in-anim $duration $timing-func $delay forwards;
 }
 
 // consistent scrollbars across browsers/user agents
