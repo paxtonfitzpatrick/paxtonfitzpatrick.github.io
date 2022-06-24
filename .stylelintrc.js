@@ -72,19 +72,6 @@ module.exports = {
           name: 'parent id selector',
         },
         {
-          // user-action pseudo-classes
-          // TODO: add more of these after? https://developer.mozilla.org/en-US/docs/Learn/Forms/UI_pseudo-classes
-          type: 'rule',
-          selector: /^(?:&:(?:hover|focus|focus-visible|focus-within|active),\s*)*&:(?:hover|focus|focus-visible|focus-within|active)$/,
-          name: 'user-action pseudo-class',
-        },
-        {
-          // other state- or position-based pseudo-classes
-          type: 'rule',
-          selector: /^&:[\w-]+$/,
-          name: 'non-user-action pseudo-class',
-        },
-        {
           // BEM modifier classes
           type: 'rule',
           selector: /^&--[\w-]+$/,
@@ -101,6 +88,19 @@ module.exports = {
           type: 'rule',
           selector: /^&\[.+]$/,
           name: 'attribute selector',
+        },
+        {
+          // user-action pseudo-classes
+          // TODO: add more of these after? https://developer.mozilla.org/en-US/docs/Learn/Forms/UI_pseudo-classes
+          type: 'rule',
+          selector: /^(?:&:(?:hover|focus|focus-visible|focus-within|active),\s*)*&:(?:hover|focus|focus-visible|focus-within|active)$/,
+          name: 'user-action pseudo-class',
+        },
+        {
+          // other state- or position-based pseudo-classes
+          type: 'rule',
+          selector: /^&:[\w-]+$/,
+          name: 'non-user-action pseudo-class',
         },
         {
           // ::before and ::after pseudo-elements
