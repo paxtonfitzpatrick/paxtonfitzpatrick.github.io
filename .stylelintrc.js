@@ -15,8 +15,15 @@ module.exports = {
   ],
   rules: {
     'declaration-empty-line-before': null,
-    'max-nesting-depth': 3,
-    'selector-max-id': 1,
+    'max-nesting-depth': [
+      2,
+      {
+        ignore: [
+          'blockless-at-rules',
+          'pseudo-classes',
+        ],
+      },
+    ],
     'order/order': [
       [
         'custom-properties',
@@ -81,7 +88,7 @@ module.exports = {
           // other modifier classes
           type: 'rule',
           selector: /^&\.[a-zA-Z].+$/,
-          name: 'additional class',
+          name: 'additional modifier class',
         },
         {
           // attribute selectors
@@ -123,19 +130,19 @@ module.exports = {
         {
           // nested tag selectors (w/wo additional selectors)
           type: 'rule',
-          selector: /^[a-zA-Z].+$/,
+          selector: /^[a-zA-Z].*$/,
           name: 'tag selector',
         },
         {
           // nested class selectors (w/wo additional selectors)
           type: 'rule',
-          selector: /^\.[a-zA-Z].+$/,
+          selector: /^\.[a-zA-Z].*$/,
           name: 'class selector',
         },
         {
           // nested id selectors (w/wo additional selectors)
           type: 'rule',
-          selector: /^#[a-zA-Z].+$/,
+          selector: /^#[a-zA-Z].*$/,
           name: 'id selector',
         },
       ],
@@ -209,7 +216,7 @@ module.exports = {
             'grid-auto-flow',
             'grid-gap',
             'grid-row-gap',
-            'grid-column-gap'
+            'grid-column-gap',
           ],
         },
         {
@@ -218,7 +225,7 @@ module.exports = {
           properties: [
             'gap',
             'row-gap',
-            'column-gap'
+            'column-gap',
           ],
         },
         {
@@ -233,14 +240,14 @@ module.exports = {
             'align-self',
             'justify-content',
             'justify-items',
-            'justify-self'
+            'justify-self',
           ],
         },
         {
           emptyLineBefore: 'threshold',
           noEmptyLineBetween: true,
           properties: [
-            'order'
+            'order',
           ],
         },
         {
@@ -291,7 +298,7 @@ module.exports = {
             'overscroll-behavior-block',
             'clip',
             'clip-path',
-            'clear'
+            'clear',
           ],
         },
         {
@@ -369,7 +376,7 @@ module.exports = {
             'size-adjust',
             'ascent-override',
             'descent-override',
-            'line-gap-override'
+            'line-gap-override',
           ],
         },
         {
@@ -397,7 +404,7 @@ module.exports = {
             'nav-up',
             'nav-right',
             'nav-down',
-            'nav-left'
+            'nav-left',
           ],
         },
         {
@@ -484,7 +491,7 @@ module.exports = {
             'filter:progid:DXImageTransform.Microsoft.Alpha(Opacity',
             '-ms-filter:\'progid:DXImageTransform.Microsoft.Alpha',
             'opacity',
-            '-ms-interpolation-mode'
+            '-ms-interpolation-mode',
           ],
         },
         {
@@ -522,7 +529,7 @@ module.exports = {
             'mask',
             'shape-rendering',
             'stop-color',
-            'stop-opacity'
+            'stop-opacity',
           ],
         },
         {
@@ -543,18 +550,18 @@ module.exports = {
             'animation-timing-function',
             'animation-delay',
             'animation-iteration-count',
-            'animation-direction'
+            'animation-direction',
           ],
-        }
+        },
       ],
       {
         unspecified: 'top',
-        emptyLineMinimumPropertyThreshold: 6
-      }
-
+        emptyLineMinimumPropertyThreshold: 5,
+      },
     ],
     'order/properties-alphabetical-order': false,
     'plugin/declaration-block-no-ignored-properties': true,
-    'plugin/stylelint-group-selectors': true
-  }
+    'plugin/stylelint-group-selectors': true,
+    'selector-max-id': 1,
+  },
 };
