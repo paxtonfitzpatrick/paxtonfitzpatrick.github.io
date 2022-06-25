@@ -13,7 +13,13 @@ module.exports = {
   processors: [
     'stylelint-processor-ignore-front-matter',
   ],
+  reportDescriptionlessDisables: true,
+  reportInvalidScopeDisables: true,
+  reportNeedlessDisables: true,
   rules: {
+    // TODO: change this to 'modern' once github-pages gem issue is resolved
+    //  (see main.scss)
+    'color-function-notation': 'legacy',
     'declaration-empty-line-before': null,
     'max-nesting-depth': [
       2,
