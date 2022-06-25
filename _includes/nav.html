@@ -6,9 +6,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto my-2 my-lg-0">
-        {% for item in site.data.menus.header  %}
+        {% for section in include.page.sections %}
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="{{ item.url | relative_url }}">{{ item.title }}</a>
+            <a class="nav-link js-scroll-trigger" href="{{ section.section_id }}">{{ section.title }}</a>
           </li>
         {% endfor %}
         <li class="nav-item">
