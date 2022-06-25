@@ -4,11 +4,11 @@ module.exports = {
   extends: [
     'stylelint-config-standard-scss',
     'stylelint-config-sass-guidelines',
-    'stylelint-config-recess-order',
   ],
   plugins: [
     'stylelint-declaration-block-no-ignored-properties',
     'stylelint-group-selectors',
+    'stylelint-order',
   ],
   processors: [
     'stylelint-processor-ignore-front-matter',
