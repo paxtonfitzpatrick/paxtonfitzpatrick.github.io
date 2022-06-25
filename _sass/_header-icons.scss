@@ -1,49 +1,56 @@
-.header-icons {
+.header-icons-row {
   @include fade-in($duration: $header-fade-in-duration, $delay: 3.25s, $timing-func: $header-fade-in-timing);
 
-  display: inline-block;
   justify-content: center;
-  text-align: center;
-
-  .icon {
-    display: inline-block;
-    font-size: 6vw;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 2em;
-    color: $header-fg;
-    width: 2em;
-    height: 2em;
-    border: 2px solid $header-fg;
-    border-radius: 50%;
-    margin: 1vw;
-    transition: color 0.7s, background 0.7s;
-
-    @media (min-width: 768px) {
-      font-size: 2em;
-      margin: 0.5em;
-    }
-
-    &.custom > svg {
-      height: 1em;
-      width: 1em;
-      vertical-align: -0.0667em;  // based on fontawesome's .fa-lg
-      fill: $header-fg;
-    }
-
-    &:hover,
-    &:active {
-      color: $header-bg;
-      background: $header-fg;
-      text-underline: none;
-
-      svg {
-        fill: $header-bg;
-      }
-    }
-  }
 
   a:hover {
     text-decoration: none;
+  }
+}
+
+.header-icon {
+  display: inline-block;
+
+  width: 2em;
+  height: 2em;
+  margin: 1vw;
+
+  font-size: 6vw;
+  line-height: 2em;
+  color: $header-fg;
+  vertical-align: middle;
+
+  border: 2px solid $header-fg;
+  border-radius: 50%;
+
+  transition: color 0.7s, background 0.7s;
+
+  @media (min-width: 768px) {
+    margin: 0.5em;
+    font-size: 2em;
+  }
+
+  // SVGs for custom icons
+  svg {
+    width: 1em;
+    height: 1em;
+
+    vertical-align: -0.0667em;  // based on fontawesome's .fa-lg
+
+    fill: $header-fg;
+
+    transition: fill 0.7s;
+  }
+
+  // stylelint-disable-next-line order/order -- want user interaction-based
+  // style mods to nested svg element to come after default style
+  &:hover,
+  &:active {
+    color: $header-bg;
+    background: $header-fg;
+
+    svg {
+      fill: $header-bg;
+    }
   }
 }

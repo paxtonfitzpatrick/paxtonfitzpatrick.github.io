@@ -1,25 +1,36 @@
-@media (min-width: 992px) {
-  #mainNav {
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    background-color: $header-bg;
+// TODO: extract only necessary parts of creative.scss and refactor this
 
-    .navbar-brand, .navbar-nav .nav-item .nav-link {
+// stylelint-disable selector-id-pattern, selector-max-compound-selectors --
+//   - #mainNav ID comes from vendor CSS
+//   - selector for .nav-link needs all 3 classes to take precedence over vendor
+//     style
+@media (min-width: 768px) {
+  #mainNav {
+    background-color: $header-bg;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 15%);
+
+    .navbar-brand,
+    .navbar-nav .nav-item .nav-link {
       color: $header-fg;
+
       &:hover {
         color: $fg-primary-hfa;
       }
     }
-  }
 
-  #mainNav.navbar-scrolled {
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    background-color: rgba(255, 255, 255, 0.7);
+    &.navbar-scrolled {
+      background-color: rgba(255, 255, 255, 70%);
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 15%);
 
-    .navbar-brand, .navbar-nav .nav-item .nav-link {
-      color: $header-bg;
-      &:hover {
-        color: $bg-primary-hfa;
+      .navbar-brand,
+      .navbar-nav .nav-item .nav-link {
+        color: $header-bg;
+
+        &:hover {
+          color: $bg-primary-hfa;
+        }
       }
     }
   }
 }
+// stylelint-enable selector-id-pattern, selector-max-compound-selectors

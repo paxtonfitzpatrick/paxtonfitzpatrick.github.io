@@ -3,16 +3,16 @@ header {
   height: 100%;
   min-height: 40rem;
 
+  h1 {
+    @include fade-in($duration: $header-fade-in-duration, $delay: 2.5s, $timing-func: $header-fade-in-timing);
+
+    font-size: min(8vw, 60px);
+  }
+
   .row {
     position: absolute;
-    left: 0;
     right: 0;
     bottom: min(10%, 30px);
-
-    h1 {
-      @include fade-in($duration: $header-fade-in-duration, $delay: 2.5s, $timing-func: $header-fade-in-timing);
-
-      font-size: min(8vw, 60px);
-    }
+    left: 0;
   }
 }

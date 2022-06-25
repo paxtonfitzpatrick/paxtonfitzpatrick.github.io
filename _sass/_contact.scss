@@ -1,13 +1,16 @@
 #contact a {
   color: $fg-primary;
-  &:hover, &:focus, &:active {
-    text-decoration: underline;
-  }
-}
 
-@media (max-width: 992px) {
-  #contact .row {
-    justify-content: center;
-    text-align: center !important;
+  @media (max-width: 992px) {
+    .row {
+      justify-content: center;
+      text-align: center !important;
+    }
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    text-decoration: underline;
   }
 }

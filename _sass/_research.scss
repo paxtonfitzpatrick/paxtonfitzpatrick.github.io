@@ -1,29 +1,19 @@
-// @use 'mixins';
-
 .publication-cards {
-  // Note: "@import" is deprecated in favor of "@use" and slated for removal in
-  // 2022. But since Ruby sass/sassc/LibSass are all EOL or deprecated, it's
-  // only available in Dart Sass, and Dart Sass can't be used with GitHub pages
-  // builds yet (without some more complex workarounds) because the github-pages
-  // gem still depends on an old version of the jekyll-sass-converter gem that
-  // didn't support Dart Sass
-
-  // once that's all fixed, this will work (also see _mixins.scss):
-  // @use mixins.scrollbar($size: 8px, $fg-color: $bg-primary-hfa, $bg-color: transparent);
-  @include styled-scrollbar(8px, $bg-primary-hfa, transparent);
+  // Once TODO in main.scss is resolved, can add `@use 'mixins';` above,
+  // `@include` this as `mixins.scrollbar`, and remove `@import` in main.scss
+  @include styled-scrollbar($size: 8px, $fg-color: $bg-primary-hfa, $bg-color: transparent);
 
   max-height: 40em;
-  overflow-y: auto;
   // account for width of vertical scrollbar to avoid horizontal scrollbar and
   // keep text from being awkwardly close to it (unlike overflow-x: hidden;).
   // 15px comes from -15px margin of .row children
   padding-right: 15px;
+  overflow-y: auto;
 
   .footnote {
-    font-size: 0.9em;
-    // rem instead of em because creative.scss uses rem for all p's
-    margin-top: -1rem;
     padding-left: 1rem;
+    margin-top: -1rem;
+    font-size: 0.9em;
   }
 }
 
@@ -39,16 +29,25 @@
 
 .publication-icons {
   font-size: 1.5em;
+
   a {
     display: inline-block;
-    text-align: center;
     margin-right: 0.75em;
     color: $fg-primary;
-  }
-  a:hover {
-    text-decoration: none;
-    color: $fg-primary-hfa;
-    background-color: transparent;
+    text-align: center;
+
+    &:hover {
+      color: $fg-primary-hfa;
+      text-decoration: none;
+      background-color: transparent;
+    }
   }
 }
 
+// @media (max-width: 576px) {
+//   .research-img {
+//     margin-left: auto;
+//     margin-right: auto;
+//     margin-top: 15%;
+//   }
+// }

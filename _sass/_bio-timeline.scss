@@ -2,14 +2,15 @@
   p {
     margin-top: -5px;
   }
-  .bio-img {
-    max-width: 8em;
-    max-height: 8em;
-  }
+}
+
+.bio-img {
+  max-width: 8em;
+  max-height: 8em;
 }
 
 #timeline {
-  // stores custom properties to be accessed by timeline.js
+  // custom properties to be accessed by timeline.js
   --vertical-padding: #{$tl-vertical-padding};
   --background-color: #{$tl-background-color};
   --background-alpha: #{$tl-background-alpha};
@@ -28,15 +29,17 @@
   --info-font-color: #{$tl-info-font-color};
   --info-font-alpha: #{$tl-info-font-alpha};
 
-  min-height: 475px;
-  max-height: 100%;
   min-width: 10vw;
   max-width: 90vw;
+  min-height: 475px;
+  max-height: 100%;
+
   text-align: initial;
 
   ul {
     display: none;
-    margin: 0;
+    // TODO: are these necessary?
     padding: 0;
+    margin: 0;
   }
 }
