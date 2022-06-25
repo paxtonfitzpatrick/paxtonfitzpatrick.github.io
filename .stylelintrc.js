@@ -20,6 +20,7 @@ module.exports = {
     // TODO: change this to 'modern' once github-pages gem issue is resolved
     //  (see main.scss)
     'color-function-notation': 'legacy',
+    // prioritize order/properties-order grouping
     'declaration-empty-line-before': null,
     'max-nesting-depth': [
       2,
@@ -136,19 +137,19 @@ module.exports = {
         {
           // nested tag selectors (w/wo additional selectors)
           type: 'rule',
-          selector: /^(?:[a-zA-Z][\w. -]*,\n\s*)*[a-zA-Z][\w. -]*$/,
+          selector: /^(?:[a-zA-Z][\w.: -]*,\n\s*)*[a-zA-Z][\w.: -]*$/,
           name: 'tag selector',
         },
         {
           // nested class selectors (w/wo additional selectors)
           type: 'rule',
-          selector: /^(?:\.[a-zA-Z][\w. -]*,\n\s*)*\.[a-zA-Z][\w. -]*$/,
+          selector: /^(?:\.[a-zA-Z][\w.: -]*,\n\s*)*\.[a-zA-Z][\w.: -]*$/,
           name: 'class selector',
         },
         {
           // nested id selectors (w/wo additional selectors)
           type: 'rule',
-          selector: /^(?:#[a-zA-Z][\w-]*,\n\s*)*#[a-zA-Z][\w-]*$/,
+          selector: /^(?:#[a-zA-Z][\w:-]*,\n\s*)*#[a-zA-Z][\w:-]*$/,
           name: 'id selector',
         },
       ],
@@ -568,6 +569,16 @@ module.exports = {
     'order/properties-alphabetical-order': false,
     'plugin/declaration-block-no-ignored-properties': true,
     'plugin/stylelint-group-selectors': true,
+    'scss/double-slash-comment-empty-line-before': [
+      'always',
+      {
+        'ignore': [
+          'between-comments',
+          'stylelint-commands',
+          'inside-block',
+        ],
+      },
+    ],
     'selector-max-id': 1,
   },
 };
