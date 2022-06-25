@@ -106,7 +106,7 @@ module.exports = {
           // user-action pseudo-classes
           // TODO: add more of these after? https://developer.mozilla.org/en-US/docs/Learn/Forms/UI_pseudo-classes
           type: 'rule',
-          selector: /^(?:&:(?:hover|focus|focus-visible|focus-within|active),\s*)*&:(?:hover|focus|focus-visible|focus-within|active)$/,
+          selector: /^(?:&:(?:hover|focus|focus-visible|focus-within|active),\n\s*)*&:(?:hover|focus|focus-visible|focus-within|active)$/,
           name: 'user-action pseudo-class',
         },
         {
@@ -136,19 +136,19 @@ module.exports = {
         {
           // nested tag selectors (w/wo additional selectors)
           type: 'rule',
-          selector: /^[a-zA-Z].*$/,
+          selector: /^(?:[a-zA-Z][\w. -]*,\n\s*)*[a-zA-Z][\w. -]*$/,
           name: 'tag selector',
         },
         {
           // nested class selectors (w/wo additional selectors)
           type: 'rule',
-          selector: /^\.[a-zA-Z].*$/,
+          selector: /^(?:\.[a-zA-Z][\w. -]*,\n\s*)*\.[a-zA-Z][\w. -]*$/,
           name: 'class selector',
         },
         {
           // nested id selectors (w/wo additional selectors)
           type: 'rule',
-          selector: /^#[a-zA-Z].*$/,
+          selector: /^(?:#[a-zA-Z][\w-]*,\n\s*)*#[a-zA-Z][\w-]*$/,
           name: 'id selector',
         },
       ],
