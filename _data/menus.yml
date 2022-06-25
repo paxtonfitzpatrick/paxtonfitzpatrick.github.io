@@ -1,13 +1,13 @@
 # Sets content of navbar
 header:
 - title: About me
-  url: /#about
+  url: '#about'
 - title: Research
-  url: /#research
+  url: '#research'
 - title: Software
-  url: /#software
+  url: '#software'
 - title: Contact
-  url: /#contact
+  url: '#contact'
 
 # NOTE: additional item added last in _includes/nav.html:
 #  - title: CV
