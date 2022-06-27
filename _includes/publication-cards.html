@@ -1,7 +1,7 @@
 <div class="publication-cards">
   {% for item in section.items %}
     {% if include.filter == "all" or include.filter == item.type %}
-      <div class="publication row align-items-center">
+      <div class="publication row no-gutters align-items-center">
         <div class="col-md-2 mb-2 mb-md-0 pr-md-0 text-center">
           <img src="{{ item.image | relative_url }}" alt="X">
         </div>
