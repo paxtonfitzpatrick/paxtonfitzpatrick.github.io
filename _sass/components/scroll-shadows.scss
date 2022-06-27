@@ -8,10 +8,15 @@
   &::before {
     content: '';
 
-    position: absolute;
+    // stylelint-disable-next-line value-no-vendor-prefix -- needed for Safari
+    // until Sept 2019 (https://caniuse.com/css-sticky)
+    position: -webkit-sticky;
+    position: sticky;
     top: 0;
     right: 15px;
     left: 0;
+
+    display: block;
 
     height: 10px;
 
@@ -25,10 +30,15 @@
   &::after {
     content: '';
 
-    position: absolute;
+    // stylelint-disable-next-line value-no-vendor-prefix -- needed for Safari
+    // until Sept 2019 (https://caniuse.com/css-sticky)
+    position: -webkit-sticky;
+    position: sticky;
     right: 15px;
     bottom: 0;
     left: 0;
+
+    display: block;
 
     height: 10px;
 
