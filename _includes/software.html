@@ -1,37 +1,44 @@
-<div class="software-cards scroll-shadows container text-left">
+<div class="software-cards scroll-shadows text-left">
   <!-- TODO: fix veritcal margins -->
   <!-- TODO: clean up this whole setup so each item is its own row-->
   {% for item in include.pane.items %}
-    <div class="row mb-n4">
+    <div class="software-card row">
       <div class="col-12">
-        <div class="float-left">
-          <p><code>{{ item.title }}</code></p>
+        <!-- title row -->
+        <div class="row">
+          <div class="col-12">
+            <div class="float-left">
+              <p><code>{{ item.title }}</code></p>
+            </div>
+            {% if item.role %}
+              <div class="float-right">
+                <p><code class="text-muted"># {{ item.role }}</code></p>
+              </div>
+            {%  endif %}
+          </div>
         </div>
-        {% if item.role %}
-          <div class="float-right">
-           <p><code class="text-muted"># {{ item.role }}</code></p>
+        <!-- text row -->
+        <div class="row">
+          <div class="col-12">
+            <blockquote>
+              {{ item.description | markdownify }}
+               <!-- icons sub-row -->
+              <div class="software-icons">
+                {% for icon in item.icons %}
+                  {% assign text_lower = icon.text | downcase %}
+                  {% if text_lower contains "download" %}
+                    {% assign target = "" %}
+                  {% else %}
+                    {% assign target = "_blank" %}
+                  {% endif %}
+                  <a aria-label="{{ icon.text }}" href="{{ icon.url }}" target="{{ target }}">
+                    <i class="icon {{ icon.type }} {{ icon.icon }} fa-fw" aria-hidden="true" title="{{ icon.text }}" data-toggle="tooltip" data-placement="bottom"></i>
+                  </a>
+                {% endfor %}
+              </div>
+            </blockquote>
           </div>
-        {% endif %}
-      </div>
-    </div>
-    <div class="row mb-3">
-      <div class="col-12">
-        <blockquote>
-          <samp>{{ item.description | markdownify | remove: '<p>' | remove: '</p>' }}</samp>
-          <div class="software-icons mt-n3">
-            {% for icon in item.icons %}
-              {% assign text_lower = icon.text | downcase %}
-              {% if text_lower contains "download" %}
-                {% assign target = "" %}
-              {% else %}
-                {% assign target = "_blank" %}
-              {% endif %}
-              <a aria-label="{{ icon.text }}" href="{{ icon.url }}" target="{{ target }}">
-                <i class="icon {{ icon.type }} {{ icon.icon }} fa-fw" aria-hidden="true" title="{{ icon.text }}" data-toggle="tooltip" data-placement="bottom"></i>
-              </a>
-            {% endfor %}
-          </div>
-        </blockquote>
+        </div>
       </div>
     </div>
   {% endfor %}
