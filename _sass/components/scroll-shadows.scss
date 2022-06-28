@@ -26,7 +26,6 @@
 
     pointer-events: none;
 
-    // background: -webkit-gradient(to top, rgba(255, 255, 255, 0%), rgba(0, 0, 0, 50%));
     background: linear-gradient(to top, rgba(45, 59, 77, 0%), rgba(0, 0, 0, $scroll-shadow-max-alpha));
     // box-shadow: inset 0 8px 8px rgba(0, 0, 0, 50%);
   }
@@ -49,7 +48,6 @@
     height: $scroll-shadow-height;
     margin-top: -$scroll-shadow-height;
 
-    // background: -webkit-gradient(to bottom, rgba(255, 255, 255, 0%), rgba(0, 0, 0, 50%));
     background: linear-gradient(to bottom, rgba(45, 59, 77, 0%), rgba(0, 0, 0, $scroll-shadow-max-alpha));
   }
 }
