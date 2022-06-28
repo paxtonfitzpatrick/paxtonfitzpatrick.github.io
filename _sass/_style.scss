@@ -121,5 +121,12 @@
     &:active {
       background-color: $bg-secondary-hfa;
     }
+
+    // TODO: this currently must come after &:focus for nav pills color to work
+    //  right. Refactor?
+    &.active {
+      color: $bg-secondary;
+      background-color: $fg-secondary;
+    }
   }
 }
