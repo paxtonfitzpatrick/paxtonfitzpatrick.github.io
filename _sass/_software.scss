@@ -9,8 +9,14 @@
     border-left-width: 3px;
 
     code {
-      font-weight: bold;
-      color: #858585 !important;
+      padding: 0.1rem 0.3rem 0.2rem;
+      margin: 0;
+
+      font-size: 85%;
+      color: #000;
+
+      background-color: rgba(175, 184, 193, 20%);
+      border-radius: 0.4rem;
     }
   }
 }
