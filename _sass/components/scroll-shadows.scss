@@ -34,6 +34,8 @@
 
 .scroll-shadow-bottom {
   &::after {
+    @include fade-in($duration: $scroll-shadow-fade-in-duration, $delay: 0s, $timing-func: linear);
+
     content: '';
 
     // stylelint-disable-next-line value-no-vendor-prefix -- needed for Safari
