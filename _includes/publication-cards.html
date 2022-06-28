@@ -5,7 +5,7 @@
         <div class="col-md-2 mb-2 mb-md-0 pr-md-0 text-center">
           <img src="{{ item.image | relative_url }}" alt="X">
         </div>
-        <div class="col-md-10 pl-md-5 text-left">
+        <div class="col-md-10 pl-md-5 pr-2 text-left">
           <h4>{{ item.title | markdownify | remove: '<p>' | remove: '</p>' }}</h4>
           {{ item.text | markdownify }}
           <div class="publication-icons mt-n2">
