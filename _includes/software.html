@@ -2,10 +2,10 @@
   <!-- TODO: fix veritcal margins -->
   <!-- TODO: clean up this whole setup so each item is its own row-->
   {% for item in include.pane.items %}
-    <div class="software-card row">
+    <div class="software-card row no-gutters">
       <div class="col-12">
         <!-- title row -->
-        <div class="row">
+        <div class="row no-gutters">
           <div class="col-12">
             <div class="float-left">
               <p><code>{{ item.title }}</code></p>
@@ -18,7 +18,7 @@
           </div>
         </div>
         <!-- text row -->
-        <div class="row">
+        <div class="row no-gutters">
           <div class="col-12">
             <blockquote>
               {{ item.description | markdownify }}
