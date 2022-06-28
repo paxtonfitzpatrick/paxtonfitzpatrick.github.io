@@ -16,20 +16,9 @@
 }
 
 .software-cards {
+  @include styled-scrollbar($size: 8px, $fg-color: $bg-secondary-hfa, $bg-color: transparent);
   // padding-right: .5em;
   max-height: 40em;
-  overflow-x: hidden;
-
-  // TODO: replace this with @include mixin from _mixins.scss
-  &::-webkit-scrollbar {
-    -webkit-appearance: none;
-    width: 8px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    border-radius: 8px;
-    background-color: $bg-secondary-hfa;
-  }
 
   .software-icons {
     font-size: 1.5em;
