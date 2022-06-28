@@ -451,7 +451,7 @@ window.particleImageDisplay = function(tag_id) {
   const canvas_el = document.createElement('canvas');
   canvas_el.className = canvas_classname;
   canvas_el.style.width = "100%";
-  canvas_el.style.height = "100%";
+  canvas_el.style.height = "100%"; // "calc(100% - 72px)";
   const canvas = document.getElementById(tag_id).appendChild(canvas_el);
 
 
