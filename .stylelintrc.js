@@ -166,6 +166,7 @@ module.exports = {
         {
           properties: [
             'all',
+            'content',
           ],
         },
         {
@@ -398,7 +399,6 @@ module.exports = {
             'caption-side',
             'border-spacing',
             'border-collapse',
-            'content',
             'quotes',
             'counter-reset',
             'counter-increment',
