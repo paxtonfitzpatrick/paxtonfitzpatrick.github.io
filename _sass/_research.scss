@@ -4,10 +4,6 @@
   @include styled-scrollbar($size: 8px, $fg-color: $bg-primary-hfa, $bg-color: transparent);
 
   max-height: 40em;
-  // account for width of vertical scrollbar to avoid horizontal scrollbar and
-  // keep text from being awkwardly close to it (unlike overflow-x: hidden;).
-  // 15px comes from -15px margin of .row children
-  padding-right: 15px;
   overflow-y: auto;
 
   .footnote {
