@@ -32,7 +32,7 @@ module.exports = {
       },
     ],
     // super strict, doesn't work well with component model
-    'no-descending-specificity': false,
+    'no-descending-specificity': null,
     'order/order': [
       [
         'custom-properties',
@@ -54,6 +54,7 @@ module.exports = {
           type: 'at-rule',
           name: 'include',
           hasBlock: false,
+          parameter: /^[\w-]+\(.+\)$/,
         },
         // regular property declarations
         'declarations',
@@ -164,6 +165,8 @@ module.exports = {
     'order/properties-order': [
       [
         {
+          emptyLineBefore: 'always',
+          noEmptyLineBetween: true,
           properties: [
             'all',
             'content',
@@ -560,7 +563,7 @@ module.exports = {
         emptyLineMinimumPropertyThreshold: 5,
       },
     ],
-    'order/properties-alphabetical-order': false,
+    'order/properties-alphabetical-order': null,
     'plugin/declaration-block-no-ignored-properties': true,
     'plugin/stylelint-group-selectors': true,
     'scss/double-slash-comment-empty-line-before': [
