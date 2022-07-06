@@ -43,6 +43,17 @@
   margin-top: 1rem;
 }
 
+.software-heading {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 0.5rem;
+}
+
 .software-title {
   // margin-bottom: -1.5rem;
   font-size: inherit;
@@ -50,8 +61,7 @@
 }
 
 .software-role {
-  // TODO: fix this
-  float: right;
+  margin-left: auto;  // right-aligned when flex-wrapped to new line
   color: $muted-secondary !important;
+  text-align: right;
 }
-
