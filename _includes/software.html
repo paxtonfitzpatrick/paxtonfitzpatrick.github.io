@@ -4,41 +4,28 @@
   {% for item in include.pane.items %}
     <div class="software-card row no-gutters">
       <div class="col-12">
-        <!-- title row -->
-        <div class="row no-gutters">
-          <div class="col-12">
-            <div class="float-left">
-              <p><code>{{ item.title }}</code></p>
-            </div>
-            {% if item.role %}
-              <div class="float-right">
-                <p><code class="text-muted"># {{ item.role }}</code></p>
-              </div>
-            {%  endif %}
+        <p><code class="software-title">{{ item.title }}</code></p>
+        {% if item.role %}
+          <code class="software-role"># {{ item.role }}</code>
+        {%  endif %}
+        <blockquote>
+          <samp>
+            {{ item.description | markdownify | remove: '<p>' | remove: '</p>' }}
+          </samp>
+          <div class="software-icons">
+            {% for icon in item.icons %}
+              {% assign text_lower = icon.text | downcase %}
+              {% if text_lower contains "download" %}
+                {% assign target = "" %}
+              {% else %}
+                {% assign target = "_blank" %}
+              {% endif %}
+              <a aria-label="{{ icon.text }}" href="{{ icon.url }}" target="{{ target }}">
+                <i class="icon {{ icon.type }} {{ icon.icon }} fa-fw" aria-hidden="true" title="{{ icon.text }}" data-toggle="tooltip" data-placement="bottom"></i>
+              </a>
+            {% endfor %}
           </div>
-        </div>
-        <!-- text row -->
-        <div class="row no-gutters">
-          <div class="col-12">
-            <blockquote>
-              {{ item.description | markdownify }}
-               <!-- icons sub-row -->
-              <div class="software-icons">
-                {% for icon in item.icons %}
-                  {% assign text_lower = icon.text | downcase %}
-                  {% if text_lower contains "download" %}
-                    {% assign target = "" %}
-                  {% else %}
-                    {% assign target = "_blank" %}
-                  {% endif %}
-                  <a aria-label="{{ icon.text }}" href="{{ icon.url }}" target="{{ target }}">
-                    <i class="icon {{ icon.type }} {{ icon.icon }} fa-fw" aria-hidden="true" title="{{ icon.text }}" data-toggle="tooltip" data-placement="bottom"></i>
-                  </a>
-                {% endfor %}
-              </div>
-            </blockquote>
-          </div>
-        </div>
+        </blockquote>
       </div>
     </div>
   {% endfor %}
