@@ -23,6 +23,9 @@ google_analytics:
 theme: null
 safe: true
 markdown: kramdown
+kramdown:
+  syntax_highlighter_opts:
+    disable: true
 sass:
   indentWidth: 4
   style: compressed
