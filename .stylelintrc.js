@@ -138,6 +138,24 @@ module.exports = {
           hasBlock: true,
         },
         {
+          // adjacent sibling combinator
+          type: 'rule',
+          selector: /^\+ ?[\w#.].*$/,
+          name: 'adjacent sibling combinator',
+        },
+        {
+          // general sibling combinator
+          type: 'rule',
+          selector: /^~ ?[\w#.].*$/,
+          name: 'general sibling combinator',
+        },
+        {
+          // child combinator
+          type: 'rule',
+          selector: /^> ?[\w#.].*$/,
+          name: 'child combinator',
+        },
+        {
           // nested tag selectors (w/wo additional selectors)
           type: 'rule',
           selector: /^(?:[a-zA-Z][\w.: -]*,\n\s*)*[a-zA-Z][\w.: -]*$/,
