@@ -42,3 +42,16 @@
 .software-card + .software-card {
   margin-top: 1rem;
 }
+
+.software-title {
+  // margin-bottom: -1.5rem;
+  font-size: inherit;
+  text-align: left;
+}
+
+.software-role {
+  // TODO: fix this
+  float: right;
+  color: $muted-secondary !important;
+}
+
