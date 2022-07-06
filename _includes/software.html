@@ -4,10 +4,12 @@
   {% for item in include.pane.items %}
     <div class="software-card row no-gutters">
       <div class="col-12">
-        <p><code class="software-title">{{ item.title }}</code></p>
-        {% if item.role %}
-          <code class="software-role"># {{ item.role }}</code>
-        {%  endif %}
+        <p>
+          <code class="software-title">{{ item.title }}</code>
+          {% if item.role %}
+            <code class="software-role"># {{ item.role }}</code>
+          {%  endif %}
+        </p>
         <blockquote>
           <samp>
             {{ item.description | markdownify | remove: '<p>' | remove: '</p>' }}
