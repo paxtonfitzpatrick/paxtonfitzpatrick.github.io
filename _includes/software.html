@@ -1,6 +1,4 @@
 <div class="software-cards scroll-shadows text-left">
-  <!-- TODO: fix veritcal margins -->
-  <!-- TODO: clean up this whole setup so each item is its own row-->
   {% for item in include.pane.items %}
     <div class="software-card row no-gutters">
       <div class="col-12 pr-2">
@@ -11,9 +9,7 @@
           {%  endif %}
         </p>
         <blockquote>
-          <samp>
-            {{ item.description | markdownify | remove: '<p>' | remove: '</p>' }}
-          </samp>
+          <p class="software-description">{{ item.description | markdownify | remove: '<p>' | remove: '</p>' }}</p>
           <div class="software-icons">
             {% for icon in item.icons %}
               {% assign text_lower = icon.text | downcase %}
