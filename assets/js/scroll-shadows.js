@@ -2,37 +2,43 @@
   'use strict';
 
   // check whether browser supports passive eventListeners
-  let supportsPassive = false;
+  let passiveOptsOrUseCapture = false;
   try {
     const opts = Object.defineProperty({}, 'passive', {
       // eslint-disable-next-line getter-return
-      get: () => { supportsPassive = true; },
+      get: () => { passiveOptsOrUseCapture = { passive: true }; },
     });
-    window.addEventListener('testPEL', null, opts);
-    window.removeEventListener('testPEL', null, opts);
+    window.addEventListener('checkPEL', null, opts);
+    window.removeEventListener('checkPEL', null, opts);
   } catch (e) {}
 
+  // get elements with "scroll-shadow" class
   const scrollShadowElements = document.getElementsByClassName('scroll-shadows');
 
-  // initialize scroll-shadows elements
+  // initialize scroll shadows
   Array.from(scrollShadowElements).forEach((element) => {
     // div starts out unscrolled, so add bottom shadow
     element.classList.add('scroll-shadow-bottom');
-
-    // add "scroll" eventListeners
+    // attach eventListeners to add/remove shadows on scroll
     element.addEventListener('scroll', () => {
-      const elementScrollTop = element.scrollTop;
+      // destructuring
+      const { classList, offsetHeight, scrollHeight, scrollTop } = element;
 
-      if (elementScrollTop > 0) {
-        element.classList.add('scroll-shadow-top');
-        if (elementScrollTop < element.scrollHeight - element.offsetHeight) {
-          element.classList.add('scroll-shadow-bottom');
+      if (scrollTop > 0) {
+        // if element is scrolled, add top shadow
+        classList.add('scroll-shadow-top');
+        if (scrollTop < scrollHeight - offsetHeight) {
+          // if element is not scrolled all the way to the bottom, also add
+          // bottom shadow
+          classList.add('scroll-shadow-bottom');
         } else {
-          element.classList.remove('scroll-shadow-bottom');
+          // if scrolled to bottom, remove bottom shadow (if present)
+          classList.remove('scroll-shadow-bottom');
         }
       } else {
-        element.classList.remove('scroll-shadow-top');
+        // if element is not scrolled, remove top shadow (if present)
+        classList.remove('scroll-shadow-top');
       }
-    }, supportsPassive ? { passive: true } : false);
+    }, passiveOptsOrUseCapture);
   });
 })();
