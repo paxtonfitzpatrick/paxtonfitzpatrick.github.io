@@ -15,9 +15,8 @@ layout: base
           {% endif %}
           <a aria-label="{{ icon.title }}" href="{{ href }}" target="_blank">
             <span class="header-icon {{ icon.type }} {{ icon.icon }}" aria-hidden="true" title="{{ icon.title }}" data-toggle="tooltip" data-placement="top">
-            {% if icon.type == "custom" %}
-              {% capture customiconpath %}assets/img/{{ icon.icon }}.svg{% endcapture %}
-              {% include_relative {{ customiconpath }} %}
+            {% if icon.type == "svg" %}
+              {% include_relative {{ icon.icon | append: ".svg" | prepend: "assets/img/" | relative_url }} %}
             {% endif %}
             </span>
           </a>

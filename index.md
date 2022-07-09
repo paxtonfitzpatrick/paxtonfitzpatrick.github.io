@@ -22,7 +22,7 @@ header:
       site_data: twitter
     - title: Google Scholar
       icon: google-scholar
-      type: custom
+      type: svg
       site_data: google_scholar
     - title: CV
       icon: fa-file-alt
@@ -221,8 +221,6 @@ sections:
                 caption: Plotly
               - image: hypertools.png
                 caption: Hypertools
-              - image: hypertools.svg
-                caption: Hypertools1
               - image: freesurfer.png
                 caption: FreeSurfer
               - image: boris.png
