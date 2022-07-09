@@ -129,117 +129,119 @@ sections:
         categories:
           - title: Programming & web development
             skills:
-              - image: assets/img/skills/python.png
+              - image: python.png
                 caption: Python
-              - image: assets/img/skills/javascript.png
+              - image: javascript.png
                 caption: JavaScript
-              - image: assets/img/skills/shell.png
+              - image: shell.png
                 caption: Unix shell
-              - image: assets/img/skills/latex.png
+              - image: latex.png
                 caption: LaTeX
-              - image: assets/img/skills/supercollider.png
+              - image: supercollider.png
                 caption: SuperCollider
-              - image: assets/img/skills/html.png
+              - image: html.png
                 caption: HTML
-              - image: assets/img/skills/css.png
+              - image: css.png
                 caption: CSS
-              - image: assets/img/skills/sass.png
+              - image: sass.png
                 caption: Sass/SCSS
-              - image: assets/img/skills/liquid.png
+              - image: liquid.png
                 caption: Liquid
-              - image: assets/img/skills/jekyll.png
+              - image: jekyll.png
                 caption: Jekyll
           - title: Development tools
             skills:
-              - image: assets/img/skills/git.png
+              - image: git.png
                 caption: Git/GitHub
-              - image: assets/img/skills/docker.png
+              - image: docker.png
                 caption: Docker
-              - image: assets/img/skills/db.png
+              - image: db.png
                 caption: SQLite/MySQL/SQLAlchemy
-              - image: assets/img/skills/moab-torque.png
+              - image: moab-torque.png
                 caption: Moab-TORQUE
-              - image: assets/img/skills/conda.png
+              - image: conda.png
                 caption: Conda
-              - image: assets/img/skills/pytest.png
+              - image: pytest.png
                 caption: pytest
-              - image: assets/img/skills/selenium.png
+              - image: selenium.png
                 caption: Selenium
-              - image: assets/img/skills/travis.png
+              - image: travis.png
                 caption: Travis CI
-              - image: assets/img/skills/github-actions.png
+              - image: github-actions.png
                 caption: GitHub Actions
-              - image: assets/img/skills/jupyter.png
+              - image: jupyter.png
                 caption: Jupyter/IPython/ Colaboratory
-              - image: assets/img/skills/packaging.png
+              - image: packaging.png
                 caption: Python packaging
           - title: Experimental design & data collection
             skills:
-              - image: assets/img/skills/jspsych.png
+              - image: jspsych.png
                 caption: jsPsych
-              - image: assets/img/skills/psiturk.png
+              - image: psiturk.png
                 caption: psiTurk
-              - image: assets/img/skills/mturk.png
+              - image: mturk.png
                 caption: Amazon Mechanical Turk
-              - image: assets/img/skills/psychopy.png
+              - image: psychopy.png
                 caption: PsychoPy
-              - image: assets/img/skills/superlab.png
+              - image: superlab.png
                 caption: Cedrus SuperLab
-              - image: assets/img/skills/openbci.png
+              - image: openbci.png
                 caption: OpenBCI
-              - image: assets/img/skills/opensesame.png
+              - image: opensesame.png
                 caption: OpenSesame
-              - image: assets/img/skills/morphx.png
+              - image: morphx.png
                 caption: Norkross MorphX
-              - image: assets/img/skills/qualtrics.png
+              - image: qualtrics.png
                 caption: Qualtrics
           - title: Data analysis & visualization
             skills:
-              - image: assets/img/skills/scipy.png
+              - image: scipy.png
                 caption: SciPy
-              - image: assets/img/skills/numpy.png
+              - image: numpy.png
                 caption: NumPy
-              - image: assets/img/skills/pandas.png
+              - image: pandas.png
                 caption: Pandas
-              - image: assets/img/skills/nltk.png
+              - image: nltk.png
                 caption: NLTK
-              - image: assets/img/skills/statsmodels.png
+              - image: statsmodels.png
                 caption: statsmodels
-              - image: assets/img/skills/sklearn.png
+              - image: sklearn.png
                 caption: Scikit-learn
-              - image: assets/img/skills/nilearn.png
+              - image: nilearn.png
                 caption: Nilearn
-              - image: assets/img/skills/igraph.png
+              - image: igraph.png
                 caption: igraph
-              - image: assets/img/skills/graphia.png
+              - image: graphia.png
                 caption: Graphia
-              - image: assets/img/skills/matplotlib.png
+              - image: matplotlib.png
                 caption: Matplotlib
-              - image: assets/img/skills/seaborn.png
+              - image: seaborn.png
                 caption: Seaborn
-              - image: assets/img/skills/plotly.png
+              - image: plotly.png
                 caption: Plotly
-              - image: assets/img/skills/hypertools.png
+              - image: hypertools.png
                 caption: Hypertools
-              - image: assets/img/skills/freesurfer.png
+              - image: hypertools.svg
+                caption: Hypertools1
+              - image: freesurfer.png
                 caption: FreeSurfer
-              - image: assets/img/skills/boris.png
+              - image: boris.png
                 caption: BORIS
-              - image: assets/img/skills/anvil.png
+              - image: anvil.png
                 caption: ANVIL
           - title: Non-technical
             skills:
-              - image: assets/img/skills/illustrator.png
+              - image: illustrator.png
                 caption: Adobe Illustrator
-              - image: assets/img/skills/photoshop.png
+              - image: photoshop.png
                 caption: Adobe Photoshop
-              - image: assets/img/skills/french.png
+              - image: french.png
                 caption: French
-              - image: assets/img/skills/writing.png
+              - image: writing.png
                 caption: Scientific & expository writing
-              - image: assets/img/skills/speaking.png
+              - image: speaking.png
                 caption: Public speaking
-              - image: assets/img/skills/leadership.png
+              - image: leadership.png
                 caption: Organizational leadership
 
   - type: multipane-filter.html
