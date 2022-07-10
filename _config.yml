@@ -22,6 +22,8 @@ google_analytics:
 # Jekyll build settings
 theme: null
 safe: true
+timezone: America/New_York
+verbose: false
 markdown: kramdown
 kramdown:
   syntax_highlighter_opts:
@@ -36,6 +38,19 @@ plugins:
 exclude:
   - Gemfile
   - Gemfile.lock
+  - package.json
+  - package-lock.json
   - README.md
-  - .idea
-  - node_modules
+  - node_modules/
+  - scratch/
+  # dotfiles are excluded from build by default, but edits to them still trigger
+  # rebuild via jekyll-watch when running jekyll serve or jekyll build --watch
+  # unless explicitly listed here (jekyll-watch also appears not to handle glob
+  # patterns here even though site.exclude supports them)
+  - .DS_Store
+  - .eslintrc.js
+  - .gitignore
+  - .jekyll-metadata
+  - .ruby-version
+  - .stylelintrc.js
+  - .idea/
