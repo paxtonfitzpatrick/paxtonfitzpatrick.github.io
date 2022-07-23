@@ -634,7 +634,6 @@ sections:
     map_embed: https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d721.038682728594!2d-72.28847647071619!3d43.70733339869497!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cb4c9c361e1ddb1%3A0x8b2bba0d5b098fa6!2sMoore%20Psychology%20Bldg%2C%20Hanover%2C%20NH%2003755!5e0!3m2!1sen!2sus!4v1591571050608!5m2!1sen!2sus
 
 footer:
-  background_style: bg-secondary
   credits:
     - Built with [jekyll](https://jekyllrb.com/){:target="_blank"} and
       [GitHub Pages](https://pages.github.com/){:target="_blank"}.

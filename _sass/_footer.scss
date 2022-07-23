@@ -1,5 +1,9 @@
-.footer p {
-  margin-bottom: 0;
+.footer {
+  background-color: $bg-secondary;
+
+  p {
+    margin-bottom: 0;
+  }
 
   a {
     color: $fg-secondary;
