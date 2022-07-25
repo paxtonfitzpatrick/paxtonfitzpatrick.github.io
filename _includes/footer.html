@@ -1,6 +1,6 @@
 {% assign footer = include.page.footer %}
-<footer class="footer py-4 {{ footer.background_style }}">
-  <div class="container small text-center text-muted">
+<footer class="footer py-4">
+  <div class="container small text-center">
     <p class="mb-1">&copy; {{ site.year_created }}&ndash;{{ site.year_last_updated }} {{ site.author }}</p>
     {% for credit in footer.credits %}
       {{ credit | markdownify }}

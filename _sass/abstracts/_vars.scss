@@ -24,6 +24,11 @@ $header-fg: $fg-primary;
 $header-fade-in-duration: 2s;
 $header-fade-in-timing: ease-in;
 
+// footer style
+$footer-bg: $bg-secondary;
+$footer-fg: $muted-secondary;
+$footer-link: $fg-secondary;
+
 // timeline style
 $tl-vertical-padding: 10px;
 $tl-background-color: $bg-secondary;

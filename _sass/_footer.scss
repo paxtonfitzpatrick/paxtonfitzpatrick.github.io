@@ -1,5 +1,6 @@
 .footer {
-  background-color: $bg-secondary;
+  color: $footer-fg;
+  background-color: $footer-bg;
 
   p {
     margin-bottom: 0;
@@ -7,11 +8,5 @@
 
   a {
     color: $fg-secondary;
-
-    &:hover,
-    &:focus,
-    &:active {
-      color: $fg-secondary;
-    }
   }
 }
