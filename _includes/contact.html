@@ -11,18 +11,18 @@
       <h3 class="text-bold">Contact info</h3>
       <p>
         <a href="mailto:{{ site.email }}">
-          <i class="icon fa fa-envelope" aria-hidden="true"></i>
+          <i class="icon fa fa-fw fa-envelope" aria-hidden="true"></i>
           {{ site.email }}
         </a>
       </p>
       <p>
         <a href="{{ site.twitter }}" target="_blank">
-          <i class="icon fab fa-twitter" aria-hidden="true"></i>
+          <i class="icon fab fa-fw fa-twitter" aria-hidden="true"></i>
           @{{ site.twitter | split: "/" | last }}</a>
       </p>
-      <p style="padding-left: 1em; text-indent: -0.5em">
-        <i class="fa fa-map-marker" aria-hidden="true"></i>
-        {{ site.address }}
+      <p>
+        <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i>
+        {{- site.address -}}
       </p>
     </div>
     <div class="col-12 col-lg-8 text-center">
