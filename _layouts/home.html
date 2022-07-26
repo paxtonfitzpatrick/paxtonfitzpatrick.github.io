@@ -1,12 +1,20 @@
----
-layout: base
----
+<!DOCTYPE html>
+<html lang="en-US">
+{% include head.html site=site page=page %}
 
-{% include header.html site=site page=page %}
+<body id="page-top">
+  {% include nav.html site=site page=page %}
 
-{% for section in page.sections %}
-  {% include {{ section.type }} section=section site=site page=page %}
-{% endfor %}
+  <main aria-label="Content">
+    {% include header.html site=site page=page %}
 
+    {% for section in page.sections %}
+      {% include {{ section.type }} section=section site=site page=page %}
+    {% endfor %}
 
-{{ content }}
+    {{ content }}
+  </main>
+
+  {% include footer.html site=site page=page %}
+</body>
+</html>
