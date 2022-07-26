@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  {% comment %}<title>{{ site.title }}</title>{% endcomment %}
+  <title>{{ site.title }}</title>
   <!-- Favicon -->
   <link rel="apple-touch-icon" sizes="180x180" href="{{ 'assets/img/favicon/apple-touch-icon.png' | relative_url }}">
   <link rel="icon" type="image/png" sizes="32x32" href="{{ 'assets/img/favicon/favicon-32x32.png' | relative_url }}">
@@ -49,18 +49,17 @@
   </script>
 
   {% comment %}
-    TODO: this seems to be generating another <title>tag... look into jekyll-seo-tag plugin to figure out why
-     - also check for other duplicate tags
+    suppress plugin-generated <title> tag in favor of simpler version above --
+    jekyll-seo-plugin's auto title behavior is annoying and doesn't make much
+    sense for single-page sites
   {% endcomment %}
-  {% seo %}
+  {% seo title=false %}
 
-  {% if site.google_analytics.enabled %}
+  {% if jekyll.environment == "production" %}
     {% comment %}
-      TODO: switch to checking if jekyll.environment == "production" instead of manually
-       switching on and off
-       - defaults to "development" (https://jekyllrb.com/docs/configuration/environments/)
-       - github-pages auto deployment sets it to "production"
-         (https://github.com/actions/jekyll-build-pages/blob/9b882383c88a22eef81e9c1a5a232c2ff9a6672b/entrypoint.sh#L17)
+      - defaults to "development" (https://jekyllrb.com/docs/configuration/environments/)
+      - github-pages auto deployment sets it to "production"
+        (https://github.com/actions/jekyll-build-pages/blob/9b882383c88a22eef81e9c1a5a232c2ff9a6672b/entrypoint.sh#L17)
     {% endcomment %}
     {% include analytics.html %}
   {% endif %}

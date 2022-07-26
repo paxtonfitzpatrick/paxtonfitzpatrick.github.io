@@ -16,10 +16,11 @@ layout: base
           {% case icon.site_data %}
             {% when "email" %}
               {% assign href = href | prepend: "mailto:" %}
-            {% when "cv_path" %}
+            {% when "cv_url" %}
               {% assign href = href | relative_url %}
           {% endcase %}
-          <a aria-label="{{ icon.title }}" href="{{ href }}" target="_blank">
+
+          <a href="{{ href }}" target="_blank" aria-label="{{ icon.title }}">
             <span class="header-icon {{ icon.type }} {{ icon.icon }}"
                   data-toggle="tooltip"
                   data-placement="top"
@@ -40,5 +41,6 @@ layout: base
 {% for section in page.sections %}
   {% include {{ section.type }} section=section site=site page=page %}
 {% endfor %}
+
 
 {{ content }}

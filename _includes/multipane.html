@@ -27,7 +27,7 @@
       <div class="col-12 text-center">
         <h1>{{ section.title }}</h1>
         <hr class="divider my-4">
-        {% if section.before_text %}
+        {% if section contains "before_text" %}
           <h5 class="mb-0">
             {{- section.before_text | newline_to_br | markdownify | remove: "<p>" | remove: "</p>" -}}
           </h5>
@@ -60,7 +60,7 @@
             {% assign tab_class = pane_attrs[2] %}
 
             <div id="{{ href }}" class="{{ tab_class }}">
-              {% if pane.before_text %}
+              {% if pane contains "before_text" %}
                 <h6 class="mt-4">
                   {{- pane.before_text | markdownify | remove: "<p>" | remove: "</p>" -}}
                 </h6>
@@ -68,7 +68,7 @@
 
               {% include {{ pane.type }} pane=pane %}
 
-              {% if pane.after_text %}
+              {% if pane contains "after_text" %}
                 <p class="text-muted mt-4">
                   {{- pane.after_text | markdownify | remove: "<p>" | remove: "</p>" -}}
                 </p>
@@ -78,7 +78,7 @@
         </div>
       </div>
     </div>
-    {% if section.after_text %}
+    {% if section contains "after_text" %}
       <div class="row">
         <div class="col-12 text-center">
           <hr class="divider my-4">

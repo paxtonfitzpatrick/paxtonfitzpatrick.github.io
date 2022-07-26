@@ -1,7 +1,7 @@
 {% assign footer = include.page.footer %}
 
 {%- capture copyright -%}
-  &copy; {{ site.year_created }}&ndash;{{ site.year_last_updated }} {{ site.author }}
+  &copy; {{ site.year_created }}&ndash;{{ site.year_last_updated }} {{ site.author.name }}
 {%- endcapture -%}
 
 <footer class="footer py-4">

@@ -1,5 +1,5 @@
 <!-- Global site tag (gtag.js) - Google Analytics -->
-{% assign src_url = "https://www.googletagmanager.com/gtag/js?id=" | append: site.google_analytics.id %}
+{% assign src_url = "https://www.googletagmanager.com/gtag/js?id=" | append: site.google_analytics_id %}
 
 <script async src="{{ src_url }}"></script>
 <script>
@@ -7,5 +7,5 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', '{{ site.google_analytics.id }}');
+  gtag('config', '{{ site.google_analytics_id }}');
 </script>

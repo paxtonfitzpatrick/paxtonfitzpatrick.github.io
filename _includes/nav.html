@@ -1,7 +1,7 @@
 <nav id="mainNav" class="navbar navbar-expand-md navbar-light fixed-top py-3">
   <div class="container">
     <a class="navbar-brand js-scroll-trigger" href="#page-top">
-      {{- site.title -}}
+      {{- page.header.title -}}
     </a>
     <button class="navbar-toggler navbar-toggler-right" type="button"
             data-toggle="collapse"
@@ -22,7 +22,7 @@
           </li>
         {% endfor %}
         <li class="nav-item">
-          {% assign href = site.cv_path | relative_url %}
+          {% assign href = site.cv_url | relative_url %}
           <a class="nav-link" href="{{ href }}" target="_blank">CV</a>
         </li>
       </ul>

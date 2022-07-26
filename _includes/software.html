@@ -4,7 +4,7 @@
       <div class="col-12 pr-2">
         <p class="software-heading">
           <code class="software-title">{{ item.title }}</code>
-          {% if item.role %}
+          {% if item contains "role" %}
             <code class="software-role"># {{ item.role }}</code>
           {%  endif %}
         </p>

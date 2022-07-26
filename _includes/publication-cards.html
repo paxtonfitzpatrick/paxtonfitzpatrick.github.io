@@ -11,7 +11,7 @@
           </h4>
           {{ item.text | markdownify }}
           <div class="publication-icons mt-n2">
-            {% if item.pdf_url %}
+            {% if item contains "pdf_url" %}
               <a aria-label="PDF" href="{{ item.pdf_url }}" target="_blank">
                 <i class="icon fas fa-file-pdf fa-fw"
                    data-toggle="tooltip"
@@ -20,7 +20,7 @@
                    aria-hidden="true"></i>
               </a>
             {% endif %}
-            {% if item.slides_url %}
+            {% if item contains "slides_url" %}
               <a aria-label="Slides" href="{{ item.slides_url }}" target="_blank">
                 <i class="icon fas fa-chalkboard fa-fw"
                    data-toggle="tooltip"
@@ -29,7 +29,7 @@
                    aria-hidden="true"></i>
               </a>
             {% endif %}
-            {% if item.code_url %}
+            {% if item contains "code_url" %}
               <a aria-label="Code" href="{{ item.code_url }}" target="_blank">
                 <i class="icon fas fa-file-code fa-fw"
                    data-toggle="tooltip"
@@ -38,7 +38,7 @@
                    aria-hidden="true"></i>
               </a>
             {% endif %}
-            {% if item.data_url %}
+            {% if item contains "data_url" %}
               <a aria-label="Data" href="{{ item.data_url }}" target="_blank">
                 <i class="icon fas fa-database fa-fw"
                    data-toggle="tooltip"
