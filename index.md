@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: default
 
 header:
   title: Paxton Fitzpatrick
