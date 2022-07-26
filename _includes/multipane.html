@@ -1,3 +1,27 @@
+{%- capture panes_array -%}
+  {%- for pane in section.panes -%}
+
+    {{ pane.title | downcase | replace: " ", "_" | replace: "'", "x" }}||
+
+    {%- assign nav_class = "nav-link" -%}
+    {%- assign pane_class = "tab-pane fade" -%}
+
+    {%- if forloop.first -%}
+      {%- assign nav_class = nav_class | append: " active" -%}
+      {%- assign pane_class = pane_class | append: " active show" -%}
+    {%- endif -%}
+
+    {{ nav_class }}||{{ pane_class }}
+
+    {%- unless forloop.last -%}
+      ::
+    {%- endunless -%}
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- assign panes_array = panes_array | split: "::" -%}
+
+
 <section id="{{ section.section_id }}" class="page-section {{ section.background_style }}">
   <div class="container">
     <div class="row">
@@ -5,7 +29,9 @@
         <h1>{{ section.title }}</h1>
         <hr class="divider my-4">
         {% if section.before_text %}
-          <h5 class="mb-0">{{ section.before_text | newline_to_br | markdownify | remove: '<p>' | remove: '</p>' }}</h5>
+          <h5 class="mb-0">
+            {{- section.before_text | newline_to_br | markdownify | remove: "<p>" | remove: "</p>" -}}
+          </h5>
         {% endif %}
       </div>
     </div>
@@ -13,28 +39,41 @@
       <div class="col-12">
         <ul class="nav nav-pills justify-content-center my-4" role="tablist">
           {% for pane in section.panes %}
-            {% assign href = pane.title | downcase | replace: ' ', '_' | replace: "'", 'x' %}
+            {% assign pane_attrs = panes_array[forloop.index0] | split: "||" %}
+            {% assign href = pane_attrs[0] | prepend: "#" %}
+            {% assign nav_class = pane_attrs[1] %}
+
             <li class="nav-item">
-              <a class="nav-link {% if forloop.first %}active{% endif %}" data-toggle="pill" href="#{{ href }}">
-                {{ pane.title }}
+              <a class="{{ nav_class }}" href="{{ href }}" data-toggle="pill">
+                {{- pane.title -}}
               </a>
             </li>
           {% endfor %}
         </ul>
       </div>
     </div>
+
     <div class="row">
       <div class="col-12">
         <div class="tab-content mb-4">
           {% for pane in section.panes %}
-            {% assign href = pane.title | downcase | replace: ' ', '_' | replace: "'", 'x' %}
-            <div class="tab-pane fade {% if forloop.first %}active show{% endif %}" id="{{ href }}">
+            {% assign pane_attrs = panes_array[forloop.index0] | split: "||" %}
+            {% assign href = pane_attrs[0] %}
+            {% assign tab_class = pane_attrs[2] %}
+
+            <div id="{{ href }}" class="{{ tab_class }}">
               {% if pane.before_text %}
-                <h6 class="mt-4">{{ pane.before_text | markdownify | remove: '<p>' | remove: '</p>' }}</h6>
+                <h6 class="mt-4">
+                  {{- pane.before_text | markdownify | remove: "<p>" | remove: "</p>" -}}
+                </h6>
               {% endif %}
+
               {% include {{ pane.type }} pane=pane %}
+
               {% if pane.after_text %}
-                <p class="text-muted mt-4">{{ pane.after_text | markdownify | remove: "<p>" | remove: "</p>" }}</p>
+                <p class="text-muted mt-4">
+                  {{- pane.after_text | markdownify | remove: "<p>" | remove: "</p>" -}}
+                </p>
               {% endif %}
             </div>
           {% endfor %}
@@ -45,7 +84,9 @@
       <div class="row">
         <div class="col-12 text-center">
           <hr class="divider my-4">
-          <p class="mb-0">{{ section.after_text | markdownify | remove: '<p>' | remove: '</p>' }}</p>
+          <p class="mb-0">
+            {{- section.after_text | markdownify | remove: "<p>" | remove: "</p>" -}}
+          </p>
         </div>
       </div>
     {% endif %}
