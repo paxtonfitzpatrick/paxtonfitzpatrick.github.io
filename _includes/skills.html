@@ -1,16 +1,21 @@
 <div class="skills">
   {% for category in include.pane.categories %}
-  <div class="row mb-4">
-    <div class="col-12">
-      <h5 class="text-left font-weight-bold">{{ category.title }}</h5>
-      <div class="row align-items-center">
-        {% for skill in category.skills %}
-          <div class="col-3 col-sm-2">
-            <img src="{{ skill.image | relative_url }}" alt="{{ skill.caption }}" title="{{ skill.caption }}" data-toggle="tooltip" data-placement="top" data-offset="0,-15px">
-          </div>
-        {% endfor %}
+    <div class="row mb-4">
+      <div class="col-12">
+        <h5 class="text-left font-weight-bold">{{ category.title }}</h5>
+        <div class="row align-items-center">
+          {% for skill in category.skills %}
+            <div class="col-3 col-sm-2">
+              <img src="{{ skill.image | prepend: "assets/img/skills/" | relative_url }}"
+                   alt="{{ skill.caption }}"
+                   data-toggle="tooltip"
+                   data-placement="top"
+                   data-offset="0,-15px"
+                   title="{{ skill.caption }}">
+            </div>
+          {% endfor %}
+        </div>
       </div>
     </div>
-  </div>
   {% endfor %}
 </div>

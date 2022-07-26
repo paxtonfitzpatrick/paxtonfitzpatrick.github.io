@@ -9,17 +9,23 @@
           {%  endif %}
         </p>
         <blockquote>
-          <p class="software-description">{{ item.description | markdownify | remove: '<p>' | remove: '</p>' }}</p>
+          <p class="software-description">
+            {{- item.description | markdownify | remove: '<p>' | remove: '</p>' -}}
+          </p>
           <div class="software-icons">
             {% for icon in item.icons %}
               {% assign text_lower = icon.text | downcase %}
-              {% if text_lower contains "download" %}
-                {% assign target = "" %}
-              {% else %}
+              {% assign target = "" %}
+
+              {% unless text_lower contains "download" %}
                 {% assign target = "_blank" %}
-              {% endif %}
+              {% endunless %}
               <a aria-label="{{ icon.text }}" href="{{ icon.url }}" target="{{ target }}">
-                <i class="icon {{ icon.type }} {{ icon.icon }} fa-fw" aria-hidden="true" title="{{ icon.text }}" data-toggle="tooltip" data-placement="bottom"></i>
+                <i class="icon {{ icon.type }} {{ icon.icon }} fa-fw"
+                   data-toggle="tooltip"
+                   data-placement="bottom"
+                   title="{{ icon.text }}"
+                   aria-hidden="true"></i>
               </a>
             {% endfor %}
           </div>

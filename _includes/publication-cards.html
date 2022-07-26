@@ -6,27 +6,45 @@
           <img src="{{ item.image | relative_url }}" alt="X">
         </div>
         <div class="col-md-10 pl-md-5 pr-2 text-left">
-          <h4>{{ item.title | markdownify | remove: '<p>' | remove: '</p>' }}</h4>
+          <h4>
+            {{- item.title | markdownify | remove: '<p>' | remove: '</p>' -}}
+          </h4>
           {{ item.text | markdownify }}
           <div class="publication-icons mt-n2">
             {% if item.pdf_url %}
               <a aria-label="PDF" href="{{ item.pdf_url }}" target="_blank">
-                <i class="icon fas fa-file-pdf fa-fw" aria-hidden="true" title="PDF" data-toggle="tooltip" data-placement="bottom"></i>
+                <i class="icon fas fa-file-pdf fa-fw"
+                   data-toggle="tooltip"
+                   data-placement="bottom"
+                   title="PDF"
+                   aria-hidden="true"></i>
               </a>
             {% endif %}
             {% if item.slides_url %}
               <a aria-label="Slides" href="{{ item.slides_url }}" target="_blank">
-                <i class="icon fas fa-chalkboard fa-fw" aria-hidden="true" title="Slides" data-toggle="tooltip" data-placement="bottom"></i>
+                <i class="icon fas fa-chalkboard fa-fw"
+                   data-toggle="tooltip"
+                   data-placement="bottom"
+                   title="Slides"
+                   aria-hidden="true"></i>
               </a>
             {% endif %}
             {% if item.code_url %}
               <a aria-label="Code" href="{{ item.code_url }}" target="_blank">
-                <i class="icon fas fa-file-code fa-fw" aria-hidden="true" title="Code" data-toggle="tooltip" data-placement="bottom"></i>
+                <i class="icon fas fa-file-code fa-fw"
+                   data-toggle="tooltip"
+                   data-placement="bottom"
+                   title="Code"
+                   aria-hidden="true"></i>
               </a>
             {% endif %}
             {% if item.data_url %}
               <a aria-label="Data" href="{{ item.data_url }}" target="_blank">
-                <i class="icon fas fa-database fa-fw" aria-hidden="true" title="Data" data-toggle="tooltip" data-placement="bottom"></i>
+                <i class="icon fas fa-database fa-fw"
+                   data-toggle="tooltip"
+                   data-placement="bottom"
+                   title="Data"
+                   aria-hidden="true"></i>
               </a>
             {% endif %}
           </div>

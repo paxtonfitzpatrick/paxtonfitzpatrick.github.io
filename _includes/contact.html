@@ -1,34 +1,40 @@
+{% comment %}
+  FIXME: remove container and refactor margins/padding like other content
+  TODO: fix leading whitespace on twitter handle (and email, but invisible)
+{% endcomment %}
+
 <section id="{{ section.section_id }}" class="page-section {{ section.background_style }}">
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-lg-8 text-center">
-      <h1 class="mt-0">{{ section.title }}</h1>
-      <hr class="divider my-4">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center">
+        <h1 class="mt-0">{{ section.title }}</h1>
+        <hr class="divider my-4">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-auto col-lg-4">
+        <h3>Contact info</h3>
+        <p>
+          <a href="mailto:{{ site.email }}">
+            <i class="icon fa fa-fw fa-envelope" aria-hidden="true"></i>
+            {{- site.email -}}
+          </a>
+        </p>
+        <p>
+          <a href="{{ site.twitter }}" target="_blank">
+            <i class="icon fab fa-fw fa-twitter" aria-hidden="true"></i>
+            {{- site.twitter | split: "/" | last | prepend: "@" -}}
+          </a>
+        </p>
+        <p>
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i>
+          {{- site.address -}}
+        </p>
+      </div>
+      <div class="col-12 col-lg-8 text-center">
+        <h3>Where am I?</h3>
+        <iframe src="{{ section.map_embed }}"></iframe>
+      </div>
     </div>
   </div>
-  <div class="row text-left">
-    <div class="col-auto col-lg-4" id="contact-info">
-      <h3 class="text-bold">Contact info</h3>
-      <p>
-        <a href="mailto:{{ site.email }}">
-          <i class="icon fa fa-fw fa-envelope" aria-hidden="true"></i>
-          {{ site.email }}
-        </a>
-      </p>
-      <p>
-        <a href="{{ site.twitter }}" target="_blank">
-          <i class="icon fab fa-fw fa-twitter" aria-hidden="true"></i>
-          @{{ site.twitter | split: "/" | last }}</a>
-      </p>
-      <p>
-        <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i>
-        {{- site.address -}}
-      </p>
-    </div>
-    <div class="col-12 col-lg-8 text-center">
-      <h3 class="text-bold">Where am I?</h3>
-      <iframe src="{{ section.map_embed }}"></iframe>
-    </div>
-  </div>
-</div>
 </section>

@@ -1,18 +1,29 @@
-<nav class="navbar navbar-expand-md navbar-light fixed-top py-3" id="mainNav">
+<nav id="mainNav" class="navbar navbar-expand-md navbar-light fixed-top py-3">
   <div class="container">
-    <a class="navbar-brand js-scroll-trigger" href="#page-top">{{ site.title }}</a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand js-scroll-trigger" href="#page-top">
+      {{- site.title -}}
+    </a>
+    <button class="navbar-toggler navbar-toggler-right" type="button"
+            data-toggle="collapse"
+            data-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
+    <div id="navbarResponsive" class="collapse navbar-collapse">
       <ul class="navbar-nav ml-auto my-2 my-md-0">
         {% for section in include.page.sections %}
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#{{ section.section_id }}">{{ section.title }}</a>
+            {% assign href = section.section_id | prepend: "#" %}
+            <a class="nav-link js-scroll-trigger" href="{{ href }}">
+              {{- section.title -}}
+            </a>
           </li>
         {% endfor %}
         <li class="nav-item">
-          <a class="nav-link" href="{{ site.cv_path | relative_url }}" target="_blank">CV</a>
+          {% assign href = site.cv_path | relative_url %}
+          <a class="nav-link" href="{{ href }}" target="_blank">CV</a>
         </li>
       </ul>
     </div>

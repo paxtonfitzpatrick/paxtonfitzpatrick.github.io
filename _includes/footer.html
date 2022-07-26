@@ -1,7 +1,12 @@
 {% assign footer = include.page.footer %}
+
+{%- capture copyright -%}
+  &copy; {{ site.year_created }}&ndash;{{ site.year_last_updated }} {{ site.author }}
+{%- endcapture -%}
+
 <footer class="footer py-4">
   <div class="container small text-center">
-    <p class="mb-1">&copy; {{ site.year_created }}&ndash;{{ site.year_last_updated }} {{ site.author }}</p>
+    <p class="mb-1">{{ copyright }}</p>
     {% for credit in footer.credits %}
       {{ credit | markdownify }}
     {% endfor %}

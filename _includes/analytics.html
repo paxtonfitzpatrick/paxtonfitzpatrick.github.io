@@ -1,5 +1,7 @@
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics.id }}"></script>
+{% assign src_url = "https://www.googletagmanager.com/gtag/js?id=" | append: site.google_analytics.id %}
+
+<script async src="{{ src_url }}"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}

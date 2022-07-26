@@ -1,6 +1,5 @@
 {%- capture panes_array -%}
   {%- for pane in section.panes -%}
-
     {{ pane.title | downcase | replace: " ", "_" | replace: "'", "x" }}||
 
     {%- assign nav_class = "nav-link" -%}
@@ -52,7 +51,6 @@
         </ul>
       </div>
     </div>
-
     <div class="row">
       <div class="col-12">
         <div class="tab-content mb-4">
