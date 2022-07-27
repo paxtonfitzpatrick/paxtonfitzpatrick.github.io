@@ -17,6 +17,22 @@ module.exports = {
   reportInvalidScopeDisables: true,
   reportNeedlessDisables: true,
   rules: {
+    'at-rule-empty-line-before': [
+      'always',
+      {
+        except: [
+          'blockless-after-same-name-blockless',
+          'first-nested'
+        ],
+        ignore: [
+          'after-comment'
+        ],
+        ignoreAtRules: [
+          'else',
+          'import'
+        ]
+      }
+    ],
     // TODO: change this to 'modern' once github-pages gem issue is resolved
     //  (see main.scss)
     'color-function-notation': 'legacy',
