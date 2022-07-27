@@ -1,9 +1,5 @@
 ---
 ---
-
-// TODO: UPDATE CREATIVE.SCSS WITH SCRATCH/CREATIVE-UPDATED.SCSS. MEDIA QUERY
-//  FOR MAINNAV WAS CHANGED FROM LARGE TO MEDIUM AND HAD TO REVERT FOR DEBUGGING
-
 // don't complain about @charset not being on the first line -- need to include
 // front matter first so jekyll knows to parse the file
 // noinspection CssInvalidCharsetRule
@@ -23,12 +19,17 @@
 
 // Import partials from `sass_dir` (defaults to `_sass`)
 
+// vendored base styles
+@import
+  'vendors/creative';
+
 // global variables & mixins
 @import
   'abstracts/vars',
   'abstracts/mixins';
 
-@import 'components/scroll-shadows';
+@import
+  'components/scroll-shadows';
 
 // placeholder comment
 @import
@@ -42,5 +43,4 @@
   'research',
   'software',
   'contact',
-  'footer'
-;
+  'footer';
