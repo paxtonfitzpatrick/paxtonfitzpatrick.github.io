@@ -148,7 +148,7 @@ google_site_verification: fSAhYufIxAuyDcwQQb_LFrG15bGwALzIdQ0T9MEtB3U
 
 ############################ jekyll-sass-converter #############################
 sass:
-  sass_dir: _sass
+  sass_dir: assets/sass
   style: compressed
   # not valid until v2.0
   implementation: sassc

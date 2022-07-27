@@ -9,15 +9,6 @@
     background-color: $header-bg;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 15%);
 
-    .navbar-brand,
-    .navbar-nav .nav-item .nav-link {
-      color: $header-fg;
-
-      &:hover {
-        color: $fg-primary-hfa;
-      }
-    }
-
     &.navbar-scrolled {
       background-color: rgba(255, 255, 255, 70%);
       box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 15%);
@@ -29,6 +20,15 @@
         &:hover {
           color: $bg-primary-hfa;
         }
+      }
+    }
+
+    .navbar-brand,
+    .navbar-nav .nav-item .nav-link {
+      color: $header-fg;
+
+      &:hover {
+        color: $fg-primary-hfa;
       }
     }
   }
