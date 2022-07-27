@@ -106,8 +106,8 @@ detach: false
 #                                PLUGIN OPTIONS                                #
 ################################################################################
 plugins:
-#  - jekyll-sitemap
   - jekyll-seo-tag
+  - jekyll-sitemap
 
 
 ################################ jekyll-seo-tag ################################
