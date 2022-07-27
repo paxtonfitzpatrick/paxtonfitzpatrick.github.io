@@ -75,7 +75,7 @@ strict_front_matter: true
 liquid:
   error_mode: warn
   strict_filters: true
-  strict_variables: true
+  strict_variables: false
 
 markdown: kramdown
 kramdown:
@@ -84,6 +84,16 @@ kramdown:
   gfm_quirks: [paragraph_end]
   syntax_highlighter_opts:
     disable: true
+
+compress_html:
+  clippings: all
+  comments: ["<!-- ", " -->"]
+  endings: all
+  ignore:
+    envs: [no_compress]
+  blanklines: false
+  profile: false
+  startings: [html, head, body]
 
 
 ############################# local server options #############################
