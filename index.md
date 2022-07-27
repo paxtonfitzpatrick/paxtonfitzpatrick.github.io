@@ -35,8 +35,8 @@ sections:
     background_style: bg-secondary
     title: About me
     before_text: >
-     I build computational models of human learning and memory, and create software tools for research, data science, 
-     and education.<br/><br/>I'm currently a Ph.D. student in cognitive neuroscience at 
+     I build computational models of human learning and memory, and create software tools for research and education.
+     <br/><br/>I'm currently a Ph.D. student in Cognitive Neuroscience at 
      [Dartmouth College](https://home.dartmouth.edu){:target="_blank"}, working with 
      [Dr. Jeremy Manning](https://pbs.dartmouth.edu/people/jeremy-rothman-manning){:target="_blank"} and 
      [Dr. Luke Chang](https://pbs.dartmouth.edu/people/luke-j-chang-0){:target="_blank"}.
