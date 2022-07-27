@@ -26,7 +26,7 @@
     }
   }
 
-  p a {
+  a {
     color: $fg-primary-link;
     text-decoration: none;
 
@@ -50,21 +50,26 @@
   .nav-pills .nav-link {
     color: $fg-primary;
 
-    &.active {
-      color: $bg-primary;
-      background-color: $fg-primary;
-    }
-
     &:hover,
     &:focus,
     &:active {
+      text-decoration: none;
       background-color: $bg-primary-hfa;
+    }
+
+    // TODO: this currently must come after &:focus for nav pills color to work
+    //  right. Refactor?
+    &.active {
+      color: $bg-primary;
+      background-color: $fg-primary;
     }
   }
 }
 
 .bg-secondary {
   color: $fg-secondary;
+  // has to have !important to override identical declaration in creative.scss
+  // TODO: remove unused declarations from vendor stylesheet
   background-color: $bg-secondary !important;
 
   code {
@@ -87,7 +92,7 @@
     }
   }
 
-  p a {
+  a {
     color: $fg-secondary-link;
     text-decoration: none;
 
@@ -111,14 +116,10 @@
   .nav-pills .nav-link {
     color: $fg-secondary;
 
-    &.active {
-      color: $bg-secondary;
-      background-color: $fg-secondary;
-    }
-
     &:hover,
     &:focus,
     &:active {
+      text-decoration: none;
       background-color: $bg-secondary-hfa;
     }
 

@@ -21,6 +21,12 @@ module.exports = {
     sourceType: 'script',
     ecmaVersion: 2019,
   },
+  overrides: [
+    {
+      files: 'assets/js/particle-image/*',
+      parserOptions: { sourceType: 'module' },
+    },
+  ],
   rules: {
     'no-empty': ['error', { allowEmptyCatch: true }],
     // https://eslint.org/docs/latest/rules/object-curly-newline

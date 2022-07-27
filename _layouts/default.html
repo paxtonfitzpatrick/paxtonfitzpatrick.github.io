@@ -1,7 +1,3 @@
----
-layout: compress
----
-
 <!DOCTYPE html>
 <html lang="en-US">
 {% include head.html site=site page=page %}
@@ -9,15 +5,13 @@ layout: compress
 <body id="page-top">
   {% include nav.html site=site page=page %}
 
-  <main aria-label="Content">
-    {% include header.html site=site page=page %}
+  {% include header.html site=site page=page %}
 
-    {% for section in page.sections %}
-      {% include {{ section.type }} section=section site=site page=page %}
-    {% endfor %}
+  {% for section in page.sections %}
+    {% include {{ section.type }} section=section site=site page=page %}
+  {% endfor %}
 
-    {{ content }}
-  </main>
+  {{ content }}
 
   {% include footer.html site=site page=page %}
 </body>
