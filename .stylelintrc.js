@@ -113,7 +113,7 @@ module.exports = {
         {
           // other modifier classes
           type: 'rule',
-          selector: /^&\.[a-zA-Z].+$/,
+          selector: /^&\.[a-zA-Z][^,]+(?:,\n\s*[^,\s]+)*$/,
           name: 'additional modifier class',
         },
         {
