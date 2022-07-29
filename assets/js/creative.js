@@ -1,6 +1,8 @@
 (function($) {
   "use strict"; // Start of use strict
 
+  const navbarHeight = document.getElementById('main-nav').offsetHeight;
+
   // Smooth scrolling using jQuery easing
   $('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function() {
     if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
@@ -8,7 +10,7 @@
       target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
       if (target.length) {
         $('html, body').animate({
-          scrollTop: (target.offset().top - 72)
+          scrollTop: (target.offset().top - navbarHeight)
         }, 1000, "easeInOutExpo");
         return false;
       }
@@ -21,9 +23,12 @@
   });
 
   // Activate scrollspy to add active class to navbar items on scroll
+
+  // scrollspy offset must be greater than (not equal to) navbar height for
+  // current section to be highlighted correctly after scrolling to it
   $('body').scrollspy({
     target: '#mainNav',
-    offset: 75
+    offset: navbarHeight + 1
   });
 
   // Collapse Navbar

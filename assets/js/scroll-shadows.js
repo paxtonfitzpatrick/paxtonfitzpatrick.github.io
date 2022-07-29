@@ -12,7 +12,7 @@
     window.removeEventListener('checkPEL', null, opts);
   } catch (e) {}
 
-  // get elements with "scroll-shadow" class
+  // get elements with "scroll-shadows" class
   const scrollShadowElements = document.getElementsByClassName('scroll-shadows');
 
   // initialize scroll shadows
