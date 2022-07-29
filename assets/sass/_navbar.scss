@@ -1,36 +1,87 @@
 // TODO: extract only necessary parts of creative.scss and refactor this
 
-// stylelint-disable selector-id-pattern, selector-max-compound-selectors --
-//   - #mainNav ID comes from vendor CSS
-//   - selector for .nav-link needs all 3 classes to take precedence over vendor
-//     style
-@media (min-width: 768px) {
-  #mainNav {
-    background-color: $header-bg;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 15%);
+#main-nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030; // navbar z-index value used by bootstrap/creative.scss
 
-    &.navbar-scrolled {
-      background-color: rgba(255, 255, 255, 70%);
-      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 15%);
+  padding: 1rem;
 
-      .navbar-brand,
-      .navbar-nav .nav-item .nav-link {
-        color: $header-bg;
+  font-weight: 700;
 
-        &:hover {
-          color: $bg-primary-hfa;
-        }
-      }
-    }
+  background-color: $navbar-mobile-bg;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 15%);
 
-    .navbar-brand,
-    .navbar-nav .nav-item .nav-link {
-      color: $header-fg;
+  .navbar-brand {
+    // navbar-brand always has "active" color, even when not .active or :active
+    color: $navbar-mobile-fg-active;
+  }
 
-      &:hover {
-        color: $fg-primary-hfa;
-      }
+  .nav-link {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    color: $navbar-mobile-fg;
+
+    &.active {
+      color: $navbar-mobile-fg-active;
     }
   }
 }
-// stylelint-enable selector-id-pattern, selector-max-compound-selectors
+
+@media (min-width: 768px) {
+  #main-nav {
+    // TODO: convert hard-coded height to rem to handle user agent settings.
+    //  Also update other usages in particle-image.js, creative.js, etc.
+    height: 72px;
+    color: $navbar-desktop-fg;
+    background-color: $navbar-desktop-bg;
+    transition: background-color 0.2s ease;
+
+    .navbar-brand {
+      padding: 0;
+    }
+
+    .navbar-brand,
+    .nav-link {
+      color: $navbar-desktop-fg;
+
+      &:hover,
+      &:active {
+        color: $navbar-desktop-fg-hfa;
+      }
+    }
+
+    .nav-link {
+      padding: 0 1rem;
+      transition: font-size 0.2s ease;
+
+      // &:hover,
+      &.active {
+        font-size: 1.1rem;
+      }
+    }
+
+    .nav-item:last-child .nav-link {
+      padding-right: 0;
+    }
+
+    &.navbar-scrolled {
+      background-color: $navbar-scrolled-bg;
+
+      .navbar-brand,
+      .nav-link {
+        color: $navbar-scrolled-fg;
+
+        &:hover {
+          color: $navbar-desktop-fg-hfa;
+        }
+      }
+    }
+  }
+
+  .navbar-nav {
+    align-items: center;
+  }
+}
