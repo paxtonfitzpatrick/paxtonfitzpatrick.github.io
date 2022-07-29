@@ -24,6 +24,20 @@ $header-fg: $fg-primary;
 $header-fade-in-duration: 2s;
 $header-fade-in-timing: ease-in;
 
+// mobile navbar style
+$navbar-mobile-bg: $header-fg;
+$navbar-mobile-fg: #808080;
+$navbar-mobile-fg-active: $header-bg;  // when item hsa .active class (current section)
+
+// desktop navbar style
+$navbar-desktop-bg: $header-bg;
+$navbar-desktop-fg: $header-fg;
+$navbar-desktop-fg-hfa: $fg-primary-hfa;
+
+// desktop navbar scrolled style:
+$navbar-scrolled-bg: rgba(255, 255, 255, 85%);
+$navbar-scrolled-fg: $navbar-desktop-bg;
+
 // footer style
 $footer-bg: $bg-secondary;
 $footer-fg: $muted-secondary;
