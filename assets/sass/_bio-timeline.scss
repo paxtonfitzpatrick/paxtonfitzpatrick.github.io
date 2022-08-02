@@ -1,12 +1,14 @@
 .bio-paragraph {
-  p {
-    margin-top: -5px;
-  }
-}
+  margin-top: 0.5em;
+  text-align: justify;
 
-.bio-img {
-  max-width: 8em;
-  max-height: 8em;
+  img {
+    max-width: 8em;
+    height: auto;
+    // line-height is 1.5 (implied em), so 0.5em is split between space above and
+    // below each line. So 0.25em aligns image top with top of first text line.
+    padding-top: 0.25em;
+  }
 }
 
 #timeline {
