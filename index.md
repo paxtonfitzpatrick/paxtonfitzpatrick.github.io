@@ -255,7 +255,7 @@ sections:
     pane_type: publication-cards.html
     before_text: >
      My research uses language models to capture how our memories preserve, distort, and compress the external world,
-     and to identify the neural mechanisms that compute these transformations.<br/><br/>I'm particularly interested in
+     and to identify the neural mechanisms that underlie these transformations.<br/><br/>I'm particularly interested in
      how episodic memory compresses the temporal structure of an experience, and how that compression is warped over 
      time.
     panes:
