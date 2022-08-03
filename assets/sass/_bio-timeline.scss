@@ -70,6 +70,7 @@
 }
 
 .timeline-event {
+  position: relative;
   z-index: 1;
 
   grid-row: calc(( var(--start) - var(--timeline-start)) * 4) / calc(( var(--end) - var(--timeline-start)) * 4);
@@ -84,12 +85,11 @@
     width: 0;
     height: 0;
 
-    // &::before {
-    //   content: attr(data-info);
     div {
       position: absolute;
-      top: -#{$tl-info-y-offset};
-      left: -#{$tl-info-x-offset};
+      // top: -#{$tl-info-y-offset};
+      bottom: $tl-info-y-offset;
+      left: $tl-info-x-offset;
 
       // TODO: calculate this based on 100% width of #timeline, width of
       //  timeline grid, desired padding between events and info, etc.
@@ -102,6 +102,15 @@
 
       border-bottom: $tl-info-line-width solid var(--event-color);
     }
+  }
+
+  svg {
+    position: absolute;
+    bottom: calc(100% - min(50%, 26px));
+    left: 50%;
+
+    width: calc(#{$tl-info-x-offset} - 50%);
+    height: calc(#{$tl-info-y-offset} + min(50%, 26px) + 1px);
   }
 }
 

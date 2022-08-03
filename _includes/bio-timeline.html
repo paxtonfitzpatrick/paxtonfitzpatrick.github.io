@@ -58,6 +58,9 @@
               {{ event.title | replace: ", ", ",<br>" }}
             </div>
           </div>
+          <svg>
+            <line x1="0" y1="100%" x2="100%" y2="0" stroke="#{{ event.color }}" stroke-width="2px"></line>
+          </svg>
         </div>
       {% endfor %}
       <ul class="timeline-grid">
