@@ -60,15 +60,49 @@
   justify-content: center;
 
   width: 100%;
+  min-width: 10vw;
+  max-width: 90vw;
   height: 100%;
+  min-height: 475px;
+  max-height: 100%;
 
   font-size: $tl-info-font-size;
 }
 
 .timeline-event {
+  z-index: 1;
+
   grid-row: calc(( var(--start) - var(--timeline-start)) * 4) / calc(( var(--end) - var(--timeline-start)) * 4);
+
   white-space: nowrap;
+
+  background-color: var(--event-color);
   border-radius: $tl-event-width / 2;
+
+  div {
+    position: relative;
+    width: 0;
+    height: 0;
+
+    // &::before {
+    //   content: attr(data-info);
+    div {
+      position: absolute;
+      top: -#{$tl-info-y-offset};
+      left: -#{$tl-info-x-offset};
+
+      // TODO: calculate this based on 100% width of #timeline, width of
+      //  timeline grid, desired padding between events and info, etc.
+      width: 10em;
+      height: auto;
+
+      font-size: $tl-info-font-size;
+      color: rgba($tl-info-font-color, $tl-info-font-alpha);
+      white-space: pre-line;
+
+      border-bottom: $tl-info-line-width solid var(--event-color);
+    }
+  }
 }
 
 .timeline-grid {
@@ -81,6 +115,7 @@
   // aligning grid lines part 1: shift upwards 0.5 * line-height
   top: -#{0.5 * $line-height}em;
   right: 0;
+  z-index: 0;
 
   display: flex;
 
@@ -95,6 +130,7 @@
 
   font-size: $tl-year-font-size;
   line-height: 1;
+  color: rgba($tl-year-color, $tl-year-alpha);
   list-style: none;
 
   li {
@@ -103,9 +139,14 @@
 
     &::before {
       content: '';
+
       flex: 1;
+
       margin: auto 0.5em auto 0;
-      border-bottom: 1px solid;
+
+      color: rgba($tl-gridline-color, $tl-gridline-alpha);
+
+      border-bottom: $tl-gridline-width solid;
     }
   }
 }

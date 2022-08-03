@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-7">
+  <div class="col-lg-7">
     {% assign img_right_cls = "float-right pl-3" %}
     {% assign img_left_cls = "float-left pr-3" %}
 
@@ -20,7 +20,6 @@
   <div id="timeline" class="col-md-5"
        data-start="{{ include.pane.timeline.start }}"
        data-end="{{ include.pane.timeline.end }}">
-       {% comment %}style="{% include timeline-style.scss timeline=include.pane.timeline %}">{% endcomment %}
     <ul class="timeline-events">
       {% for event in include.pane.timeline.events %}
         {% assign event_id = event.title | replace: " ", "_" | prepend: "timeline-event-" %}
@@ -38,7 +37,7 @@
 </div>
 {% endcomment %}
 
-  <div class="col-md-5 justify-content-center">
+  <div class="col-lg-5 justify-content-center">
     {% assign timeline = include.pane.timeline %}
 
     <div id="timeline"
@@ -46,8 +45,19 @@
 
       {% for event in timeline.events %}
         <div class="timeline-event"
-             style="--start:{{ event.start }};--end:{{ event.end }};background-color:#{{ event.color }};">
-          {{ event.title | replace: ", ", ",<br>" }}
+             style="--start:{{ event.start }};--end:{{ event.end }};--event-color:#{{ event.color }};">
+          {% comment %}{{ event.title | replace: ", ", ",<br>" }}{% endcomment %}
+
+          {% comment %}
+            wrapper element with 0 width & height so that description can be
+            relatively positioned without displacing other elements
+          {% endcomment %}
+          <div>
+            <div class="timeline-event-info"
+                 {% comment %}data-info="{{ event.title | replace: ", ", ",&#xa;" }}"{% endcomment %}>
+              {{ event.title | replace: ", ", ",<br>" }}
+            </div>
+          </div>
         </div>
       {% endfor %}
       <ul class="timeline-grid">
@@ -58,67 +68,3 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-{% comment %}{% assign curr_timeline_col = 1 %}{% endcomment %}
-      {% comment %}{% assign variable = value %}{% endcomment %}
-
-
-
-
-{% comment %}<div class="wrapper">{% endcomment %}
-  {% comment %}<ul id="timeline" class="timeline-events" data-start="2015" data-end="2023"{% endcomment %}
-       {% comment %}style="--timeline-start:2015;--timeline-end:2023;">{% endcomment %}
-    {% comment %}<li id="timeline-event-Undergraduate,_Dartmouth_College"{% endcomment %}
-        {% comment %}style="--start:2015.75;--end:2019.5;background-color:#d60000;">{% endcomment %}
-      {% comment %}Undergraduate,<br>Dartmouth College{% endcomment %}
-    {% comment %}</li>{% endcomment %}
-    {% comment %}<li id="timeline-event-Research_Assistant,_Dartmouth_Brain_Imaging_Center"{% endcomment %}
-        {% comment %}style="--start:2016.75;--end:2019.5;background-color:#8c3bff;">{% endcomment %}
-      {% comment %}Research Assistant,<br>Dartmouth Brain Imaging Center{% endcomment %}
-    {% comment %}</li>{% endcomment %}
-    {% comment %}<li id="timeline-event-Research_Assistant,_Contextual_Dynamics_Lab"{% endcomment %}
-        {% comment %}style="--start:2017.25;--end:2018.5;background-color:#018700;">{% endcomment %}
-      {% comment %}Research Assistant,<br>Contextual Dynamics Lab{% endcomment %}
-    {% comment %}</li>{% endcomment %}
-    {% comment %}<li id="timeline-event-Research_Assistant,_Bregman_Media_Labs"{% endcomment %}
-        {% comment %}style="--start:2017.25;--end:2018;background-color:#00acc6;">{% endcomment %}
-      {% comment %}Research Assistant,<br>Bregman Media Labs{% endcomment %}
-    {% comment %}</li>{% endcomment %}
-    {% comment %}<li id="timeline-event-Laboratory_&amp;_Research_Manager,_Contextual_Dynamics_Lab"{% endcomment %}
-        {% comment %}style="--start:2018.5;--end:2021.75;background-color:#97ff00;">{% endcomment %}
-      {% comment %}Laboratory &amp; Research Manager,<br>Contextual Dynamics Lab{% endcomment %}
-    {% comment %}</li>{% endcomment %}
-    {% comment %}<li id="timeline-event-Peer_Tutor,_Intro_Computer_Science"{% endcomment %}
-        {% comment %}style="--start:2018.75;--end:2019.5;background-color:#ff7ed1;">{% endcomment %}
-      {% comment %}Peer Tutor,<br>Intro Computer Science{% endcomment %}
-    {% comment %}</li>{% endcomment %}
-    {% comment %}<li id="timeline-event-Teaching_Assistant,_Human_Memory"{% endcomment %}
-        {% comment %}style="--start:2019.75;--end:2020;background-color:#6b004f;">{% endcomment %}
-      {% comment %}Teaching Assistant,<br>Human Memory{% endcomment %}
-    {% comment %}</li>{% endcomment %}
-    {% comment %}<li id="timeline-event-Teaching_Assistant_&amp;_Guest_Lecturer,_Intro_to_Programming_for_Psychological_Scientists"{% endcomment %}
-        {% comment %}style="--start:2020;--end:2020.25;background-color:#ffa52f;">{% endcomment %}
-      {% comment %}Teaching Assistant &amp; Guest Lecturer,<br>Intro to Programming for Psychological Scientists{% endcomment %}
-    {% comment %}</li>{% endcomment %}
-    {% comment %}<li id="timeline-event-Teaching_Assistant,_Storytelling_with_Data"{% endcomment %}
-        {% comment %}style="--start:2020.25;--end:2020.5;background-color:#573b00;">{% endcomment %}
-      {% comment %}Teaching Assistant,<br>Storytelling with Data{% endcomment %}
-    {% comment %}</li>{% endcomment %}
-    {% comment %}<li id="timeline-event-Teaching_Assistant,_Intro_to_Programming_for_Psychological_Scientists"{% endcomment %}
-        {% comment %}style="--start:2021;--end:2021.25;background-color:#005659;">{% endcomment %}
-      {% comment %}Teaching Assistant,<br>Intro to Programming for Psychological Scientists{% endcomment %}
-    {% comment %}</li>{% endcomment %}
-    {% comment %}<li id="timeline-event-Ph.D._Student,_Dartmouth_College"{% endcomment %}
-        {% comment %}style="--start:2021.75;--end:2022.5;background-color:#0000dd;">{% endcomment %}
-      {% comment %}Ph.D. Student,<br>Dartmouth College{% endcomment %}
-    {% comment %}</li>{% endcomment %}
-    {% comment %}<li id="timeline-event-Teaching_Assistant,_Laboratory_in_Experimental_Psychology"{% endcomment %}
-        {% comment %}style="--start:2022.25;--end:2022.5;background-color:#00fdcf;">{% endcomment %}
-      {% comment %}Teaching Assistant,<br>Laboratory in Experimental Psychology{% endcomment %}
-    {% comment %}</li>{% endcomment %}
-  {% comment %}</ul>{% endcomment %}
-{% comment %}</div>{% endcomment %}

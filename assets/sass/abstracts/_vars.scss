@@ -44,20 +44,20 @@ $footer-fg: $muted-secondary;
 $footer-link: $fg-secondary;
 
 // timeline style
-$tl-vertical-padding: 10px;
-$tl-background-color: $bg-secondary;
-$tl-background-alpha: 1;
+// $tl-vertical-padding: 10px;
+// $tl-background-color: $bg-secondary;
+// $tl-background-alpha: 1;
 $tl-year-color: #868686;
 $tl-year-alpha: 1;
-$tl-year-font-size: 12px;
+$tl-year-font-size: 0.75rem;
 $tl-gridline-color: $tl-year-color;
 $tl-gridline-alpha: 0.3;
 $tl-gridline-width: 2px;
 $tl-event-width: 12px;
 $tl-column-gap: 5px;
 $tl-info-line-width: 2px;
-$tl-info-x-offset: 30px;
-$tl-info-y-offset: 0.25;
+$tl-info-x-offset: 15em; //30px;
+$tl-info-y-offset: 5em;  //0.25; // <-- "year" units
 $tl-info-font-size: 0.75rem;
 $tl-info-font-color: $tl-year-color;
 $tl-info-font-alpha: 1;
