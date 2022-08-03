@@ -14,139 +14,35 @@
   }
 }
 
-// #timeline {
-//   // custom properties to be accessed by timeline.js
-//   --vertical-padding: #{$tl-vertical-padding};
-//   --background-color: #{$tl-background-color};
-//   --background-alpha: #{$tl-background-alpha};
-//   --year-color: #{$tl-year-color};
-//   --year-alpha: #{$tl-year-alpha};
-//   --year-font-size: #{$tl-year-font-size};
-//   --gridline-color: #{$tl-gridline-color};
-//   --gridline-alpha: #{$tl-gridline-alpha};
-//   --gridline-width: #{$tl-gridline-width};
-//   --event-width: #{$tl-event-width};
-//   --event-offset: #{$tl-event-offset};
-//   --info-line-width: #{$tl-info-line-width};
-//   --info-x-offset: #{$tl-info-x-offset};
-//   --info-y-offset: #{$tl-info-y-offset};
-//   --info-font-size: #{$tl-info-font-size};
-//   --info-font-color: #{$tl-info-font-color};
-//   --info-font-alpha: #{$tl-info-font-alpha};
-//
-//   min-width: 10vw;
-//   max-width: 90vw;
-//   min-height: 475px;
-//   max-height: 100%;
-//
-//   text-align: initial;
-//
-//   ul {
-//     display: none;
-//   }
-// }
-
 #timeline {
-  display: grid;
+  // custom properties to be accessed by timeline.js
+  // TODO: can probably define these more cleanly in a Sass script loop
+  --vertical-padding: #{$tl-vertical-padding};  // TODO: is this necessary?
+  --background-color: #{$tl-background-color};
+  --background-alpha: #{$tl-background-alpha};
+  --year-color: #{$tl-year-color};
+  --year-alpha: #{$tl-year-alpha};
+  --year-font-size: #{$tl-year-font-size};
+  --gridline-color: #{$tl-gridline-color};
+  --gridline-alpha: #{$tl-gridline-alpha};
+  --gridline-width: #{$tl-gridline-width};
+  --event-width: #{$tl-event-width};
+  --event-offset: #{$tl-event-offset};
+  --info-line-width: #{$tl-info-line-width};
+  --info-x-offset: #{$tl-info-x-offset};
+  --info-y-offset: #{$tl-info-y-offset};
+  --info-font-size: #{$tl-info-font-size};
+  --info-font-color: #{$tl-info-font-color};
+  --info-font-alpha: #{$tl-info-font-alpha};
 
-  grid-template-rows: repeat(calc((var(--timeline-end) - var(--timeline-start)) * 4), calc(100% / ((var(--timeline-end) - var(--timeline-start)) * 4)));
-  // grid-auto-rows: minmax(0, 1fr);
-  grid-auto-columns: minmax(0, $tl-event-width);
-  grid-auto-flow: column dense;
-
-  row-gap: 0;
-  column-gap: $tl-column-gap;
-
-  justify-content: center;
-
-  width: 100%;
   min-width: 10vw;
   max-width: 90vw;
-  height: 100%;
   min-height: 475px;
   max-height: 100%;
 
-  font-size: $tl-info-font-size;
-}
+  text-align: initial;
 
-.timeline-event {
-  z-index: 1;
-
-  grid-row: calc(( var(--start) - var(--timeline-start)) * 4) / calc(( var(--end) - var(--timeline-start)) * 4);
-
-  white-space: nowrap;
-
-  background-color: var(--event-color);
-  border-radius: $tl-event-width / 2;
-
-  div {
-    position: relative;
-    width: 0;
-    height: 0;
-
-    // &::before {
-    //   content: attr(data-info);
-    div {
-      position: absolute;
-      top: -#{$tl-info-y-offset};
-      left: -#{$tl-info-x-offset};
-
-      // TODO: calculate this based on 100% width of #timeline, width of
-      //  timeline grid, desired padding between events and info, etc.
-      width: 10em;
-      height: auto;
-
-      font-size: $tl-info-font-size;
-      color: rgba($tl-info-font-color, $tl-info-font-alpha);
-      white-space: pre-line;
-
-      border-bottom: $tl-info-line-width solid var(--event-color);
-    }
-  }
-}
-
-.timeline-grid {
-  // aligning grid lines to CSS grid items (.timeline-events):
-  //   - set .timeline-grid height to 100% (of #timeline) + (1 * line-height)
-  //   - shift .timeline-grid upwards by (0.5 * line-height)
-  $line-height: 1;
-
-  position: absolute;
-  // aligning grid lines part 1: shift upwards 0.5 * line-height
-  top: -#{0.5 * $line-height}em;
-  right: 0;
-  z-index: 0;
-
-  display: flex;
-
-  flex-direction: column;
-
-  justify-content: space-between;
-
-  width: 100%;
-  height: calc(100% + #{$line-height}em);
-  // match padding of parent col so gridlines don't extend too far
-  padding: 0 15px;
-
-  font-size: $tl-year-font-size;
-  line-height: 1;
-  color: rgba($tl-year-color, $tl-year-alpha);
-  list-style: none;
-
-  li {
-    display: flex;
-    flex-direction: row;
-
-    &::before {
-      content: '';
-
-      flex: 1;
-
-      margin: auto 0.5em auto 0;
-
-      color: rgba($tl-gridline-color, $tl-gridline-alpha);
-
-      border-bottom: $tl-gridline-width solid;
-    }
+  ul {
+    display: none;
   }
 }

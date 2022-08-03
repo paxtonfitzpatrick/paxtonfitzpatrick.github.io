@@ -16,8 +16,7 @@
     {% endfor %}
   </div>
 
-  {% comment %}
-  <div id="timeline" class="col-md-5"
+  <div id="timeline" class="col-lg-5"
        data-start="{{ include.pane.timeline.start }}"
        data-end="{{ include.pane.timeline.end }}">
     <ul class="timeline-events">
@@ -27,44 +26,10 @@
         <li id="{{ event_id }}"
             data-start="{{ event.start }}"
             data-end="{{ event.end }}"
-            data-color="{{ event.color }}"
-            style="--start:{{ event.start }};--end:{{ event.end }};color:#{{ event.color }};">
+            data-color="{{ event.color }}">
           {{ event.title }}
         </li>
       {% endfor %}
     </ul>
-  </div>
-</div>
-{% endcomment %}
-
-  <div class="col-lg-5 justify-content-center">
-    {% assign timeline = include.pane.timeline %}
-
-    <div id="timeline"
-         style="--timeline-start:{{ timeline.start }};--timeline-end:{{ timeline.end }};">
-
-      {% for event in timeline.events %}
-        <div class="timeline-event"
-             style="--start:{{ event.start }};--end:{{ event.end }};--event-color:#{{ event.color }};">
-          {% comment %}{{ event.title | replace: ", ", ",<br>" }}{% endcomment %}
-
-          {% comment %}
-            wrapper element with 0 width & height so that description can be
-            relatively positioned without displacing other elements
-          {% endcomment %}
-          <div>
-            <div class="timeline-event-info"
-                 {% comment %}data-info="{{ event.title | replace: ", ", ",&#xa;" }}"{% endcomment %}>
-              {{ event.title | replace: ", ", ",<br>" }}
-            </div>
-          </div>
-        </div>
-      {% endfor %}
-      <ul class="timeline-grid">
-        {% for year in (timeline.start..timeline.end) %}
-          <li>{{ year }}</li>
-        {% endfor %}
-      </ul>
-    </div>
   </div>
 </div>
