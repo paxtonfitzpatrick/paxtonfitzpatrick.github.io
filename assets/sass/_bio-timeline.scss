@@ -11,34 +11,66 @@
   }
 }
 
+// #timeline {
+//   // custom properties to be accessed by timeline.js
+//   --vertical-padding: #{$tl-vertical-padding};
+//   --background-color: #{$tl-background-color};
+//   --background-alpha: #{$tl-background-alpha};
+//   --year-color: #{$tl-year-color};
+//   --year-alpha: #{$tl-year-alpha};
+//   --year-font-size: #{$tl-year-font-size};
+//   --gridline-color: #{$tl-gridline-color};
+//   --gridline-alpha: #{$tl-gridline-alpha};
+//   --gridline-width: #{$tl-gridline-width};
+//   --event-width: #{$tl-event-width};
+//   --event-offset: #{$tl-event-offset};
+//   --info-line-width: #{$tl-info-line-width};
+//   --info-x-offset: #{$tl-info-x-offset};
+//   --info-y-offset: #{$tl-info-y-offset};
+//   --info-font-size: #{$tl-info-font-size};
+//   --info-font-color: #{$tl-info-font-color};
+//   --info-font-alpha: #{$tl-info-font-alpha};
+//
+//   min-width: 10vw;
+//   max-width: 90vw;
+//   min-height: 475px;
+//   max-height: 100%;
+//
+//   text-align: initial;
+//
+//   ul {
+//     display: none;
+//   }
+// }
+
 #timeline {
-  // custom properties to be accessed by timeline.js
-  --vertical-padding: #{$tl-vertical-padding};
-  --background-color: #{$tl-background-color};
-  --background-alpha: #{$tl-background-alpha};
-  --year-color: #{$tl-year-color};
-  --year-alpha: #{$tl-year-alpha};
-  --year-font-size: #{$tl-year-font-size};
-  --gridline-color: #{$tl-gridline-color};
-  --gridline-alpha: #{$tl-gridline-alpha};
-  --gridline-width: #{$tl-gridline-width};
-  --event-width: #{$tl-event-width};
-  --event-offset: #{$tl-event-offset};
-  --info-line-width: #{$tl-info-line-width};
-  --info-x-offset: #{$tl-info-x-offset};
-  --info-y-offset: #{$tl-info-y-offset};
-  --info-font-size: #{$tl-info-font-size};
-  --info-font-color: #{$tl-info-font-color};
-  --info-font-alpha: #{$tl-info-font-alpha};
+  position: absolute;
 
-  min-width: 10vw;
-  max-width: 90vw;
-  min-height: 475px;
-  max-height: 100%;
+  display: grid;
 
-  text-align: initial;
+  grid-template-rows: repeat(calc((var(--timeline-end) - var(--timeline-start)) * 4), minmax(0, 1fr));
+  // grid-auto-rows: minmax(0, 1fr);
+  grid-auto-columns: minmax(0, $tl-event-width);
+  grid-auto-flow: column dense;
 
-  ul {
-    display: none;
+  row-gap: 0;
+  column-gap: $tl-event-offset;
+
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  font-size: 0.75rem;
+
+  background-image:
+    repeating-linear-gradient(#ccc 0 1px, transparent 1px 100%),
+    repeating-linear-gradient(90deg, #ccc 0 1px, transparent 1px 100%);
+  background-size: 71px 71px;
+
+  div {
+    grid-row: calc(( var(--start) - var(--timeline-start)) * 4) / calc(( var(--end) - var(--timeline-start)) * 4);
+    white-space: nowrap;
+    border-radius: $tl-event-width;
   }
 }
