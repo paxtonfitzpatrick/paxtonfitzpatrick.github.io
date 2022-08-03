@@ -11,7 +11,7 @@
                alt="X">
         {% endif %}
 
-        {{- paragraph.text | markdownify -}}
+        {{- paragraph.text | markdownify | remove: '<p>' | remove: '</p>' -}}
       </div>
     {% endfor %}
   </div>
