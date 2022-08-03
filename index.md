@@ -44,32 +44,38 @@ sections:
       - type: bio-timeline.html
         title: Bio
         bio_paragraphs:
-          - text: I've always been fascinated by how and why people think the way they do. Growing up, I lived in
-             seven different places before settling in Camp Hill, Pennsylvania. Through constantly meeting new people, 
-             I became enamored with how each individual's unique set of life experiences lead to such different
-             personalities and beliefs.
+          - text: I’ve always been fascinated by the question of what makes people who they are.
+          - text: Growing up, I spent a lot of time meeting new people in new places. I lived in seven different cities 
+              throughout the northeastern and midwestern US before settling in a small town outside Harrisburg, 
+              Pennsylvania, where I continued to travel frequently for tennis, music, and quiz bowl competitions. I  
+              constantly encountered people with vastly different personalities and beliefs, and was always curious how 
+              those traits arose from each individual’s unique set of life experiences.
             image: assets/img/bio/map-pins.png
-          - text: These interests led me to pursue a degree in Neuroscience at Dartmouth College, and quickly fall in
-             love with research. I began working for the
-             [Dartmouth Brain Imaging Center](https://www.dartmouth.edu/dbic){:target="_blank"}, collecting and
-             processing fMRI data, as well as
-             [Bregman Media Labs](http://bregman.dartmouth.edu){:target="_blank"}, where I worked with
-             [Dr. Michael Casey](https://faculty-directory.dartmouth.edu/michael-casey){:target="_blank"} to create the
-             first EEG sonification-based musical ensemble.
+          - text: When I came to [Dartmouth College](https://home.dartmouth.edu){:target="_blank"} as an undergraduate 
+              in 2015 and discovered there was an entire field devoted to these questions, I quickly became excited 
+              about neuroscience research. I began working for the 
+              [Dartmouth Brain Imaging Center](https://www.dartmouth.edu/dbic){:target="_blank"}, collecting and 
+              processing fMRI data for a variety of imaging studies, as well as 
+              [Bregman Media Labs](http://bregman.dartmouth.edu){:target="_blank"}, where I worked with 
+              [Dr. Michael Casey](https://faculty-directory.dartmouth.edu/michael-casey){:target="_blank"} to create
+              [*Exnectome*](https://vimeo.com/208333051){:target="_blank"}, the first EEG sonification-based musical 
+              ensemble.
             image: assets/img/bio/eeg-headset.jpeg
-          - text: I then joined the [Contextual Dynamics Lab](https://www.context-lab.com){:target="_blank"} 
-             (PI&#58; [Dr. Jeremy Manning](https://pbs.dartmouth.edu/people/jeremy-rothman-manning){:target="_blank"})
-             and discovered passions for computational memory research and software development. I developed a love
-             for mentoring others, and after my junior year of college I began managing the CDL and serving as a
-             tutor and TA for various neuroscience and computer science classes.  I wrote my honors thesis on a
-             computational framework for modeling how episodic memories deform over time and inferring neural
-             representations of their semantic content.
+          - text: I then joined the [Contextual Dynamics Lab](https://www.context-lab.com){:target="_blank"} and 
+              discovered passions for computational memory research and open-source software development. Over time, I 
+              developed a love for mentoring, and in my junior year of college, began managing the CDL and volunteering 
+              as a tutor and TA for various neuroscience and computer science classes. I graduated in 2019 and wrote my 
+              honors thesis on a computational framework for modeling how episodic memories deform over time, and 
+              predicting neural activity from their semantic content.
             image: assets/img/bio/cdl-logo.png
-          - text: Since graduating in 2019, I've continued managing the CDL, working on memory
-             research, writing software, and mentoring students. My current research uses natural language processing
-             and other machine learning techniques to study how we understand the world around us and create
-             technologies to help us better learn from it.
-            image: assets/img/bio/brain-scan.jpg
+          - text: I continued to manage the CDL for two more years, designing naturalistic memory studies, building 
+              research software tools, TAing classes, and mentoring undergrads. Then, in 2021, I decided to stay at 
+              Dartmouth to pursue a Ph.D. in cognitive neuroscience, now working jointly in the CDL and the
+              [Computational Social Affective Neuroscience Lab](https://cosanlab.com/){:target="_blank”}. My current 
+              research is focused on leveraging the models of learning and memory I've developed in prior work to 
+              improve STEM accessibility and student outcomes by developing tools that allow instructors to easily and 
+              scalably personalize online courses.
+            image: assets/img/bio/cosanlab-logo.png
         timeline:
           start: 2015
           end: 2023
