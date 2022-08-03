@@ -48,6 +48,11 @@
           {{ event.title | replace: ", ", ",<br>" }}
         </div>
       {% endfor %}
+      <ul class="timeline-grid">
+        {% for year in (timeline.start..timeline.end) %}
+          <li>{{ year }}</li>
+        {% endfor %}
+      </ul>
     </div>
   </div>
 </div>
