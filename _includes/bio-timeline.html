@@ -38,13 +38,15 @@
 </div>
 {% endcomment %}
 
-  <div class="col-md-5 d-flex justify-content-center">
+  <div class="col-md-5 justify-content-center">
     {% assign timeline = include.pane.timeline %}
 
     <div id="timeline"
          style="--timeline-start:{{ timeline.start }};--timeline-end:{{ timeline.end }};">
+
       {% for event in timeline.events %}
-        <div style="--start:{{ event.start }};--end:{{ event.end }};background-color:#{{ event.color }};">
+        <div class="timeline-event"
+             style="--start:{{ event.start }};--end:{{ event.end }};background-color:#{{ event.color }};">
           {{ event.title | replace: ", ", ",<br>" }}
         </div>
       {% endfor %}
