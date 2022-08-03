@@ -132,7 +132,7 @@ module.exports = {
         {
           // other state- or position-based pseudo-classes
           type: 'rule',
-          selector: /^&:[\w-]+$/,
+          selector: /^&:[\w():-]+$/,
           name: 'non-user-action pseudo-class',
         },
         {
