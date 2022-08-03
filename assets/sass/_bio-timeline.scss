@@ -46,28 +46,26 @@
 #timeline {
   display: grid;
 
-  grid-template-rows: repeat(calc((var(--timeline-end) - var(--timeline-start)) * 4), minmax(0, 1fr));
+  grid-template-rows: repeat(calc((var(--timeline-end) - var(--timeline-start)) * 4), calc(100% / ((var(--timeline-end) - var(--timeline-start)) * 4)));
   // grid-auto-rows: minmax(0, 1fr);
   grid-auto-columns: minmax(0, $tl-event-width);
   grid-auto-flow: column dense;
 
   row-gap: 0;
-  column-gap: $tl-event-offset;
+  column-gap: $tl-column-gap;
 
   justify-content: center;
 
   width: 100%;
   height: 100%;
 
-  // TODO: deal with this -- make rows not expand to fit text
-  // font-size: 0.75rem;
-  font-size: 0.1rem;
+  font-size: $tl-info-font-size;
 }
 
 .timeline-event {
   grid-row: calc(( var(--start) - var(--timeline-start)) * 4) / calc(( var(--end) - var(--timeline-start)) * 4);
   white-space: nowrap;
-  border-radius: $tl-event-width;
+  border-radius: $tl-event-width / 2;
 }
 
 .timeline-grid {
