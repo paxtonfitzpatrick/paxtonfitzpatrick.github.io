@@ -16,7 +16,7 @@
   const scrollShadowElements = document.getElementsByClassName('scroll-shadows');
 
   // initialize scroll shadows
-  Array.from(scrollShadowElements).forEach((element) => {
+  Array.prototype.forEach.call(scrollShadowElements, (element) => {
     // div starts out unscrolled, so add bottom shadow
     element.classList.add('scroll-shadow-bottom');
     // attach eventListeners to add/remove shadows on scroll
