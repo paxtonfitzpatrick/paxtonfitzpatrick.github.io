@@ -38,9 +38,53 @@
     // eslint-disable-next-line -- (placeholder) // TODO: write me
     drawInfo(infoLayout) {};
 
-    // eslint-disable-next-line -- (placeholder) // TODO: write me
-    formatInfoLayout(infoLeftXcoord, infoRightXcoord) {};
+    formatInfoLayout() {
+      const infoLayout = {
+          lineArr: [],
+          lineHeight: this.timeline.infoLineHeight,
+        },
+        infoWords = this.info.split(' ');
 
+      let infoMaxWidth,
+        currentLine = infoWords[0];
+
+      if (this.xCoord >= this.timeline.centerXCoord) {
+        infoLayout.xCoord = this.timeline.infoRightXCoord;
+        infoLayout.alignment = 'left';
+        infoMaxWidth = this.timeline.currentWidth - infoLayout.xCoord;
+      } else {
+        infoLayout.xCoord = this.timeline.infoLeftXCoord;
+        infoLayout.alignment = 'right';
+        infoMaxWidth = infoLayout.xCoord;
+      }
+
+      // wrap info text by iteratively adding words to each line until its
+      // length exceeds infoMaxWidth, then start a new one
+      infoWords.slice(1).forEach((nextWord) => {
+        const withNextWord = `${currentLine} ${nextWord}`,
+          widthWithNextWord = this.timeline.canvas.context.measureText(withNextWord).width;
+        // always split on comma regardless of current line length
+        if (widthWithNextWord > infoMaxWidth || currentLine.endswith(',')) {
+          infoLayout.lineArr.push(currentLine);
+          currentLine = nextWord;
+        } else {
+          currentLine = withNextWord;
+        }
+      });
+
+      infoLayout.lineArr.push(currentLine);
+      // TODO: optimize this -- track running max width above rather than recomputing here
+      infoLayout.width = Math.max(
+        ...infoLayout.lineArr.map((line) => this.timeline.canvas.context.measureText(line).width)
+      );
+      // TODO: optimize this -- conditional is redundant with the one above
+      if (infoLayout.alignment === 'left') {
+        infoLayout.underlineX = infoLayout.xCoord + infoLayout.width;
+      } else {
+        infoLayout.underlineX = infoLayout.xCoord - infoLayout.width;
+      }
+      return infoLayout;
+    }
   }
 
   /*
