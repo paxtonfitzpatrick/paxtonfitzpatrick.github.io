@@ -92,7 +92,7 @@
       //    x-coord of left edge of event info/description text on right side
       this.computeEventLayout();
       this.drawBase();
-      this.events.forEach((event) => event.draw());
+      this.drawEvents();
     }
 
     precomputeStaticValues() {
@@ -201,6 +201,18 @@
       ctx.stroke();
     }
 
+    drawEvents() {
+      // wrapper function that draws each event, formats and draws its info, and
+      // also pre-sets the canvas context's font size to ensure the layout is
+      // computed properly
+      this.canvas.context.font = `${this.style.infoFontsize}`
+      this.events.forEach((event) => {
+        event.drawEventLine();
+        const eventInfoLayout = event.formatInfoLayout();
+        event.drawInfo(eventInfoLayout);
+      });
+    }
+
     getStyles() {
       // parse timeline style config from CSS variables stored on the target
       // element. Timeline vars are set in _vars.scss and converted to CSS vars
@@ -261,7 +273,7 @@
         this.computeBaseLayout();
         this.computeEventLayout();
         this.drawBase();
-        this.events.forEach((event) => event.draw());
+        this.drawEvents();
       }
     }
 
