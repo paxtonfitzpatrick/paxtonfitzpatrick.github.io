@@ -35,8 +35,48 @@
       ctx.stroke();
     }
 
+    // TODO: should this be accounting for this.timeline.yearXOffset?
     // eslint-disable-next-line -- (placeholder) // TODO: write me
-    drawInfo(infoLayout) {};
+    drawInfo(infoLayout) {
+      const ctx = this.timeline.canvas.context;
+      ctx.beginPath();
+      // line properties
+      ctx.strokeStyle = this.color;
+      ctx.lineWidth = this.timeline.style.infoLineWidth;
+      // text properties -- font is already set by Timeline.drawEvents method
+      ctx.fillStyle = this.timeline.style.info_font_color;
+      // TODO: look at effects of changing this
+      ctx.textBaseline = 'bottom';
+      ctx.textAlign = infoLayout.alignment;
+      infoLayout.lineArr.forEach((line, lineIndex, lineArr) => {
+        ctx.fillText(
+          line,
+          infoLayout.xCoord,
+          this.timeline.yearsYCoords[this.startYear] - lineArr.length - 1 - lineIndex,
+        );
+      });
+      // TODO: clean this up; lots of repeat property accesses
+      let infoLineStartY = this.timeline.yearsYCoords[
+        this.startYear + this.timeline.style.infoYOffset
+      ];
+      if (this.endYear - this.startYear <= this.timeline.style.infoYOffset) {
+        infoLineStartY = Math.floor(
+          (this.timeline.yearsYCoords[this.startYear] + this.timeline.yearsYCoords[this.endYear])
+          / 2,
+        );
+      }
+
+      ctx.moveTo(this.xCoord, infoLineStartY);
+      ctx.lineTo(
+        infoLayout.xCoord,
+        this.timeline.yearsYCoords[this.startYear] + infoLayout.lineHeight * 0.3,
+      );
+      ctx.lineTo(
+        infoLayout.underlineX,
+        this.timeline.years_ycoords[this.startYear] + infoLayout.lineHeight * 0.3,
+      );
+      ctx.stroke();
+    }
 
     formatInfoLayout() {
       const infoLayout = {
@@ -64,7 +104,7 @@
         const withNextWord = `${currentLine} ${nextWord}`,
           widthWithNextWord = this.timeline.canvas.context.measureText(withNextWord).width;
         // always split on comma regardless of current line length
-        if (widthWithNextWord > infoMaxWidth || currentLine.endswith(',')) {
+        if (widthWithNextWord > infoMaxWidth || currentLine.endsWith(',')) {
           infoLayout.lineArr.push(currentLine);
           currentLine = nextWord;
         } else {
@@ -74,9 +114,9 @@
 
       infoLayout.lineArr.push(currentLine);
       // TODO: optimize this -- track running max width above rather than recomputing here
-      infoLayout.width = Math.max(
-        ...infoLayout.lineArr.map((line) => this.timeline.canvas.context.measureText(line).width)
-      );
+      infoLayout.width = Math.max(...infoLayout.lineArr.map(
+        (line) => this.timeline.canvas.context.measureText(line).width,
+      ));
       // TODO: optimize this -- conditional is redundant with the one above
       if (infoLayout.alignment === 'left') {
         infoLayout.underlineX = infoLayout.xCoord + infoLayout.width;
@@ -249,7 +289,7 @@
       // wrapper function that draws each event, formats and draws its info, and
       // also pre-sets the canvas context's font size to ensure the layout is
       // computed properly
-      this.canvas.context.font = `${this.style.infoFontsize}`
+      this.canvas.context.font = `${this.style.infoFontsize}`;
       this.events.forEach((event) => {
         event.drawEventLine();
         const eventInfoLayout = event.formatInfoLayout();
@@ -349,7 +389,7 @@
   =             MAIN SCRIPT              =
   ========================================
   */
-  const timelineElement = document.getElementById(tagID);
+  const timelineElement = document.getElementById('timeline');
   if (timelineElement !== null) {
     const timelineObj = new Timeline(timelineElement);
     timelineElement.addEventListener('resize', timelineObj.onResize);
