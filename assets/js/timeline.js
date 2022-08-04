@@ -218,8 +218,8 @@
 
       // set x-coordinates for event info text on left side (right edge) & right
       // side (left edge)
-      this.infoLeftXCoord = Math.min(eventXCoords) - this.style.infoXOffset;
-      this.infoRightXCoord = Math.max(eventXCoords) + this.style.infoXOffset;
+      this.infoLeftXCoord = Math.min(...eventXCoords) - this.style.infoXOffset;
+      this.infoRightXCoord = Math.max(...eventXCoords) + this.style.infoXOffset;
     }
 
     drawBase() {
