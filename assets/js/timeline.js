@@ -55,22 +55,37 @@
       this.initCanvas(timelineElement);
       // sets this.style (Object; see function for full list of field names)
       this.getStyles();
-
-      // {year: this.events.length binary array} with 1's in rows/cols occupied
-      // by a timeline event
-      this.occupedGrid = {};
-
-      this.events = [];
-
-      // this.style = this.getStyle(); function
+      // sets this.events (Array of TimelineEvents)
+      this.parseEvents();
+      // sets this.yearsYCoords:
+      //   {year: y-coord} of offsets from the canvas top for each 1/4 year
+      //   increment in the timeline,
+      // and this.occupiedGrid:
+      //   {year: this.events.length binary array} initially has all 0's; will
+      //   contain 1's in rows/cols occupied by a timeline event
+      this.computeBaseLayout();
     }
 
-    // TODO: can the two methods below be combined?
-    // eslint-disable-next-line -- (placeholder) // TODO: write me
-    computeEventLayout() {};
+    computeBaseLayout() {
+      const topY = this.style.verticalPadding,
+        bottomY = this.canvas.element.height - this.style.verticalPadding,
+        // compute y-coord for each 1/4 year increment included in the timeline
+        yInc = (bottomY - topY) / ((this.endYear - this.startYear) * 4),
+        yearsYCoords = {},
+        occupiedGrid = {};
+
+      for (
+        let year = this.startYear, yearY = topY; year <= this.endYear; year += 0.25, yearY += yInc
+      ) {
+        yearsYCoords[year] = Math.floor(yearY);
+        occupiedGrid[year] = Array(this.events.length).fill(0);
+      }
+      this.yearsYCoords = yearsYCoords;
+      this.occupedGrid = occupiedGrid;
+    }
 
     // eslint-disable-next-line -- (placeholder) // TODO: write me
-    computeTimelineLayout() {};
+    computeEventLayout() {};
 
     // eslint-disable-next-line -- (placeholder) // TODO: write me
     drawBase() {};
@@ -89,15 +104,15 @@
         infoFontColor = compStyles.getPropertyValue('--info-font-color').trim(),
         infoFontAlpha = parseInt(compStyles.getPropertyValue('--info-font-alpha'), 10);
       this.style = {
-        vertical_padding: parseInt(compStyles.getPropertyValue('--vertical-padding'), 10),
-        year_fontsize: compStyles.getPropertyValue('--year-font-size').trim(),
-        gridline_width: parseInt(compStyles.getPropertyValue('--gridline-width'), 10),
-        event_width: parseInt(compStyles.getPropertyValue('--event-width'), 10),
-        event_offset: parseInt(compStyles.getPropertyValue('--event-offset'), 10),
-        info_line_width: parseInt(compStyles.getPropertyValue('--info-line-width'), 10),
-        info_x_offset: parseInt(compStyles.getPropertyValue('--info-x-offset'), 10),
-        info_y_offset: parseFloat(compStyles.getPropertyValue('--info-y-offset')),
-        info_fontsize: compStyles.getPropertyValue('--info-font-size').trim(),
+        verticalPadding: parseInt(compStyles.getPropertyValue('--vertical-padding'), 10),
+        yearFontsize: compStyles.getPropertyValue('--year-font-size').trim(),
+        gridlineWidth: parseInt(compStyles.getPropertyValue('--gridline-width'), 10),
+        eventWidth: parseInt(compStyles.getPropertyValue('--event-width'), 10),
+        eventOffset: parseInt(compStyles.getPropertyValue('--event-offset'), 10),
+        infoLineWidth: parseInt(compStyles.getPropertyValue('--info-line-width'), 10),
+        infoXOffset: parseInt(compStyles.getPropertyValue('--info-x-offset'), 10),
+        infoYOffset: parseFloat(compStyles.getPropertyValue('--info-y-offset')),
+        infoFontsize: compStyles.getPropertyValue('--info-font-size').trim(),
         backgroundColor: hexToRGBA(backgroundColor, backgroundAlpha),
         yearColor: hexToRGBA(yearColor, yearAlpha),
         gridlineColor: hexToRGBA(gridlineColor, gridlineAlpha),
@@ -122,8 +137,14 @@
       };
     }
 
-    // eslint-disable-next-line -- (placeholder) // TODO: write me
-    parseEvents() {};
+    parseEvents() {
+      const eventsList = this.timelineElement.getElementsByTagName('li'),
+        events = [];
+      Array.prototype.forEach.call(eventsList, (eventLi) => {
+        events.push(new TimelineEvent(eventLi, this));
+      });
+      this.events = events;
+    }
   }
 
   const hexToRGBA = (hex, opacity = 1) => {
@@ -134,7 +155,6 @@
     return `rgba(${r},${g},${b},${opacity})`;
   };
 })();
-
 
 // const TimelineDisplayer = function(tag_id, timeline_el, canvas) {
 //   "use strict";
