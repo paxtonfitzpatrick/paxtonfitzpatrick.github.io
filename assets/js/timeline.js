@@ -49,9 +49,7 @@
   ========================================
   */
   class Timeline {
-    constructor(tagID) {
-      const timelineElement = document.getElementById(tagID);
-
+    constructor(timelineElement) {
       // target element
       this.timelineElement = timelineElement;
       // current height & width of target element (and child canvas)
@@ -83,10 +81,15 @@
       //  - this.occupiedGrid:
       //    {year: this.events.length binary array} initially has all 0's; will
       //    contain 1's in rows/cols occupied by a timeline event
-      //  - this.centerX:
+      //  - this.centerXCoord:
       //    x-coord at center of canvas, used to determine which side to place
       //    each event's info on
       this.computeBaseLayout();
+      // sets:
+      //  - this.infoLeftXCoord:
+      //    x-coord of right edge of event info/description text on left side
+      //  - this.infoRightXCoord:
+      //    x-coord of left edge of event info/description text on right side
       this.computeEventLayout();
       this.drawBase();
       this.events.forEach((event) => event.draw());
@@ -131,7 +134,7 @@
       }
       this.yearsYCoords = yearsYCoords;
       this.occupedGrid = occupiedGrid;
-      this.centerX = Math.round(this.canvas.element.width / 2 - this.yearXOffset);
+      this.centerXCoord = Math.round(this.canvas.element.width / 2 - this.yearXOffset);
     }
 
     computeEventLayout() {
@@ -141,29 +144,38 @@
       // "auto-flow: column dense;", but rather than preferring the left column
       // and expanding right, this prioritizes the center column and expands
       // outward in both directions
-      const eventColXCoords = [this.centerX];
+      const eventColXCoords = [this.centerXCoord];
       // current number of columns from center (left or right)
-      let offsetCols = 1;
+      let columnOffset = 1;
       while (eventColXCoords.length < this.events.length) {
-        const offsetX = offsetCols * (this.style.eventWidth + this.style.eventOffset);
-        eventColXCoords.push(this.centerX + offsetX);
+        const offsetX = columnOffset * (this.style.eventWidth + this.style.eventOffset);
+        eventColXCoords.push(this.centerXCoord + offsetX);
         if (eventColXCoords.length < this.events.length) {
-          eventColXCoords.push(this.centerX - offsetX);
+          eventColXCoords.push(this.centerXCoord - offsetX);
         }
-        offsetCols++;
+        columnOffset++;
       }
 
+      const eventXCoords = [];
       // for each timeline event
       this.events.forEach((event) => {
-        // get the index of the centermost column not occupied at its start year
-        const firstOpenCol = this.occupedGrid[event.startYear].indexOf(0);
-        // set the x-coordinate of the column where the event should be drawn
-        event.xCoord = eventColXCoords[firstOpenCol];
+        // get the index of the center-most column not occupied at its start year
+        const firstOpenCol = this.occupedGrid[event.startYear].indexOf(0),
+          // get the x-coordinate of the column where the event should be drawn
+          xCoord = eventColXCoords[firstOpenCol];
+
+        event.xCoord = xCoord;
+        eventXCoords.push(xCoord);
         // mark that column as occupied for the duration of the event
         for (let year = event.startYear; year < event.endYear; year += 0.25) {
           this.occupedGrid[year][firstOpenCol] = 1;
         }
       });
+
+      // set x-coordinates for event info text on left side (right edge) & right
+      // side (left edge)
+      this.infoLeftXCoord = Math.min(eventXCoords) - this.style.infoXOffset;
+      this.infoRightXCoord = Math.max(eventXCoords) + this.style.infoXOffset;
     }
 
     drawBase() {
