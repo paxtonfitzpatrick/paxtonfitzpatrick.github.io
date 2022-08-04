@@ -1,9 +1,6 @@
 .bio-paragraph {
+  margin-bottom: 1em;
   text-align: justify;
-
-  &:not(:last-child) {
-    margin-bottom: 1em;
-  }
 
   img {
     max-width: 8em;
