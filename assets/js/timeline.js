@@ -84,11 +84,28 @@
       this.occupedGrid = occupiedGrid;
     }
 
-    // eslint-disable-next-line -- (placeholder) // TODO: write me
-    computeEventLayout() {};
+    drawBase() {
+      // draw horizontal grid lines and year labels
+      const ctx = this.canvas.context;
+      ctx.beginPath();
+      ctx.fillStyle = this.style.yearColor;
+      ctx.textAlign = 'right';
+      ctx.font = `${this.style.year_fontsize} sans-serif`;
+      ctx.strokeStyle = this.style.gridlineColor;
+      ctx.lineWidth = this.style.gridlineWidth;
 
-    // eslint-disable-next-line -- (placeholder) // TODO: write me
-    drawBase() {};
+      for (const [yearString, yCoord] of Object.entries(this.yearsYCoords)) {
+        if (Number.isInteger(Number(yearString))) {
+          // TODO: second arg here is probably why year labels are overflowing
+          // TODO: Math.round/Math.floor these?
+          ctx.fillText(yearString, this.canvas.element.width, yCoord + (this.yearLineHeight / 2));
+          ctx.moveTo(0, yCoord);
+          // TODO: this.currentWidth instead? Any difference?
+          ctx.lineTo(this.canvas.element.width - this.yearXOffset, yCoord);
+        }
+      }
+      ctx.stroke();
+    }
 
     getStyles() {
       // parse timeline style config from CSS variables stored on the target
