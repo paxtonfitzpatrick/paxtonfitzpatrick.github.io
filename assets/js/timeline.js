@@ -10,7 +10,7 @@
     constructor(eventListItem, timeline) {
       // reference to owner class
       this.timeline = timeline;
-      this.info = eventListItem.innerHTML;
+      this.info = eventListItem.innerText;
       // start and end years (+ increments) of the timeline
       this.startYear = parseFloat(eventListItem.dataset.start);
       this.endYear = parseFloat(eventListItem.dataset.end);
@@ -31,7 +31,7 @@
       // rounded caps have a radius of 1/2 the line's width and add that much
       // additional length to the line
       ctx.moveTo(this.xCoord, yearsYCoords[this.startYear] + (eventWidth / 2));
-      ctx.moveTo(this.xCoord, yearsYCoords[this.endYear] - (eventWidth / 2));
+      ctx.lineTo(this.xCoord, yearsYCoords[this.endYear] - (eventWidth / 2));
       ctx.stroke();
     }
 
@@ -52,7 +52,7 @@
         ctx.fillText(
           line,
           infoLayout.xCoord,
-          this.timeline.yearsYCoords[this.startYear] - lineArr.length - 1 - lineIndex,
+          this.timeline.yearsYCoords[this.startYear] - (infoLayout.lineHeight * 1.3) * (lineArr.length - 1 - lineIndex),
         );
       });
       // TODO: clean this up; lots of repeat property accesses
@@ -73,7 +73,7 @@
       );
       ctx.lineTo(
         infoLayout.underlineX,
-        this.timeline.years_ycoords[this.startYear] + infoLayout.lineHeight * 0.3,
+        this.timeline.yearsYCoords[this.startYear] + infoLayout.lineHeight * 0.3,
       );
       ctx.stroke();
     }
@@ -268,7 +268,7 @@
       ctx.beginPath();
       ctx.fillStyle = this.style.yearColor;
       ctx.textAlign = 'right';
-      ctx.font = `${this.style.year_fontsize} sans-serif`;
+      ctx.font = `${this.style.yearFontsize} sans-serif`;
       ctx.strokeStyle = this.style.gridlineColor;
       ctx.lineWidth = this.style.gridlineWidth;
 
@@ -289,7 +289,7 @@
       // wrapper function that draws each event, formats and draws its info, and
       // also pre-sets the canvas context's font size to ensure the layout is
       // computed properly
-      this.canvas.context.font = `${this.style.infoFontsize}`;
+      this.canvas.context.font = `${this.style.infoFontsize} sans-serif`;
       this.events.forEach((event) => {
         event.drawEventLine();
         const eventInfoLayout = event.formatInfoLayout();
@@ -392,6 +392,7 @@
   const timelineElement = document.getElementById('timeline');
   if (timelineElement !== null) {
     const timelineObj = new Timeline(timelineElement);
-    timelineElement.addEventListener('resize', timelineObj.onResize);
+    window.timeline = timelineObj;
+    window.addEventListener('resize', () => timelineObj.onResize());
   }
 })();
