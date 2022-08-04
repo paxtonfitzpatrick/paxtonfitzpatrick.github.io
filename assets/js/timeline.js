@@ -82,6 +82,39 @@
       }
       this.yearsYCoords = yearsYCoords;
       this.occupedGrid = occupiedGrid;
+      this.centerX = Math.round(this.canvas.element.width / 2 - this.yearXOffset);
+    }
+
+    computeEventLayout() {
+      // store x-coords for each possible column event bars can occupy (largest
+      // number of simultaneous events we have to account for is the total
+      // number of events). Layout is computed similarly to a CSS grid with
+      // "auto-flow: column dense;", but rather than preferring the left column
+      // and expanding right, this prioritizes the center column and expands
+      // outward in both directions
+      const eventColXCoords = [this.centerX];
+      // current number of columns from center (left or right)
+      let offsetCols = 1;
+      while (eventColXCoords.length < this.events.length) {
+        const offsetX = offsetCols * (this.style.eventWidth + this.style.eventOffset);
+        eventColXCoords.push(this.centerX + offsetX);
+        if (eventColXCoords.length < this.events.length) {
+          eventColXCoords.push(this.centerX - offsetX);
+        }
+        offsetCols++;
+      }
+
+      // for each timeline event
+      this.events.forEach((event) => {
+        // get the index of the centermost column not occupied at its start year
+        const firstOpenCol = this.occupedGrid[event.startYear].indexOf(0);
+        // set the x-coordinate of the column where the event should be drawn
+        event.xCoord = eventColXCoords[firstOpenCol];
+        // mark that column as occupied for the duration of the event
+        for (let year = event.startYear; year < event.endYear; year += 0.25) {
+          this.occupedGrid[year][firstOpenCol] = 1;
+        }
+      });
     }
 
     drawBase() {
