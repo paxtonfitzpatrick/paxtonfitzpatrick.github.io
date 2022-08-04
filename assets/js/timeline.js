@@ -236,6 +236,23 @@
       };
     }
 
+    onResize() {
+      const newWidth = this.timelineElement.clientWidth,
+        newHeight = this.timelineElement.clientHeight;
+
+      if (newWidth !== this.currentWidth || newHeight !== this.currentHeight) {
+        this.canvas.context.clearRect(0, 0, this.currentWidth, this.currentHeight);
+        this.canvas.element.width = newWidth;
+        this.canvas.element.height = newHeight;
+        this.currentWidth = newWidth;
+        this.currentHeight = newHeight;
+        this.computeBaseLayout();
+        this.computeEventLayout();
+        this.drawBase();
+        this.events.forEach((event) => event.draw());
+      }
+    }
+
     parseEvents() {
       const eventsList = this.timelineElement.getElementsByTagName('li'),
         events = [];
