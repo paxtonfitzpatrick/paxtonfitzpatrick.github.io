@@ -391,8 +391,9 @@
   */
   const timelineElement = document.getElementById('timeline');
   if (timelineElement !== null) {
-    const timelineObj = new Timeline(timelineElement);
-    window.timeline = timelineObj;
-    window.addEventListener('resize', () => timelineObj.onResize());
+    window.addEventListener('load', () => {
+      const timelineObj = new Timeline(timelineElement);
+      window.addEventListener('resize', () => timelineObj.onResize());
+    });
   }
 })();
