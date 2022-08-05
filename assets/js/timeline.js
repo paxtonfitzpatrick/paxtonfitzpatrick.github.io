@@ -312,14 +312,14 @@
         infoFontAlpha = parseInt(compStyles.getPropertyValue('--info-font-alpha'), 10);
       this.style = {
         verticalPadding: parseInt(compStyles.getPropertyValue('--vertical-padding'), 10),
-        yearFontsize: compStyles.getPropertyValue('--year-font-size').trim(),
+        yearFontsize: parseInt(compStyles.getPropertyValue('--year-font-size'), 10),
         gridlineWidth: parseInt(compStyles.getPropertyValue('--gridline-width'), 10),
         eventWidth: parseInt(compStyles.getPropertyValue('--event-width'), 10),
         eventOffset: parseInt(compStyles.getPropertyValue('--event-offset'), 10),
         infoLineWidth: parseInt(compStyles.getPropertyValue('--info-line-width'), 10),
         infoXOffset: parseInt(compStyles.getPropertyValue('--info-x-offset'), 10),
         infoYOffset: parseFloat(compStyles.getPropertyValue('--info-y-offset')),
-        infoFontsize: compStyles.getPropertyValue('--info-font-size').trim(),
+        infoLineHeight: infoFontSize * parseFloat(compStyles.getPropertyValue('--info-line-height')),
         backgroundColor: hexToRGBA(backgroundColor, backgroundAlpha),
         yearColor: hexToRGBA(yearColor, yearAlpha),
         gridlineColor: hexToRGBA(gridlineColor, gridlineAlpha),

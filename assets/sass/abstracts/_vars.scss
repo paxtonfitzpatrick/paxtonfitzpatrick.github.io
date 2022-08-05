@@ -44,13 +44,15 @@ $footer-fg: $muted-secondary;
 $footer-link: $fg-secondary;
 
 // timeline style
+// Note: for simplicity, expects all values to be in px or unitless, as
+// appropriate (though it would be pretty easy to add add support for em & rem)
 $timeline-vars: (
   'vertical-padding': 8px,
   'background-color': $bg-secondary,
   'background-alpha': 1,
   'year-color': #868686,
   'year-alpha': 1,
-  'year-font-size': 0.75rem,
+  'year-font-size': 12px,
   'gridline-color': #868686,
   'gridline-alpha': 0.3,
   'gridline-width': 2px,
@@ -59,7 +61,7 @@ $timeline-vars: (
   'info-line-width': 2px,
   'info-x-offset': 30px,
   'info-y-offset': 0.25,  // <-- "year" units
-  'info-font-size': 0.75rem,
+  'info-font-size': 12px,
   'info-font-color': #868686,
   'info-font-alpha': 1
 );
