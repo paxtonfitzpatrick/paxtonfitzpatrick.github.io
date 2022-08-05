@@ -44,16 +44,17 @@
       ctx.strokeStyle = this.color;
       ctx.lineWidth = this.timeline.style.infoLineWidth;
       // text properties -- font is already set by Timeline.drawEvents method
-      ctx.fillStyle = this.timeline.style.info_font_color;
+      ctx.fillStyle = this.timeline.style.infoFontColor;
       // TODO: look at effects of changing this
       ctx.textBaseline = 'bottom';
       ctx.textAlign = infoLayout.alignment;
       infoLayout.lineArr.forEach((line, lineIndex, lineArr) => {
-        console.log(line, infoLayout.xCoord, this.timeline.yearsYCoords[this.startYear] - (infoLayout.lineHeight * (lineArr.length - 1 - lineIndex)));
         ctx.fillText(
           line,
           infoLayout.xCoord,
-          this.timeline.yearsYCoords[this.startYear] - (infoLayout.lineHeight * (lineArr.length - 1 - lineIndex)),
+          infoLayout.underlineY
+            - this.timeline.style.infoUnderlineOffset
+            - (infoLayout.lineHeight * (lineArr.length - 1 - lineIndex)),
         );
       });
       // TODO: clean this up; lots of repeat property accesses
@@ -70,11 +71,11 @@
       ctx.moveTo(this.xCoord, infoLineStartY);
       ctx.lineTo(
         infoLayout.xCoord,
-        this.timeline.yearsYCoords[this.startYear] + infoLayout.lineHeight * 0.3,
+        infoLayout.underlineY,
       );
       ctx.lineTo(
         infoLayout.underlineX,
-        this.timeline.yearsYCoords[this.startYear] + infoLayout.lineHeight * 0.3,
+        infoLayout.underlineY,
       );
       ctx.stroke();
     }
@@ -83,6 +84,7 @@
       const infoLayout = {
           lineArr: [],
           lineHeight: this.timeline.style.infoLineHeight,
+          underlineY: this.timeline.yearsYCoords[this.startYear],
         },
         infoWords = this.info.split(' ');
 
@@ -314,10 +316,11 @@
         eventWidth: parseInt(compStyles.getPropertyValue('--event-width'), 10),
         eventOffset: parseInt(compStyles.getPropertyValue('--event-offset'), 10),
         infoLineWidth: parseInt(compStyles.getPropertyValue('--info-line-width'), 10),
+        infoUnderlineOffset: parseInt(compStyles.getPropertyValue('--info-underline-offset'), 10),
         infoXOffset: parseInt(compStyles.getPropertyValue('--info-x-offset'), 10),
         infoYOffset: parseFloat(compStyles.getPropertyValue('--info-y-offset')),
         infoFontSize: infoFontSize,
-        infoLineHeight: infoFontSize * parseFloat(compStyles.getPropertyValue('--info-line-height')),
+        infoLineHeight: Math.round(infoFontSize * parseFloat(compStyles.getPropertyValue('--info-line-height'))),
         backgroundColor: hexToRGBA(backgroundColor, backgroundAlpha),
         yearColor: hexToRGBA(yearColor, yearAlpha),
         gridlineColor: hexToRGBA(gridlineColor, gridlineAlpha),
