@@ -29,6 +29,7 @@ module.exports = {
   ],
   rules: {
     'no-empty': ['error', { allowEmptyCatch: true }],
+    'no-plusplus': 'off',
     // https://eslint.org/docs/latest/rules/object-curly-newline
     'object-curly-newline': ['error', { multiline: true, consistent: true }],
     // https://eslint.org/docs/latest/rules/object-shorthand
@@ -40,6 +41,14 @@ module.exports = {
         avoidExplicitReturnArrows: false,
         avoidQuotes: true,
         ignoreConstructors: false,
+      },
+    ],
+    'one-var': ['error', 'consecutive'],
+    'operator-linebreak': [
+      'error',
+      'before',
+      {
+        overrides: { '=': 'none' },
       },
     ],
     strict: ['warn', 'safe'],
