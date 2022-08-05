@@ -144,16 +144,17 @@
       // start and end years of the timeline
       this.startYear = parseInt(timelineElement.dataset.start, 10);
       this.endYear = parseInt(timelineElement.dataset.end, 10);
-      // sets this.canvas:
-      //   {element: HTMLCanvasElement, context: CanvasRenderingContext2D}
+      // sets:
+      //  - this.canvas:
+      //    {element: HTMLCanvasElement, context: CanvasRenderingContext2D}
+      //  - this.devicePixelRatio:
+      //    window.devicePixelRatio, used to scale canvas for retina displays
       this.initCanvas(timelineElement);
       // sets this.style (Object; see function for full list of field names)
       this.getStyles();
       // sets this.events (Array of TimelineEvents)
       this.parseEvents();
       // sets:
-      //  - this.yearLineHeight:
-      //    (approximate) height of year labels for grid lines (for alignment)
       //  - this.yearXOffset:
       //    used to offset labels from grid lines (approx. 1 character width)
       this.precomputeStaticValues();
@@ -180,10 +181,10 @@
 
     precomputeStaticValues() {
       // compute & cache various values that don't change when resizing canvas
-      // this.yearXOffset & this.yearLineHeight:
       // TODO: Math.round/Math.floor these?
       const ctx = this.canvas.context;
-      ctx.font = `${this.style.yearFontsize} sans-serif`;
+      ctx.font = `${this.style.yearFontsize}px sans-serif`;
+      ctx.textBaseline = 'bottom';
       // use 5 digits (4 for year + 1) to get small gap between year and line.
       // all digits are equal width, so this should hopefully work for the next
       // ~8,000 years
