@@ -10,7 +10,7 @@
     constructor(eventListItem, timeline) {
       // reference to owner class
       this.timeline = timeline;
-      this.info = eventListItem.innerText;
+      this.info = eventListItem.innerText.trim();
       // start and end years (+ increments) of the timeline
       this.startYear = parseFloat(eventListItem.dataset.start);
       this.endYear = parseFloat(eventListItem.dataset.end);
