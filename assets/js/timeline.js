@@ -139,8 +139,8 @@
       this.timelineElement = timelineElement;
       // current height & width of target element (and child canvas)
       // TODO: account for padding?
-      this.currentWidth = timelineElement.offsetWidth;
-      this.currentHeight = timelineElement.offsetHeight;
+      this.currentWidth = timelineElement.clientWidth;
+      this.currentHeight = timelineElement.clientHeight;
       // start and end years of the timeline
       this.startYear = parseInt(timelineElement.dataset.start, 10);
       this.endYear = parseInt(timelineElement.dataset.end, 10);
