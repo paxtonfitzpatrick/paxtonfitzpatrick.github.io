@@ -49,10 +49,11 @@
       ctx.textBaseline = 'bottom';
       ctx.textAlign = infoLayout.alignment;
       infoLayout.lineArr.forEach((line, lineIndex, lineArr) => {
+        console.log(line, infoLayout.xCoord, this.timeline.yearsYCoords[this.startYear] - (infoLayout.lineHeight * (lineArr.length - 1 - lineIndex)));
         ctx.fillText(
           line,
           infoLayout.xCoord,
-          this.timeline.yearsYCoords[this.startYear] - (infoLayout.lineHeight * 1.3) * (lineArr.length - 1 - lineIndex),
+          this.timeline.yearsYCoords[this.startYear] - (infoLayout.lineHeight * (lineArr.length - 1 - lineIndex)),
         );
       });
       // TODO: clean this up; lots of repeat property accesses
@@ -81,7 +82,7 @@
     formatInfoLayout() {
       const infoLayout = {
           lineArr: [],
-          lineHeight: this.timeline.infoLineHeight,
+          lineHeight: this.timeline.style.infoLineHeight,
         },
         infoWords = this.info.split(' ');
 
@@ -155,8 +156,6 @@
       //    (approximate) height of year labels for grid lines (for alignment)
       //  - this.yearXOffset:
       //    used to offset labels from grid lines (approx. 1 character width)
-      //  - this.infoLineHeight:
-      //    line height of event info/descriptions
       this.precomputeStaticValues();
       // sets:
       //  - this.yearsYCoords:
@@ -190,10 +189,6 @@
       // ~8,000 years
       const yearTextMetrics = ctx.measureText('00000');
       this.yearXOffset = yearTextMetrics.width;
-      this.yearLineHeight = yearTextMetrics.actualBoundingBoxAscent;
-      // this.infoLineHeight:
-      ctx.font = `${this.style.infoFontsize} sans-serif`;
-      this.infoLineHeight = ctx.measureText('0').actualBoundingBoxAscent;
       // could also pre-compute this.occupiedGrid here since that doesn't
       // change, but as-is, it's being constructed in loops that would exist
       // anyway, so it doesn't cost much and extracting it to here would just
@@ -268,7 +263,7 @@
       ctx.beginPath();
       ctx.fillStyle = this.style.yearColor;
       ctx.textAlign = 'right';
-      ctx.font = `${this.style.yearFontsize} sans-serif`;
+      ctx.font = `${this.style.yearFontsize}px sans-serif`;
       ctx.strokeStyle = this.style.gridlineColor;
       ctx.lineWidth = this.style.gridlineWidth;
 
@@ -276,7 +271,7 @@
         if (Number.isInteger(Number(yearString))) {
           // TODO: second arg here is probably why year labels are overflowing
           // TODO: Math.round/Math.floor these?
-          ctx.fillText(yearString, this.canvas.element.width, yCoord + (this.yearLineHeight / 2));
+          ctx.fillText(yearString, this.canvas.element.width, yCoord + (this.style.yearFontsize / 2));
           ctx.moveTo(0, yCoord);
           // TODO: this.currentWidth instead? Any difference?
           ctx.lineTo(this.canvas.element.width - this.yearXOffset, yCoord);
@@ -289,7 +284,7 @@
       // wrapper function that draws each event, formats and draws its info, and
       // also pre-sets the canvas context's font size to ensure the layout is
       // computed properly
-      this.canvas.context.font = `${this.style.infoFontsize} sans-serif`;
+      this.canvas.context.font = `${this.style.infoFontSize}px sans-serif`;
       this.events.forEach((event) => {
         event.drawEventLine();
         const eventInfoLayout = event.formatInfoLayout();
@@ -309,7 +304,8 @@
         gridlineColor = compStyles.getPropertyValue('--gridline-color').trim(),
         gridlineAlpha = parseFloat(compStyles.getPropertyValue('--gridline-alpha')),
         infoFontColor = compStyles.getPropertyValue('--info-font-color').trim(),
-        infoFontAlpha = parseInt(compStyles.getPropertyValue('--info-font-alpha'), 10);
+        infoFontAlpha = parseInt(compStyles.getPropertyValue('--info-font-alpha'), 10),
+        infoFontSize = parseInt(compStyles.getPropertyValue('--info-font-size'), 10);
       this.style = {
         verticalPadding: parseInt(compStyles.getPropertyValue('--vertical-padding'), 10),
         yearFontsize: parseInt(compStyles.getPropertyValue('--year-font-size'), 10),
@@ -319,6 +315,7 @@
         infoLineWidth: parseInt(compStyles.getPropertyValue('--info-line-width'), 10),
         infoXOffset: parseInt(compStyles.getPropertyValue('--info-x-offset'), 10),
         infoYOffset: parseFloat(compStyles.getPropertyValue('--info-y-offset')),
+        infoFontSize: infoFontSize,
         infoLineHeight: infoFontSize * parseFloat(compStyles.getPropertyValue('--info-line-height')),
         backgroundColor: hexToRGBA(backgroundColor, backgroundAlpha),
         yearColor: hexToRGBA(yearColor, yearAlpha),

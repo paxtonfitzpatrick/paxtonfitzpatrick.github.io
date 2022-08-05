@@ -63,7 +63,8 @@ $timeline-vars: (
   'info-y-offset': 0.25,  // <-- "year" units
   'info-font-size': 12px,
   'info-font-color': #868686,
-  'info-font-alpha': 1
+  'info-font-alpha': 1,
+  'info-line-height': 1.15  // <-- unitless; same meaning as CSS line-height
 );
 
 // scroll shadow component style
