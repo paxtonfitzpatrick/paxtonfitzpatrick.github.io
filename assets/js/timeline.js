@@ -284,6 +284,31 @@
         }
       });
       ctx.stroke();
+
+      // // TEST:
+      // ctx.beginPath();
+      // ctx.strokeStyle = 'red';
+      // ctx.lineWidth = '2px';
+      // ctx.moveTo(this.currentWidth - this.yearXOffset, 0);
+      // ctx.lineTo(this.currentWidth - this.yearXOffset, this.currentHeight);
+      // ctx.stroke();
+      //
+      // // ctx.moveTo(this.centerXCoord, 0);
+      // // ctx.lineTo(this.centerXCoord, this.currentHeight);
+      // // ctx.stroke();
+      // ctx.beginPath();
+      // ctx.strokeStyle = 'blue';
+      // const center1 = Math.round((this.canvas.element.width - this.yearXOffset) / 2);
+      // ctx.moveTo(center1, 0);
+      // ctx.lineTo(center1, this.currentHeight);
+      // ctx.stroke();
+      //
+      // ctx.beginPath();
+      // ctx.strokeStyle = 'green';
+      // const center2 = Math.round(this.canvas.element.width / 2 - this.yearXOffset);
+      // ctx.moveTo(center2, 0);
+      // ctx.lineTo(center2, this.currentHeight);
+      // ctx.stroke();
     }
 
     drawEvents() {
@@ -397,6 +422,7 @@
   if (timelineElement !== null) {
     window.addEventListener('load', () => {
       const timelineObj = new Timeline(timelineElement);
+      // window.timeline = timelineObj;
       window.addEventListener('resize', () => timelineObj.onResize());
     });
   }
