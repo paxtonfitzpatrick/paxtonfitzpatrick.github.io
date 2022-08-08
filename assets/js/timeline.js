@@ -216,7 +216,7 @@
       }
       this.yearsYCoords = yearsYCoords;
       this.occupedGrid = occupiedGrid;
-      this.centerXCoord = Math.round(this.canvas.element.width / 2 - this.yearXOffset);
+      this.centerXCoord = Math.round((this.canvas.element.width - this.yearXOffset) / 2);
     }
 
     computeEventLayout() {
