@@ -87,16 +87,20 @@
           lineHeight: this.timeline.style.infoLineHeight,
           underlineY: this.timeline.yearsYCoords[this.startYear],
         },
-        infoWords = this.info.split(' ');
+        infoWords = this.info.split(' '),
+        lineWidths = [];
 
       let infoMaxWidth,
-        currentLine = infoWords[0];
+        currentLine = infoWords[0],
+        currentLineWidth = this.timeline.canvas.context.measureText(infoWords[0]).width;
 
       if (this.xCoord >= this.timeline.centerXCoord) {
+        // place info to right of event line
         infoLayout.xCoord = this.timeline.infoRightXCoord;
         infoLayout.alignment = 'left';
         infoMaxWidth = this.timeline.currentWidth - infoLayout.xCoord - this.timeline.yearXOffset;
       } else {
+        // place info to left of event line
         infoLayout.xCoord = this.timeline.infoLeftXCoord;
         infoLayout.alignment = 'right';
         infoMaxWidth = infoLayout.xCoord;
@@ -110,17 +114,19 @@
         // always split on comma regardless of current line length
         if (widthWithNextWord > infoMaxWidth || currentLine.endsWith(',')) {
           infoLayout.lineArr.push(currentLine);
+          lineWidths.push(currentLineWidth);
           currentLine = nextWord;
+          currentLineWidth = widthWithNextWord - currentLineWidth;
         } else {
           currentLine = withNextWord;
+          currentLineWidth = widthWithNextWord;
         }
       });
 
       infoLayout.lineArr.push(currentLine);
+      lineWidths.push(currentLineWidth);
       // TODO: optimize this -- track running max width above rather than recomputing here
-      infoLayout.width = Math.max(...infoLayout.lineArr.map(
-        (line) => this.timeline.canvas.context.measureText(line).width
-      ));
+      infoLayout.width = Math.max(...lineWidths);
       // TODO: optimize this -- conditional is redundant with the one above
       if (infoLayout.alignment === 'left') {
         infoLayout.underlineX = infoLayout.xCoord + infoLayout.width;
