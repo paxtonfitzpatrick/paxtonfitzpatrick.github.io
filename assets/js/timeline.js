@@ -36,7 +36,6 @@
     }
 
     // TODO: should this be accounting for this.timeline.yearXOffset?
-    // eslint-disable-next-line -- (placeholder) // TODO: write me
     drawInfo(infoLayout) {
       const ctx = this.timeline.canvas.context;
       ctx.beginPath();
@@ -48,6 +47,7 @@
       // TODO: look at effects of changing this
       ctx.textBaseline = 'bottom';
       ctx.textAlign = infoLayout.alignment;
+      ctx.lineJoin = 'round';
       infoLayout.lineArr.forEach((line, lineIndex, lineArr) => {
         ctx.fillText(
           line,
