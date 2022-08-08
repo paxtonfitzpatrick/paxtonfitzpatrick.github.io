@@ -28,6 +28,16 @@ module.exports = {
     },
   ],
   rules: {
+    'comma-dangle': [
+      'error',
+      {
+        arrays: 'always-multiline',
+        objects: 'always-multiline',
+        imports: 'always-multiline',
+        exports: 'always-multiline',
+        functions: 'never',
+      },
+    ],
     'no-empty': ['error', { allowEmptyCatch: true }],
     'no-plusplus': 'off',
     // https://eslint.org/docs/latest/rules/object-curly-newline
