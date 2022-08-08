@@ -63,19 +63,20 @@
       ];
       if (this.endYear - this.startYear <= this.timeline.style.infoYOffset) {
         infoLineStartY = Math.floor(
-          (this.timeline.yearsYCoords[this.startYear] + this.timeline.yearsYCoords[this.endYear])
-          / 2,
+          (this.timeline.yearsYCoords[this.startYear]
+            + this.timeline.yearsYCoords[this.endYear])
+          / 2
         );
       }
 
       ctx.moveTo(this.xCoord, infoLineStartY);
       ctx.lineTo(
         infoLayout.xCoord,
-        infoLayout.underlineY,
+        infoLayout.underlineY
       );
       ctx.lineTo(
         infoLayout.underlineX,
-        infoLayout.underlineY,
+        infoLayout.underlineY
       );
       ctx.stroke();
     }
@@ -118,7 +119,7 @@
       infoLayout.lineArr.push(currentLine);
       // TODO: optimize this -- track running max width above rather than recomputing here
       infoLayout.width = Math.max(...infoLayout.lineArr.map(
-        (line) => this.timeline.canvas.context.measureText(line).width,
+        (line) => this.timeline.canvas.context.measureText(line).width
       ));
       // TODO: optimize this -- conditional is redundant with the one above
       if (infoLayout.alignment === 'left') {
@@ -274,12 +275,16 @@
         if (Number.isInteger(Number(yearString))) {
           // TODO: second arg here is probably why year labels are overflowing
           // TODO: Math.round/Math.floor these?
-          ctx.fillText(yearString, this.canvas.element.width, yCoord + (this.style.yearFontsize / 2));
+          ctx.fillText(
+            yearString,
+            this.canvas.element.width,
+            yCoord + (this.style.yearFontsize / 2)
+          );
           ctx.moveTo(0, yCoord);
           // TODO: this.currentWidth instead? Any difference?
           ctx.lineTo(this.canvas.element.width - this.yearXOffset, yCoord);
         }
-      }
+      });
       ctx.stroke();
     }
 
