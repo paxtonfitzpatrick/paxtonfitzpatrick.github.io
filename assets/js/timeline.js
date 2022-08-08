@@ -186,7 +186,7 @@
       // compute & cache various values that don't change when resizing canvas
       // TODO: Math.round/Math.floor these?
       const ctx = this.canvas.context;
-      ctx.font = `${this.style.yearFontsize}px sans-serif`;
+      ctx.font = `${this.style.yearFontSize}px sans-serif`;
       ctx.textBaseline = 'bottom';
       // use 5 digits (4 for year + 1) to get small gap between year and line.
       // all digits are equal width, so this should hopefully work for the next
@@ -267,18 +267,17 @@
       ctx.beginPath();
       ctx.fillStyle = this.style.yearColor;
       ctx.textAlign = 'right';
-      ctx.font = `${this.style.yearFontsize}px sans-serif`;
+      ctx.font = `${this.style.yearFontSize}px sans-serif`;
       ctx.strokeStyle = this.style.gridlineColor;
       ctx.lineWidth = this.style.gridlineWidth;
 
-      for (const [yearString, yCoord] of Object.entries(this.yearsYCoords)) {
+      Object.entries(this.yearsYCoords).forEach(([yearString, yCoord]) => {
         if (Number.isInteger(Number(yearString))) {
-          // TODO: second arg here is probably why year labels are overflowing
           // TODO: Math.round/Math.floor these?
           ctx.fillText(
             yearString,
             this.canvas.element.width,
-            yCoord + (this.style.yearFontsize / 2)
+            yCoord + (this.style.yearFontSize / 2)
           );
           ctx.moveTo(0, yCoord);
           // TODO: this.currentWidth instead? Any difference?
@@ -316,7 +315,7 @@
         infoFontSize = parseInt(compStyles.getPropertyValue('--info-font-size'), 10);
       this.style = {
         verticalPadding: parseInt(compStyles.getPropertyValue('--vertical-padding'), 10),
-        yearFontsize: parseInt(compStyles.getPropertyValue('--year-font-size'), 10),
+        yearFontSize: parseInt(compStyles.getPropertyValue('--year-font-size'), 10),
         gridlineWidth: parseInt(compStyles.getPropertyValue('--gridline-width'), 10),
         eventWidth: parseInt(compStyles.getPropertyValue('--event-width'), 10),
         eventOffset: parseInt(compStyles.getPropertyValue('--event-offset'), 10),
