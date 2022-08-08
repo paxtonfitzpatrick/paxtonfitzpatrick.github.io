@@ -95,7 +95,7 @@
       if (this.xCoord >= this.timeline.centerXCoord) {
         infoLayout.xCoord = this.timeline.infoRightXCoord;
         infoLayout.alignment = 'left';
-        infoMaxWidth = this.timeline.currentWidth - infoLayout.xCoord;
+        infoMaxWidth = this.timeline.currentWidth - infoLayout.xCoord - this.timeline.yearXOffset;
       } else {
         infoLayout.xCoord = this.timeline.infoLeftXCoord;
         infoLayout.alignment = 'right';
@@ -191,8 +191,7 @@
       // use 5 digits (4 for year + 1) to get small gap between year and line.
       // all digits are equal width, so this should hopefully work for the next
       // ~8,000 years
-      const yearTextMetrics = ctx.measureText('00000');
-      this.yearXOffset = yearTextMetrics.width;
+      this.yearXOffset = ctx.measureText('00000').width;
       // could also pre-compute this.occupiedGrid here since that doesn't
       // change, but as-is, it's being constructed in loops that would exist
       // anyway, so it doesn't cost much and extracting it to here would just
@@ -203,7 +202,7 @@
 
     computeBaseLayout() {
       const topY = this.style.verticalPadding,
-        bottomY = this.canvas.element.height - this.style.verticalPadding,
+        bottomY = this.currentHeight - this.style.verticalPadding,
         // compute y-coord for each 1/4 year increment included in the timeline
         yInc = (bottomY - topY) / ((this.endYear - this.startYear) * 4),
         yearsYCoords = {},
@@ -217,7 +216,7 @@
       }
       this.yearsYCoords = yearsYCoords;
       this.occupedGrid = occupiedGrid;
-      this.centerXCoord = Math.round((this.canvas.element.width - this.yearXOffset) / 2);
+      this.centerXCoord = Math.round((this.currentWidth - this.yearXOffset) / 2);
     }
 
     computeEventLayout() {
@@ -276,12 +275,12 @@
           // TODO: Math.round/Math.floor these?
           ctx.fillText(
             yearString,
-            this.canvas.element.width,
+            this.currentWidth,
             yCoord + (this.style.yearFontSize / 2)
           );
           ctx.moveTo(0, yCoord);
           // TODO: this.currentWidth instead? Any difference?
-          ctx.lineTo(this.canvas.element.width - this.yearXOffset, yCoord);
+          ctx.lineTo(this.currentWidth - this.yearXOffset, yCoord);
         }
       });
       ctx.stroke();
