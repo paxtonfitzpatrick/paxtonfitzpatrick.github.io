@@ -123,7 +123,7 @@ sections:
               color: 005659
             - title: Ph.D. Student, Dartmouth College
               start: 2021.75
-              end: 2022.5
+              end: present
               color: 0000dd
             - title: Teaching Assistant, Laboratory in Experimental Psychology
               start: 2022.25

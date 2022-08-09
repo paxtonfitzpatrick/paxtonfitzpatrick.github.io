@@ -12,7 +12,12 @@
       this.timeline = timeline;
       // start and end years (+ increments) of the timeline
       this.startYear = parseFloat(eventListItem.dataset.start);
-      this.endYear = parseFloat(eventListItem.dataset.end);
+      const endYear = eventListItem.dataset.end;
+      if (endYear === 'present') {
+        this.endYear = endYear;
+      } else {
+        this.endYear = parseFloat(endYear);
+      }
       this.color = `#${eventListItem.dataset.color}`;
       this.backgroundColor = hexToRGBA(this.color, timeline.style.infoBackgroundAlpha);
       this.info = eventListItem.innerText.trim();
@@ -28,12 +33,26 @@
 
       ctx.beginPath();
       ctx.lineWidth = eventWidth;
-      ctx.strokeStyle = this.color;
-      ctx.lineCap = 'round';
       // rounded caps have a radius of 1/2 the line's width and add that much
       // additional length to the line
+      ctx.lineCap = 'round';
       ctx.moveTo(this.xCoord, yearsYCoords[this.startYear] + (eventWidth / 2));
-      ctx.lineTo(this.xCoord, yearsYCoords[this.endYear] - (eventWidth / 2));
+
+      if (this.endYear === 'present') {
+        const gradient = ctx.createLinearGradient(
+          this.xCoord,
+          yearsYCoords[this.startYear],
+          this.xCoord,
+          this.timeline.currentHeight
+        );
+        gradient.addColorStop(0.25, this.color);
+        gradient.addColorStop(1, this.timeline.style.backgroundColor);
+        ctx.strokeStyle = gradient;
+        ctx.lineTo(this.xCoord, this.timeline.currentHeight);
+      } else {
+        ctx.strokeStyle = this.color;
+        ctx.lineTo(this.xCoord, yearsYCoords[this.endYear] - (eventWidth / 2));
+      }
       ctx.stroke();
     }
 
@@ -56,7 +75,11 @@
         xLeft -= infoLayout.width;
       }
 
-      if (this.endYear - this.startYear <= this.timeline.style.infoYOffset) {
+      if (
+        this.endYear !== 'present'
+        && this.endYear - this.startYear <= this.timeline.style.infoYOffset
+      ) {
+      // if (this.endYear - this.startYear <= this.timeline.style.infoYOffset) {
         lineYStart = Math.round(
           (this.timeline.yearsYCoords[this.startYear] + this.timeline.yearsYCoords[this.endYear])
           / 2
@@ -76,7 +99,7 @@
       }
 
       // line properties
-      ctx.strokeStyle = this.color;
+      ctx.strokeStyle = hexToRGBA(this.color, this.timeline.style.infoLineAlpha);
       ctx.lineWidth = this.timeline.style.infoLineWidth;
 
       // draw reference line first
@@ -107,7 +130,7 @@
       );
 
       ctx.beginPath();
-      // text properties -- font is already set by Timeline.drawEvents method
+      ctx.font = `${this.timeline.style.infoFontSize}px sans-serif`;
       ctx.fillStyle = this.timeline.style.infoFontColor;
       // TODO: look at effects of changing this
       ctx.textBaseline = 'bottom';
@@ -121,10 +144,14 @@
             - this.timeline.style.infoBackgroundPadding
             - (this.timeline.style.infoLineHeight * (lineArr.length - 1 - lineIndex))
         );
+        if (line.endsWith(',')) {
+          ctx.font = `italic ${this.timeline.style.infoFontSize}px sans-serif`;
+        }
       });
     }
 
     computeInfoLayout() {
+      this.timeline.canvas.context.font = `${this.timeline.style.infoFontSize}px sans-serif`;
       const infoLayout = {
           lineArr: [],
           bottomY: this.timeline.yearsYCoords[this.startYear],
@@ -337,7 +364,11 @@
         event.xCoord = xCoord;
         eventXCoords.push(xCoord);
         // mark that column as occupied for the duration of the event
-        for (let year = event.startYear; year < event.endYear; year += 0.25) {
+        let endYear = event.endYear;
+        if (endYear === 'present') {
+          endYear = this.endYear;
+        }
+        for (let year = event.startYear; year < endYear; year += 0.25) {
           this.occupiedGrid[year][firstOpenCol] = 1;
         }
       });
@@ -427,6 +458,7 @@
         eventWidth: parseInt(compStyles.getPropertyValue('--event-width'), 10),
         eventOffset: parseInt(compStyles.getPropertyValue('--event-offset'), 10),
         infoLineWidth: parseInt(compStyles.getPropertyValue('--info-line-width'), 10),
+        infoLineAlpha: parseFloat(compStyles.getPropertyValue('--info-line-alpha')),
         infoXOffset: parseInt(compStyles.getPropertyValue('--info-x-offset'), 10),
         infoYOffset: parseFloat(compStyles.getPropertyValue('--info-y-offset')),
         infoMinPaddingY: parseInt(compStyles.getPropertyValue('--info-min-padding-y'), 10),
