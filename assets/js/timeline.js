@@ -206,6 +206,65 @@
       // the screen while the timeline is in view.
     }
 
+    adjustEventInfo(eventsInfoLayouts) {
+      // for each event's info:
+      //  - get the y-coord of its top
+      //    - if its top's y-coord is less than the previous event's underline's
+      //      y-coord AND they're on the same side:
+      //    - figure out how much the previous event would have to be moved
+      //      upward so the current event doesn't overlap AND there's some min.
+      //      amount of space between them
+      //    - if the prev event CAN be moved up that much without overlapping
+      //      the one before IT:
+      //      - update its underline's y-coord to the new y-coord
+      //     - else:
+      //      - instead, move the current event downward until it doesn't
+      //        overlap the previous one
+      [this.infoLeftXCoord, this.infoRightXCoord].forEach((xCoord) => {
+        // deal with vertically adjusting info on left and right separately
+        const sameSideInfoLayouts = eventsInfoLayouts.filter((info) => info.xCoord === xCoord);
+        // index arg to forEach callback func corresponds to index of previous
+        // event (on the same side)'s info because 1st item is `.slice`d off
+        sameSideInfoLayouts.slice(1).forEach((eventInfo, prevEventIx) => {
+          // get y-coord of top of event info text
+          const infoTopY = eventInfo.underlineY
+            - this.style.infoUnderlineOffset
+            - (this.style.infoLineHeight * eventInfo.lineArr.length),
+            // get info data for previous event (on the same side)
+            prevEventInfo = sameSideInfoLayouts[prevEventIx];
+          // if the top of the current event's info text isn't at least
+          // infoMinPaddingY from the bottom of previous event's info text:
+          if (infoTopY < prevEventInfo.underlineY + this.style.infoMinPaddingY) {
+            // console.log(eventInfo.lineArr);
+            // distance the previous event's info would need to be moved upward
+            // or the current event's info would need to be moved downward to
+            // A) not overlap and B) have infoMinPaddingY space between them
+            const toMove = (prevEventInfo.underlineY + this.style.infoMinPaddingY) - infoTopY,
+              // y-coord for the top of the previous event's info text
+              prevInfoTopY = prevEventInfo.underlineY
+                - this.style.infoUnderlineOffset
+                - (this.style.infoLineHeight * prevEventInfo.lineArr.length);
+            if (
+              // if the previous event is the first on that side and can be
+              // moved upward without going off the top edge of the canvas...
+              (prevEventIx === 0 && prevInfoTopY - toMove >= 0)
+              // ...or the previous event *isn't* the first on that side and can
+              // be moved upward without overlapping with the one above *that*:
+              || (prevEventIx > 0
+                  && prevInfoTopY - toMove
+                  >= sameSideInfoLayouts[prevEventIx - 1].underlineY + this.style.infoMinPaddingY)
+            ) {
+              // move the previous event's info text upward
+              prevEventInfo.underlineY -= toMove;
+            } else {
+              // otherwise, move the current event's info text downward the required amount
+              eventInfo.underlineY += toMove;
+            }
+          }
+        });
+      });
+    }
+
     computeBaseLayout() {
       const topY = this.style.verticalPadding,
         bottomY = this.currentHeight - this.style.verticalPadding,
@@ -318,14 +377,23 @@
     }
 
     drawEvents() {
-      // wrapper function that draws each event, formats and draws its info, and
-      // also pre-sets the canvas context's font size to ensure the layout is
-      // computed properly
+      // wrapper function that:
+      //   - pre-sets the canvas context's font size & style to ensure the
+      //     layout is computed properly
+      //   - draws each event's line on the timeline
+      //   - computes an initial position for each event's info text & callout
+      //     line
+      //   - adjusts the layout of the events' info to avoid overlap
+      //   - draws the events' info to the canvas
+      const eventsInfoLayouts = [];
       this.canvas.context.font = `${this.style.infoFontSize}px sans-serif`;
       this.events.forEach((event) => {
         event.drawEventLine();
-        const eventInfoLayout = event.formatInfoLayout();
-        event.drawInfo(eventInfoLayout);
+        eventsInfoLayouts.push(event.computeInfoLayout());
+      });
+      this.adjustEventInfo(eventsInfoLayouts);
+      this.events.forEach((event, ix) => {
+        event.drawInfo(eventsInfoLayouts[ix]);
       });
     }
 
