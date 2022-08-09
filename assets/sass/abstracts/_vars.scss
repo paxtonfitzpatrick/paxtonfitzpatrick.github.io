@@ -62,6 +62,7 @@ $timeline-vars: (
   'info-underline-offset': 4px,
   'info-x-offset': 30px,
   'info-y-offset': 0.25,  // <-- "year" units
+  'info-min-padding-y': 15px,  // minimum vertical distance between events' info
   'info-font-size': 12px,
   'info-font-color': #868686,
   'info-font-alpha': 1,

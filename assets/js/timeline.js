@@ -402,6 +402,7 @@
         infoUnderlineOffset: parseInt(compStyles.getPropertyValue('--info-underline-offset'), 10),
         infoXOffset: parseInt(compStyles.getPropertyValue('--info-x-offset'), 10),
         infoYOffset: parseFloat(compStyles.getPropertyValue('--info-y-offset')),
+        infoMinPaddingY: parseInt(compStyles.getPropertyValue('--info-min-padding-y'), 10),
         infoFontSize: infoFontSize,
         infoLineHeight: Math.round(infoFontSize * parseFloat(compStyles.getPropertyValue('--info-line-height'))),
         backgroundColor: hexToRGBA(backgroundColor, backgroundAlpha),
