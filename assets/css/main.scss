@@ -18,8 +18,6 @@
 
 // -----------------------------------------------------------------------------
 
-// Import partials from `sass_dir` (defaults to `_sass`)
-
 // vendored base styles
 @import
   'vendors/creative';
@@ -33,15 +31,16 @@
   'components/scroll-shadows',
   'components/navbar';
 
-// placeholder comment
 @import
-  'style',
-  'particles',
-  'header',
-  'header-icons',
-  'bio-timeline',
-  'skills',
-  'research',
-  'software',
-  'contact',
-  'footer';
+  'themes/style';
+
+@import
+  'partials/particles',
+  'partials/header',
+  'partials/header-icons',
+  'partials/bio-timeline',
+  'partials/skills',
+  'partials/research',
+  'partials/software',
+  'partials/contact',
+  'partials/footer';
