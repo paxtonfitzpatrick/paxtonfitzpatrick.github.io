@@ -216,7 +216,6 @@
           // if the top of the current event's info text isn't at least
           // infoMinPaddingY from the bottom of previous event's info text:
           if (infoTopY < prevEventInfo.underlineY + this.style.infoMinPaddingY) {
-            // console.log(eventInfo.lineArr);
             // distance the previous event's info would need to be moved upward
             // or the current event's info would need to be moved downward to
             // A) not overlap and B) have infoMinPaddingY space between them
@@ -225,22 +224,46 @@
               prevInfoTopY = prevEventInfo.underlineY
                 - this.style.infoUnderlineOffset
                 - (this.style.infoLineHeight * prevEventInfo.lineArr.length);
-            if (
-              // if the previous event is the first on that side and can be
-              // moved upward without going off the top edge of the canvas...
-              (prevEventIx === 0 && prevInfoTopY - toMove >= 0)
-              // ...or the previous event *isn't* the first on that side and can
-              // be moved upward without overlapping with the one above *that*:
-              || (prevEventIx > 0
-                  && prevInfoTopY - toMove
-                  >= sameSideInfoLayouts[prevEventIx - 1].underlineY + this.style.infoMinPaddingY)
-            ) {
-              // move the previous event's info text upward
+            // assuming the previous event is the first on that side, the most
+            // it can be moved upward is the distance from the top of its info
+            // text to the top of the canvas (y=0)
+            let prevInfoCanMove = prevInfoTopY;
+            if (prevEventIx > 0) {
+              // if the previous event *isn't* the first on that side, the most
+              // it can be moved upward is the distance from the top of its info
+              // text to the bottom of the previous event's info text, minus the
+              // min. required vertical space between them
+              prevInfoCanMove -= sameSideInfoLayouts[prevEventIx - 1].underlineY
+                                 + this.style.infoMinPaddingY;
+            }
+            if (prevInfoCanMove >= toMove) {
+              // if the previous event's info can be moved upward the full
+              // amount needed, do so
               prevEventInfo.underlineY -= toMove;
             } else {
-              // otherwise, move the current event's info text downward the required amount
-              eventInfo.underlineY += toMove;
+              // otherwise, move the previous event's info upward as much as
+              // possible, and move the current event's info downward to make up
+              // the difference
+              prevEventInfo.underlineY -= prevInfoCanMove;
+              eventInfo.underlineY += toMove - prevInfoCanMove;
             }
+
+            // if (
+            //   // if the previous event is the first on that side and can be
+            //   // moved upward without going off the top edge of the canvas...
+            //   (prevEventIx === 0 && prevInfoTopY - toMove >= 0)
+            //   // ...or the previous event *isn't* the first on that side and can
+            //   // be moved upward without overlapping with the one above *that*:
+            //   || (prevEventIx > 0
+            //       && prevInfoTopY - toMove
+            //       >= sameSideInfoLayouts[prevEventIx - 1].underlineY + this.style.infoMinPaddingY)
+            // ) {
+            //   // move the previous event's info text upward
+            //   prevEventInfo.underlineY -= toMove;
+            // } else {
+            //   // otherwise, move the current event's info text downward the required amount
+            //   eventInfo.underlineY += toMove;
+            // }
           }
         });
       });
