@@ -209,18 +209,17 @@
     constructor(timelineElement) {
       // target element
       this.timelineElement = timelineElement;
-      // current height & width of target element (and child canvas)
-      this.currentWidth = timelineElement.clientWidth;
-      this.currentHeight = timelineElement.clientHeight;
       // start and end years of the timeline
       this.startYear = parseInt(timelineElement.dataset.start, 10);
       this.endYear = parseInt(timelineElement.dataset.end, 10);
       // sets:
       //  - this.canvas:
       //    {element: HTMLCanvasElement, context: CanvasRenderingContext2D}
-      //  - this.devicePixelRatio:
-      //    window.devicePixelRatio, used to scale canvas for retina displays
-      this.initCanvas(timelineElement);
+      //  - this.currentWidth:
+      //    current width of both `this.timelineElement` & `this.canvas.element`
+      //  - this.currentHeight:
+      //    current height of both `this.timelineElement` & `this.canvas.element`
+      this.initCanvas();
       // sets this.style (Object; see function for full list of field names)
       this.getStyles();
       // sets this.events (Array of TimelineEvents)
@@ -468,25 +467,28 @@
       };
     }
 
-    initCanvas(timelineElement) {
+    initCanvas() {
       // create canvas element and push it to the DOM as a child of the target
       // element
       const canvasElement = document.createElement('canvas'),
         context = canvasElement.getContext('2d');
 
+      // since the containing
+      this.currentWidth = this.timelineElement.clientWidth;
+      this.currentHeight = this.timelineElement.clientHeight;
+
       canvasElement.className = 'timeline-canvas-el';
-      canvasElement.width = timelineElement.clientWidth * devicePixelRatio;
-      canvasElement.height = timelineElement.clientHeight * devicePixelRatio;
+      canvasElement.width = this.currentWidth * devicePixelRatio;
+      canvasElement.height = this.currentHeight * devicePixelRatio;
 
       context.scale(devicePixelRatio, devicePixelRatio);
 
-      canvasElement.style.width = `${timelineElement.clientWidth}px`;
-      canvasElement.style.height = `${timelineElement.clientHeight}px`;
+      canvasElement.style.width = `${this.currentWidth}px`;
+      canvasElement.style.height = `${this.currentHeight}px`;
 
       // style.position (absolute), style.width (100%), & style.height (100%)
       // set in _bio-timeline.scss; no need to set here
-      timelineElement.appendChild(canvasElement);
-
+      this.timelineElement.appendChild(canvasElement);
       this.canvas = {
         element: canvasElement,
         context: context,
@@ -577,7 +579,6 @@
   if (timelineElement !== null) {
     window.addEventListener('load', () => {
       const timelineObj = new Timeline(timelineElement);
-      window.timeline = timelineObj;
       window.addEventListener('resize', () => timelineObj.onResize());
     });
   }
