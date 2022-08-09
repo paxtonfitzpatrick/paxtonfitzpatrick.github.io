@@ -471,17 +471,25 @@
     initCanvas(timelineElement) {
       // create canvas element and push it to the DOM as a child of the target
       // element
-      const canvasElement = document.createElement('canvas');
+      const canvasElement = document.createElement('canvas'),
+        context = canvasElement.getContext('2d');
+
       canvasElement.className = 'timeline-canvas-el';
-      canvasElement.width = timelineElement.clientWidth;
-      canvasElement.height = timelineElement.clientHeight;
+      canvasElement.width = timelineElement.clientWidth * devicePixelRatio;
+      canvasElement.height = timelineElement.clientHeight * devicePixelRatio;
+
+      context.scale(devicePixelRatio, devicePixelRatio);
+
+      canvasElement.style.width = `${timelineElement.clientWidth}px`;
+      canvasElement.style.height = `${timelineElement.clientHeight}px`;
+
       // style.position (absolute), style.width (100%), & style.height (100%)
       // set in _bio-timeline.scss; no need to set here
       timelineElement.appendChild(canvasElement);
 
       this.canvas = {
         element: canvasElement,
-        context: canvasElement.getContext('2d'),
+        context: context,
       };
     }
 
@@ -491,8 +499,11 @@
 
       if (newWidth !== this.currentWidth || newHeight !== this.currentHeight) {
         this.canvas.context.clearRect(0, 0, this.currentWidth, this.currentHeight);
-        this.canvas.element.width = newWidth;
-        this.canvas.element.height = newHeight;
+        this.canvas.element.width = newWidth * devicePixelRatio;
+        this.canvas.element.height = newHeight * devicePixelRatio;
+        this.canvas.context.scale(devicePixelRatio, devicePixelRatio);
+        this.canvas.element.style.width = `${newWidth}px`;
+        this.canvas.element.style.height = `${newHeight}px`;
         this.currentWidth = newWidth;
         this.currentHeight = newHeight;
         this.computeBaseLayout();
