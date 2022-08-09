@@ -2,6 +2,13 @@
   margin-bottom: 1em;
   text-align: justify;
 
+  @media (min-width: 992px) {
+    // to give the timeline some additional room, give the enclosing row
+    // .no-gutters and add the timeline column's normal 15px padding-left to the
+    // the bio column's 15px padding-right
+    padding-right: 30px;
+  }
+
   img {
     max-width: 8em;
     height: auto;
