@@ -1,0 +1,31 @@
+<nav id="main-nav" class="navbar navbar-expand-md navbar-light">
+  <div class="container">
+    <a class="navbar-brand js-scroll-trigger" href="#page-top">
+      {{- page.header.title -}}
+    </a>
+    <button class="navbar-toggler navbar-toggler-right" type="button"
+            data-toggle="collapse"
+            data-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="navbarResponsive" class="collapse navbar-collapse">
+      <ul class="navbar-nav ml-auto my-2 my-md-0">
+        {% for section in include.page.sections %}
+          <li class="nav-item">
+            {% assign href = section.section_id | prepend: "#" %}
+            <a class="nav-link js-scroll-trigger" href="{{ href }}">
+              {{- section.title -}}
+            </a>
+          </li>
+        {% endfor %}
+        <li class="nav-item">
+          {% assign href = site.cv_url | relative_url %}
+          <a class="nav-link" href="{{ href }}" target="_blank">CV</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

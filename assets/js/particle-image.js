@@ -97,7 +97,7 @@ const ParticleImageDisplayer = function(tag_id, canvas_el, params) {
     pImg.canvas.el.height = pImg.canvas.h;
     pImg.image.height_available = pImg.image.bottom_constraint.el.offsetTop - pImg.canvas.offset_top;
     pImg.canvas.aspect_ratio = pImg.canvas.w / pImg.image.height_available;
-    window.addEventListener('resize', pImg.functions.utils.debounce(pImg.functions.canvas.onResize, 200));
+    window.addEventListener('resize', pImg.functions.utils.debounce(pImg.functions.canvas.onResize, 200), pImg.eventListenerOpts);
   };
 
   pImg.functions.canvas.onResize = function() {
@@ -154,7 +154,7 @@ const ParticleImageDisplayer = function(tag_id, canvas_el, params) {
       const img_pixels = pImg.functions.canvas.getImagePixels();
       pImg.functions.particles.createImageParticles(img_pixels);
       pImg.functions.particles.animateParticles();
-    });
+    }, pImg.eventListenerOpts);
     let src_path = pImg.image.src.path;
     if (pImg.image.src.is_external) {
       src_path = `https://cors-anywhere.herokuapp.com/${pImg.image.src.path}`;
@@ -301,22 +301,22 @@ const ParticleImageDisplayer = function(tag_id, canvas_el, params) {
             pos_y = e.offsetY || e.clientY;
         pImg.mouse.x = pos_x;
         pImg.mouse.y = pos_y;
-      });
+      }, pImg.eventListenerOpts);
       pImg.canvas.el.addEventListener('mouseleave', function(e) {
         pImg.mouse.x = null;
         pImg.mouse.y = null;
-      });
+      }, pImg.eventListenerOpts);
       pImg.functions.utils.addEventActions('on_hover');
     }
     if (pImg.particles.interactivity.on_click.enabled) {
       pImg.canvas.el.addEventListener('mousedown', function(e) {
         pImg.mouse.click_x = pImg.mouse.x;
         pImg.mouse.click_y = pImg.mouse.y;
-      });
+      }, pImg.eventListenerOpts);
       pImg.canvas.el.addEventListener('mouseup', function(e) {
         pImg.mouse.click_x = null;
         pImg.mouse.click_y = null;
-      });
+      }, pImg.eventListenerOpts);
       pImg.functions.utils.addEventActions('on_click');
     }
     if (pImg.particles.interactivity.on_touch.enabled) {
@@ -325,11 +325,11 @@ const ParticleImageDisplayer = function(tag_id, canvas_el, params) {
             pos_y = e.touches[0].clientY;
         pImg.mouse.x = pos_x;
         pImg.mouse.y = pos_y;
-      });
+      }, pImg.eventListenerOpts);
       pImg.canvas.el.addEventListener('touchend', function(e) {
         pImg.mouse.x = null;
         pImg.mouse.y = null;
-      });
+      }, pImg.eventListenerOpts);
       pImg.functions.utils.addEventActions('on_touch');
     }
   };
@@ -434,6 +434,20 @@ window.cancelRequestAnimFrame = (function() {
 window.pImgDom = [];
 
 window.particleImageDisplay = function(tag_id) {
+  "use strict";
+  // chceck whether browser supports passive eventListeners. If so, 3rd param of
+  // EventTarget.addEventListener is `options`; pass `{ passive: true }`. Else,
+  // 3rd param is `useCapture`; pass `false`.
+  let passiveOptsOrUseCapture = false;
+  try {
+    const opts = Object.defineProperty({}, 'passive', {
+      // eslint-disable-next-line getter-return
+      get: () => { passiveOptsOrUseCapture = { passive: true }; },
+    });
+    window.addEventListener('checkPEL', null, opts);
+    window.removeEventListener('checkPEL', null, opts);
+  } catch (e) {}
+
   // get target element by ID, check for existing canvases
   const pImage_el = document.getElementById(tag_id),
       canvas_classname = 'particle-image-canvas-el',
@@ -450,7 +464,8 @@ window.particleImageDisplay = function(tag_id) {
   const canvas_el = document.createElement('canvas');
   canvas_el.className = canvas_classname;
   canvas_el.style.width = "100%";
-  canvas_el.style.height = "100%";
+  // TODO: link this 72px value to pImageConfig.canvas.offset_top
+  canvas_el.style.height = "calc(100% - 72px)";
   const canvas = document.getElementById(tag_id).appendChild(canvas_el);
 
 
@@ -464,6 +479,7 @@ window.particleImageDisplay = function(tag_id) {
       if (xhr.readyState === 4 && xhr.status === 200) {
         // parse parameters & launch display
         const params = JSON.parse(xhr.responseText);
+        params.eventListenerOpts = passiveOptsOrUseCapture;
         pImgDom.push(new ParticleImageDisplayer(tag_id, canvas, params));
       } else {
         console.log(`failed to load params.json. XMLHTTPRequest status: ${xhr.statusText}`);

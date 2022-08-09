@@ -1,0 +1,22 @@
+---
+layout: compress
+---
+
+<!DOCTYPE html>
+<html lang="en-US">
+{% include head.html site=site page=page %}
+
+<body id="page-top">
+  {% include navbar.html site=site page=page %}
+
+  {% include header.html site=site page=page %}
+
+  {% for section in page.sections %}
+    {% include {{ section.type }} section=section site=site page=page %}
+  {% endfor %}
+
+  {{ content }}
+
+  {% include footer.html site=site page=page %}
+</body>
+</html>

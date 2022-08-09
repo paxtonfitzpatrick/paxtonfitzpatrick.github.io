@@ -1,0 +1,57 @@
+.publication-cards {
+  // Once TODO in main.scss is resolved, can add `@use 'mixins';` above,
+  // `@include` this as `mixins.scrollbar`, and remove `@import` in main.scss
+  @include styled-scrollbar($size: 8px, $fg-color: $bg-primary-hfa, $bg-color: transparent);
+
+  max-height: 40em;
+  overflow-y: auto;
+
+  .footnote {
+    padding-left: 1rem;
+    margin-top: -1rem;
+    font-size: 0.9em;
+  }
+}
+
+.publication img {
+  width: 50%;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+
+  @media (min-width: 768px) {
+    width: 100%;
+  }
+}
+
+.publication + .publication {
+  margin-top: 1rem;
+
+  @media (min-width: 768px) {
+    margin-top: 3rem;
+  }
+}
+
+.publication-icons {
+  font-size: 1.5em;
+
+  a {
+    display: inline-block;
+    margin-right: 0.75em;
+    color: $fg-primary;
+    text-align: center;
+
+    &:hover {
+      color: $fg-primary-hfa;
+      text-decoration: none;
+      background-color: transparent;
+    }
+  }
+}
+
+// @media (max-width: 576px) {
+//   .research-img {
+//     margin-left: auto;
+//     margin-right: auto;
+//     margin-top: 15%;
+//   }
+// }

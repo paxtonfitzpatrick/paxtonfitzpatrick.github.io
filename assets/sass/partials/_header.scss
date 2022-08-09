@@ -1,0 +1,18 @@
+header {
+  // 100% instead of 100vh to account for iOS safari tab bar bug
+  height: 100%;
+  min-height: 40rem;
+
+  h1 {
+    @include fade-in($duration: $header-fade-in-duration, $delay: 2.5s, $timing-func: $header-fade-in-timing);
+
+    font-size: min(8vw, 60px);
+  }
+
+  .row {
+    position: absolute;
+    right: 0;
+    bottom: min(10%, 45px);
+    left: 0;
+  }
+}

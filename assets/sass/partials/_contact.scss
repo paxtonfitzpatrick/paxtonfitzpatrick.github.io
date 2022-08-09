@@ -1,0 +1,38 @@
+#contact {
+  @media (max-width: 992px) {
+    .row {
+      justify-content: center;
+      text-align: center;
+    }
+  }
+
+  p {
+    // hanging indent for multiline "list items" starting with fontawesome icons
+    // value is from 1em + padding between icon and text
+    padding-left: 1.25em;
+    text-indent: -1.25em;
+  }
+
+  i {
+    padding-right: 0.25em;
+    // reset so text-indent is applied to text only
+    // (equivalent to "initial" with slightly better compatibility)
+    text-indent: 0;
+  }
+
+  a {
+    color: $fg-primary;
+
+    &:hover,
+    &:focus,
+    &:active {
+      text-decoration: underline;
+    }
+  }
+
+  iframe {
+    width: 100%;
+    height: 450px;
+    border: 0;
+  }
+}

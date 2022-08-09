@@ -1,0 +1,53 @@
+.scroll-shadows {
+  // element must have position: relative for shadows to be placed & oriented
+  // correctly
+  position: relative;
+  // create stacking context to isolate from rest of page
+  z-index: 0;
+}
+
+.scroll-shadow-top {
+  &::before {
+    @include fade-in($duration: $scroll-shadow-fade-in-duration, $delay: 0s, $timing-func: linear);
+
+    content: '';
+
+    // stylelint-disable-next-line value-no-vendor-prefix -- needed for Safari
+    // until Sept 2019 (https://caniuse.com/css-sticky)
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+
+    display: block;
+
+    height: $scroll-shadow-height;
+    margin-bottom: -$scroll-shadow-height;
+
+    pointer-events: none;
+
+    background: linear-gradient(to top, transparent, rgba(0, 0, 0, $scroll-shadow-max-alpha));
+    // box-shadow: inset 0 8px 8px rgba(0, 0, 0, 50%);
+  }
+}
+
+.scroll-shadow-bottom {
+  &::after {
+    @include fade-in($duration: $scroll-shadow-fade-in-duration, $delay: 0s, $timing-func: linear);
+
+    content: '';
+
+    // stylelint-disable-next-line value-no-vendor-prefix -- needed for Safari
+    // until Sept 2019 (https://caniuse.com/css-sticky)
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 0;
+
+    display: block;
+
+    height: $scroll-shadow-height;
+    margin-top: -$scroll-shadow-height;
+
+    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, $scroll-shadow-max-alpha));
+  }
+}

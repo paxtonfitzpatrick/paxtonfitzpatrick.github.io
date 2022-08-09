@@ -1,0 +1,75 @@
+.software-cards {
+  @include styled-scrollbar($size: 8px, $fg-color: $bg-secondary-hfa, $bg-color: transparent);
+
+  max-height: 40em;
+  overflow-y: auto;
+}
+
+.software-card {
+  + .software-card {
+    margin-top: 2rem;
+  }
+
+  blockquote {
+    padding: 0 0 0 1em;
+    margin: 0 0 0 1em;
+    border-left-style: solid;
+    border-left-width: 0.25em;
+
+    @media (min-width: 768px) {
+      padding-right: 1em;
+      margin-left: 2em;
+    }
+  }
+}
+
+.software-heading {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 0.5rem;
+}
+
+.software-title {
+  font-size: inherit;
+  text-align: left;
+}
+
+.software-role {
+  // right-aligned when flex-wrapped to new line
+  margin-left: auto;
+  // needs to override .bg-secondary theme's default <code> color -- could also
+  // just nest inside .software-heading
+  color: $muted-secondary !important;
+  text-align: right;
+}
+
+.software-description {
+  margin-bottom: 0;
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  font-size: 1em;
+
+  code {
+    padding: 0.1rem 0.3rem 0.2rem;
+    margin: 0;
+
+    font-size: 85%;
+    color: #000;
+
+    background-color: rgba(175, 184, 193, 20%);
+    border-radius: 0.4rem;
+  }
+}
+
+// TODO: pull out common features of research & software icons to @extend-able component
+.software-icons {
+  font-size: 1.5em;
+
+  a {
+    margin-right: 0.75em;
+  }
+}

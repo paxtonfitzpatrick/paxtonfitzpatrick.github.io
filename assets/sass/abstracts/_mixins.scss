@@ -1,0 +1,53 @@
+@keyframes fade-in-anim {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@mixin fade-in(
+  $duration,          // animation-duration (Xs or Xms)
+  $delay,             // animation-delay (Xs or Xms)
+  $timing-func: ease  // animation-timing-function (various keywords/functions)
+) {
+  // element needs to start with opacity 0 so it doesn't appear during delay
+  // period
+  opacity: 0;
+  animation: fade-in-anim $duration $timing-func $delay forwards;
+}
+
+// consistent scrollbars across browsers/user agents
+@mixin styled-scrollbar(
+  $size,      // width for vertical scrollbars, height for horizontal scrollbars
+  $fg-color,  // scrollbar thumb color
+  $bg-color   // scrollbar track color
+) {
+  // new CSS standard, only implemented in Gecko so far, and not fully
+  // (https://caniuse.com/css-scrollbar, 6/24/22)
+  //   Note: in Firefox there's currently no way to specify scrollbar width
+  //   beyond `scrollbar-width: [auto|thin|none];` and also no way to always
+  //   show scrollbars if user hasn't enabled it
+  scrollbar-color: $fg-color $bg-color;
+
+  // webkit/blink (Chrome, Safari, Edge, Opera)
+  //   Note: starting with iOS 14, iOS Safari no longer supports custom CSS
+  //   scrollbars. Desktop Safari still does as of v15.2.
+  // stylelint-disable-next-line order/order -- vendor-prefixed version
+  // currently provides more customization, so want to prioritize it where
+  // available
+  &::-webkit-scrollbar {
+    // stylelint-disable-next-line property-no-vendor-prefix -- Safari didn't
+    // drop vendor prefix until 2022 (https://caniuse.com/css-appearance)
+    -webkit-appearance: none;
+    appearance: none;
+    width: $size;
+    height: $size;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $fg-color;
+    border-radius: $size;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: $bg-color;
+  }
+}

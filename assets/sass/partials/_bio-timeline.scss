@@ -1,0 +1,54 @@
+.bio-paragraph {
+  margin-bottom: 1em;
+  text-align: justify;
+
+  @media (min-width: 992px) {
+    // to give the timeline some additional room, give the enclosing row
+    // .no-gutters and add the timeline column's normal 15px padding-left to the
+    // the bio column's 15px padding-right
+    padding-right: 30px;
+  }
+
+  img {
+    max-width: 8em;
+    height: auto;
+    // line-height is 1.5 (implied em), so 0.5em is split between space above and
+    // below each line. So 0.25em aligns image top with top of first text line.
+    padding-top: 0.25em;
+  }
+}
+
+#timeline {
+  @each $key, $value in $timeline-vars {
+    --#{$key}: #{$value};
+  }
+
+  /* stylelint-disable-next-line order/order -- @each at-rule above declares
+  custom CSS variables, which should come first. Also, this comment is in CSS
+  format because stylelint's at-rule-empty-line-before rule doesn't recognize
+  Sass comments as comments */
+  @media (max-width: 991px) {
+    // min-height: 75vh;
+    min-height: 675px;
+  }
+
+  @media (max-width: 767px) {
+    min-height: 728px;
+  }
+
+  @media (max-width: 575px) {
+    min-height: 970px;
+  }
+
+  @media (max-width: 414px) {
+    min-height: 1150px;
+  }
+
+  ul {
+    display: none;
+  }
+}
+
+.timeline-canvas-el {
+  position: absolute;
+}

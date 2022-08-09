@@ -1,0 +1,12 @@
+.footer {
+  color: $footer-fg;
+  background-color: $footer-bg;
+
+  p {
+    margin-bottom: 0;
+  }
+
+  a {
+    color: $fg-secondary;
+  }
+}

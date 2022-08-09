@@ -1,38 +1,156 @@
-# Site settings
-# Values are accessed from HTML files via {{ site.value }}
-title: Paxton Fitzpatrick
-description: >- # ignore newlines until "baseurl:"
-  My personal website
-baseurl: "" # site subpath, e.g. /blog
-url: "" # base hostname & protocol, e.g. http://example.com
-lang: en_US
+################################################################################
+#                                GLOBAL OPTIONS                                #
+################################################################################
 
-author: 'Paxton Fitzpatrick &copy; 2021'
-email: Paxton.C.Fitzpatrick@Dartmouth.edu
-phone: (717) 439-3999
+########################## site-level content fields ###########################
+name: &full_name Paxton Fitzpatrick
+
+url: &site_url https://paxtonfitzpatrick.me
+baseurl: ""
+cv_url: assets/files/CV-paxton-fitzpatrick.pdf
+
+email: Paxton.C.Fitzpatrick.GR@Dartmouth.edu
+github: &github_url https://github.com/paxtonfitzpatrick
+linkedin: &linkedin_url https://www.linkedin.com/in/paxtonfitzpatrick
+twitter_handle: &twitter_handle paxt0n4
+twitter_url: &twitter_url https://twitter.com/paxt0n4
+google_scholar: &google_scholar_url https://scholar.google.com/citations?user=0Pvr9WEAAAAJ
 address: 416 Moore Hall, Dartmouth College<br>Hanover, NH 03755
-github: https://github.com/paxtonfitzpatrick
-linkedin: https://www.linkedin.com/in/paxtonfitzpatrick
-twitter: https://twitter.com/paxt0n4
-cv_path: assets/files/CV-paxton-fitzpatrick.pdf
-lab_website: https://www.context-lab.com/
-google_analytics:
-  id: UA-169319829-1
-  enabled: true
 
-# Build settings
-safe: true
-markdown: kramdown
-sass:
-  indentWidth: 4
-  style: compressed
-  precision: 10
-plugins:
-  - jekyll-sitemap
-  - jekyll-seo-tag
+year_created: 2020
+year_last_updated: 2022
+
+google_analytics_id: UA-169319829-1
+
+
+################################ source layout #################################
+source: .                       # enforced by github-pages gem (production only)
+destination: _site              # enforced by github-pages gem (production only)
+layouts_dir: _layouts
+includes_dir: _includes
+data_dir: _data
+
+
+################################################################################
+#                             BUILD/SERVE OPTIONS                              #
+################################################################################
+
+################################# build output #################################
+theme: null
+safe: true                      # enforced by github-pages gem (always)
+incremental: false              # enforced by github-pages gem (production only)
+lsi: false                      # enforced by github-pages gem (always)
+verbose: false                  # enforced by github-pages gem (production only)
+quiet: false
+profile: false
+timezone: America/New_York
+
 exclude:
   - Gemfile
   - Gemfile.lock
+  - package.json
+  - package-lock.json
   - README.md
-  - .idea
-  - node_modules
+  - node_modules/
+  - scratch/
+  # dotfiles are excluded from build by default, but edits to them still trigger
+  # rebuild via jekyll-watch when running jekyll serve or jekyll build --watch
+  # unless explicitly listed here (jekyll-watch also appears not to handle glob
+  # patterns here even though site.exclude supports them)
+  - .DS_Store
+  - .eslintrc.js
+  - .gitignore
+  - .jekyll-metadata
+  - .ruby-version
+  - .stylelintrc.js
+  - .idea/
+
+include: []
+keep_files: []
+
+
+################################ input parsers #################################
+strict_front_matter: true
+
+liquid:
+  error_mode: warn
+  strict_filters: true
+  strict_variables: false
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+  gfm_quirks: [paragraph_end]
+  syntax_highlighter_opts:
+    disable: true
+
+compress_html:
+  clippings: all
+  comments: ["<!-- ", " -->"]
+  endings: all
+  ignore:
+    envs: [no_compress]
+  blanklines: false
+  profile: false
+  startings: [html, head, body]
+
+
+############################# local server options #############################
+# expose to authorized devices on local network to allow debugging from mobile
+host: 0.0.0.0
+port: 4000
+detach: false
+
+################################################################################
+#                                PLUGIN OPTIONS                                #
+################################################################################
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+
+################################ jekyll-seo-tag ################################
+#   also uses some fields above, see
+#   https://github.com/jekyll/jekyll-seo-tag/blob/v2.8.0/docs/usage.md
+#   https://github.com/jekyll/jekyll-seo-tag/blob/v2.8.0/docs/advanced-usage.md
+#   https://github.com/jekyll/jekyll-seo-tag/blob/v2.8.0/lib/template.html
+title: *full_name
+tagline: My personal website
+description: >-
+  PhD student in Cognitive Neuroscience at Dartmouth College. I build 
+  computational models of human memory, and create software tools for research 
+  and education.
+
+author:
+  name: *full_name
+  twitter: *twitter_handle
+  url: *site_url
+
+image:
+  path: "assets/img/site-logo.png"
+  alt: A cartoon image of a brain whose right half is a circuit board
+
+twitter:
+  card: summary
+  username: *twitter_handle
+
+social:
+  name: *full_name
+  links:
+    - *github_url
+    - *twitter_url
+    - *linkedin_url
+    - *google_scholar_url
+
+google_site_verification: fSAhYufIxAuyDcwQQb_LFrG15bGwALzIdQ0T9MEtB3U
+
+
+############################ jekyll-sass-converter #############################
+sass:
+  sass_dir: assets/sass
+  style: compressed
+  # not valid until v2.0
+  implementation: sassc
+  sourcemap: development
+  line_comments: false
