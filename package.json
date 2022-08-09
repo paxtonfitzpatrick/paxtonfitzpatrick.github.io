@@ -18,7 +18,7 @@
     "stylelint-group-selectors": "^1.0.9",
     "stylelint-order": "^5.0.0",
     "stylelint-processor-ignore-front-matter": "^1.0.3",
-    "terser": "^5.14.1"
+    "terser": "^5.14.2"
   },
   "scripts": {
     "stylelint-find-rules": "stylelint-find-new-rules"
