@@ -54,7 +54,7 @@
           infoLayout.xCoord,
           infoLayout.underlineY
             - this.timeline.style.infoUnderlineOffset
-            - (infoLayout.lineHeight * (lineArr.length - 1 - lineIndex)),
+            - (this.timeline.style.infoLineHeight * (lineArr.length - 1 - lineIndex))
         );
       });
       // TODO: clean this up; lots of repeat property accesses
@@ -81,10 +81,9 @@
       ctx.stroke();
     }
 
-    formatInfoLayout() {
+    computeInfoLayout() {
       const infoLayout = {
           lineArr: [],
-          lineHeight: this.timeline.style.infoLineHeight,
           underlineY: this.timeline.yearsYCoords[this.startYear],
         },
         infoWords = this.info.split(' '),
@@ -186,24 +185,6 @@
       this.computeEventLayout();
       this.drawBase();
       this.drawEvents();
-    }
-
-    precomputeStaticValues() {
-      // compute & cache various values that don't change when resizing canvas
-      // TODO: Math.round/Math.floor these?
-      const ctx = this.canvas.context;
-      ctx.font = `${this.style.yearFontSize}px sans-serif`;
-      ctx.textBaseline = 'bottom';
-      // use 5 digits (4 for year + 1) to get small gap between year and line.
-      // all digits are equal width, so this should hopefully work for the next
-      // ~8,000 years
-      this.yearXOffset = ctx.measureText('00000').width;
-      // could also pre-compute this.occupiedGrid here since that doesn't
-      // change, but as-is, it's being constructed in loops that would exist
-      // anyway, so it doesn't cost much and extracting it to here would just
-      // add more operations before the first paint in order to be a tiny bit
-      // more efficient in the comparatively uncommon case where someone resizes
-      // the screen while the timeline is in view.
     }
 
     adjustEventInfo(eventsInfoLayouts) {
@@ -471,6 +452,24 @@
         events.push(new TimelineEvent(eventLi, this));
       });
       this.events = events;
+    }
+
+    precomputeStaticValues() {
+      // compute & cache various values that don't change when resizing canvas
+      // TODO: Math.round/Math.floor these?
+      const ctx = this.canvas.context;
+      ctx.font = `${this.style.yearFontSize}px sans-serif`;
+      ctx.textBaseline = 'bottom';
+      // use 5 digits (4 for year + 1) to get small gap between year and line.
+      // all digits are equal width, so this should hopefully work for the next
+      // ~8,000 years
+      this.yearXOffset = ctx.measureText('00000').width;
+      // could also pre-compute this.occupiedGrid here since that doesn't
+      // change, but as-is, it's being constructed in loops that would exist
+      // anyway, so it doesn't cost much and extracting it to here would just
+      // add more operations before the first paint in order to be a tiny bit
+      // more efficient in the comparatively uncommon case where someone resizes
+      // the screen while the timeline is in view.
     }
   }
 
