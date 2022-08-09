@@ -25,7 +25,59 @@
       this.xCoord = null;
     }
 
-    // TODO: alphabetize methods
+    computeInfoLayout() {
+      const ctx = this.timeline.canvas.context,
+        style = this.timeline.style,
+        infoLayout = {
+          lineArr: [],
+          bottomY: this.timeline.yearsYCoords[this.startYear],
+        },
+        infoWords = this.info.split(' '),
+        lineWidths = [];
+
+      let maxTextWidth,
+        currentLine = infoWords[0],
+        currentLineWidth = ctx.measureText(infoWords[0]).width;
+
+      if (this.xCoord >= this.timeline.centerXCoord) {
+        // place info to right of event line
+        infoLayout.lineXDest = this.timeline.infoRightXCoord;
+        maxTextWidth = this.timeline.currentWidth
+                       - infoLayout.lineXDest
+                       - this.timeline.yearXOffset;
+      } else {
+        // place info to left of event line
+        infoLayout.lineXDest = this.timeline.infoLeftXCoord;
+        maxTextWidth = infoLayout.lineXDest;
+      }
+      // account for padding between info text and edge of background
+      maxTextWidth -= style.infoBackgroundPadding * 2;
+
+      // wrap info text by iteratively adding words to each line until its
+      // length exceeds `maxTextWidth`, then starting a new one
+      infoWords.slice(1).forEach((nextWord) => {
+        const withNextWord = `${currentLine} ${nextWord}`,
+          widthWithNextWord = ctx.measureText(withNextWord).width;
+        // always split on comma regardless of current line length
+        if (widthWithNextWord > maxTextWidth || currentLine.endsWith(',')) {
+          infoLayout.lineArr.push(currentLine);
+          lineWidths.push(currentLineWidth);
+          currentLine = nextWord;
+          currentLineWidth = widthWithNextWord - currentLineWidth;
+        } else {
+          currentLine = withNextWord;
+          currentLineWidth = widthWithNextWord;
+        }
+      });
+
+      infoLayout.lineArr.push(currentLine);
+      lineWidths.push(currentLineWidth);
+      infoLayout.width = Math.max(...lineWidths) + style.infoBackgroundPadding * 2;
+      infoLayout.height = style.infoLineHeight * infoLayout.lineArr.length
+                          + style.infoBackgroundPadding * 2;
+      return infoLayout;
+    }
+
     drawEventLine() {
       const ctx = this.timeline.canvas.context,
         eventWidth = this.timeline.style.eventWidth,
@@ -56,28 +108,26 @@
       ctx.stroke();
     }
 
-    // TODO: should this be accounting for this.timeline.yearXOffset?
     drawInfo(infoLayout) {
-      const ctx = this.timeline.canvas.context;
+      const ctx = this.timeline.canvas.context,
+        style = this.timeline.style;
       let lineXDest = infoLayout.lineXDest,
         lineYDest = infoLayout.bottomY,
         xLeft = lineXDest,
-        lineYStart = this.timeline.yearsYCoords[
-          this.startYear + this.timeline.style.infoYOffset
-        ];
+        lineYStart = this.timeline.yearsYCoords[this.startYear + style.infoYOffset];
 
       if (this.xCoord >= this.timeline.centerXCoord) {
         // info is on right side of event line
-        lineXDest += this.timeline.style.infoBackgroundRadius / 2;
+        lineXDest += style.infoBackgroundRadius / 2;
       } else {
         // info is on left side of event line
-        lineXDest -= this.timeline.style.infoBackgroundRadius / 2;
+        lineXDest -= style.infoBackgroundRadius / 2;
         xLeft -= infoLayout.width;
       }
 
       if (
         this.endYear !== 'present'
-        && this.endYear - this.startYear <= this.timeline.style.infoYOffset
+        && this.endYear - this.startYear <= style.infoYOffset
       ) {
       // if (this.endYear - this.startYear <= this.timeline.style.infoYOffset) {
         lineYStart = Math.round(
@@ -88,10 +138,10 @@
 
       if (infoLayout.bottomY < lineYStart) {
         // connecting to bottom corner of background
-        lineYDest -= this.timeline.style.infoBackgroundRadius / 2;
+        lineYDest -= style.infoBackgroundRadius / 2;
       } else if (infoLayout.bottomY - infoLayout.height > lineYStart) {
         // connecting to top corner of background
-        lineYDest -= infoLayout.height - this.timeline.style.infoBackgroundRadius / 2;
+        lineYDest -= infoLayout.height - style.infoBackgroundRadius / 2;
       } else {
         // connecting to middle of background
         lineYDest -= infoLayout.height / 2;
@@ -99,8 +149,8 @@
       }
 
       // line properties
-      ctx.strokeStyle = hexToRGBA(this.color, this.timeline.style.infoLineAlpha);
-      ctx.lineWidth = this.timeline.style.infoLineWidth;
+      ctx.strokeStyle = hexToRGBA(this.color, style.infoLineAlpha);
+      ctx.lineWidth = style.infoLineWidth;
 
       // draw reference line first
       ctx.beginPath();
@@ -109,14 +159,14 @@
       ctx.stroke();
 
       // functionally similar to ctx.clearRect, but accounts for rounded corners
-      ctx.fillStyle = this.timeline.style.backgroundColor;
+      ctx.fillStyle = style.backgroundColor;
       roundedRect(
         ctx,
         xLeft,
         infoLayout.bottomY - infoLayout.height,
         infoLayout.width,
         infoLayout.height,
-        this.timeline.style.infoBackgroundRadius
+        style.infoBackgroundRadius
       );
       // draw background
       ctx.fillStyle = this.backgroundColor;
@@ -126,80 +176,27 @@
         infoLayout.bottomY - infoLayout.height,
         infoLayout.width,
         infoLayout.height,
-        this.timeline.style.infoBackgroundRadius
+        style.infoBackgroundRadius
       );
 
       ctx.beginPath();
-      ctx.font = `${this.timeline.style.infoFontSize}px sans-serif`;
-      ctx.fillStyle = this.timeline.style.infoFontColor;
-      // TODO: look at effects of changing this
+      ctx.font = `${style.infoFontSize}px sans-serif`;
+      ctx.fillStyle = style.infoFontColor;
       ctx.textBaseline = 'bottom';
       ctx.textAlign = 'left';
       ctx.lineJoin = 'round';
       infoLayout.lineArr.forEach((line, lineIndex, lineArr) => {
         ctx.fillText(
           line,
-          xLeft + this.timeline.style.infoBackgroundPadding,
+          xLeft + style.infoBackgroundPadding,
           infoLayout.bottomY
-            - this.timeline.style.infoBackgroundPadding
-            - (this.timeline.style.infoLineHeight * (lineArr.length - 1 - lineIndex))
+            - style.infoBackgroundPadding
+            - (style.infoLineHeight * (lineArr.length - 1 - lineIndex))
         );
         if (line.endsWith(',')) {
-          ctx.font = `italic ${this.timeline.style.infoFontSize}px sans-serif`;
+          ctx.font = `italic ${style.infoFontSize}px sans-serif`;
         }
       });
-    }
-
-    computeInfoLayout() {
-      this.timeline.canvas.context.font = `${this.timeline.style.infoFontSize}px sans-serif`;
-      const infoLayout = {
-          lineArr: [],
-          bottomY: this.timeline.yearsYCoords[this.startYear],
-        },
-        infoWords = this.info.split(' '),
-        lineWidths = [];
-
-      let maxTextWidth,
-        currentLine = infoWords[0],
-        currentLineWidth = this.timeline.canvas.context.measureText(infoWords[0]).width;
-
-      if (this.xCoord >= this.timeline.centerXCoord) {
-        // place info to right of event line
-        infoLayout.lineXDest = this.timeline.infoRightXCoord;
-        maxTextWidth = this.timeline.currentWidth
-                       - infoLayout.lineXDest
-                       - this.timeline.yearXOffset;
-      } else {
-        // place info to left of event line
-        infoLayout.lineXDest = this.timeline.infoLeftXCoord;
-        maxTextWidth = infoLayout.lineXDest;
-      }
-      // account for padding between info text and edge of background
-      maxTextWidth -= this.timeline.style.infoBackgroundPadding * 2;
-
-      // wrap info text by iteratively adding words to each line until its
-      // length exceeds `maxTextWidth`, then starting a new one
-      infoWords.slice(1).forEach((nextWord) => {
-        const withNextWord = `${currentLine} ${nextWord}`,
-          widthWithNextWord = this.timeline.canvas.context.measureText(withNextWord).width;
-        // always split on comma regardless of current line length
-        if (widthWithNextWord > maxTextWidth || currentLine.endsWith(',')) {
-          infoLayout.lineArr.push(currentLine);
-          lineWidths.push(currentLineWidth);
-          currentLine = nextWord;
-          currentLineWidth = widthWithNextWord - currentLineWidth;
-        } else {
-          currentLine = withNextWord;
-          currentLineWidth = widthWithNextWord;
-        }
-      });
-
-      infoLayout.lineArr.push(currentLine);
-      lineWidths.push(currentLineWidth);
-      infoLayout.width = Math.max(...lineWidths) + this.timeline.style.infoBackgroundPadding * 2;
-      infoLayout.height = this.timeline.style.infoLineHeight * infoLayout.lineArr.length
-                          + this.timeline.style.infoBackgroundPadding * 2;
-      return infoLayout;
     }
   }
 
@@ -213,7 +210,6 @@
       // target element
       this.timelineElement = timelineElement;
       // current height & width of target element (and child canvas)
-      // TODO: account for padding?
       this.currentWidth = timelineElement.clientWidth;
       this.currentHeight = timelineElement.clientHeight;
       // start and end years of the timeline
@@ -402,14 +398,12 @@
 
       Object.entries(this.yearsYCoords).forEach(([yearString, yCoord]) => {
         if (Number.isInteger(Number(yearString))) {
-          // TODO: Math.round/Math.floor these?
           ctx.fillText(
             yearString,
             this.currentWidth,
-            yCoord + (this.style.yearFontSize / 2)
+            Math.round(yCoord + (this.style.yearFontSize / 2))
           );
           ctx.moveTo(0, yCoord);
-          // TODO: this.currentWidth instead? Any difference?
           ctx.lineTo(this.currentWidth - this.yearXOffset, yCoord);
         }
       });
@@ -519,14 +513,13 @@
 
     precomputeStaticValues() {
       // compute & cache various values that don't change when resizing canvas
-      // TODO: Math.round/Math.floor these?
       const ctx = this.canvas.context;
       ctx.font = `${this.style.yearFontSize}px sans-serif`;
       ctx.textBaseline = 'bottom';
       // use 5 digits (4 for year + 1) to get small gap between year and line.
       // all digits are equal width, so this should hopefully work for the next
       // ~8,000 years
-      this.yearXOffset = ctx.measureText('00000').width;
+      this.yearXOffset = Math.round(ctx.measureText('00000').width);
       // could also pre-compute this.occupiedGrid here since that doesn't
       // change, but as-is, it's being constructed in loops that would exist
       // anyway, so it doesn't cost much and extracting it to here would just
@@ -573,6 +566,7 @@
   if (timelineElement !== null) {
     window.addEventListener('load', () => {
       const timelineObj = new Timeline(timelineElement);
+      window.timeline = timelineObj;
       window.addEventListener('resize', () => timelineObj.onResize());
     });
   }
