@@ -300,6 +300,17 @@
         }
       });
 
+      // // adjust center to be between center two columns when even number is used
+      // const nColumnsUsed = new Set(eventXCoords).size;
+      // if (nColumnsUsed % 2 === 0) {
+      //   const centerAdjust = Math.round((this.style.eventWidth + this.style.eventOffset) / 2);
+      //   this.centerXCoord -= centerAdjust;
+      //   for (let ix = 0; ix < eventXCoords.length; ix++) {
+      //     eventXCoords[ix] -= centerAdjust;
+      //     this.events[ix].xCoord -= centerAdjust;
+      //   }
+      // }
+
       // set x-coordinates for event info text on left side (right edge) & right
       // side (left edge)
       this.infoLeftXCoord = Math.min(...eventXCoords) - this.style.infoXOffset;
