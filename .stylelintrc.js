@@ -124,7 +124,6 @@ module.exports = {
         },
         {
           // user-action pseudo-classes
-          // TODO: add more of these after? https://developer.mozilla.org/en-US/docs/Learn/Forms/UI_pseudo-classes
           type: 'rule',
           selector: /^(?:&:(?:hover|focus|focus-visible|focus-within|active),\n\s*)*&:(?:hover|focus|focus-visible|focus-within|active)$/,
           name: 'user-action pseudo-class',
