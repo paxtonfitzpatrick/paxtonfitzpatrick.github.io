@@ -10,15 +10,17 @@
     constructor(eventListItem, timeline) {
       // reference to owner class
       this.timeline = timeline;
-      this.info = eventListItem.innerText.trim();
       // start and end years (+ increments) of the timeline
       this.startYear = parseFloat(eventListItem.dataset.start);
       this.endYear = parseFloat(eventListItem.dataset.end);
       this.color = `#${eventListItem.dataset.color}`;
+      this.backgroundColor = hexToRGBA(this.color, timeline.style.infoBackgroundAlpha);
+      this.info = eventListItem.innerText.trim();
       // x-coordinate of column where event will be drawn
       this.xCoord = null;
     }
 
+    // TODO: alphabetize methods
     drawEventLine() {
       const ctx = this.timeline.canvas.context,
         eventWidth = this.timeline.style.eventWidth,
@@ -38,80 +40,123 @@
     // TODO: should this be accounting for this.timeline.yearXOffset?
     drawInfo(infoLayout) {
       const ctx = this.timeline.canvas.context;
-      ctx.beginPath();
-      // line properties
-      ctx.strokeStyle = this.color;
-      ctx.lineWidth = this.timeline.style.infoLineWidth;
-      // text properties -- font is already set by Timeline.drawEvents method
-      ctx.fillStyle = this.timeline.style.infoFontColor;
-      // TODO: look at effects of changing this
-      ctx.textBaseline = 'bottom';
-      ctx.textAlign = infoLayout.alignment;
-      ctx.lineJoin = 'round';
-      infoLayout.lineArr.forEach((line, lineIndex, lineArr) => {
-        ctx.fillText(
-          line,
-          infoLayout.xCoord,
-          infoLayout.underlineY
-            - this.timeline.style.infoUnderlineOffset
-            - (this.timeline.style.infoLineHeight * (lineArr.length - 1 - lineIndex))
-        );
-      });
-      // TODO: clean this up; lots of repeat property accesses
-      let infoLineStartY = this.timeline.yearsYCoords[
-        this.startYear + this.timeline.style.infoYOffset
-      ];
+      let lineXDest = infoLayout.lineXDest,
+        lineYDest = infoLayout.bottomY,
+        xLeft = lineXDest,
+        lineYStart = this.timeline.yearsYCoords[
+          this.startYear + this.timeline.style.infoYOffset
+        ];
+
+      if (this.xCoord >= this.timeline.centerXCoord) {
+        // info is on right side of event line
+        lineXDest += this.timeline.style.infoBackgroundRadius / 2;
+      } else {
+        // info is on left side of event line
+        lineXDest -= this.timeline.style.infoBackgroundRadius / 2;
+        xLeft -= infoLayout.width;
+      }
+
       if (this.endYear - this.startYear <= this.timeline.style.infoYOffset) {
-        infoLineStartY = Math.floor(
-          (this.timeline.yearsYCoords[this.startYear]
-            + this.timeline.yearsYCoords[this.endYear])
+        lineYStart = Math.round(
+          (this.timeline.yearsYCoords[this.startYear] + this.timeline.yearsYCoords[this.endYear])
           / 2
         );
       }
 
-      ctx.moveTo(this.xCoord, infoLineStartY);
-      ctx.lineTo(
-        infoLayout.xCoord,
-        infoLayout.underlineY
-      );
-      ctx.lineTo(
-        infoLayout.underlineX,
-        infoLayout.underlineY
-      );
+      if (infoLayout.bottomY < lineYStart) {
+        // connecting to bottom corner of background
+        lineYDest -= this.timeline.style.infoBackgroundRadius / 2;
+      } else if (infoLayout.bottomY - infoLayout.height > lineYStart) {
+        // connecting to top corner of background
+        lineYDest -= infoLayout.height - this.timeline.style.infoBackgroundRadius / 2;
+      } else {
+        // connecting to middle of background
+        lineYDest -= infoLayout.height / 2;
+        // lineXDest = infoLayout.lineXDest;
+      }
+
+      // line properties
+      ctx.strokeStyle = this.color;
+      ctx.lineWidth = this.timeline.style.infoLineWidth;
+
+      // draw reference line first
+      ctx.beginPath();
+      ctx.moveTo(this.xCoord, lineYStart);
+      ctx.lineTo(Math.round(lineXDest), Math.round(lineYDest));
       ctx.stroke();
+
+      // functionally similar to ctx.clearRect, but accounts for rounded corners
+      ctx.fillStyle = this.timeline.style.backgroundColor;
+      roundedRect(
+        ctx,
+        xLeft,
+        infoLayout.bottomY - infoLayout.height,
+        infoLayout.width,
+        infoLayout.height,
+        this.timeline.style.infoBackgroundRadius
+      );
+      // draw background
+      ctx.fillStyle = this.backgroundColor;
+      roundedRect(
+        ctx,
+        xLeft,
+        infoLayout.bottomY - infoLayout.height,
+        infoLayout.width,
+        infoLayout.height,
+        this.timeline.style.infoBackgroundRadius
+      );
+
+      ctx.beginPath();
+      // text properties -- font is already set by Timeline.drawEvents method
+      ctx.fillStyle = this.timeline.style.infoFontColor;
+      // TODO: look at effects of changing this
+      ctx.textBaseline = 'bottom';
+      ctx.textAlign = 'left';
+      ctx.lineJoin = 'round';
+      infoLayout.lineArr.forEach((line, lineIndex, lineArr) => {
+        ctx.fillText(
+          line,
+          xLeft + this.timeline.style.infoBackgroundPadding,
+          infoLayout.bottomY
+            - this.timeline.style.infoBackgroundPadding
+            - (this.timeline.style.infoLineHeight * (lineArr.length - 1 - lineIndex))
+        );
+      });
     }
 
     computeInfoLayout() {
       const infoLayout = {
           lineArr: [],
-          underlineY: this.timeline.yearsYCoords[this.startYear],
+          bottomY: this.timeline.yearsYCoords[this.startYear],
         },
         infoWords = this.info.split(' '),
         lineWidths = [];
 
-      let infoMaxWidth,
+      let maxTextWidth,
         currentLine = infoWords[0],
         currentLineWidth = this.timeline.canvas.context.measureText(infoWords[0]).width;
 
       if (this.xCoord >= this.timeline.centerXCoord) {
         // place info to right of event line
-        infoLayout.xCoord = this.timeline.infoRightXCoord;
-        infoLayout.alignment = 'left';
-        infoMaxWidth = this.timeline.currentWidth - infoLayout.xCoord - this.timeline.yearXOffset;
+        infoLayout.lineXDest = this.timeline.infoRightXCoord;
+        maxTextWidth = this.timeline.currentWidth
+                       - infoLayout.lineXDest
+                       - this.timeline.yearXOffset;
       } else {
         // place info to left of event line
-        infoLayout.xCoord = this.timeline.infoLeftXCoord;
-        infoLayout.alignment = 'right';
-        infoMaxWidth = infoLayout.xCoord;
+        infoLayout.lineXDest = this.timeline.infoLeftXCoord;
+        maxTextWidth = infoLayout.lineXDest;
       }
+      // account for padding between info text and edge of background
+      maxTextWidth -= this.timeline.style.infoBackgroundPadding * 2;
 
       // wrap info text by iteratively adding words to each line until its
-      // length exceeds infoMaxWidth, then start a new one
+      // length exceeds `maxTextWidth`, then starting a new one
       infoWords.slice(1).forEach((nextWord) => {
         const withNextWord = `${currentLine} ${nextWord}`,
           widthWithNextWord = this.timeline.canvas.context.measureText(withNextWord).width;
         // always split on comma regardless of current line length
-        if (widthWithNextWord > infoMaxWidth || currentLine.endsWith(',')) {
+        if (widthWithNextWord > maxTextWidth || currentLine.endsWith(',')) {
           infoLayout.lineArr.push(currentLine);
           lineWidths.push(currentLineWidth);
           currentLine = nextWord;
@@ -124,14 +169,9 @@
 
       infoLayout.lineArr.push(currentLine);
       lineWidths.push(currentLineWidth);
-      // TODO: optimize this -- track running max width above rather than recomputing here
-      infoLayout.width = Math.max(...lineWidths);
-      // TODO: optimize this -- conditional is redundant with the one above
-      if (infoLayout.alignment === 'left') {
-        infoLayout.underlineX = infoLayout.xCoord + infoLayout.width;
-      } else {
-        infoLayout.underlineX = infoLayout.xCoord - infoLayout.width;
-      }
+      infoLayout.width = Math.max(...lineWidths) + this.timeline.style.infoBackgroundPadding * 2;
+      infoLayout.height = this.timeline.style.infoLineHeight * infoLayout.lineArr.length
+                          + this.timeline.style.infoBackgroundPadding * 2;
       return infoLayout;
     }
   }
@@ -201,69 +241,48 @@
       //     - else:
       //      - instead, move the current event downward until it doesn't
       //        overlap the previous one
-      [this.infoLeftXCoord, this.infoRightXCoord].forEach((xCoord) => {
+      [this.infoLeftXCoord, this.infoRightXCoord].forEach((lineXDest) => {
         // deal with vertically adjusting info on left and right separately
-        const sameSideInfoLayouts = eventsInfoLayouts.filter((info) => info.xCoord === xCoord);
+        const sameSideInfoLayouts = eventsInfoLayouts.filter(
+          (info) => info.lineXDest === lineXDest
+        );
         // index arg to forEach callback func corresponds to index of previous
         // event (on the same side)'s info because 1st item is `.slice`d off
         sameSideInfoLayouts.slice(1).forEach((eventInfo, prevEventIx) => {
           // get y-coord of top of event info text
-          const infoTopY = eventInfo.underlineY
-            - this.style.infoUnderlineOffset
-            - (this.style.infoLineHeight * eventInfo.lineArr.length),
+          const infoTopY = eventInfo.bottomY - eventInfo.height,
             // get info data for previous event (on the same side)
             prevEventInfo = sameSideInfoLayouts[prevEventIx];
           // if the top of the current event's info text isn't at least
           // infoMinPaddingY from the bottom of previous event's info text:
-          if (infoTopY < prevEventInfo.underlineY + this.style.infoMinPaddingY) {
+          if (infoTopY < prevEventInfo.bottomY + this.style.infoMinPaddingY) {
             // distance the previous event's info would need to be moved upward
             // or the current event's info would need to be moved downward to
             // A) not overlap and B) have infoMinPaddingY space between them
-            const toMove = (prevEventInfo.underlineY + this.style.infoMinPaddingY) - infoTopY,
-              // y-coord for the top of the previous event's info text
-              prevInfoTopY = prevEventInfo.underlineY
-                - this.style.infoUnderlineOffset
-                - (this.style.infoLineHeight * prevEventInfo.lineArr.length);
-            // assuming the previous event is the first on that side, the most
-            // it can be moved upward is the distance from the top of its info
-            // text to the top of the canvas (y=0)
-            let prevInfoCanMove = prevInfoTopY;
+            const toMove = (prevEventInfo.bottomY + this.style.infoMinPaddingY) - infoTopY;
+            // if the previous event is the first on that side, the most it can
+            // be moved upward is the distance from the top of its background to
+            // the top of the canvas (y=0), which is equal to its top y-coord
+            let prevInfoCanMove = prevEventInfo.bottomY - prevEventInfo.height;
             if (prevEventIx > 0) {
               // if the previous event *isn't* the first on that side, the most
               // it can be moved upward is the distance from the top of its info
               // text to the bottom of the previous event's info text, minus the
               // min. required vertical space between them
-              prevInfoCanMove -= sameSideInfoLayouts[prevEventIx - 1].underlineY
+              prevInfoCanMove -= sameSideInfoLayouts[prevEventIx - 1].bottomY
                                  + this.style.infoMinPaddingY;
             }
             if (prevInfoCanMove >= toMove) {
               // if the previous event's info can be moved upward the full
               // amount needed, do so
-              prevEventInfo.underlineY -= toMove;
+              prevEventInfo.bottomY -= toMove;
             } else {
               // otherwise, move the previous event's info upward as much as
               // possible, and move the current event's info downward to make up
               // the difference
-              prevEventInfo.underlineY -= prevInfoCanMove;
-              eventInfo.underlineY += toMove - prevInfoCanMove;
+              prevEventInfo.bottomY -= prevInfoCanMove;
+              eventInfo.bottomY += toMove - prevInfoCanMove;
             }
-
-            // if (
-            //   // if the previous event is the first on that side and can be
-            //   // moved upward without going off the top edge of the canvas...
-            //   (prevEventIx === 0 && prevInfoTopY - toMove >= 0)
-            //   // ...or the previous event *isn't* the first on that side and can
-            //   // be moved upward without overlapping with the one above *that*:
-            //   || (prevEventIx > 0
-            //       && prevInfoTopY - toMove
-            //       >= sameSideInfoLayouts[prevEventIx - 1].underlineY + this.style.infoMinPaddingY)
-            // ) {
-            //   // move the previous event's info text upward
-            //   prevEventInfo.underlineY -= toMove;
-            // } else {
-            //   // otherwise, move the current event's info text downward the required amount
-            //   eventInfo.underlineY += toMove;
-            // }
           }
         });
       });
@@ -364,31 +383,6 @@
         }
       });
       ctx.stroke();
-
-      // // TEST:
-      // ctx.beginPath();
-      // ctx.strokeStyle = 'red';
-      // ctx.lineWidth = '2px';
-      // ctx.moveTo(this.currentWidth - this.yearXOffset, 0);
-      // ctx.lineTo(this.currentWidth - this.yearXOffset, this.currentHeight);
-      // ctx.stroke();
-      //
-      // // ctx.moveTo(this.centerXCoord, 0);
-      // // ctx.lineTo(this.centerXCoord, this.currentHeight);
-      // // ctx.stroke();
-      // ctx.beginPath();
-      // ctx.strokeStyle = 'blue';
-      // const center1 = Math.round((this.canvas.element.width - this.yearXOffset) / 2);
-      // ctx.moveTo(center1, 0);
-      // ctx.lineTo(center1, this.currentHeight);
-      // ctx.stroke();
-      //
-      // ctx.beginPath();
-      // ctx.strokeStyle = 'green';
-      // const center2 = Math.round(this.canvas.element.width / 2 - this.yearXOffset);
-      // ctx.moveTo(center2, 0);
-      // ctx.lineTo(center2, this.currentHeight);
-      // ctx.stroke();
     }
 
     drawEvents() {
@@ -433,12 +427,14 @@
         eventWidth: parseInt(compStyles.getPropertyValue('--event-width'), 10),
         eventOffset: parseInt(compStyles.getPropertyValue('--event-offset'), 10),
         infoLineWidth: parseInt(compStyles.getPropertyValue('--info-line-width'), 10),
-        infoUnderlineOffset: parseInt(compStyles.getPropertyValue('--info-underline-offset'), 10),
         infoXOffset: parseInt(compStyles.getPropertyValue('--info-x-offset'), 10),
         infoYOffset: parseFloat(compStyles.getPropertyValue('--info-y-offset')),
         infoMinPaddingY: parseInt(compStyles.getPropertyValue('--info-min-padding-y'), 10),
         infoFontSize: infoFontSize,
         infoLineHeight: Math.round(infoFontSize * parseFloat(compStyles.getPropertyValue('--info-line-height'))),
+        infoBackgroundPadding: parseInt(compStyles.getPropertyValue('--info-background-padding'), 10),
+        infoBackgroundRadius: parseInt(compStyles.getPropertyValue('--info-background-radius'), 10),
+        infoBackgroundAlpha: parseFloat(compStyles.getPropertyValue('--info-background-alpha')),
         backgroundColor: hexToRGBA(backgroundColor, backgroundAlpha),
         yearColor: hexToRGBA(yearColor, yearAlpha),
         gridlineColor: hexToRGBA(gridlineColor, gridlineAlpha),
@@ -521,6 +517,21 @@
     return `rgba(${r},${g},${b},${opacity})`;
   };
 
+  const roundedRect = (ctx, x, y, width, height, radius) => {
+    ctx.beginPath();
+    ctx.moveTo(x, y + radius);
+    ctx.lineTo(x, y + height - radius);
+    ctx.quadraticCurveTo(x, y + height, x + radius, y + height);
+    ctx.lineTo(x + width - radius, y + height);
+    ctx.quadraticCurveTo(x + width, y + height, x + width, y + height - radius);
+    ctx.lineTo(x + width, y + radius);
+    ctx.quadraticCurveTo(x + width, y, x + width - radius, y);
+    ctx.lineTo(x + radius, y);
+    ctx.quadraticCurveTo(x, y, x, y + radius);
+    ctx.closePath();
+    ctx.fill();
+  };
+
   /*
   ========================================
   =             MAIN SCRIPT              =
@@ -530,7 +541,6 @@
   if (timelineElement !== null) {
     window.addEventListener('load', () => {
       const timelineObj = new Timeline(timelineElement);
-      // window.timeline = timelineObj;
       window.addEventListener('resize', () => timelineObj.onResize());
     });
   }

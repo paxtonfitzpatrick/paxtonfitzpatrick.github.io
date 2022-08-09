@@ -57,16 +57,18 @@ $timeline-vars: (
   'gridline-alpha': 0.3,
   'gridline-width': 2px,
   'event-width': 12px,
-  'event-offset': 5px,
+  'event-offset': 4px,
   'info-line-width': 2px,
-  'info-underline-offset': 4px,
   'info-x-offset': 30px,
   'info-y-offset': 0.25,  // <-- "year" units
   'info-min-padding-y': 15px,  // minimum vertical distance between events' info
   'info-font-size': 12px,
   'info-font-color': #868686,
   'info-font-alpha': 1,
-  'info-line-height': 1.15  // <-- unitless; same meaning as CSS line-height
+  'info-line-height': 1.15,  // <-- unitless; same meaning as CSS line-height
+  'info-background-padding': 5px,  // padding between text and background edge
+  'info-background-alpha': 0.1,
+  'info-background-radius': 8px,  // equivalent to border-radius for rounded corners
 );
 
 // scroll shadow component style
