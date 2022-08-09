@@ -261,7 +261,7 @@
         occupiedGrid[year] = Array(this.events.length).fill(0);
       }
       this.yearsYCoords = yearsYCoords;
-      this.occupedGrid = occupiedGrid;
+      this.occupiedGrid = occupiedGrid;
       this.centerXCoord = Math.round((this.currentWidth - this.yearXOffset) / 2);
     }
 
@@ -288,7 +288,7 @@
       // for each timeline event
       this.events.forEach((event) => {
         // get the index of the center-most column not occupied at its start year
-        const firstOpenCol = this.occupedGrid[event.startYear].indexOf(0),
+        const firstOpenCol = this.occupiedGrid[event.startYear].indexOf(0),
           // get the x-coordinate of the column where the event should be drawn
           xCoord = eventColXCoords[firstOpenCol];
 
@@ -296,7 +296,7 @@
         eventXCoords.push(xCoord);
         // mark that column as occupied for the duration of the event
         for (let year = event.startYear; year < event.endYear; year += 0.25) {
-          this.occupedGrid[year][firstOpenCol] = 1;
+          this.occupiedGrid[year][firstOpenCol] = 1;
         }
       });
 
