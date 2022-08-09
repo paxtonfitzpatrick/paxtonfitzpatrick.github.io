@@ -428,12 +428,12 @@
       const eventsInfoLayouts = [];
       this.canvas.context.font = `${this.style.infoFontSize}px sans-serif`;
       this.events.forEach((event) => {
-        event.drawEventLine();
         eventsInfoLayouts.push(event.computeInfoLayout());
       });
       this.adjustEventInfo(eventsInfoLayouts);
       this.events.forEach((event, ix) => {
         event.drawInfo(eventsInfoLayouts[ix]);
+        event.drawEventLine();
       });
     }
 
