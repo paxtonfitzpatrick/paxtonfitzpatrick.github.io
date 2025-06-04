@@ -21,8 +21,8 @@ header:
       type: fab
       site_data: twitter_url
     - title: Google Scholar
-      icon: google-scholar
-      type: svg
+      icon: fa-google-scholar
+      type: fab
       site_data: google_scholar
     - title: CV
       icon: fa-file-alt
