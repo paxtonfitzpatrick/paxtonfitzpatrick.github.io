@@ -16,8 +16,8 @@ header:
       icon: fa-linkedin-in
       type: fab
       site_data: linkedin
-    - title: Twitter
-      icon: fa-twitter
+    - title: X (Twitter)
+      icon: fa-x-twitter
       type: fab
       site_data: twitter_url
     - title: Google Scholar
