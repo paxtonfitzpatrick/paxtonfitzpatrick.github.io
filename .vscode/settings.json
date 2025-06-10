@@ -21,5 +21,6 @@
             "workingDirectoryAsCWD": true,
             "runIn": "backend"
         }
-    ]
+    ],
+    "eslint.useFlatConfig": true
 }
