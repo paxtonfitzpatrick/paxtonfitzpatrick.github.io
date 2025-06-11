@@ -1,6 +1,6 @@
-(() => {
-  'use strict';
+'use strict';
 
+(() => {
   // check whether browser supports passive eventListeners
   let passiveOptsOrUseCapture = false;
   try {
@@ -10,7 +10,7 @@
     });
     window.addEventListener('checkPEL', null, opts);
     window.removeEventListener('checkPEL', null, opts);
-  } catch (e) {}
+  } catch {}
 
   // get elements with "scroll-shadows" class
   const scrollShadowElements = document.getElementsByClassName('scroll-shadows');

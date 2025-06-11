@@ -1,6 +1,7 @@
-(() => {
-  'use strict';
+/* eslint-disable max-classes-per-file */
+'use strict';
 
+(() => {
   /*
   ========================================
   =         TIMELINE EVENT CLASS         =
@@ -13,11 +14,7 @@
       // start and end years (+ increments) of the timeline
       this.startYear = parseFloat(eventListItem.dataset.start);
       const endYear = eventListItem.dataset.end;
-      if (endYear === 'present') {
-        this.endYear = endYear;
-      } else {
-        this.endYear = parseFloat(endYear);
-      }
+      this.endYear = endYear === 'present' ? endYear : parseFloat(endYear);
       this.color = `#${eventListItem.dataset.color}`;
       this.backgroundColor = hexToRGBA(this.color, timeline.style.infoBackgroundAlpha);
       this.info = eventListItem.innerText.trim();
@@ -26,18 +23,14 @@
     }
 
     computeInfoLayout() {
-      const ctx = this.timeline.canvas.context,
-        style = this.timeline.style,
-        infoLayout = {
-          lineArr: [],
-          bottomY: this.timeline.yearsYCoords[this.startYear],
-        },
-        infoWords = this.info.split(' '),
-        lineWidths = [];
+      const { canvas: { context: ctx }, style, yearsYCoords } = this.timeline,
+            infoLayout = { lineArr: [], bottomY: yearsYCoords[this.startYear] },
+            infoWords = this.info.split(' '),
+            lineWidths = [];
 
       let maxTextWidth,
-        currentLine = infoWords[0],
-        currentLineWidth = ctx.measureText(infoWords[0]).width;
+          currentLine = infoWords[0],
+          currentLineWidth = ctx.measureText(infoWords[0]).width;
 
       if (this.xCoord >= this.timeline.centerXCoord) {
         // place info to right of event line
@@ -57,7 +50,7 @@
       // length exceeds `maxTextWidth`, then starting a new one
       infoWords.slice(1).forEach((nextWord) => {
         const withNextWord = `${currentLine} ${nextWord}`,
-          widthWithNextWord = ctx.measureText(withNextWord).width;
+              widthWithNextWord = ctx.measureText(withNextWord).width;
         // always split on comma regardless of current line length
         if (widthWithNextWord > maxTextWidth || currentLine.endsWith(',')) {
           infoLayout.lineArr.push(currentLine);
@@ -79,9 +72,11 @@
     }
 
     drawEventLine() {
-      const ctx = this.timeline.canvas.context,
-        eventWidth = this.timeline.style.eventWidth,
-        yearsYCoords = this.timeline.yearsYCoords;
+      const {
+        canvas: { context: ctx },
+        style: { eventWidth },
+        yearsYCoords,
+      } = this.timeline;
 
       ctx.beginPath();
       ctx.lineWidth = eventWidth;
@@ -95,7 +90,7 @@
           this.xCoord,
           yearsYCoords[this.startYear],
           this.xCoord,
-          this.timeline.currentHeight
+          this.timeline.currentHeight,
         );
         gradient.addColorStop(0.25, this.color);
         gradient.addColorStop(1, this.timeline.style.backgroundColor);
@@ -109,14 +104,18 @@
     }
 
     drawInfo(infoLayout) {
-      const ctx = this.timeline.canvas.context,
-        style = this.timeline.style;
-      let lineXDest = infoLayout.lineXDest,
-        lineYDest = infoLayout.bottomY,
-        xLeft = lineXDest,
-        lineYStart = this.timeline.yearsYCoords[this.startYear + style.infoYOffset];
+      const {
+        canvas: { context: ctx },
+        style,
+        yearsYCoords,
+        centerXCoord,
+      } = this.timeline;
 
-      if (this.xCoord >= this.timeline.centerXCoord) {
+      let { lineXDest, bottomY: lineYDest } = infoLayout,
+          xLeft = lineXDest,
+          lineYStart = yearsYCoords[this.startYear + style.infoYOffset];
+
+      if (this.xCoord >= centerXCoord) {
         // info is on right side of event line
         lineXDest += style.infoBackgroundRadius / 2;
       } else {
@@ -125,14 +124,9 @@
         xLeft -= infoLayout.width;
       }
 
-      if (
-        this.endYear !== 'present'
-        && this.endYear - this.startYear <= style.infoYOffset
-      ) {
-      // if (this.endYear - this.startYear <= this.timeline.style.infoYOffset) {
+      if (this.endYear !== 'present' && this.endYear - this.startYear <= style.infoYOffset) {
         lineYStart = Math.round(
-          (this.timeline.yearsYCoords[this.startYear] + this.timeline.yearsYCoords[this.endYear])
-          / 2
+          (this.timeline.yearsYCoords[this.startYear] + this.timeline.yearsYCoords[this.endYear]) / 2,
         );
       }
 
@@ -166,7 +160,7 @@
         infoLayout.bottomY - infoLayout.height,
         infoLayout.width,
         infoLayout.height,
-        style.infoBackgroundRadius
+        style.infoBackgroundRadius,
       );
       // draw background
       ctx.fillStyle = this.backgroundColor;
@@ -176,7 +170,7 @@
         infoLayout.bottomY - infoLayout.height,
         infoLayout.width,
         infoLayout.height,
-        style.infoBackgroundRadius
+        style.infoBackgroundRadius,
       );
 
       ctx.beginPath();
@@ -191,7 +185,7 @@
           xLeft + style.infoBackgroundPadding,
           infoLayout.bottomY
             - style.infoBackgroundPadding
-            - (style.infoLineHeight * (lineArr.length - 1 - lineIndex))
+            - (style.infoLineHeight * (lineArr.length - 1 - lineIndex)),
         );
         if (line.endsWith(',')) {
           ctx.font = `italic ${style.infoFontSize}px sans-serif`;
@@ -265,16 +259,14 @@
       //        overlap the previous one
       [this.infoLeftXCoord, this.infoRightXCoord].forEach((lineXDest) => {
         // deal with vertically adjusting info on left and right separately
-        const sameSideInfoLayouts = eventsInfoLayouts.filter(
-          (info) => info.lineXDest === lineXDest
-        );
+        const sameSideInfoLayouts = eventsInfoLayouts.filter((info) => info.lineXDest === lineXDest);
         // index arg to forEach callback func corresponds to index of previous
         // event (on the same side)'s info because 1st item is `.slice`d off
         sameSideInfoLayouts.slice(1).forEach((eventInfo, prevEventIx) => {
           // get y-coord of top of event info text
           const infoTopY = eventInfo.bottomY - eventInfo.height,
             // get info data for previous event (on the same side)
-            prevEventInfo = sameSideInfoLayouts[prevEventIx];
+                prevEventInfo = sameSideInfoLayouts[prevEventIx];
           // if the top of the current event's info text isn't at least
           // infoMinPaddingY from the bottom of previous event's info text:
           if (infoTopY < prevEventInfo.bottomY + this.style.infoMinPaddingY) {
@@ -303,6 +295,7 @@
               // possible, and move the current event's info downward to make up
               // the difference
               prevEventInfo.bottomY -= prevInfoCanMove;
+              // eslint-disable-next-line no-param-reassign
               eventInfo.bottomY += toMove - prevInfoCanMove;
             }
           }
@@ -312,15 +305,13 @@
 
     computeBaseLayout() {
       const topY = this.style.verticalPadding,
-        bottomY = this.currentHeight - this.style.verticalPadding,
-        // compute y-coord for each 1/4 year increment included in the timeline
-        yInc = (bottomY - topY) / ((this.endYear - this.startYear) * 4),
-        yearsYCoords = {},
-        occupiedGrid = {};
+            bottomY = this.currentHeight - this.style.verticalPadding,
+            // compute y-coord for each 1/4 year increment included in the timeline
+            yInc = (bottomY - topY) / ((this.endYear - this.startYear) * 4),
+            yearsYCoords = {},
+            occupiedGrid = {};
 
-      for (
-        let year = this.startYear, yearY = topY; year <= this.endYear; year += 0.25, yearY += yInc
-      ) {
+      for (let year = this.startYear, yearY = topY; year <= this.endYear; year += 0.25, yearY += yInc) {
         yearsYCoords[year] = Math.floor(yearY);
         occupiedGrid[year] = Array(this.events.length).fill(0);
       }
@@ -353,13 +344,14 @@
       this.events.forEach((event) => {
         // get the index of the center-most column not occupied at its start year
         const firstOpenCol = this.occupiedGrid[event.startYear].indexOf(0),
-          // get the x-coordinate of the column where the event should be drawn
-          xCoord = eventColXCoords[firstOpenCol];
+              // get the x-coordinate of the column where the event should be drawn
+              xCoord = eventColXCoords[firstOpenCol];
 
+        // eslint-disable-next-line no-param-reassign
         event.xCoord = xCoord;
         eventXCoords.push(xCoord);
         // mark that column as occupied for the duration of the event
-        let endYear = event.endYear;
+        let { endYear } = event;
         if (endYear === 'present') {
           endYear = this.endYear;
         }
@@ -400,7 +392,7 @@
           ctx.fillText(
             yearString,
             this.currentWidth,
-            Math.round(yCoord + (this.style.yearFontSize / 2))
+            Math.round(yCoord + (this.style.yearFontSize / 2)),
           );
           ctx.moveTo(0, yCoord);
           ctx.lineTo(this.currentWidth - this.yearXOffset, yCoord);
@@ -435,15 +427,15 @@
       // element. Timeline vars are set in _vars.scss and converted to CSS vars
       // in _bio-timeline.scss.
       const compStyles = getComputedStyle(this.timelineElement),
-        backgroundColor = compStyles.getPropertyValue('--background-color').trim(),
-        backgroundAlpha = parseFloat(compStyles.getPropertyValue('--background-alpha')),
-        yearColor = compStyles.getPropertyValue('--year-color').trim(),
-        yearAlpha = parseFloat(compStyles.getPropertyValue('--year-alpha')),
-        gridlineColor = compStyles.getPropertyValue('--gridline-color').trim(),
-        gridlineAlpha = parseFloat(compStyles.getPropertyValue('--gridline-alpha')),
-        infoFontColor = compStyles.getPropertyValue('--info-font-color').trim(),
-        infoFontAlpha = parseInt(compStyles.getPropertyValue('--info-font-alpha'), 10),
-        infoFontSize = parseInt(compStyles.getPropertyValue('--info-font-size'), 10);
+            backgroundColor = compStyles.getPropertyValue('--background-color').trim(),
+            backgroundAlpha = parseFloat(compStyles.getPropertyValue('--background-alpha')),
+            yearColor = compStyles.getPropertyValue('--year-color').trim(),
+            yearAlpha = parseFloat(compStyles.getPropertyValue('--year-alpha')),
+            gridlineColor = compStyles.getPropertyValue('--gridline-color').trim(),
+            gridlineAlpha = parseFloat(compStyles.getPropertyValue('--gridline-alpha')),
+            infoFontColor = compStyles.getPropertyValue('--info-font-color').trim(),
+            infoFontAlpha = parseInt(compStyles.getPropertyValue('--info-font-alpha'), 10),
+            infoFontSize = parseInt(compStyles.getPropertyValue('--info-font-size'), 10);
       this.style = {
         verticalPadding: parseInt(compStyles.getPropertyValue('--vertical-padding'), 10),
         yearFontSize: parseInt(compStyles.getPropertyValue('--year-font-size'), 10),
@@ -455,7 +447,7 @@
         infoXOffset: parseInt(compStyles.getPropertyValue('--info-x-offset'), 10),
         infoYOffset: parseFloat(compStyles.getPropertyValue('--info-y-offset')),
         infoMinPaddingY: parseInt(compStyles.getPropertyValue('--info-min-padding-y'), 10),
-        infoFontSize: infoFontSize,
+        infoFontSize,
         infoLineHeight: Math.round(infoFontSize * parseFloat(compStyles.getPropertyValue('--info-line-height'))),
         infoBackgroundPadding: parseInt(compStyles.getPropertyValue('--info-background-padding'), 10),
         infoBackgroundRadius: parseInt(compStyles.getPropertyValue('--info-background-radius'), 10),
@@ -471,7 +463,7 @@
       // create canvas element and push it to the DOM as a child of the target
       // element
       const canvasElement = document.createElement('canvas'),
-        context = canvasElement.getContext('2d');
+            context = canvasElement.getContext('2d');
 
       // since the containing
       this.currentWidth = this.timelineElement.clientWidth;
@@ -491,13 +483,13 @@
       this.timelineElement.appendChild(canvasElement);
       this.canvas = {
         element: canvasElement,
-        context: context,
+        context,
       };
     }
 
     onResize() {
       const newWidth = this.timelineElement.clientWidth,
-        newHeight = this.timelineElement.clientHeight;
+            newHeight = this.timelineElement.clientHeight;
 
       if (newWidth !== this.currentWidth || newHeight !== this.currentHeight) {
         this.canvas.context.clearRect(0, 0, this.currentWidth, this.currentHeight);
@@ -517,7 +509,7 @@
 
     parseEvents() {
       const eventsList = this.timelineElement.getElementsByTagName('li'),
-        events = [];
+            events = [];
       Array.prototype.forEach.call(eventsList, (eventLi) => {
         events.push(new TimelineEvent(eventLi, this));
       });
@@ -547,15 +539,15 @@
   =           HELPER FUNCTIONS           =
   ========================================
   */
-  const hexToRGBA = (hex, opacity = 1) => {
+  function hexToRGBA(hex, opacity = 1) {
     const tempHex = hex.replace('#', ''),
-      r = parseInt(tempHex.substring(0, 2), 16),
-      g = parseInt(tempHex.substring(2, 4), 16),
-      b = parseInt(tempHex.substring(4, 6), 16);
+          r = parseInt(tempHex.substring(0, 2), 16),
+          g = parseInt(tempHex.substring(2, 4), 16),
+          b = parseInt(tempHex.substring(4, 6), 16);
     return `rgba(${r},${g},${b},${opacity})`;
-  };
+  }
 
-  const roundedRect = (ctx, x, y, width, height, radius) => {
+  function roundedRect(ctx, x, y, width, height, radius) {
     ctx.beginPath();
     ctx.moveTo(x, y + radius);
     ctx.lineTo(x, y + height - radius);
@@ -568,7 +560,7 @@
     ctx.quadraticCurveTo(x, y, x, y + radius);
     ctx.closePath();
     ctx.fill();
-  };
+  }
 
   /*
   ========================================
