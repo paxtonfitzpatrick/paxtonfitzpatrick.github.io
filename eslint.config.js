@@ -7,14 +7,17 @@ import { configs, plugins } from 'eslint-config-airbnb-extended';
 import globals from 'globals';
 
 export default defineConfig([
-  // inherit ignores from .gitignore, plus minified files & source maps.
-  // (**/node_modules/ & .git/ are ignored by default)
   // must be outside main config block to work because .gitignore includes dir
   // patterns, and non-global ignores can only match file names
+  // (**/node_modules/ & .git/ are ignored by default)
   globalIgnores([
+    // inherit ignores from .gitignore
     ...includeIgnoreFile(path.resolve('.gitignore')).ignores,
+    // minified files & source maps
     '**/*.min.js',
     '**/*.min.js.map',
+    // vendored scripts
+    'assets/js/creative.js',
   ]),
   // main config
   {
