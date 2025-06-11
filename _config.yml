@@ -51,6 +51,8 @@ exclude:
   - package.json
   - package-lock.json
   - README.md
+  - eslint.config.js
+  - stylelint.config.js
   - node_modules/
   - scratch/
   # dotfiles are excluded from build by default, but edits to them still trigger
@@ -58,11 +60,9 @@ exclude:
   # unless explicitly listed here (jekyll-watch also appears not to handle glob
   # patterns here even though site.exclude supports them)
   - .DS_Store
-  - .eslintrc.js
   - .gitignore
   - .jekyll-metadata
   - .ruby-version
-  - .stylelintrc.js
   - .idea/
 
 include: []
