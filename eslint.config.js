@@ -49,9 +49,9 @@ export default defineConfig([
       strict: ['error', 'global'],
     },
   },
-  // consider this file a module so imports/exports don't prevent linting
+  // consider config files modules so imports/exports don't prevent linting
   {
-    files: ['eslint.config.js'],
+    files: ['eslint.config.js', 'stylelint.config.js'],
     languageOptions: {
       sourceType: 'module',
     },

@@ -1,6 +1,4 @@
-'use strict';
-
-module.exports = {
+export default {
   extends: [
     'stylelint-config-standard-scss',
     'stylelint-config-sass-guidelines',
@@ -10,28 +8,27 @@ module.exports = {
     'stylelint-group-selectors',
     'stylelint-order',
   ],
-  processors: [
-    'stylelint-processor-ignore-front-matter',
-  ],
+  ignoreFiles: ['assets/sass/vendors/**', '_site/**', 'scratch/**'],
   reportDescriptionlessDisables: true,
   reportInvalidScopeDisables: true,
   reportNeedlessDisables: true,
+  reportUnusedDisables: true,
   rules: {
     'at-rule-empty-line-before': [
       'always',
       {
         except: [
           'blockless-after-same-name-blockless',
-          'first-nested'
+          'first-nested',
         ],
         ignore: [
-          'after-comment'
+          'after-comment',
         ],
         ignoreAtRules: [
           'else',
-          'import'
-        ]
-      }
+          'import',
+        ],
+      },
     ],
     // TODO: change this to 'modern' once github-pages gem issue is resolved
     //  (see main.scss)
@@ -49,6 +46,19 @@ module.exports = {
     ],
     // super strict, doesn't work well with component model
     'no-descending-specificity': null,
+    'plugin/declaration-block-no-ignored-properties': true,
+    'plugin/stylelint-group-selectors': true,
+    'scss/double-slash-comment-empty-line-before': [
+      'always',
+      {
+        ignore: [
+          'between-comments',
+          'stylelint-commands',
+          'inside-block',
+        ],
+      },
+    ],
+    'selector-max-id': 1,
     'order/order': [
       [
         'custom-properties',
@@ -125,6 +135,7 @@ module.exports = {
         {
           // user-action pseudo-classes
           type: 'rule',
+          // eslint-disable-next-line @stylistic/max-len
           selector: /^(?:&:(?:hover|focus|focus-visible|focus-within|active),\n\s*)*&:(?:hover|focus|focus-visible|focus-within|active)$/,
           name: 'user-action pseudo-class',
         },
@@ -597,18 +608,5 @@ module.exports = {
       },
     ],
     'order/properties-alphabetical-order': null,
-    'plugin/declaration-block-no-ignored-properties': true,
-    'plugin/stylelint-group-selectors': true,
-    'scss/double-slash-comment-empty-line-before': [
-      'always',
-      {
-        'ignore': [
-          'between-comments',
-          'stylelint-commands',
-          'inside-block',
-        ],
-      },
-    ],
-    'selector-max-id': 1,
   },
 };
