@@ -16,7 +16,7 @@
     border-left-style: solid;
     border-left-width: 0.25em;
 
-    @media (min-width: 768px) {
+    @media (width >= 768px) {
       padding-right: 1em;
       margin-left: 2em;
     }

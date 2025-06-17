@@ -57,8 +57,9 @@
       background-color: $bg-primary-hfa;
     }
 
-    // TODO: this currently must come after &:focus for nav pills color to work
-    //  right. Refactor?
+    // TODO: refactor? see description in disable rule below
+    /* stylelint-disable-next-line order/order -- this currently must come after
+    &:focus for nav-pills color to work right */
     &.active {
       color: $bg-primary;
       background-color: $fg-primary;
@@ -123,8 +124,9 @@
       background-color: $bg-secondary-hfa;
     }
 
-    // TODO: this currently must come after &:focus for nav pills color to work
-    //  right. Refactor?
+    // TODO: refactor? see description in disable rule below
+    /* stylelint-disable-next-line order/order -- this currently must come after
+    &:focus for nav-pills color to work right */
     &.active {
       color: $bg-secondary;
       background-color: $fg-secondary;

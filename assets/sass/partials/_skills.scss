@@ -1,7 +1,7 @@
 .skills {
   text-align: center;
 
-  @media (min-width: 768px) {
+  @media (width >= 768px) {
     width: 80%;
     margin-right: auto;
     margin-left: auto;

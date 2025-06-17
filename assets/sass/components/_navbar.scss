@@ -30,7 +30,11 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (width >= 768px) {
+  .navbar-nav {
+    align-items: center;
+  }
+
   #main-nav {
     // TODO: convert hard-coded height to rem to handle user agent settings.
     //  Also update other usages in particle-image.js, creative.js, etc.
@@ -38,6 +42,19 @@
     color: $navbar-desktop-fg;
     background-color: $navbar-desktop-bg;
     transition: background-color 0.2s ease;
+
+    &.navbar-scrolled {
+      background-color: $navbar-scrolled-bg;
+
+      .navbar-brand,
+      .nav-link {
+        color: $navbar-scrolled-fg;
+
+        &:hover {
+          color: $navbar-desktop-fg-hfa;
+        }
+      }
+    }
 
     .navbar-brand {
       padding: 0;
@@ -66,22 +83,5 @@
     .nav-item:last-child .nav-link {
       padding-right: 0;
     }
-
-    &.navbar-scrolled {
-      background-color: $navbar-scrolled-bg;
-
-      .navbar-brand,
-      .nav-link {
-        color: $navbar-scrolled-fg;
-
-        &:hover {
-          color: $navbar-desktop-fg-hfa;
-        }
-      }
-    }
-  }
-
-  .navbar-nav {
-    align-items: center;
   }
 }

@@ -30,9 +30,11 @@ export default {
         ],
       },
     ],
-    // TODO: change this to 'modern' once github-pages gem issue is resolved
-    //  (see main.scss)
+    // TODO: change 'color-function-notation' to 'modern' and remove
+    //  'color-function-alias-notation' rule once github-pages gem issue is
+    //  resolved (see main.scss)
     'color-function-notation': 'legacy',
+    'color-function-alias-notation': 'with-alpha',
     // prioritize order/properties-order grouping
     'declaration-empty-line-before': null,
     'max-nesting-depth': [
@@ -48,6 +50,15 @@ export default {
     'no-descending-specificity': null,
     'plugin/declaration-block-no-ignored-properties': true,
     'plugin/stylelint-group-selectors': true,
+    'comment-empty-line-before': [
+      'always',
+      {
+        ignore: [
+          'after-comment',
+          'stylelint-commands',
+        ],
+      },
+    ],
     'scss/double-slash-comment-empty-line-before': [
       'always',
       {

@@ -2,7 +2,7 @@
   margin-bottom: 1em;
   text-align: justify;
 
-  @media (min-width: 992px) {
+  @media (width >= 992px) {
     // to give the timeline some additional room, give the enclosing row
     // .no-gutters and add the timeline column's normal 15px padding-left to the
     // the bio column's 15px padding-right
@@ -27,20 +27,20 @@
   custom CSS variables, which should come first. Also, this comment is in CSS
   format because stylelint's at-rule-empty-line-before rule doesn't recognize
   Sass comments as comments */
-  @media (max-width: 991px) {
+  @media (width <= 991px) {
     // min-height: 75vh;
     min-height: 675px;
   }
 
-  @media (max-width: 767px) {
+  @media (width <= 767px) {
     min-height: 728px;
   }
 
-  @media (max-width: 575px) {
+  @media (width <= 575px) {
     min-height: 970px;
   }
 
-  @media (max-width: 414px) {
+  @media (width <= 414px) {
     min-height: 1150px;
   }
 
