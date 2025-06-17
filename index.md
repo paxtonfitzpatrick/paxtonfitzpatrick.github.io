@@ -78,7 +78,7 @@ sections:
             image: assets/img/bio/cosanlab-logo.png
         timeline:
           start: 2015
-          end: 2023
+          end: 2026
           events:
             - title: Undergraduate, Dartmouth College
               start: 2015.75
@@ -108,7 +108,7 @@ sections:
               start: 2019.75
               end: 2020
               color: 6b004f
-            - title: Teaching Assistant & Guest Lecturer, Intro to Programming 
+            - title: Teaching Assistant & Guest Lecturer, Intro to Programming
                for Psychological Scientists
               start: 2020
               end: 2020.25
@@ -129,6 +129,26 @@ sections:
               start: 2022.25
               end: 2022.5
               color: 00fdcf
+            - title: Teaching Assistant, Experimental Design, Methodology, and Data Analysis Procedures
+              start: 2023
+              end: 2023.25
+              type: experience
+              color: 00a6ff
+            - title: Teaching Assistant, Methods in Neuroscience at Dartmouth (MIND) Summer School
+              start: 2023.5
+              end: 2023.75
+              type: experience
+              color: 00ffb2
+            - title: Teaching Assistant, Laboratory in Psychological Science
+              start: 2023.5
+              end: 2023.75
+              type: experience
+              color: ffb200
+            - title: Teaching Assistant, Laboratory in Psychological Science
+              start: 2024.75
+              end: 2025
+              type: experience
+              color: ff0000
 
       - type: skills.html
         title: Skills
