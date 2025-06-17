@@ -118,8 +118,8 @@ plugins:
 title: *full_name
 tagline: My personal website
 description: >-
-  PhD student in Cognitive Neuroscience at Dartmouth College. I build 
-  computational models of human memory, and create software tools for research 
+  PhD candidate in Cognitive Neuroscience at Dartmouth College. I build
+  computational models of human memory, and create software tools for research
   and education.
 
 author:
