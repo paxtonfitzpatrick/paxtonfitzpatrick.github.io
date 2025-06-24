@@ -1,5 +1,5 @@
 .bio-paragraph {
-  margin-bottom: 1em;
+  // TODO: update this to only take affect above a particular min-width
   text-align: justify;
 
   @media (width >= 992px) {
@@ -9,12 +9,33 @@
     padding-right: 30px;
   }
 
+  + .bio-paragraph {
+    margin-top: 2.5rem;
+  }
+
   img {
-    max-width: 8em;
-    height: auto;
-    // line-height is 1.5 (implied em), so 0.5em is split between space above and
-    // below each line. So 0.25em aligns image top with top of first text line.
-    padding-top: 0.25em;
+    width: 6rem;
+    height: 6rem;
+    shape-outside: circle(50%);
+
+    object-fit: cover;
+    clip-path: circle(50%);
+  }
+
+  .bio-img-right {
+    float: right;
+    margin-left: 0.5rem;
+  }
+
+  .bio-img-left {
+    float: left;
+    margin-right: 0.5rem;
+  }
+
+  .bio-text {
+    padding-top: 2rem;
+    margin-left: 3.5rem;
+    margin-right: 3.5rem;
   }
 }
 
@@ -23,12 +44,11 @@
     --#{$key}: #{$value};
   }
 
+  // TODO: update these min-heights to fit new timeline content (would be better
+  //  if they weren't hardcoded)
   /* stylelint-disable-next-line order/order -- @each at-rule above declares
-  custom CSS variables, which should come first. Also, this comment is in CSS
-  format because stylelint's at-rule-empty-line-before rule doesn't recognize
-  Sass comments as comments */
+  custom CSS variables, which should come first */
   @media (width <= 991px) {
-    // min-height: 75vh;
     min-height: 675px;
   }
 

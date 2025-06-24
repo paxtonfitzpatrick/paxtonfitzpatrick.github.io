@@ -42,38 +42,41 @@ sections:
       - type: bio-timeline.html
         title: Bio
         bio_paragraphs:
-          - text: I’ve always been fascinated by the question of what makes people who they are.
-          - text: Growing up, I spent a lot of time meeting new people in new places. I lived in seven different cities 
-              throughout the northeastern and midwestern US before settling in a small town outside Harrisburg, 
-              Pennsylvania, where I continued to travel frequently for tennis, music, and quiz bowl competitions. I  
-              constantly encountered people with vastly different personalities and beliefs, and was always curious how 
-              those traits arose from each individual’s unique set of life experiences.
+          - text: Growing up, I lived in eight different cities throughout the eastern and midwestern US before starting
+              college at [Dartmouth](https://home.dartmouth.edu){:target="_blank"} in 2015.
             image: assets/img/bio/map-pins.png
-          - text: When I came to [Dartmouth College](https://home.dartmouth.edu){:target="_blank"} as an undergraduate 
-              in 2015 and discovered there was an entire field devoted to these questions, I quickly became excited 
-              about neuroscience research. I began working for the 
-              [Dartmouth Brain Imaging Center](https://www.dartmouth.edu/dbic){:target="_blank"}, collecting and 
-              processing fMRI data for a variety of imaging studies, as well as 
-              [Bregman Media Labs](http://bregman.dartmouth.edu){:target="_blank"}, where I worked with 
-              [Dr. Michael Casey](https://faculty-directory.dartmouth.edu/michael-casey){:target="_blank"} to create
-              [*Exnectome*](https://vimeo.com/208333051){:target="_blank"}, the first EEG sonification-based musical 
+          - text: From 2016 to 2019, I worked in the
+              [Dartmouth Brain Imaging Center](https://www.dartmouth.edu/dbic){:target="_blank"}, collecting and
+              processing fMRI data for a multi-year neuroimaging study.
+            image: assets/img/bio/brain-scan.jpg
+          - text: In 2017, I worked with
+              [Dr. Michael Casey](https://faculty-directory.dartmouth.edu/michael-casey){:target="_blank"}  in
+              [Bregman Media Labs](http://bregman.dartmouth.edu){:target="_blank"} to create
+              [*Exnectome*](https://vimeo.com/208333051){:target="_blank"}, the first EEG sonification-based musical
               ensemble.
             image: assets/img/bio/eeg-headset.jpeg
-          - text: I then joined the [Contextual Dynamics Lab](https://www.context-lab.com){:target="_blank"} and 
-              discovered passions for computational memory research and open-source software development. Over time, I 
-              developed a love for mentoring, and in my junior year of college, began managing the CDL and volunteering 
-              as a tutor and TA for various neuroscience and computer science classes. I graduated in 2019 and wrote my 
-              honors thesis on a computational framework for modeling how episodic memories deform over time, and 
-              predicting neural activity from their semantic content.
+          - text: I joined the [Contextual Dynamics Lab](https://www.context-lab.com){:target="_blank"} in 2017, where
+              I developed novel methods and software for studying episodic memory. I managed the CDL from 2018
+              to 2021, designing and executing studies, mentoring teams of undergrads, and maintaining the lab's
+              software stack.
             image: assets/img/bio/cdl-logo.png
-          - text: I continued to manage the CDL for two more years, designing naturalistic memory studies, building 
-              research software tools, TAing classes, and mentoring undergrads. Then, in 2021, I decided to stay at 
-              Dartmouth to pursue a Ph.D. in cognitive neuroscience, now working jointly in the CDL and the
-              [Computational Social Affective Neuroscience Lab](https://cosanlab.com/){:target="_blank”}. My current 
-              research is focused on leveraging the models of learning and memory I've developed in prior work to 
-              improve STEM accessibility and student outcomes by developing tools that allow instructors to easily and 
-              scalably personalize online courses.
-            image: assets/img/bio/cosanlab-logo.png
+          - text: In 2019, I graduated from [Dartmouth](https://home.dartmouth.edu){:target="_blank"} with a BA
+              in cognitive neuroscience. For my senior honors thesis, I developed a computational framework for modeling how memories
+              deform over time and predicting neural activity from verbal recalls. My thesis won the <i>Nickerson</i>
+              and <i>Leaton</i> awards for undergraduate neuroscience research.
+            image: assets/img/bio/dartmouth-logo.png
+          - text: Since 2019, I've TA'd and guest-taught undergrad and grad-level courses on neuroscience, statistics,
+              programming, data science, and research methods. I received teaching awards from Dartmouth in 2019 and 2024.
+            image: assets/img/bio/eeg-headset.jpeg
+          - text: I started my Ph.D. at [Dartmouth](https://graduate.dartmouth.edu/){:target="_blank"} in 2021. In 2024,
+              my master's thesis on modeling conceptual knowledge and learning using text embedding models won a
+              <i>Neukom</i> prize for graduate research in computational science.
+            image: assets/img/bio/eeg-headset.jpeg
+          - text: I'm now a PhD candidate in cognitive neuroscience, working with
+              [Dr. Jeremy Manning](https://pbs.dartmouth.edu/people/jeremy-rothman-manning){:target="_blank"}. My
+              current work is focused on building automated, scalable systems for personalizing and improving how people
+              learn.
+            image: assets/img/bio/eeg-headset.jpeg
         timeline:
           start: 2015
           end: 2026
@@ -165,6 +168,7 @@ sections:
                 caption: SuperCollider
               - image: html.png
                 caption: HTML
+              # TODO: update CSS logo
               - image: css.png
                 caption: CSS
               - image: sass.png
@@ -274,7 +278,7 @@ sections:
     before_text: >
      My research uses language models to capture how our memories preserve, distort, and compress the external world,
      and to identify the neural mechanisms that underlie these transformations.<br/><br/>I'm particularly interested in
-     how episodic memory compresses the temporal structure of an experience, and how that compression is warped over 
+     how episodic memory compresses the temporal structure of an experience, and how that compression is warped over
      time.
     panes:
       - title: Manuscripts
@@ -292,7 +296,7 @@ sections:
         code_url: https://github.com/ContextLab/davos
       - type: manuscript
         title: Fitness tracking reveals task-specific associations between memory, mental health, and exercise
-        text: Manning J. R., Notaro G. M., Chen E., **Fitzpatrick P. C.** (2022). Fitness tracking reveals task-specific 
+        text: Manning J. R., Notaro G. M., Chen E., **Fitzpatrick P. C.** (2022). Fitness tracking reveals task-specific
          associations between memory, mental health, and exercise. (*under revision*).
         image: assets/img/research/fitwit-white.png
         pdf_url: https://www.biorxiv.org/content/10.1101/2021.10.22.465441
@@ -300,27 +304,27 @@ sections:
         data_url: https://github.com/ContextLab/brainfit-paper/tree/main/data
       - type: poster
         title: A geometric approach to modeling knowledge and learning from Khan Academy course videos
-        text: "**Fitzpatrick P. C.**, Heusser A. C., Manning J. R. (2022). A geometric approach to modeling knowledge and learning 
+        text: "**Fitzpatrick P. C.**, Heusser A. C., Manning J. R. (2022). A geometric approach to modeling knowledge and learning
          from Khan Academy course videos. *Context and Episodic Memory Symposium*. Philadelphia, PA."
         image: assets/img/research/cems-2022.png
         pdf_url: https://www.dropbox.com/s/6h621wefszdxv46/CEMS_2022.pdf?dl=0
       - type: poster
         title: Cognitive tasks as a diagnostic tool for mental health
-        text: Jain S., Schreder N., **Fitzpatrick P. C.**, Ziman K., Manning J. R. (2021). Cognitive tasks as a diagnostic 
+        text: Jain S., Schreder N., **Fitzpatrick P. C.**, Ziman K., Manning J. R. (2021). Cognitive tasks as a diagnostic
          tool for mental health. *Trends in Psychology Summit*. Cambridge, MA.
         image: assets/img/research/tips-2021.png
         pdf_url: https://www.dropbox.com/s/e87wwac4o5rpzn1/TIPS_2021.pdf?dl=0
       - type: talk
         title: Capturing the geometric and neural structures of experiences and memories
-        text: "**Fitzpatrick P. C.** (2022). Capturing the geometric and neural structures of experiences and memories. 
+        text: "**Fitzpatrick P. C.** (2022). Capturing the geometric and neural structures of experiences and memories.
          *Dartmouth College*. Hanover, NH."
         image: assets/img/research/thesis-talk.png
       - type: manuscript
         title: Geometric models reveal behavioral and neural signatures of transforming experiences into memories
         text: Heusser A. C.&dagger;, **Fitzpatrick P. C.**&dagger;, Manning J. R. (2021). Geometric models reveal
-         behavioural and neural signatures of transforming experiences into memories. *Nature Human Behaviour*. 
+         behavioural and neural signatures of transforming experiences into memories. *Nature Human Behaviour*.
          doi:10.1038/s41562-021-01051-6.
-         
+
          <p class="footnote"><em>&dagger;denotes equal contribution</em></p>
         image: assets/img/research/sherlock-white.png
         pdf_url: https://rdcu.be/cfeFb
@@ -334,7 +338,7 @@ sections:
         code_url: https://github.com/paxtonfitzpatrick/docker-tutorial
       - type: talk
         title: Web-based behavioral experiments for online data collection
-        text: "**Fitzpatrick P. C.** (2020). Web-based behavioral experiments for online data collection. *EPSCoR 
+        text: "**Fitzpatrick P. C.** (2020). Web-based behavioral experiments for online data collection. *EPSCoR
          Attention Consortium meeting*. Virtual."
         image: assets/img/research/epscor-talk.png
         slides_url: https://github.com/paxtonfitzpatrick/psiturk-experiment-template/blob/master/slides/slides.pdf
@@ -392,19 +396,19 @@ sections:
     background_style: bg-secondary
     title: Software
     before_text: I also regularly develop, maintain, and contribute to a number of open-source software projects.
-    after_text: ...and of course 
+    after_text: ...and of course
      [this website](https://github.com/paxtonfitzpatrick/paxtonfitzpatrick.github.io){:target="_blank"}!
     panes:
       - type: software.html
         title: Things I've created
         items:
           - title: davos
-            description: Import Python packages even if they aren't installed. Enables the "`smuggle`" statement&#58; 
-             a drop-in replacement for [`import`](https://docs.python.org/3/reference/import.html){:target="_blank"} 
-             that handles missing packages on the fly. Add "*onion comments*" alongside `smuggle` statements specify 
-             package versions and additional options. Can be used to turn 
-             [Jupyter](https://jupyter.org){:target="_blank"} or 
-             [Colab](https://colab.research.google.com){:target="_blank"} notebooks into self-contained, reproducible 
+            description: Import Python packages even if they aren't installed. Enables the "`smuggle`" statement&#58;
+             a drop-in replacement for [`import`](https://docs.python.org/3/reference/import.html){:target="_blank"}
+             that handles missing packages on the fly. Add "*onion comments*" alongside `smuggle` statements specify
+             package versions and additional options. Can be used to turn
+             [Jupyter](https://jupyter.org){:target="_blank"} or
+             [Colab](https://colab.research.google.com){:target="_blank"} notebooks into self-contained, reproducible
              Python environments that manage dependencies at runtime.
             icons:
               - icon: fa-github-square
@@ -416,8 +420,8 @@ sections:
                 text: Documentation
                 url: https://github.com/ContextLab/davos#readme
           - title: docker-tutorial
-            description: Walkthroughs and template code for running experiments and analyzing data from within 
-             [Docker](https://www.docker.com){:target="_blank"} containers. Pre-built images are available on 
+            description: Walkthroughs and template code for running experiments and analyzing data from within
+             [Docker](https://www.docker.com){:target="_blank"} containers. Pre-built images are available on
              [Docker Hub](https://hub.docker.com){:target="_blank"}.
             icons:
               - icon: fa-github-square
@@ -433,8 +437,8 @@ sections:
                 text: Tutorial slides
                 url: https://github.com/paxtonfitzpatrick/docker-tutorial/blob/main/slides/docker-tutorial.pdf
           - title: particle-image
-            description: Animate a particlized image in vanilla JavaScript. Turn an image from the web into an animated 
-             swarm of interactive particles. Set parameters to control particle color, size, density, speed, 
+            description: Animate a particlized image in vanilla JavaScript. Turn an image from the web into an animated
+             swarm of interactive particles. Set parameters to control particle color, size, density, speed,
              hover/click/touch interactions, and more.
             icons:
               - icon: fa-github-square
@@ -452,12 +456,12 @@ sections:
           - title: psiturk-experiment-template
             description: A template behavioral experiment ready to be deployed locally or online via
              [Amazon Mechanical Turk](https://www.mturk.com){:target="_blank"}. Implemented using the
-             [psiTurk](https://psiturk.org){:target="_blank"} platform and 
+             [psiTurk](https://psiturk.org){:target="_blank"} platform and
              [jsPsych](https://www.jspsych.org){:target="_blank"} library, and isolated within four networked
-             [Docker](https://www.docker.com){:target="_blank"} containers&#58; a 
-             [Debian 9](https://www.debian.org/releases/stretch){:target="_blank"} container to house the experiment 
+             [Docker](https://www.docker.com){:target="_blank"} containers&#58; a
+             [Debian 9](https://www.debian.org/releases/stretch){:target="_blank"} container to house the experiment
              code and psiTurk server, an [nginx](https://www.nginx.com){:target="_blank"} server for load balancing, a
-             [MySQL](https://www.mysql.com){:target="_blank"} database for storing data, and 
+             [MySQL](https://www.mysql.com){:target="_blank"} database for storing data, and
              [Adminer](https://www.adminer.org){:target="_blank"} for inspecting and downloading data.
             icons:
               - icon: fa-github-square
@@ -473,9 +477,9 @@ sections:
                 text: Tutorial slides
                 url: https://github.com/paxtonfitzpatrick/psiturk-experiment-template/blob/master/slides/slides.pdf
           - title: CDL-docker-stacks
-            description: A collection of optimized, extensible, hierarchically built Docker images for common 
-             neuro/data science tasks. Pre-built images are available on 
-             [Docker Hub](https://hub.docker.com){:target="_blank"} in Python 3.6, 3.7, and 3.8 
+            description: A collection of optimized, extensible, hierarchically built Docker images for common
+             neuro/data science tasks. Pre-built images are available on
+             [Docker Hub](https://hub.docker.com){:target="_blank"} in Python 3.6, 3.7, and 3.8
              variants.
             icons:
               - icon: fa-github-square
@@ -487,9 +491,9 @@ sections:
                 text: View on Docker Hub
                 url: https://hub.docker.com/u/contextlab
           - title: cluster-tools-dartmouth
-            description: A Python toolbox for remotely interacting with Dartmouth's 
-             [Discovery](https://rc.dartmouth.edu/index.php/discovery-overview){:target="_blank"} HPC cluster. 
-             Automatically generates PBS scripts, submits jobs to the scheduler, monitors progress, and compiles results 
+            description: A Python toolbox for remotely interacting with Dartmouth's
+             [Discovery](https://rc.dartmouth.edu/index.php/discovery-overview){:target="_blank"} HPC cluster.
+             Automatically generates PBS scripts, submits jobs to the scheduler, monitors progress, and compiles results
              when finished. Can easily be configured to work with any Moab/TORQUE system.
             icons:
               - icon: fa-github-square
@@ -498,8 +502,8 @@ sections:
                 url: https://github.com/paxtonfitzpatrick/cluster-tools-dartmouth
           - title: gittracker
             description: A CLI app for tracking the states of all your local Git repositories in one place. Run a single
-             command from any directory to display `git status`-like information for each repo `gittracker` is 
-             configured to track. Supports arbitrarily nested submodules, multiple verbosity levels, and automatic 
+             command from any directory to display `git status`-like information for each repo `gittracker` is
+             configured to track. Supports arbitrarily nested submodules, multiple verbosity levels, and automatic
              discovery of local repos.
             icons:
               - icon: fa-github-square
@@ -512,9 +516,9 @@ sections:
                 url: https://user-images.githubusercontent.com/26118297/124789467-50a2fc80-df18-11eb-9454-01c0341bf50e.gif
           - title: quail
             description: A Python toolbox for processing, analyzing, and visualizing free recall data. Provides a common
-             interface for working with data from both list-learning and naturalistic memory experiments. 
-             Integrates with the 
-             [Google Cloud Speech-to-Text](https://cloud.google.com/speech-to-text){:target="_blank"} API for 
+             interface for working with data from both list-learning and naturalistic memory experiments.
+             Integrates with the
+             [Google Cloud Speech-to-Text](https://cloud.google.com/speech-to-text){:target="_blank"} API for
              rapid, on-the-fly audio transcription.
             icons:
               - icon: fa-github-square
@@ -531,8 +535,8 @@ sections:
                 url: https://www.theoj.org/joss-papers/joss.00424/10.21105.joss.00424.pdf
           - title: autoFR
             description: A verbal free recall experiment that incorporates automated speech decoding. Uses
-             [quail](https://github.com/contextlab/quail){:target="_blank"} to automatically obtain recall transcripts, 
-             onset/offset times, IRTs, confidence scores, and other metadata. Provides a custom 
+             [quail](https://github.com/contextlab/quail){:target="_blank"} to automatically obtain recall transcripts,
+             onset/offset times, IRTs, confidence scores, and other metadata. Provides a custom
              [jsPsych](https://www.jspsych.org){:target="_blank"} plugin for collecting and saving verbal recall data.
             icons:
               - icon: fa-github-square
@@ -552,9 +556,9 @@ sections:
         items:
           - title: hypertools
             role: lead maintainer
-            description: A Python package for visualizing and manipulating high-dimensional data. Transform, align, 
-             normalize, interpolate, cluster, reduce, and plot numeric or text data with a single function call or in 
-             individual steps. Save full analysis pipelines including data and trained models as `DataGeometry` 
+            description: A Python package for visualizing and manipulating high-dimensional data. Transform, align,
+             normalize, interpolate, cluster, reduce, and plot numeric or text data with a single function call or in
+             individual steps. Save full analysis pipelines including data and trained models as `DataGeometry`
              objects for later reuse. Designed to be fully customizable with reasonable defaults.
             icons:
               - icon: fa-github-square
@@ -571,12 +575,12 @@ sections:
                 url: https://jmlr.org/papers/volume18/17-434/17-434.pdf
           - title: umap-learn
             role: core maintainer
-            description: Python implementation of 
+            description: Python implementation of
              [Uniform Manifold Approximation and Projection](https://arxiv.org/abs/1802.03426){:target="_blank"}.
-             A general-purpose non-linear dimensionality reduction algorithm based on finding a low-dimensional 
-             projection of the data that best preserves its fuzzy topological structure. The Python package also 
-             implements supervised, semi-supervised, aligned, and parametric UMAP variants, an inverse transform, 
-             [densMAP](https://www.biorxiv.org/content/10.1101/2020.05.12.077776v1){:target="_blank"}, and a 
+             A general-purpose non-linear dimensionality reduction algorithm based on finding a low-dimensional
+             projection of the data that best preserves its fuzzy topological structure. The Python package also
+             implements supervised, semi-supervised, aligned, and parametric UMAP variants, an inverse transform,
+             [densMAP](https://www.biorxiv.org/content/10.1101/2020.05.12.077776v1){:target="_blank"}, and a
              plotting library.
             icons:
               - icon: fa-github-square
@@ -593,9 +597,9 @@ sections:
                 url: https://arxiv.org/pdf/1802.03426.pdf
           - title: timecorr
             role: core contributor
-            description: A Python toolbox for exploring higher-order structure in multivariate timeseries data. 
-             Iteratively computes dynamic correlations and reduces dimensionality to approximate higher-order dynamic 
-             correlations in a computationally tractable way. Also supports computing various dynamic graph theoretic 
+            description: A Python toolbox for exploring higher-order structure in multivariate timeseries data.
+             Iteratively computes dynamic correlations and reduces dimensionality to approximate higher-order dynamic
+             correlations in a computationally tractable way. Also supports computing various dynamic graph theoretic
              measures.
             icons:
               - icon: fa-github-square
@@ -612,7 +616,7 @@ sections:
                 url: https://www.nature.com/articles/s41467-021-25876-x
           - title: SuperEEG
             role: core contributor
-            description: Infer activity throughout the brain from a small(ish) 
+            description: Infer activity throughout the brain from a small(ish)
              number of electrodes using Gaussian process regression
             icons:
               - icon: fa-github-square
@@ -629,7 +633,7 @@ sections:
                 url: https://academic.oup.com/cercor/article/30/10/5333/5851264
           - title: CDL-bibliography
             role: core contributor
-            description: A shared `bibtex` file containing references for ~6,000 psychology, neuroscience, math, 
+            description: A shared `bibtex` file containing references for ~6,000 psychology, neuroscience, math,
              and machine learning papers.
             icons:
               - icon: fa-github-square
@@ -638,8 +642,8 @@ sections:
                 url: https://github.com/contextlab/cdl-bibliography
           - title: lab-manual
             role: core maintainer
-            description: Lab manual and associated source code for the 
-             [Contextual Dynamics Lab](https://www.context-lab.com){:target="_blank"} at 
+            description: Lab manual and associated source code for the
+             [Contextual Dynamics Lab](https://www.context-lab.com){:target="_blank"} at
              [Dartmouth College](https://home.dartmouth.edu){:target="_blank"}.
             icons:
               - icon: fa-github-square
