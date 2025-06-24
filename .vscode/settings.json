@@ -22,5 +22,8 @@
             "runIn": "backend"
         }
     ],
-    "eslint.useFlatConfig": true
+    "eslint.useFlatConfig": true,
+    "files.associations": {
+        "*.html": "liquid"
+    }
 }

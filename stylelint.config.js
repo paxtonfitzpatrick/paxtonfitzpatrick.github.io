@@ -8,7 +8,11 @@ export default {
     'stylelint-group-selectors',
     'stylelint-order',
   ],
-  ignoreFiles: ['assets/sass/vendors/**', '_site/**', 'scratch/**'],
+  ignoreFiles: [
+    'assets/sass/vendors/**',
+    '_site/**',
+    'scratch/**',
+  ],
   reportDescriptionlessDisables: true,
   reportInvalidScopeDisables: true,
   reportNeedlessDisables: true,
@@ -212,8 +216,8 @@ export default {
         },
       ],
       {
-        // don't actually want unspecified items at the top, but use this warning to catch items
-        // missed by the rules above
+        // don't actually want unspecified items at the top, but use this
+        // warning to catch items missed by the rules above
         unspecified: 'top',
       },
     ],
@@ -350,9 +354,9 @@ export default {
             'margin-inline-start',
             'margin-inline-end',
             'margin-top',
-            'margin-right',
             'margin-bottom',
             'margin-left',
+            'margin-right',
             'overflow',
             'overflow-x',
             'overflow-y',
@@ -614,7 +618,7 @@ export default {
         },
       ],
       {
-        unspecified: 'top',
+        unspecified: 'ignore',
         emptyLineMinimumPropertyThreshold: 5,
       },
     ],
