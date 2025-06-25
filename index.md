@@ -289,25 +289,76 @@ sections:
         filter: poster
     items:
       - type: manuscript
-        title: Davos&#58; The Python package smuggler
-        text: "**Fitzpatrick P. C.**, Manning J. R. (2022). Davos&#58; The Python package smuggler. (*under revision*)."
+        title: Text embedding models yield high-resolution insights into conceptual knowledge from short mulitple-choice quizzes
+        text: '**Fitzpatrick P. C.**, Heusser A. C., Manning J. R. (2025). Text embedding models yield high-resolution
+         insights into conceptual knowledge from short mulitple-choice quizzes. *PsyArXiv*: 10.31234/osf.io/dh3q2.'
+        image: assets/img/research/khan-white.png
+        pdf_url: https://osf.io/preprints/psyarxiv/dh3q2_v2
+        code_url: https://github.com/ContextLab/efficient-learning-khan
+        data_url: https://github.com/ContextLab/efficient-learning-khan/tree/master/data
+      - type: talk
+        title: 'Davos: a novel approach to sharing reproducible research code with collaborators, students, and the public'
+        text: '**Fitzpatrick P. C.** (2024). Davos: a novel approach to sharing reproducible research code with collaborators, students, and the public. *Dartmouth College*. Hanover, NH.'
+        image: assets/img/research/cbb-2024f.png
+      - type: manuscript
+        title: Feature and order manipulations in a free recall task affect memory for current and future lists
+        text: 'Manning J. R., Whitaker E. C., **Fitzpatrick P. C.**, Lee M. R., Frantz A. M., Bollinger B. J., Romanova
+         D., Field C. E., Heusser A. C. (2024). Feature and order manipulations in a free recall task affect memory for
+         current and future lists. *PsyArXiv*: 10.31234/osf.io/erzfp.'
+        image: assets/img/research/frfr-white.png
+        pdf_url: https://osf.io/preprints/psyarxiv/erzfp
+        code_url: https://github.com/ContextLab/FRFR-analyses
+        data_url: https://github.com/ContextLab/FRFR-analyses/tree/master/data
+      - type: manuscript
+        title: 'Davos: a Python package "smuggler" for constructing lightweight reproducible notebooks'
+        text: '**Fitzpatrick P. C.**, Manning J. R. (2024). Davos: a Python package "smuggler" for constructing
+         lightweight reproducible notebooks. *SoftwareX*, *25*, 101614.'
         image: assets/img/research/davos-white.png
-        pdf_url: https://www.dropbox.com/s/vasgv6qlyfiimih/FitzMann22.pdf
+        pdf_url: https://www.dropbox.com/scl/fi/tj0mhxdt2r62x986i3a7r/FitzMann24.pdf?rlkey=4rhec7cly9bowjmk5k0zvhp01&e=1
         code_url: https://github.com/ContextLab/davos
+      - type: talk
+        title: A framework for modeling idiosyncratic distortions and compressions of semantic content representations
+        text: '**Fitzpatrick P. C.** (2023). A framework for modeling idiosyncratic distortions and compressions of
+          semantic content representations. *Dartmouth College*. Hanover, NH.'
+        image: assets/img/research/cbb-2024x.png
+      - type: talk
+        title: How do context and time modulate the geometric trajectory of memory?
+        text: '**Fitzpatrick P. C.** (2023). How do context and time modulate the geometric trajectory of memory?
+         *Context and Episodic Memory Symposium*. Lake Buena Vista, FL.'
+        image: assets/img/research/cems-2023.png
+      - type: talk
+        title: Modeling real-world learning & memory
+        text: '**Fitzpatrick P. C.** (2023). Modeling real-world learning & memory. *Dartmouth College*. Hanover, NH.'
+        image: assets/img/research/specialist-talk.png
       - type: manuscript
         title: Fitness tracking reveals task-specific associations between memory, mental health, and exercise
         text: Manning J. R., Notaro G. M., Chen E., **Fitzpatrick P. C.** (2022). Fitness tracking reveals task-specific
-         associations between memory, mental health, and exercise. (*under revision*).
+         associations between memory, mental health, and exercise. *Scientific Reports*, *12*(1), 13822.
         image: assets/img/research/fitwit-white.png
-        pdf_url: https://www.biorxiv.org/content/10.1101/2021.10.22.465441
+        pdf_url: https://rdcu.be/ethog
         code_url: https://github.com/ContextLab/brainfit-paper
         data_url: https://github.com/ContextLab/brainfit-paper/tree/main/data
       - type: poster
         title: A geometric approach to modeling knowledge and learning from Khan Academy course videos
-        text: "**Fitzpatrick P. C.**, Heusser A. C., Manning J. R. (2022). A geometric approach to modeling knowledge and learning
-         from Khan Academy course videos. *Context and Episodic Memory Symposium*. Philadelphia, PA."
+        text: '**Fitzpatrick P. C.**, Heusser A. C., Manning J. R. (2022). A geometric approach to modeling knowledge and learning
+         from Khan Academy course videos. *Context and Episodic Memory Symposium*. Philadelphia, PA.'
         image: assets/img/research/cems-2022.png
         pdf_url: https://www.dropbox.com/s/6h621wefszdxv46/CEMS_2022.pdf?dl=0
+      - type: talk
+        title: Connecting fragmented networks of neuroscientific research via bibliometric analysis
+        text: '**Fitzpatrick P. C.**, O&#39;Nell K. C. (2022). Connecting fragmented networks of neuroscientific
+         research via bibliometric analysis. *Dartmouth College*. Hanover, NH.'
+        image: assets/img/research/citation-networks-talk.png
+      - type: talk
+        title: Automated personalized instruction for improving online learning
+        text: '**Fitzpatrick P. C.** (2022). Automated personalized instruction for improving online learning.
+         *PBS Annual Retreat*. Fairlee, VT.'
+        image: assets/img/research/pbs-retreat-talk.png
+      - type: talk
+        title: 'Thought trajectories: a geometric framework for studying complex cognitive processes'
+        text: '**Fitzpatrick P. C.** (2022). Thought trajectories: a geometric framework for studying complex cognitive
+         processes. *Dartmouth Text-analysis Workshop*. Hanover, NH.'
+        image: assets/img/research/text-analysis-workshop-talk.png
       - type: poster
         title: Cognitive tasks as a diagnostic tool for mental health
         text: Jain S., Schreder N., **Fitzpatrick P. C.**, Ziman K., Manning J. R. (2021). Cognitive tasks as a diagnostic
@@ -316,14 +367,14 @@ sections:
         pdf_url: https://www.dropbox.com/s/e87wwac4o5rpzn1/TIPS_2021.pdf?dl=0
       - type: talk
         title: Capturing the geometric and neural structures of experiences and memories
-        text: "**Fitzpatrick P. C.** (2022). Capturing the geometric and neural structures of experiences and memories.
-         *Dartmouth College*. Hanover, NH."
+        text: '**Fitzpatrick P. C.** (2022). Capturing the geometric and neural structures of experiences and memories.
+         *Dartmouth College*. Hanover, NH.'
         image: assets/img/research/thesis-talk.png
       - type: manuscript
         title: Geometric models reveal behavioral and neural signatures of transforming experiences into memories
         text: Heusser A. C.&dagger;, **Fitzpatrick P. C.**&dagger;, Manning J. R. (2021). Geometric models reveal
-         behavioural and neural signatures of transforming experiences into memories. *Nature Human Behaviour*.
-         doi:10.1038/s41562-021-01051-6.
+         behavioural and neural signatures of transforming experiences into memories. *Nature Human Behaviour*,
+         *5*(7), 905&ndash;919.
 
          <p class="footnote"><em>&dagger;denotes equal contribution</em></p>
         image: assets/img/research/sherlock-white.png
@@ -332,61 +383,61 @@ sections:
         data_url: https://arks.princeton.edu/ark:/88435/dsp01nz8062179
       - type: talk
         title: Docker for scientific research
-        text: "**Fitzpatrick P. C.** (2021). Docker for scientific research. *Dartmouth College*. Hanover, NH."
+        text: '**Fitzpatrick P. C.** (2021). Docker for scientific research. *Dartmouth College*. Hanover, NH.'
         image: assets/img/research/docker-talk.png
         slides_url: https://github.com/paxtonfitzpatrick/docker-tutorial/blob/master/slides/docker-tutorial.pdf
         code_url: https://github.com/paxtonfitzpatrick/docker-tutorial
       - type: talk
         title: Web-based behavioral experiments for online data collection
-        text: "**Fitzpatrick P. C.** (2020). Web-based behavioral experiments for online data collection. *EPSCoR
-         Attention Consortium meeting*. Virtual."
+        text: '**Fitzpatrick P. C.** (2020). Web-based behavioral experiments for online data collection. *EPSCoR
+         Attention Consortium meeting*. Virtual.'
         image: assets/img/research/epscor-talk.png
         slides_url: https://github.com/paxtonfitzpatrick/psiturk-experiment-template/blob/master/slides/slides.pdf
         code_url: https://github.com/paxtonfitzpatrick/psiturk-experiment-template
       - type: poster
         title: Exploring the evolving geometric structure of experiences and memories
-        text: __Fitzpatrick P. C.__, Heusser A. C., Manning J. R. (2019). Exploring the evolving geometric structure
-         of experiences and memories. *Society for Neuroscience Annual Meeting*. Chicago, IL.
+        text: '**Fitzpatrick P. C.**, Heusser A. C., Manning J. R. (2019). Exploring the evolving geometric structure
+         of experiences and memories. *Society for Neuroscience Annual Meeting*. Chicago, IL.'
         image: assets/img/research/sfn-2019.png
         pdf_url: https://www.dropbox.com/s/7y6q9gsi2ywkdbm/SFN_2019b.pdf?dl=0
       - type: poster
         title: Mapping between naturalistic experience and verbal recall
-        text: __Fitzpatrick P. C.__, Heusser A. C., Manning J. R. (2018). Mapping between naturalistic experience and
-         verbal recall. *Society for Neuroscience Annual Meeting*. San Diego, CA.
+        text: '**Fitzpatrick P. C.**, Heusser A. C., Manning J. R. (2018). Mapping between naturalistic experience and
+         verbal recall. *Society for Neuroscience Annual Meeting*. San Diego, CA.'
         image: assets/img/research/sfn-2018.png
         pdf_url: https://www.dropbox.com/s/rv86ve80zjis91t/SFN_2018a.pdf?dl=0
         data_url: https://arks.princeton.edu/ark:/88435/dsp01nz8062179
       - type: poster
         title: Capturing the geometric structure of our experiences and how we remember them
-        text: Heusser A. C., __Fitzpatrick P. C.__, Manning J. R. (2018). Capturing the geometric structure of our
+        text: Heusser A. C., **Fitzpatrick P. C.**, Manning J. R. (2018). Capturing the geometric structure of our
          experiences and how we remember them. *Conference on Cognitive Computational Neuroscience*. Philadelphia, PA.
         image: assets/img/research/ccn-2018.png
         pdf_url: https://www.dropbox.com/s/zmcc74w6z6pow0t/CCN_2018.pdf?dl=0
         data_url: https://arks.princeton.edu/ark:/88435/dsp01nz8062179
       - type: poster
         title: The utility of speech-to-text software for transcription of verbal response data
-        text: __Fitzpatrick P. C.__, Ziman K., Heusser A. C., Field C. E., Manning J. R. (2018). The utility of
-         speech-to-text software for transcription of verbal response data. *Wetterhahn Science Symposium*. Hanover, NH.
+        text: '**Fitzpatrick P. C.**, Ziman K., Heusser A. C., Field C. E., Manning J. R. (2018). The utility of
+         speech-to-text software for transcription of verbal response data. *Wetterhahn Science Symposium*. Hanover, NH.'
         image: assets/img/research/wetterhahn-2018a.png
         pdf_url: https://www.dropbox.com/s/kd72y0qh0bsm3mr/Wetterhahn_2018c.pdf?dl=0
       - type: poster
-        title: Adaptive free recall&#58; Enhancing (or diminishing) memory
-        text: Lee M., Chacko R., Whitaker E., **Fitzpatrick P. C.**, Field C. E., Ziman K., Bollinger B., Heusser A. C., Manning J. R. (2018). Adaptive free recall&#58; Enhancing (or diminishing) memory. *Wetterhahn Science
-         Symposium*. Hanover, NH.
+        title: 'Adaptive free recall: Enhancing (or diminishing) memory'
+        text: 'Lee M., Chacko R., Whitaker E., **Fitzpatrick P. C.**, Field C. E., Ziman K., Bollinger B., Heusser A. C., Manning J. R. (2018). Adaptive free recall: Enhancing (or diminishing) memory. *Wetterhahn Science
+         Symposium*. Hanover, NH.'
         image: assets/img/research/wetterhahn-2018b.png
         pdf_url: https://www.dropbox.com/s/qmrzr0bc00p7hqv/Wetterhahn_2018a.pdf?dl=0
       - type: manuscript
         title: Is automatic speech-to-text transcription ready for use in psychological experiments?
         text: Ziman K., Heusser A. C., **Fitzpatrick P. C.**, Field C. E., Manning J. R. (2018). Is automatic
-         speech-to-text transcription ready for use in psychological experiments?. *Behavior Research Methods*, 1-9.
+         speech-to-text transcription ready for use in psychological experiments?. *Behavior Research Methods*, 1&ndash;9.
         image: assets/img/research/autofr-paper-white.png
         pdf_url: https://link.springer.com/content/pdf/10.3758/s13428-018-1037-4.pdf
         code_url: https://github.com/ContextLab/AutoFR-analyses
         data_url: https://github.com/ContextLab/quail/tree/master/quail/data
       - type: manuscript
-        title: Quail&#58; a Python toolbox for analyzing and plotting free recall data
-        text: Heusser A. C., **Fitzpatrick P. C.**, Field C. E., Ziman K., Manning J. R. (2017). Quail&#58; a Python
-         toolbox for analyzing and plotting free recall data. *The Journal of Open Source Software*, 2(18)&#58; 424.
+        title: 'Quail: a Python toolbox for analyzing and plotting free recall data'
+        text: 'Heusser A. C., **Fitzpatrick P. C.**, Field C. E., Ziman K., Manning J. R. (2017). Quail: a Python
+         toolbox for analyzing and plotting free recall data. *The Journal of Open Source Software*, *2*(18): 424.'
         image: assets/img/research/quail-white.png
         pdf_url: https://www.theoj.org/joss-papers/joss.00424/10.21105.joss.00424.pdf
         code_url: https://github.com/ContextLab/quail
