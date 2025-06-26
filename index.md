@@ -42,9 +42,9 @@ sections:
       - type: bio-timeline.html
         title: Bio
         bio_paragraphs:
-          - text: Growing up, I lived in eight different cities throughout the eastern and midwestern US before starting
-              college at [Dartmouth](https://home.dartmouth.edu){:target="_blank"} in 2015.
-            image: assets/img/bio/map-pins.png
+          - text: I grew up in a small town in central Pennsylvania before coming to
+              [Dartmouth](https://home.dartmouth.edu){:target="_blank"} as an undergrad in 2015.
+            image: assets/img/bio/pa-map.png
           - text: From 2016 to 2019, I worked in the
               [Dartmouth Brain Imaging Center](https://www.dartmouth.edu/dbic){:target="_blank"}, collecting and
               processing fMRI data for a multi-year neuroimaging study.
@@ -56,17 +56,17 @@ sections:
               ensemble.
             image: assets/img/bio/eeg-headset.jpeg
           - text: I joined the [Contextual Dynamics Lab](https://www.context-lab.com){:target="_blank"} in 2017, where
-              I developed novel methods and software for studying episodic memory. I managed the CDL from 2018
+              I worked on developing novel methods and software for studying episodic memory. I managed the CDL from 2018
               to 2021, designing and executing studies, mentoring teams of undergrads, and maintaining the lab's
               software stack.
             image: assets/img/bio/cdl-logo.png
           - text: In 2019, I graduated from [Dartmouth](https://home.dartmouth.edu){:target="_blank"} with a BA
-              in cognitive neuroscience. For my senior honors thesis, I developed a computational framework for modeling how memories
+              in cognitive neuroscience. I wrote my honors thesis on a computational framework for modeling how memories
               deform over time and predicting neural activity from verbal recalls. My thesis won the <i>Nickerson</i>
               and <i>Leaton</i> awards for undergraduate neuroscience research.
             image: assets/img/bio/dartmouth-logo.png
-          - text: Since 2019, I've TA'd and guest-taught undergrad and grad-level courses on neuroscience, statistics,
-              programming, data science, and research methods. I received teaching awards from Dartmouth in 2019 and 2024.
+          - text: Since 2018, I've TA'd and guest-taught undergrad and grad-level courses on neuroscience, statistics,
+              programming, data science, and research methods. I won awards for teaching from Dartmouth in 2019 and 2024.
             image: assets/img/bio/eeg-headset.jpeg
           - text: I started my Ph.D. at [Dartmouth](https://graduate.dartmouth.edu/){:target="_blank"} in 2021. In 2024,
               my master's thesis on modeling conceptual knowledge and learning using text embedding models won a
