@@ -22,7 +22,8 @@ $bio-img-diameter: 6rem;
     shape-outside: circle(50%);
 
     object-fit: cover;
-    clip-path: circle(50%);
+
+    border-radius: 50%;
   }
 }
 
@@ -42,9 +43,27 @@ $bio-img-diameter: 6rem;
   margin-right: calc(#{$bio-img-diameter} / 2);
 }
 
+// Group-specific styling for bio elements
+@each $group, $color in $timeline-group-colors {
+  .bio-img-group-#{$group} {
+    border: 3px solid #{$color};
+  }
+
+  .bio-text-group-#{$group} {
+    padding: 10px;
+    background-color: rgba($color, 0.1);
+    border-radius: 8px;
+  }
+}
+
 #timeline {
   @each $key, $value in $timeline-vars {
     --#{$key}: #{$value};
+  }
+
+  // Add group color CSS variables
+  @each $group, $color in $timeline-group-colors {
+    --group-#{$group}: #{$color};
   }
 
   // TODO: update these min-heights to fit new timeline content (would be better

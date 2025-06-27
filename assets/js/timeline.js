@@ -15,11 +15,18 @@
       this.startYear = parseFloat(eventListItem.dataset.start);
       const endYear = eventListItem.dataset.end;
       this.endYear = endYear === 'present' ? endYear : parseFloat(endYear);
-      this.color = `#${eventListItem.dataset.color}`;
+      this.group = eventListItem.dataset.group;
+      this.color = this.getColorFromGroup();
       this.backgroundColor = hexToRGBA(this.color, timeline.style.infoBackgroundAlpha);
       this.info = eventListItem.innerText.trim();
       // x-coordinate of column where event will be drawn
       this.xCoord = null;
+    }
+
+    getColorFromGroup() {
+      const compStyles = getComputedStyle(this.timeline.timelineElement),
+            groupColor = compStyles.getPropertyValue(`--group-${this.group}`).trim();
+      return groupColor || '#000000'; // fallback color if group not found
     }
 
     computeInfoLayout() {

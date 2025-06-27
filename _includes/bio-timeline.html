@@ -2,11 +2,11 @@
   <div class="col-lg-7">
 
     {% for paragraph in include.pane.bio_paragraphs %}
-      <div class=" bio-paragraph">
-        <img class="{% cycle 'bio-img-right', 'bio-img-left' %}"
+      <div class="bio-paragraph bio-group-{{ paragraph.timeline_group }}">
+        <img class="{% cycle 'bio-img-right', 'bio-img-left' %} bio-img-group-{{ paragraph.timeline_group }}"
              src="{{ paragraph.image | relative_url }}"
              alt="">
-        <div class="bio-text">
+        <div class="bio-text bio-text-group-{{ paragraph.timeline_group }}">
           {{- paragraph.text | markdownify | remove: '<p>' | remove: '</p>' -}}
         </div>
       </div>
@@ -23,7 +23,7 @@
         <li id="{{ event_id }}"
             data-start="{{ event.start }}"
             data-end="{{ event.end }}"
-            data-color="{{ event.color }}">
+            data-group="{{ event.group }}">
           {{ event.title }}
         </li>
       {% endfor %}

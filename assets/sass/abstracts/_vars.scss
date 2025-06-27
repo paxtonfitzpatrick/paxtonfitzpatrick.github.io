@@ -43,6 +43,17 @@ $footer-bg: $bg-secondary;
 $footer-fg: $muted-secondary;
 $footer-link: $fg-secondary;
 
+// timeline group colors
+$timeline-group-colors: (
+  'undergrad': #d60000,
+  'dbic': #8c3bff,
+  'cdl': #018700,
+  'bregman': #00acc6,
+  'teaching': #ff7ed1,
+  'phd-student': #00d,
+  'phd-candidate': #add8e6,
+);
+
 // timeline style
 // Note: for simplicity, expects all values to be in px or unitless, as
 // appropriate (though it would be pretty easy to add add support for em & rem)

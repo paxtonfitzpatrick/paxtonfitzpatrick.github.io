@@ -92,88 +92,71 @@ sections:
             - title: Undergraduate, Dartmouth College
               start: 2015.75
               end: 2019.5
-              color: d60000
               group: undergrad
             - title: Research Assistant, Dartmouth Brain Imaging Center
               start: 2016.75
               end: 2019.5
-              color: 8c3bff
               group: dbic
             - title: Research Assistant, Contextual Dynamics Lab
               start: 2017.25
               end: 2018.5
-              color: 018700
               group: cdl
             - title: Research Assistant, Bregman Media Labs
               start: 2017.25
               end: 2018
-              color: 00acc6
               group: bregman
             - title: Laboratory & Research Manager, Contextual Dynamics Lab
               start: 2018.5
               end: 2021.75
-              color: 97ff00
               group: cdl
             - title: Peer Tutor, Intro Computer Science
               start: 2018.75
               end: 2019.5
-              color: ff7ed1
               group: teaching
             - title: Teaching Assistant, Human Memory
               start: 2019.75
               end: 2020
-              color: 6b004f
               group: teaching
             - title: Teaching Assistant & Guest Lecturer, Intro to Programming
                for Psychological Scientists
               start: 2020
               end: 2020.25
-              color: ffa52f
               group: teaching
             - title: Teaching Assistant, Storytelling with Data
               start: 2020.25
               end: 2020.5
-              color: 573b00
               group: teaching
             - title: Teaching Assistant, Intro to Programming for Psychological Scientists
               start: 2021
               end: 2021.25
-              color: 005659
               group: teaching
             - title: Ph.D. Student, Dartmouth College
               start: 2021.75
               end: 2024.5
-              color: 0000dd
               group: phd-student
             - title: Teaching Assistant, Laboratory in Experimental Psychology
               start: 2022.25
               end: 2022.5
-              color: 00fdcf
               group: teaching
             - title: Teaching Assistant, Experimental Design, Methodology, and Data Analysis Procedures
               start: 2023
               end: 2023.25
-              color: 00a6ff
               group: teaching
             - title: Teaching Assistant, Methods in Neuroscience at Dartmouth (MIND) Summer School
               start: 2023.5
               end: 2023.75
-              color: 00ffb2
               group: teaching
             - title: Teaching Assistant, Laboratory in Psychological Science
               start: 2023.5
               end: 2023.75
-              color: ffb200
               group: teaching
             - title: Ph.D. Candidate, Dartmouth College
               start: 2024.5
               end: present
-              color: add8e6
               group: phd-candidate
             - title: Teaching Assistant, Laboratory in Psychological Science
               start: 2024.75
               end: 2025
-              color: ff0000
               group: teaching
 
       - type: skills.html
