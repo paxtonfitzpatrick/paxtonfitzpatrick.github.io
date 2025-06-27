@@ -45,38 +45,46 @@ sections:
           - text: I grew up in a small town in central Pennsylvania before coming to
               [Dartmouth](https://home.dartmouth.edu){:target="_blank"} as an undergrad in 2015.
             image: assets/img/bio/pa-map.png
+            timeline_group: undergrad
           - text: From 2016 to 2019, I worked in the
               [Dartmouth Brain Imaging Center](https://www.dartmouth.edu/dbic){:target="_blank"}, collecting and
               processing fMRI data for a multi-year neuroimaging study.
             image: assets/img/bio/brain-scan.jpg
+            timeline_group: dbic
           - text: In 2017, I worked with
               [Dr. Michael Casey](https://faculty-directory.dartmouth.edu/michael-casey){:target="_blank"}  in
               [Bregman Media Labs](http://bregman.dartmouth.edu){:target="_blank"} to create
               [*Exnectome*](https://vimeo.com/208333051){:target="_blank"}, the first EEG sonification-based musical
               ensemble.
             image: assets/img/bio/eeg-headset.jpeg
+            timeline_group: bregman
           - text: I joined the [Contextual Dynamics Lab](https://www.context-lab.com){:target="_blank"} in 2017, where
               I worked on developing novel methods and software for studying episodic memory. I managed the CDL from 2018
               to 2021, designing and executing studies, mentoring teams of undergrads, and maintaining the lab's
               software stack.
             image: assets/img/bio/cdl-logo.png
+            timeline_group: cdl
           - text: In 2019, I graduated from [Dartmouth](https://home.dartmouth.edu){:target="_blank"} with a BA
               in cognitive neuroscience. I wrote my honors thesis on a computational framework for modeling how memories
               deform over time and predicting neural activity from verbal recalls. My thesis won the <i>Nickerson</i>
               and <i>Leaton</i> awards for undergraduate neuroscience research.
             image: assets/img/bio/dartmouth-logo.png
+            timeline_group: undergrad
           - text: Since 2019, I've TA'd and guest-taught undergrad and grad-level courses on neuroscience, statistics,
               programming, data science, and research methods. I won awards for teaching from Dartmouth in 2019 and 2024.
             image: assets/img/bio/filene-lecture.jpg
+            timeline_group: teaching
           - text: I started my Ph.D. at [Dartmouth](https://graduate.dartmouth.edu/){:target="_blank"} in 2021. In 2024,
               my master's thesis on modeling conceptual knowledge and learning using text embedding models won a
               <i>Neukom</i> prize for graduate research in computational science.
             image: assets/img/bio/guarini-logo.png
+            timeline_group: phd-student
           - text: I'm now a PhD candidate in cognitive neuroscience, working with
               [Dr. Jeremy Manning](https://pbs.dartmouth.edu/people/jeremy-rothman-manning){:target="_blank"}. My
               current work is focused on building automated, scalable systems for personalizing and improving how people
               learn.
             image: assets/img/bio/moore-pic.jpeg
+            timeline_group: phd-candidate
         timeline:
           start: 2015
           end: 2026
@@ -85,71 +93,88 @@ sections:
               start: 2015.75
               end: 2019.5
               color: d60000
+              group: undergrad
             - title: Research Assistant, Dartmouth Brain Imaging Center
               start: 2016.75
               end: 2019.5
               color: 8c3bff
+              group: dbic
             - title: Research Assistant, Contextual Dynamics Lab
               start: 2017.25
               end: 2018.5
               color: 018700
+              group: cdl
             - title: Research Assistant, Bregman Media Labs
               start: 2017.25
               end: 2018
               color: 00acc6
+              group: bregman
             - title: Laboratory & Research Manager, Contextual Dynamics Lab
               start: 2018.5
               end: 2021.75
               color: 97ff00
+              group: cdl
             - title: Peer Tutor, Intro Computer Science
               start: 2018.75
               end: 2019.5
               color: ff7ed1
+              group: teaching
             - title: Teaching Assistant, Human Memory
               start: 2019.75
               end: 2020
               color: 6b004f
+              group: teaching
             - title: Teaching Assistant & Guest Lecturer, Intro to Programming
                for Psychological Scientists
               start: 2020
               end: 2020.25
               color: ffa52f
+              group: teaching
             - title: Teaching Assistant, Storytelling with Data
               start: 2020.25
               end: 2020.5
               color: 573b00
+              group: teaching
             - title: Teaching Assistant, Intro to Programming for Psychological Scientists
               start: 2021
               end: 2021.25
               color: 005659
+              group: teaching
             - title: Ph.D. Student, Dartmouth College
               start: 2021.75
-              end: present
+              end: 2024.5
               color: 0000dd
+              group: phd-student
             - title: Teaching Assistant, Laboratory in Experimental Psychology
               start: 2022.25
               end: 2022.5
               color: 00fdcf
+              group: teaching
             - title: Teaching Assistant, Experimental Design, Methodology, and Data Analysis Procedures
               start: 2023
               end: 2023.25
-              type: experience
               color: 00a6ff
+              group: teaching
             - title: Teaching Assistant, Methods in Neuroscience at Dartmouth (MIND) Summer School
               start: 2023.5
               end: 2023.75
-              type: experience
               color: 00ffb2
+              group: teaching
             - title: Teaching Assistant, Laboratory in Psychological Science
               start: 2023.5
               end: 2023.75
-              type: experience
               color: ffb200
+              group: teaching
+            - title: Ph.D. Candidate, Dartmouth College
+              start: 2024.5
+              end: present
+              color: add8e6
+              group: phd-candidate
             - title: Teaching Assistant, Laboratory in Psychological Science
               start: 2024.75
               end: 2025
-              type: experience
               color: ff0000
+              group: teaching
 
       - type: skills.html
         title: Skills
