@@ -65,18 +65,18 @@ sections:
               deform over time and predicting neural activity from verbal recalls. My thesis won the <i>Nickerson</i>
               and <i>Leaton</i> awards for undergraduate neuroscience research.
             image: assets/img/bio/dartmouth-logo.png
-          - text: Since 2018, I've TA'd and guest-taught undergrad and grad-level courses on neuroscience, statistics,
+          - text: Since 2019, I've TA'd and guest-taught undergrad and grad-level courses on neuroscience, statistics,
               programming, data science, and research methods. I won awards for teaching from Dartmouth in 2019 and 2024.
-            image: assets/img/bio/eeg-headset.jpeg
+            image: assets/img/bio/filene-lecture.jpg
           - text: I started my Ph.D. at [Dartmouth](https://graduate.dartmouth.edu/){:target="_blank"} in 2021. In 2024,
               my master's thesis on modeling conceptual knowledge and learning using text embedding models won a
               <i>Neukom</i> prize for graduate research in computational science.
-            image: assets/img/bio/eeg-headset.jpeg
+            image: assets/img/bio/guarini-logo.png
           - text: I'm now a PhD candidate in cognitive neuroscience, working with
               [Dr. Jeremy Manning](https://pbs.dartmouth.edu/people/jeremy-rothman-manning){:target="_blank"}. My
               current work is focused on building automated, scalable systems for personalizing and improving how people
               learn.
-            image: assets/img/bio/eeg-headset.jpeg
+            image: assets/img/bio/moore-pic.jpeg
         timeline:
           start: 2015
           end: 2026
