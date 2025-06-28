@@ -100,12 +100,12 @@ export default {
         // regular property declarations
         'declarations',
         {
-          // feature queries
+          // @supports queries
           type: 'at-rule',
           name: 'supports',
         },
         {
-          // media queries
+          // @media queries
           type: 'at-rule',
           name: 'media',
         },
@@ -132,7 +132,7 @@ export default {
         {
           // BEM modifier classes
           type: 'rule',
-          selector: /^&--[\w-]+$/,
+          selector: /^&[-_]+[\w-]+$/,
           name: 'BEM modifier class',
         },
         {
@@ -144,7 +144,7 @@ export default {
         {
           // attribute selectors
           type: 'rule',
-          selector: /^&\[.+]$/,
+          selector: /^&\[.+\]$/,
           name: 'attribute selector',
         },
         {
@@ -335,6 +335,17 @@ export default {
             'max-height',
             'aspect-ratio',
             'object-fit',
+            'margin',
+            'margin-block',
+            'margin-block-start',
+            'margin-block-end',
+            'margin-inline',
+            'margin-inline-start',
+            'margin-inline-end',
+            'margin-top',
+            'margin-right',
+            'margin-bottom',
+            'margin-left',
             'padding',
             'padding-block',
             'padding-block-start',
@@ -346,17 +357,6 @@ export default {
             'padding-right',
             'padding-bottom',
             'padding-left',
-            'margin',
-            'margin-block',
-            'margin-block-start',
-            'margin-block-end',
-            'margin-inline',
-            'margin-inline-start',
-            'margin-inline-end',
-            'margin-top',
-            'margin-bottom',
-            'margin-left',
-            'margin-right',
             'overflow',
             'overflow-x',
             'overflow-y',

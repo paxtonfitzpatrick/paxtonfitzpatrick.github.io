@@ -11,14 +11,14 @@
   }
 
   blockquote {
-    padding: 0 0 0 1em;
     margin: 0 0 0 1em;
+    padding: 0 0 0 1em;
     border-left-style: solid;
     border-left-width: 0.25em;
 
     @media (width >= 768px) {
-      padding-right: 1em;
       margin-left: 2em;
+      padding-right: 1em;
     }
   }
 }
@@ -54,8 +54,8 @@
   font-size: 1em;
 
   code {
-    padding: 0.1rem 0.3rem 0.2rem;
     margin: 0;
+    padding: 0.1rem 0.3rem 0.2rem;
 
     font-size: 85%;
     color: #000;
