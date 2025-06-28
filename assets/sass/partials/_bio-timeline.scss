@@ -13,46 +13,50 @@ $bio-img-diameter: 6rem;
   }
 
   + .bio-paragraph {
-    margin-top: 1.5rem;
-  }
-
-  img {
-    width: $bio-img-diameter;
-    height: $bio-img-diameter;
-    shape-outside: circle(50%);
-
-    object-fit: cover;
-
-    border-radius: 50%;
+    margin-top: 1rem;
   }
 }
 
-.bio-img-right {
-  float: right;
-  margin-left: 0.5rem;
-}
+.bio-img {
+  width: $bio-img-diameter;
+  height: $bio-img-diameter;
+  shape-outside: circle(50%);
 
-.bio-img-left {
-  float: left;
-  margin-right: 0.5rem;
+  object-fit: cover;
+
+  border-style: solid;
+  border-width: 3px;
+  border-radius: 50%;
+
+  @each $group, $color in $timeline-group-colors {
+    &-group-#{$group} {
+      border-color: #{$color};
+    }
+  }
+
+  &-right {
+    float: right;
+    margin-left: 0.5rem;
+  }
+
+  &-left {
+    float: left;
+    margin-right: 0.5rem;
+  }
 }
 
 .bio-text {
   margin-top: calc(#{$bio-img-diameter} / 3);
-  margin-left: calc(#{$bio-img-diameter} / 2);
-  margin-right: calc(#{$bio-img-diameter} / 2);
-}
+  margin-right: calc(#{$bio-img-diameter} / 3);
+  margin-left: calc(#{$bio-img-diameter} / 3);
+  padding: 5px 10px;
 
-// Group-specific styling for bio elements
-@each $group, $color in $timeline-group-colors {
-  .bio-img-group-#{$group} {
-    border: 3px solid #{$color};
-  }
+  border-radius: 8px;
 
-  .bio-text-group-#{$group} {
-    padding: 10px;
-    background-color: rgba($color, 0.1);
-    border-radius: 8px;
+  @each $group, $color in $timeline-group-colors {
+    &-group-#{$group} {
+      background-color: rgba($color, 0.1);
+    }
   }
 }
 
