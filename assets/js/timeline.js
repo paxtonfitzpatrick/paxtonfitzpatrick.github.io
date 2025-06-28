@@ -17,7 +17,7 @@
       this.endYear = endYear === 'present' ? endYear : parseFloat(endYear);
       this.group = eventListItem.dataset.group;
       this.color = this.getColorFromGroup();
-      this.backgroundColor = hexToRGBA(this.color, timeline.style.infoBackgroundAlpha);
+      this.backgroundColor = colorToRGBA(this.color, timeline.style.infoBackgroundAlpha);
       this.info = eventListItem.innerText.trim();
       // x-coordinate of column where event will be drawn
       this.xCoord = null;
@@ -150,7 +150,7 @@
       }
 
       // line properties
-      ctx.strokeStyle = hexToRGBA(this.color, style.infoLineAlpha);
+      ctx.strokeStyle = colorToRGBA(this.color, style.infoLineAlpha);
       ctx.lineWidth = style.infoLineWidth;
 
       // draw reference line first
@@ -459,10 +459,10 @@
         infoBackgroundPadding: parseInt(compStyles.getPropertyValue('--info-background-padding'), 10),
         infoBackgroundRadius: parseInt(compStyles.getPropertyValue('--info-background-radius'), 10),
         infoBackgroundAlpha: parseFloat(compStyles.getPropertyValue('--info-background-alpha')),
-        backgroundColor: hexToRGBA(backgroundColor, backgroundAlpha),
-        yearColor: hexToRGBA(yearColor, yearAlpha),
-        gridlineColor: hexToRGBA(gridlineColor, gridlineAlpha),
-        infoFontColor: hexToRGBA(infoFontColor, infoFontAlpha),
+        backgroundColor: colorToRGBA(backgroundColor, backgroundAlpha),
+        yearColor: colorToRGBA(yearColor, yearAlpha),
+        gridlineColor: colorToRGBA(gridlineColor, gridlineAlpha),
+        infoFontColor: colorToRGBA(infoFontColor, infoFontAlpha),
       };
     }
 
@@ -546,12 +546,70 @@
   =           HELPER FUNCTIONS           =
   ========================================
   */
-  function hexToRGBA(hex, opacity = 1) {
-    const tempHex = hex.replace('#', ''),
-          r = parseInt(tempHex.substring(0, 2), 16),
-          g = parseInt(tempHex.substring(2, 4), 16),
-          b = parseInt(tempHex.substring(4, 6), 16);
-    return `rgba(${r},${g},${b},${opacity})`;
+  const colorCache = new Map();
+
+  function colorToRGBA(inputColor, opacity = 1) {
+    const cacheKey = `${inputColor}-${opacity}`;
+    if (colorCache.has(cacheKey)) {
+      return colorCache.get(cacheKey);
+    }
+    const trimmedColor = inputColor.trim();
+
+    // handle 3- or 6-digit hex colors
+    // eslint-disable-next-line one-var
+    const hexMatch = trimmedColor.match(/^#([0-9a-f]+)$/i);
+    if (hexMatch) {
+      let hex = hexMatch[1];
+      if (hex.length === 3) {
+        hex = hex.split('').map((char) => char + char).join('');
+      } else if (hex.length !== 6) {
+        throw new Error(`colorToRGBA: Failed to parse color: ${inputColor}`);
+      }
+      const r = parseInt(hex.slice(0, 2), 16),
+            g = parseInt(hex.slice(2, 4), 16),
+            b = parseInt(hex.slice(4, 6), 16),
+            outputRgba = `rgba(${r},${g},${b},${opacity})`;
+      colorCache.set(cacheKey, outputRgba);
+      return outputRgba;
+    }
+
+    // handle RGB colors
+    const rgbMatch = trimmedColor.match(/^rgb\(\s*([^)]+)\s*\)$/i);
+    if (rgbMatch) {
+      const outputRgba = `rgba(${rgbMatch[1]},${opacity})`;
+      colorCache.set(cacheKey, outputRgba);
+      return outputRgba;
+    }
+
+    // handle RGBA colors
+    const rgbaMatch = trimmedColor.match(/^rgba\(((?:\s*[^,]+,){3})(?:[^,)]+)\)$/i);
+    if (rgbaMatch) {
+      const outputRgba = `rgba(${rgbaMatch[1]},${opacity})`;
+      colorCache.set(cacheKey, outputRgba);
+      return outputRgba;
+    }
+
+    // fall back to using the browser directly to parse colors (named, hls, etc.)
+    try {
+      const temp = document.createElement('div');
+      temp.style.color = trimmedColor;
+      document.body.appendChild(temp);
+      const rgbOrRgba = getComputedStyle(temp).color;
+      document.body.removeChild(temp);
+
+      const rgbOrRgbaMatch = rgbOrRgba.match(
+        /rgba?\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)(?:\s*,\s*[^)]+)?\s*\)$/i,
+      );
+      if (!rgbOrRgbaMatch) {
+        throw new Error();
+      }
+      const [, r, g, b] = rgbOrRgbaMatch,
+            outputRgba = `rgba(${r},${g},${b},${opacity})`;
+      colorCache.set(cacheKey, outputRgba);
+      return outputRgba;
+    } catch {
+      throw new Error(`colorToRGBA: Failed to parse color: ${inputColor}`);
+    }
   }
 
   function roundedRect(ctx, x, y, width, height, radius) {
