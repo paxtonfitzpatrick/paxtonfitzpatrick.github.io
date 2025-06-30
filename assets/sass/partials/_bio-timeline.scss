@@ -60,6 +60,20 @@ $bio-img-diameter: 6rem;
   }
 }
 
+// Dimming effects for hover interactions
+.bio-paragraph,
+.bio-img,
+.bio-text {
+  transition: opacity 0.3s ease;
+}
+
+.bio-paragraph.dimmed,
+.bio-img.dimmed,
+.bio-text.dimmed,
+.timeline-dimmed {
+  opacity: 0.3;
+}
+
 #timeline {
   @each $key, $value in $timeline-vars {
     --#{$key}: #{$value};

@@ -213,6 +213,9 @@
       // start and end years of the timeline
       this.startYear = parseInt(timelineElement.dataset.start, 10);
       this.endYear = parseInt(timelineElement.dataset.end, 10);
+      // hover state management
+      this.currentHoveredGroup = null;
+      this.isHovering = false;
       // sets:
       //  - this.canvas:
       //    {element: HTMLCanvasElement, context: CanvasRenderingContext2D}
@@ -248,6 +251,8 @@
       this.computeEventLayout();
       this.drawBase();
       this.drawEvents();
+      // set up hover interactions
+      this.setupHoverInteractions();
     }
 
     adjustEventInfo(eventsInfoLayouts) {
@@ -420,7 +425,11 @@
       const eventsInfoLayouts = [];
       this.canvas.context.font = `${this.style.infoFontSize}px sans-serif`;
       this.events.forEach((event) => {
-        eventsInfoLayouts.push(event.computeInfoLayout());
+        const layout = event.computeInfoLayout();
+        eventsInfoLayouts.push(layout);
+        // Store layout on event for hit detection
+        // eslint-disable-next-line no-param-reassign
+        event.infoLayout = layout;
       });
       this.adjustEventInfo(eventsInfoLayouts);
       this.events.forEach((event, ix) => {
@@ -538,6 +547,153 @@
       // add more operations before the first paint in order to be a tiny bit
       // more efficient in the comparatively uncommon case where someone resizes
       // the screen while the timeline is in view.
+    }
+
+    setupHoverInteractions() {
+      // Set up bio paragraph hover interactions
+      const bioParagraphs = document.querySelectorAll('.bio-paragraph');
+      bioParagraphs.forEach((paragraph) => {
+        const groupMatch = paragraph.className.match(/bio-group-(\w+)/);
+        if (groupMatch) {
+          const group = groupMatch[1];
+          paragraph.addEventListener('mouseenter', () => this.dimGroup(group));
+          paragraph.addEventListener('mouseleave', () => this.clearDimming());
+        }
+      });
+
+      // Set up timeline canvas hover interactions
+      this.canvas.element.addEventListener('mousemove', (e) => this.handleTimelineHover(e));
+      this.canvas.element.addEventListener('mouseleave', () => this.clearDimming());
+    }
+
+    handleTimelineHover(event) {
+      const rect = this.canvas.element.getBoundingClientRect(),
+            x = event.clientX - rect.left,
+            y = event.clientY - rect.top,
+            hoveredEvent = this.getEventAtPosition(x, y);
+
+      if (hoveredEvent) {
+        if (!this.isHovering || this.currentHoveredGroup !== hoveredEvent.group) {
+          this.dimGroup(hoveredEvent.group);
+        }
+      } else if (this.isHovering) {
+        this.clearDimming();
+      }
+    }
+
+    getEventAtPosition(x, y) {
+      // Check each event to see if the mouse is over it
+      return this.events.find((event) => this.isPositionOverEvent(x, y, event)) || null;
+    }
+
+    isPositionOverEvent(x, y, event) {
+      const { yearsYCoords, style } = this,
+            hitMargin = 4, // pixels of margin around hoverable areas
+            // Check if over the event line
+            lineStartY = yearsYCoords[event.startYear],
+            lineEndY = event.endYear === 'present' ? this.currentHeight : yearsYCoords[event.endYear];
+
+      if (Math.abs(x - event.xCoord) <= style.eventWidth / 2 + hitMargin
+          && y >= lineStartY - hitMargin
+          && y <= lineEndY + hitMargin) {
+        return true;
+      }
+
+      // Check if over the info text area (this is more complex)
+      if (event.infoLayout) {
+        const { infoLayout } = event;
+        let infoLeft = infoLayout.lineXDest;
+
+        if (event.xCoord < this.centerXCoord) {
+          // Info is on the left side
+          infoLeft -= infoLayout.width;
+        }
+
+        const infoTop = infoLayout.bottomY - infoLayout.height,
+              infoRight = infoLeft + infoLayout.width,
+              infoBottom = infoLayout.bottomY;
+
+        if (x >= infoLeft - hitMargin && x <= infoRight + hitMargin
+            && y >= infoTop - hitMargin && y <= infoBottom + hitMargin) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    dimGroup(activeGroup) {
+      this.currentHoveredGroup = activeGroup;
+      this.isHovering = true;
+
+      // Dim bio elements not in the active group
+      const bioElements = document.querySelectorAll('.bio-paragraph, .bio-img, .bio-text');
+      bioElements.forEach((element) => {
+        const hasActiveGroup = element.classList.contains(`bio-group-${activeGroup}`)
+                            || element.classList.contains(`bio-img-group-${activeGroup}`)
+                            || element.classList.contains(`bio-text-group-${activeGroup}`);
+
+        if (hasActiveGroup) {
+          element.classList.remove('dimmed');
+        } else {
+          element.classList.add('dimmed');
+        }
+      });
+
+      // Redraw timeline with dimming
+      this.redrawWithDimming();
+    }
+
+    clearDimming() {
+      this.currentHoveredGroup = null;
+      this.isHovering = false;
+
+      // Remove dimming from bio elements
+      const bioElements = document.querySelectorAll('.bio-paragraph, .bio-img, .bio-text');
+      bioElements.forEach((element) => {
+        element.classList.remove('dimmed');
+      });
+
+      // Redraw timeline without dimming
+      this.redrawWithDimming();
+    }
+
+    redrawWithDimming() {
+      // Clear and redraw the timeline
+      this.canvas.context.clearRect(0, 0, this.currentWidth, this.currentHeight);
+      this.drawBase();
+      this.drawEventsWithDimming();
+    }
+
+    drawEventsWithDimming() {
+      // Similar to drawEvents but with dimming logic
+      const eventsInfoLayouts = [];
+      this.canvas.context.font = `${this.style.infoFontSize}px sans-serif`;
+
+      this.events.forEach((event) => {
+        const layout = event.computeInfoLayout();
+        eventsInfoLayouts.push(layout);
+        // Store layout on event for hit detection
+        // eslint-disable-next-line no-param-reassign
+        event.infoLayout = layout;
+      });
+
+      this.adjustEventInfo(eventsInfoLayouts);
+
+      this.events.forEach((event, ix) => {
+        const shouldDim = this.isHovering && event.group !== this.currentHoveredGroup;
+
+        if (shouldDim) {
+          this.canvas.context.globalAlpha = 0.3;
+        }
+
+        event.drawInfo(eventsInfoLayouts[ix]);
+        event.drawEventLine();
+
+        if (shouldDim) {
+          this.canvas.context.globalAlpha = 1.0;
+        }
+      });
     }
   }
 
