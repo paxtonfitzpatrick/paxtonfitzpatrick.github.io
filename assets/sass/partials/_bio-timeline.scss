@@ -63,7 +63,7 @@ $bio-img-diameter: 6rem;
 // Dimming effects for hover interactions
 .bio-img,
 .bio-text {
-  transition: opacity 0.3s ease;
+  transition: opacity map-get($timeline-vars, 'transition-duration');
 }
 
 .bio-img.dimmed,

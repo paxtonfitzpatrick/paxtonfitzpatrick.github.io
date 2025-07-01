@@ -210,6 +210,11 @@
       // hover state management
       this.currentHoveredGroup = null;
       this.isHovering = false;
+      // transition state management
+      this.transitionStartTime = null;
+      this.isTransitioning = false;
+      this.eventOpacities = new Map(); // event -> current opacity
+      this.targetOpacities = new Map(); // event -> target opacity
       // sets:
       //  - this.canvas:
       //    {element: HTMLCanvasElement, context: CanvasRenderingContext2D}
@@ -245,8 +250,18 @@
       this.computeEventLayout();
       this.drawBase();
       this.drawEvents();
+      // initialize opacity system
+      this.initializeOpacitySystem();
       // set up hover interactions
       this.setupHoverInteractions();
+    }
+
+    initializeOpacitySystem() {
+      // Initialize all events with full opacity
+      this.events.forEach((event) => {
+        this.eventOpacities.set(event, 1.0);
+        this.targetOpacities.set(event, 1.0);
+      });
     }
 
     adjustEventInfo(eventsInfoLayouts) {
@@ -468,6 +483,7 @@
         gridlineColor: colorToRGBA(gridlineColor, gridlineAlpha),
         infoFontColor: colorToRGBA(infoFontColor, infoFontAlpha),
         eventHoverOpacity: parseFloat(compStyles.getPropertyValue('--event-hover-opacity')),
+        transitionDuration: parseFloat(compStyles.getPropertyValue('--transition-duration')),
       };
     }
 
@@ -516,6 +532,12 @@
         this.computeEventLayout();
         this.drawBase();
         this.drawEvents();
+        this.initializeOpacitySystem();
+
+        // If we were in the middle of hovering, restart the transition
+        if (this.isHovering && this.currentHoveredGroup) {
+          this.dimGroup(this.currentHoveredGroup);
+        }
       }
     }
 
@@ -647,8 +669,13 @@
         }
       });
 
-      // Redraw timeline with dimming
-      this.redrawWithDimming();
+      // Set target opacities for timeline events and start transition
+      this.events.forEach((event) => {
+        const targetOpacity = event.group === activeGroup ? 1.0 : this.style.eventHoverOpacity;
+        this.targetOpacities.set(event, targetOpacity);
+      });
+
+      this.startTransition();
     }
 
     clearDimming() {
@@ -661,19 +688,63 @@
         element.classList.remove('dimmed');
       });
 
-      // Redraw timeline without dimming
-      this.redrawWithDimming();
+      // Set target opacities for timeline events back to normal and start transition
+      this.events.forEach((event) => {
+        this.targetOpacities.set(event, 1.0);
+      });
+
+      this.startTransition();
     }
 
-    redrawWithDimming() {
-      // Clear and redraw the timeline
+    startTransition() {
+      // Store initial opacities at the start of transition
+      if (!this.initialOpacities) {
+        this.initialOpacities = new Map();
+      }
+
+      this.events.forEach((event) => {
+        const currentOpacity = this.eventOpacities.get(event) || 1.0;
+        this.initialOpacities.set(event, currentOpacity);
+      });
+
+      this.transitionStartTime = performance.now();
+      this.isTransitioning = true;
+      this.animateTransition();
+    }
+
+    animateTransition() {
+      if (!this.isTransitioning) return;
+
+      const elapsed = performance.now() - this.transitionStartTime,
+            progress = Math.min(elapsed / this.style.transitionDuration, 1.0);
+
+      // Linear interpolation between initial and target opacities
+      this.events.forEach((event) => {
+        const initialOpacity = this.initialOpacities.get(event) || 1.0,
+              targetOpacity = this.targetOpacities.get(event) || 1.0,
+              currentOpacity = initialOpacity + (targetOpacity - initialOpacity) * progress;
+
+        this.eventOpacities.set(event, currentOpacity);
+      });
+
+      this.redrawWithTransitions();
+
+      if (progress < 1.0) {
+        requestAnimationFrame(() => this.animateTransition());
+      } else {
+        this.isTransitioning = false;
+      }
+    }
+
+    redrawWithTransitions() {
+      // Clear and redraw the timeline with current opacity values
       this.canvas.context.clearRect(0, 0, this.currentWidth, this.currentHeight);
       this.drawBase();
-      this.drawEventsWithDimming();
+      this.drawEventsWithTransitions();
     }
 
-    drawEventsWithDimming() {
-      // Similar to drawEvents but with dimming logic
+    drawEventsWithTransitions() {
+      // Similar to drawEvents but with smooth opacity transitions
       const eventsInfoLayouts = [];
       this.canvas.context.font = `${this.style.infoFontSize}px sans-serif`;
 
@@ -688,16 +759,16 @@
       this.adjustEventInfo(eventsInfoLayouts);
 
       this.events.forEach((event, ix) => {
-        const shouldDim = this.isHovering && event.group !== this.currentHoveredGroup;
+        const currentOpacity = this.eventOpacities.get(event) || 1.0;
 
-        if (shouldDim) {
-          this.canvas.context.globalAlpha = this.style.eventHoverOpacity;
+        if (currentOpacity < 1.0) {
+          this.canvas.context.globalAlpha = currentOpacity;
         }
 
         event.drawInfo(eventsInfoLayouts[ix]);
         event.drawEventLine();
 
-        if (shouldDim) {
+        if (currentOpacity < 1.0) {
           this.canvas.context.globalAlpha = 1.0;
         }
       });

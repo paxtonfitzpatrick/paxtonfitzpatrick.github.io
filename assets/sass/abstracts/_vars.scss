@@ -77,6 +77,7 @@ $timeline-vars: (
   'info-background-radius': 8px,  // equivalent to border-radius for rounded corners
   'event-hover-margin': 4px,  // margin around hoverable areas for easier targeting
   'event-hover-opacity': 0.3, // opacity of non-hovered events
+  'transition-duration': 300ms, // duration for hover transitions (CSS and JS)
 );
 
 // timeline group colors
