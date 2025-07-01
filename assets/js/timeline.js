@@ -210,6 +210,7 @@
       // hover state management
       this.currentHoveredGroup = null;
       this.isHovering = false;
+      this.hoverInteractionsEnabled = false;
       // transition state management
       this.transitionStartTime = null;
       this.isTransitioning = false;
@@ -534,10 +535,8 @@
         this.drawEvents();
         this.initializeOpacitySystem();
 
-        // If we were in the middle of hovering, restart the transition
-        if (this.isHovering && this.currentHoveredGroup) {
-          this.dimGroup(this.currentHoveredGroup);
-        }
+        // Re-setup hover interactions based on current conditions
+        this.setupHoverInteractions();
       }
     }
 
@@ -567,18 +566,72 @@
       // the screen while the timeline is in view.
     }
 
+    // eslint-disable-next-line class-methods-use-this
+    shouldEnableHoverInteractions() {
+      // Check if hover interactions should be enabled:
+      // 1. Screen width >= 992px (breakpoint below which bio & timeline aren't in viewport at the same time)
+      // 2. Device supports hover (non-touchscreen)
+      return window.innerWidth >= 992 && window.matchMedia('(hover: hover)').matches;
+    }
+
+    removeHoverInteractions() {
+      // Remove bio element event listeners
+      if (this.hoverEventListeners) {
+        this.hoverEventListeners.forEach((handlers, element) => {
+          element.removeEventListener('mouseenter', handlers.mouseenter);
+          element.removeEventListener('mouseleave', handlers.mouseleave);
+        });
+        this.hoverEventListeners.clear();
+      }
+
+      // Remove canvas event listeners
+      if (this.canvasMousemoveHandler) {
+        this.canvas.element.removeEventListener('mousemove', this.canvasMousemoveHandler);
+        this.canvasMousemoveHandler = null;
+      }
+      if (this.canvasMouseleaveHandler) {
+        this.canvas.element.removeEventListener('mouseleave', this.canvasMouseleaveHandler);
+        this.canvasMouseleaveHandler = null;
+      }
+
+      this.hoverInteractionsEnabled = false;
+
+      // Clear any active dimming when disabling hover interactions
+      this.clearDimming();
+    }
+
     setupHoverInteractions() {
+      // Clear any existing hover interactions first
+      this.removeHoverInteractions();
+
+      // Only set up hover interactions if conditions are met
+      if (!this.shouldEnableHoverInteractions()) {
+        return;
+      }
+
       // Set up bio text and image hover interactions
       const bioTexts = document.querySelectorAll('.bio-text'),
             bioImages = document.querySelectorAll('.bio-img');
+
+      // Store event listeners for later removal
+      this.hoverEventListeners = new Map();
 
       // Add hover listeners to bio text elements
       bioTexts.forEach((textElement) => {
         const groupMatch = textElement.className.match(/bio-text-group-([\w-]+)/);
         if (groupMatch) {
-          const group = groupMatch[1];
-          textElement.addEventListener('mouseenter', () => this.dimGroup(group));
-          textElement.addEventListener('mouseleave', () => this.clearDimming());
+          const group = groupMatch[1],
+                mouseenterHandler = () => this.dimGroup(group),
+                mouseleaveHandler = () => this.clearDimming();
+
+          textElement.addEventListener('mouseenter', mouseenterHandler);
+          textElement.addEventListener('mouseleave', mouseleaveHandler);
+
+          // Store handlers for later removal
+          this.hoverEventListeners.set(textElement, {
+            mouseenter: mouseenterHandler,
+            mouseleave: mouseleaveHandler,
+          });
         }
       });
 
@@ -586,15 +639,28 @@
       bioImages.forEach((imageElement) => {
         const groupMatch = imageElement.className.match(/bio-img-group-([\w-]+)/);
         if (groupMatch) {
-          const group = groupMatch[1];
-          imageElement.addEventListener('mouseenter', () => this.dimGroup(group));
-          imageElement.addEventListener('mouseleave', () => this.clearDimming());
+          const group = groupMatch[1],
+                mouseenterHandler = () => this.dimGroup(group),
+                mouseleaveHandler = () => this.clearDimming();
+
+          imageElement.addEventListener('mouseenter', mouseenterHandler);
+          imageElement.addEventListener('mouseleave', mouseleaveHandler);
+
+          // Store handlers for later removal
+          this.hoverEventListeners.set(imageElement, {
+            mouseenter: mouseenterHandler,
+            mouseleave: mouseleaveHandler,
+          });
         }
       });
 
       // Set up timeline canvas hover interactions
-      this.canvas.element.addEventListener('mousemove', (e) => this.handleTimelineHover(e));
-      this.canvas.element.addEventListener('mouseleave', () => this.clearDimming());
+      this.canvasMousemoveHandler = (e) => this.handleTimelineHover(e);
+      this.canvasMouseleaveHandler = () => this.clearDimming();
+
+      this.canvas.element.addEventListener('mousemove', this.canvasMousemoveHandler);
+      this.canvas.element.addEventListener('mouseleave', this.canvasMouseleaveHandler);
+      this.hoverInteractionsEnabled = true;
     }
 
     handleTimelineHover(event) {
@@ -653,6 +719,11 @@
     }
 
     dimGroup(activeGroup) {
+      // Only proceed if hover interactions are enabled
+      if (!this.hoverInteractionsEnabled) {
+        return;
+      }
+
       this.currentHoveredGroup = activeGroup;
       this.isHovering = true;
 
@@ -679,6 +750,7 @@
     }
 
     clearDimming() {
+      // Always clear dimming state, even if hover interactions are disabled
       this.currentHoveredGroup = null;
       this.isHovering = false;
 

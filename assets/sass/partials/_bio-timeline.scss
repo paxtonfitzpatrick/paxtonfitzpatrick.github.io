@@ -61,14 +61,16 @@ $bio-img-diameter: 6rem;
 }
 
 // Dimming effects for hover interactions
-.bio-img,
-.bio-text {
-  transition: opacity map-get($timeline-vars, 'transition-duration');
-}
+// Only enable on screens >= 992px and devices that support hover (non-touchscreen)
+@media (width >= 992px) and (hover: hover) {
+  .bio-img,
+  .bio-text {
+    transition: opacity map-get($timeline-vars, 'transition-duration');
 
-.bio-img.dimmed,
-.bio-text.dimmed {
-  opacity: map-get($timeline-vars, 'event-hover-opacity');
+    &.dimmed {
+      opacity: map-get($timeline-vars, 'event-hover-opacity');
+    }
+  }
 }
 
 #timeline {
