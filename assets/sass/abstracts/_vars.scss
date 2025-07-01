@@ -43,16 +43,10 @@ $footer-bg: $bg-secondary;
 $footer-fg: $muted-secondary;
 $footer-link: $fg-secondary;
 
-// timeline group colors
-$timeline-group-colors: (
-  'undergrad': #d60000,
-  'dbic': #8c3bff,
-  'cdl': #018700,
-  'bregman': #00acc6,
-  'teaching': #ff7ed1,
-  'phd-student': #00d,
-  'phd-candidate': #add8e6,
-);
+// scroll shadow component style
+$scroll-shadow-height: 10px;
+$scroll-shadow-max-alpha: 25%;
+$scroll-shadow-fade-in-duration: 0.25s;
 
 // timeline style
 // Note: for simplicity, expects all values to be in px or unitless, as
@@ -81,9 +75,17 @@ $timeline-vars: (
   'info-background-padding': 5px,  // padding between text and background edge
   'info-background-alpha': 0.1,
   'info-background-radius': 8px,  // equivalent to border-radius for rounded corners
+  'event-hover-margin': 4px,  // margin around hoverable areas for easier targeting
+  'event-hover-opacity': 0.3, // opacity of non-hovered events
 );
 
-// scroll shadow component style
-$scroll-shadow-height: 10px;
-$scroll-shadow-max-alpha: 25%;
-$scroll-shadow-fade-in-duration: 0.25s;
+// timeline group colors
+$timeline-group-colors: (
+  'undergrad': #d60000,
+  'dbic': #8c3bff,
+  'cdl': #018700,
+  'bregman': #00acc6,
+  'teaching': #ff7ed1,
+  'phd-student': #00d,
+  'phd-candidate': #add8e6
+);

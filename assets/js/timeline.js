@@ -16,17 +16,11 @@
       const endYear = eventListItem.dataset.end;
       this.endYear = endYear === 'present' ? endYear : parseFloat(endYear);
       this.group = eventListItem.dataset.group;
-      this.color = this.getColorFromGroup();
+      this.color = getComputedStyle(this.timeline.timelineElement).getPropertyValue(`--group-${this.group}`).trim();
       this.backgroundColor = colorToRGBA(this.color, timeline.style.infoBackgroundAlpha);
       this.info = eventListItem.innerText.trim();
       // x-coordinate of column where event will be drawn
       this.xCoord = null;
-    }
-
-    getColorFromGroup() {
-      const compStyles = getComputedStyle(this.timeline.timelineElement),
-            groupColor = compStyles.getPropertyValue(`--group-${this.group}`).trim();
-      return groupColor || '#000000'; // fallback color if group not found
     }
 
     computeInfoLayout() {
@@ -458,6 +452,7 @@
         gridlineWidth: parseInt(compStyles.getPropertyValue('--gridline-width'), 10),
         eventWidth: parseInt(compStyles.getPropertyValue('--event-width'), 10),
         eventOffset: parseInt(compStyles.getPropertyValue('--event-offset'), 10),
+        eventHoverMargin: parseInt(compStyles.getPropertyValue('--event-hover-margin'), 10),
         infoLineWidth: parseInt(compStyles.getPropertyValue('--info-line-width'), 10),
         infoLineAlpha: parseFloat(compStyles.getPropertyValue('--info-line-alpha')),
         infoXOffset: parseInt(compStyles.getPropertyValue('--info-x-offset'), 10),
@@ -472,6 +467,7 @@
         yearColor: colorToRGBA(yearColor, yearAlpha),
         gridlineColor: colorToRGBA(gridlineColor, gridlineAlpha),
         infoFontColor: colorToRGBA(infoFontColor, infoFontAlpha),
+        eventHoverOpacity: parseFloat(compStyles.getPropertyValue('--event-hover-opacity')),
       };
     }
 
@@ -550,14 +546,27 @@
     }
 
     setupHoverInteractions() {
-      // Set up bio paragraph hover interactions
-      const bioParagraphs = document.querySelectorAll('.bio-paragraph');
-      bioParagraphs.forEach((paragraph) => {
-        const groupMatch = paragraph.className.match(/bio-group-(\w+)/);
+      // Set up bio text and image hover interactions
+      const bioTexts = document.querySelectorAll('.bio-text'),
+            bioImages = document.querySelectorAll('.bio-img');
+
+      // Add hover listeners to bio text elements
+      bioTexts.forEach((textElement) => {
+        const groupMatch = textElement.className.match(/bio-text-group-([\w-]+)/);
         if (groupMatch) {
           const group = groupMatch[1];
-          paragraph.addEventListener('mouseenter', () => this.dimGroup(group));
-          paragraph.addEventListener('mouseleave', () => this.clearDimming());
+          textElement.addEventListener('mouseenter', () => this.dimGroup(group));
+          textElement.addEventListener('mouseleave', () => this.clearDimming());
+        }
+      });
+
+      // Add hover listeners to bio image elements
+      bioImages.forEach((imageElement) => {
+        const groupMatch = imageElement.className.match(/bio-img-group-([\w-]+)/);
+        if (groupMatch) {
+          const group = groupMatch[1];
+          imageElement.addEventListener('mouseenter', () => this.dimGroup(group));
+          imageElement.addEventListener('mouseleave', () => this.clearDimming());
         }
       });
 
@@ -588,18 +597,17 @@
 
     isPositionOverEvent(x, y, event) {
       const { yearsYCoords, style } = this,
-            hitMargin = 4, // pixels of margin around hoverable areas
-            // Check if over the event line
             lineStartY = yearsYCoords[event.startYear],
             lineEndY = event.endYear === 'present' ? this.currentHeight : yearsYCoords[event.endYear];
 
-      if (Math.abs(x - event.xCoord) <= style.eventWidth / 2 + hitMargin
-          && y >= lineStartY - hitMargin
-          && y <= lineEndY + hitMargin) {
+      // Check if over the event line
+      if (Math.abs(x - event.xCoord) <= style.eventWidth / 2 + style.eventHoverMargin
+          && y >= lineStartY - style.eventHoverMargin
+          && y <= lineEndY + style.eventHoverMargin) {
         return true;
       }
 
-      // Check if over the info text area (this is more complex)
+      // Check if over the info text area
       if (event.infoLayout) {
         const { infoLayout } = event;
         let infoLeft = infoLayout.lineXDest;
@@ -613,8 +621,8 @@
               infoRight = infoLeft + infoLayout.width,
               infoBottom = infoLayout.bottomY;
 
-        if (x >= infoLeft - hitMargin && x <= infoRight + hitMargin
-            && y >= infoTop - hitMargin && y <= infoBottom + hitMargin) {
+        if (x >= infoLeft - style.eventHoverMargin && x <= infoRight + style.eventHoverMargin
+            && y >= infoTop - style.eventHoverMargin && y <= infoBottom + style.eventHoverMargin) {
           return true;
         }
       }
@@ -627,10 +635,9 @@
       this.isHovering = true;
 
       // Dim bio elements not in the active group
-      const bioElements = document.querySelectorAll('.bio-paragraph, .bio-img, .bio-text');
+      const bioElements = document.querySelectorAll('.bio-img, .bio-text');
       bioElements.forEach((element) => {
-        const hasActiveGroup = element.classList.contains(`bio-group-${activeGroup}`)
-                            || element.classList.contains(`bio-img-group-${activeGroup}`)
+        const hasActiveGroup = element.classList.contains(`bio-img-group-${activeGroup}`)
                             || element.classList.contains(`bio-text-group-${activeGroup}`);
 
         if (hasActiveGroup) {
@@ -649,7 +656,7 @@
       this.isHovering = false;
 
       // Remove dimming from bio elements
-      const bioElements = document.querySelectorAll('.bio-paragraph, .bio-img, .bio-text');
+      const bioElements = document.querySelectorAll('.bio-img, .bio-text');
       bioElements.forEach((element) => {
         element.classList.remove('dimmed');
       });
@@ -684,7 +691,7 @@
         const shouldDim = this.isHovering && event.group !== this.currentHoveredGroup;
 
         if (shouldDim) {
-          this.canvas.context.globalAlpha = 0.3;
+          this.canvas.context.globalAlpha = this.style.eventHoverOpacity;
         }
 
         event.drawInfo(eventsInfoLayouts[ix]);

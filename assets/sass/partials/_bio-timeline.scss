@@ -61,17 +61,14 @@ $bio-img-diameter: 6rem;
 }
 
 // Dimming effects for hover interactions
-.bio-paragraph,
 .bio-img,
 .bio-text {
   transition: opacity 0.3s ease;
 }
 
-.bio-paragraph.dimmed,
 .bio-img.dimmed,
-.bio-text.dimmed,
-.timeline-dimmed {
-  opacity: 0.3;
+.bio-text.dimmed {
+  opacity: map-get($timeline-vars, 'event-hover-opacity');
 }
 
 #timeline {
