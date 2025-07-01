@@ -74,6 +74,9 @@ export default {
       },
     ],
     'selector-max-id': 1,
+    // old Ruby Sass required by github-pages gem doesn't support sass modules
+    // TODO: remove this once github-pages gem is updated
+    'scss/no-global-function-names': null,
     'order/order': [
       [
         'custom-properties',
