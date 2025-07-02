@@ -485,7 +485,7 @@
         yearColor: colorToRGBA(yearColor, yearAlpha),
         gridlineColor: colorToRGBA(gridlineColor, gridlineAlpha),
         infoFontColor: colorToRGBA(infoFontColor, infoFontAlpha),
-        eventHoverOpacity: parseFloat(compStyles.getPropertyValue('--event-hover-opacity')),
+        eventHoverOpacity: parseFloat(compStyles.getPropertyValue('--event-dimmed-opacity')),
         transitionDuration: parseFloat(compStyles.getPropertyValue('--transition-duration')),
         hoverDebounceDelay: parseFloat(compStyles.getPropertyValue('--hover-debounce-delay')),
       };

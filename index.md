@@ -42,8 +42,8 @@ sections:
       - type: bio-timeline.html
         title: Bio
         bio_paragraphs:
-          - text: I grew up in a small town in central Pennsylvania before coming to
-              [Dartmouth](https://home.dartmouth.edu){:target="_blank"} as an undergrad in 2015.
+          - text: I grew up in a small town in central Pennsylvania before starting college at
+              [Dartmouth](https://home.dartmouth.edu){:target="_blank"} in 2015.
             image: assets/img/bio/pa-map.png
             timeline_group: undergrad
           - text: From 2016 to 2019, I worked in the

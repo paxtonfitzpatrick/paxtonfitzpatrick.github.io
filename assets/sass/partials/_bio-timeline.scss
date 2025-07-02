@@ -13,7 +13,7 @@ $bio-img-diameter: 6rem;
   }
 
   + .bio-paragraph {
-    margin-top: 1rem;
+    margin-top: 0.75rem;
   }
 }
 
@@ -46,7 +46,7 @@ $bio-img-diameter: 6rem;
 }
 
 .bio-text {
-  margin-top: calc(#{$bio-img-diameter} / 3);
+  margin-top: calc(#{$bio-img-diameter} / 4);
   margin-right: calc(#{$bio-img-diameter} / 3);
   margin-left: calc(#{$bio-img-diameter} / 3);
   padding: 5px 10px;
@@ -68,7 +68,7 @@ $bio-img-diameter: 6rem;
     transition: opacity map-get($timeline-vars, 'transition-duration') linear;
 
     &.dimmed {
-      opacity: map-get($timeline-vars, 'event-hover-opacity');
+      opacity: map-get($timeline-vars, 'event-dimmed-opacity');
     }
   }
 }

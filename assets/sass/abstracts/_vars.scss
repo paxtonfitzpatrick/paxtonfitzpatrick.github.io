@@ -76,18 +76,18 @@ $timeline-vars: (
   'info-background-alpha': 0.1,
   'info-background-radius': 8px,  // equivalent to border-radius for rounded corners
   'event-hover-margin': 4px,  // margin around hoverable areas for easier targeting
-  'event-hover-opacity': 0.3, // opacity of non-hovered events
+  'event-dimmed-opacity': 0.2, // opacity of non-hovered events
   'transition-duration': 300ms, // duration for hover transitions (CSS and JS)
-  'hover-debounce-delay': 100ms, // delay to prevent flickering when mousing between bio elements
+  'hover-debounce-delay': 150ms, // delay to prevent flickering when mousing between bio elements
 );
 
 // timeline group colors
 $timeline-group-colors: (
   'undergrad': #d60000,
-  'dbic': #8c3bff,
+  'dbic': #7c22fa,
   'cdl': #018700,
   'bregman': #00acc6,
-  'teaching': #ff7ed1,
+  'teaching': #af6708,
   'phd-student': #00d,
-  'phd-candidate': #add8e6
+  'phd-candidate': #77cae6
 );
