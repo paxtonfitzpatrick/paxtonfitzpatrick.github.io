@@ -3,6 +3,7 @@
 
     {% for paragraph in include.pane.bio_paragraphs %}
       <div class="bio-paragraph bio-group-{{ paragraph.timeline_group }}">
+        <div class="bio-img-backdrop {% cycle 'bio-img-backdrop-right', 'bio-img-backdrop-left' %}"></div>
         <img class="bio-img {% cycle 'bio-img-right', 'bio-img-left' %} bio-img-group-{{ paragraph.timeline_group }}"
              src="{{ paragraph.image | relative_url }}"
              alt="">

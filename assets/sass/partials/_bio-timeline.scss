@@ -1,6 +1,7 @@
 $bio-img-diameter: 6rem;
 
 .bio-paragraph {
+  position: relative;  // needed for absolute positioning of .bio-img-backdrops
   overflow: auto;
   // TODO: update this to only take affect above a particular min-width
   text-align: justify;
@@ -9,7 +10,10 @@ $bio-img-diameter: 6rem;
     // to give the timeline some additional room, give the enclosing row
     // .no-gutters and add the timeline column's normal 15px padding-left to the
     // the bio column's 15px padding-right
-    padding-right: 30px;
+    // needs to be margin-right instead of padding-right so the
+    // .bio-img-backdrops with position: absolute right: 0 are placed directly
+    // behind .bio-img-rights with float: right
+    margin-right: 30px;
   }
 
   + .bio-paragraph {
@@ -17,7 +21,32 @@ $bio-img-diameter: 6rem;
   }
 }
 
+.bio-img-backdrop {
+  position: absolute;
+  top: 0;
+  z-index: 1;  // place above bio-text background but below image
+
+  width: $bio-img-diameter;
+  height: $bio-img-diameter;
+
+  pointer-events: none;  // don't interfere with image hover
+
+  background-color: $bg-secondary;  // match section background
+  border-radius: 50%;
+
+  &-right {
+    right: 0;
+  }
+
+  &-left {
+    left: 0;
+  }
+}
+
 .bio-img {
+  position: relative;  // ensure image appears above backdrop
+  z-index: 2;  // place above backdrop
+
   width: $bio-img-diameter;
   height: $bio-img-diameter;
   shape-outside: circle(50%);
