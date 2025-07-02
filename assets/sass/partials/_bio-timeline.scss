@@ -65,7 +65,7 @@ $bio-img-diameter: 6rem;
 @media (width >= 992px) and (hover: hover) {
   .bio-img,
   .bio-text {
-    transition: opacity map-get($timeline-vars, 'transition-duration');
+    transition: opacity map-get($timeline-vars, 'transition-duration') linear;
 
     &.dimmed {
       opacity: map-get($timeline-vars, 'event-hover-opacity');

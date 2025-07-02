@@ -211,6 +211,8 @@
       this.currentHoveredGroup = null;
       this.isHovering = false;
       this.hoverInteractionsEnabled = false;
+      // hover debouncing
+      this.hoverDebounceTimer = null;
       // transition state management
       this.transitionStartTime = null;
       this.isTransitioning = false;
@@ -485,6 +487,7 @@
         infoFontColor: colorToRGBA(infoFontColor, infoFontAlpha),
         eventHoverOpacity: parseFloat(compStyles.getPropertyValue('--event-hover-opacity')),
         transitionDuration: parseFloat(compStyles.getPropertyValue('--transition-duration')),
+        hoverDebounceDelay: parseFloat(compStyles.getPropertyValue('--hover-debounce-delay')),
       };
     }
 
@@ -575,6 +578,12 @@
     }
 
     removeHoverInteractions() {
+      // Clear any pending debounce timer
+      if (this.hoverDebounceTimer) {
+        clearTimeout(this.hoverDebounceTimer);
+        this.hoverDebounceTimer = null;
+      }
+
       // Remove bio element event listeners
       if (this.hoverEventListeners) {
         this.hoverEventListeners.forEach((handlers, element) => {
@@ -621,8 +630,8 @@
         const groupMatch = textElement.className.match(/bio-text-group-([\w-]+)/);
         if (groupMatch) {
           const group = groupMatch[1],
-                mouseenterHandler = () => this.dimGroup(group),
-                mouseleaveHandler = () => this.clearDimming();
+                mouseenterHandler = () => this.handleBioHoverEnter(group),
+                mouseleaveHandler = () => this.handleBioHoverLeave();
 
           textElement.addEventListener('mouseenter', mouseenterHandler);
           textElement.addEventListener('mouseleave', mouseleaveHandler);
@@ -640,8 +649,8 @@
         const groupMatch = imageElement.className.match(/bio-img-group-([\w-]+)/);
         if (groupMatch) {
           const group = groupMatch[1],
-                mouseenterHandler = () => this.dimGroup(group),
-                mouseleaveHandler = () => this.clearDimming();
+                mouseenterHandler = () => this.handleBioHoverEnter(group),
+                mouseleaveHandler = () => this.handleBioHoverLeave();
 
           imageElement.addEventListener('mouseenter', mouseenterHandler);
           imageElement.addEventListener('mouseleave', mouseleaveHandler);
@@ -656,11 +665,30 @@
 
       // Set up timeline canvas hover interactions
       this.canvasMousemoveHandler = (e) => this.handleTimelineHover(e);
-      this.canvasMouseleaveHandler = () => this.clearDimming();
+      this.canvasMouseleaveHandler = () => this.handleBioHoverLeave();
 
       this.canvas.element.addEventListener('mousemove', this.canvasMousemoveHandler);
       this.canvas.element.addEventListener('mouseleave', this.canvasMouseleaveHandler);
       this.hoverInteractionsEnabled = true;
+    }
+
+    handleBioHoverEnter(group) {
+      // Cancel any pending hover-out
+      if (this.hoverDebounceTimer) {
+        clearTimeout(this.hoverDebounceTimer);
+        this.hoverDebounceTimer = null;
+      }
+
+      // Immediately dim the new group
+      this.dimGroup(group);
+    }
+
+    handleBioHoverLeave() {
+      // Set a timeout before clearing dimming
+      this.hoverDebounceTimer = setTimeout(() => {
+        this.clearDimming();
+        this.hoverDebounceTimer = null;
+      }, this.style.hoverDebounceDelay);
     }
 
     handleTimelineHover(event) {
@@ -670,11 +698,17 @@
             hoveredEvent = this.getEventAtPosition(x, y);
 
       if (hoveredEvent) {
+        // Cancel any pending hover-out
+        if (this.hoverDebounceTimer) {
+          clearTimeout(this.hoverDebounceTimer);
+          this.hoverDebounceTimer = null;
+        }
+
         if (!this.isHovering || this.currentHoveredGroup !== hoveredEvent.group) {
           this.dimGroup(hoveredEvent.group);
         }
       } else if (this.isHovering) {
-        this.clearDimming();
+        this.handleBioHoverLeave();
       }
     }
 

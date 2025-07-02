@@ -78,6 +78,7 @@ $timeline-vars: (
   'event-hover-margin': 4px,  // margin around hoverable areas for easier targeting
   'event-hover-opacity': 0.3, // opacity of non-hovered events
   'transition-duration': 300ms, // duration for hover transitions (CSS and JS)
+  'hover-debounce-delay': 100ms, // delay to prevent flickering when mousing between bio elements
 );
 
 // timeline group colors
