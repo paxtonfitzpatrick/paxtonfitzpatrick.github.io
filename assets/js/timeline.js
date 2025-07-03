@@ -671,6 +671,11 @@
     }
 
     handleBioHoverLeave() {
+      // Clear any existing timer first to prevent timer leaks
+      if (this.hoverDebounceTimer) {
+        clearTimeout(this.hoverDebounceTimer);
+      }
+
       // Set a timeout before clearing dimming
       this.hoverDebounceTimer = setTimeout(() => {
         this.clearDimming();
@@ -694,7 +699,8 @@
         if (!this.isHovering || this.currentHoveredGroup !== hoveredEvent.group) {
           this.dimGroup(hoveredEvent.group);
         }
-      } else if (this.isHovering) {
+      } else if (this.isHovering && !this.hoverDebounceTimer) {
+        // Only start the leave process if we're not already in a debounce state
         this.handleBioHoverLeave();
       }
     }
