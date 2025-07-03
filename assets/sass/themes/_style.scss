@@ -47,24 +47,25 @@
     color: $muted-primary !important;
   }
 
-  .nav-pills .nav-link {
-    color: $fg-primary;
+  // .nav-pills .nav-link {
+  //   color: $fg-primary;
 
-    &:hover,
-    &:focus,
-    &:active {
-      text-decoration: none;
-      background-color: $bg-primary-hfa;
-    }
+  //   &:hover,
+  //   &:focus,
+  //   &:active {
+  //     text-decoration: none;
+  //     background-color: $bg-primary-hfa;
+  //   }
 
-    // TODO: refactor? see description in disable rule below
-    /* stylelint-disable-next-line order/order -- this currently must come after
-    &:focus for nav-pills color to work right */
-    &.active {
-      color: $bg-primary;
-      background-color: $fg-primary;
-    }
-  }
+  //   // TODO: refactor? see description in disable rule below
+
+  //   /* stylelint-disable-next-line order/order -- this currently must come after
+  //   &:focus for nav-pills color to work right */
+  //   &.active {
+  //     color: $bg-primary;
+  //     background-color: $fg-primary;
+  //   }
+  // }
 }
 
 .bg-secondary {
@@ -114,22 +115,23 @@
     color: $muted-secondary !important;
   }
 
-  .nav-pills .nav-link {
-    color: $fg-secondary;
+  // .nav-pills .nav-link {
+  //   color: $fg-secondary;
 
-    &:hover,
-    &:focus,
-    &:active {
-      text-decoration: none;
-      background-color: $bg-secondary-hfa;
-    }
+  //   &:hover,
+  //   &:focus,
+  //   &:active {
+  //     text-decoration: none;
+  //     background-color: $bg-secondary-hfa;
+  //   }
 
-    // TODO: refactor? see description in disable rule below
-    /* stylelint-disable-next-line order/order -- this currently must come after
-    &:focus for nav-pills color to work right */
-    &.active {
-      color: $bg-secondary;
-      background-color: $fg-secondary;
-    }
-  }
+  //   // TODO: refactor? see description in disable rule below
+
+  //   /* stylelint-disable-next-line order/order -- this currently must come after
+  //   &:focus for nav-pills color to work right */
+  //   &.active {
+  //     color: $bg-secondary;
+  //     background-color: $fg-secondary;
+  //   }
+  // }
 }
