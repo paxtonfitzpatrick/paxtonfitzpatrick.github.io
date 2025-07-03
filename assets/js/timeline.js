@@ -218,45 +218,119 @@
       this.isTransitioning = false;
       this.eventOpacities = new Map(); // event -> current opacity
       this.targetOpacities = new Map(); // event -> target opacity
-      // sets:
-      //  - this.canvas:
-      //    {element: HTMLCanvasElement, context: CanvasRenderingContext2D}
-      //  - this.currentWidth:
-      //    current width of both `this.timelineElement` & `this.canvas.element`
-      //  - this.currentHeight:
-      //    current height of both `this.timelineElement` & `this.canvas.element`
-      this.initCanvas();
-      // sets this.style (Object; see function for full list of field names)
+
+      // Initialize with dynamic height calculation
+      this.initializeWithDynamicHeight();
+    }
+
+    initializeWithDynamicHeight() {
+      // Step 1: Create temporary canvas for layout calculations
+      this.createTemporaryCanvas();
+
+      // Step 2: Get styles and parse events
       this.getStyles();
-      // sets this.events (Array of TimelineEvents)
       this.parseEvents();
-      // sets:
-      //  - this.yearXOffset:
-      //    used to offset labels from grid lines (approx. 1 character width)
       this.precomputeStaticValues();
-      // sets:
-      //  - this.yearsYCoords:
-      //    {year: y-coord} of offsets from the canvas top for each 1/4 year
-      //    increment in the timeline
-      //  - this.occupiedGrid:
-      //    {year: this.events.length binary array} initially has all 0's; will
-      //    contain 1's in rows/cols occupied by a timeline event
-      //  - this.centerXCoord:
-      //    x-coord at center of canvas, used to determine which side to place
-      //    each event's info on
+
+      // Step 3: Compute required height based on info layouts
+      const requiredHeight = this.computeRequiredHeight();
+
+      // Step 4: Set the parent element and canvas height
+      this.setTimelineHeight(requiredHeight);
+
+      // Step 5: Initialize the real canvas with correct dimensions
+      this.initCanvas();
+
+      // Step 6: Compute layouts and draw with correct height
       this.computeBaseLayout();
-      // sets:
-      //  - this.infoLeftXCoord:
-      //    x-coord of right edge of event info/description text on left side
-      //  - this.infoRightXCoord:
-      //    x-coord of left edge of event info/description text on right side
       this.computeEventLayout();
       this.drawBase();
       this.drawEvents();
-      // initialize opacity system
+
+      // Step 7: Initialize opacity system and hover interactions
       this.initializeOpacitySystem();
-      // set up hover interactions
       this.setupHoverInteractions();
+    }
+
+    createTemporaryCanvas() {
+      // Create a temporary canvas element for layout calculations
+      const tempCanvas = document.createElement('canvas'),
+            tempContext = tempCanvas.getContext('2d');
+
+      // Set initial dimensions (will be adjusted later)
+      this.currentWidth = this.timelineElement.clientWidth;
+      this.currentHeight = this.timelineElement.clientHeight;
+
+      tempCanvas.width = this.currentWidth * devicePixelRatio;
+      tempCanvas.height = this.currentHeight * devicePixelRatio;
+      tempContext.scale(devicePixelRatio, devicePixelRatio);
+
+      // Don't append to DOM - this is just for calculations
+      this.canvas = {
+        element: tempCanvas,
+        context: tempContext,
+      };
+    }
+
+    computeRequiredHeight() {
+      // on wide screens, take the same height as the adjacent bio column
+      if (window.innerWidth >= 1200) {
+        // Temporarily hide the timeline column to measure bio column's natural height
+        const bioColumn = document.querySelector('.bio-column'),
+              originalDisplay = this.timelineElement.style.display;
+        this.timelineElement.style.display = 'none';
+        // Force a reflow to get the updated bio column height
+        // eslint-disable-next-line no-void
+        void bioColumn.offsetHeight;
+        const bioColumnHeight = bioColumn.clientHeight;
+        // Restore the timeline column
+        this.timelineElement.style.display = originalDisplay;
+        return bioColumnHeight;
+      }
+
+      // Start with a reasonable minimum height based on the timeline span
+      const minHeight = 400,
+            maxIterations = 3;
+      let testHeight = minHeight,
+          currentIteration = 0,
+          maxBottomY = 0;
+
+      while (currentIteration < maxIterations) {
+        this.currentHeight = testHeight;
+        this.computeBaseLayout();
+        this.computeEventLayout();
+        const eventsInfoLayouts = [];
+        this.canvas.context.font = `${this.style.infoFontSize}px sans-serif`;
+        this.events.forEach((event) => {
+          const layout = event.computeInfoLayout();
+          eventsInfoLayouts.push(layout);
+        });
+
+        this.adjustEventInfo(eventsInfoLayouts);
+
+        let currentMaxBottomY = 0;
+        eventsInfoLayouts.forEach((layout) => {
+          if (layout.bottomY > currentMaxBottomY) {
+            currentMaxBottomY = layout.bottomY;
+          }
+        });
+
+        maxBottomY = currentMaxBottomY;
+
+        const requiredHeight = maxBottomY + this.style.verticalPadding * 2;
+        if (requiredHeight <= testHeight) {
+          break;
+        }
+        testHeight = requiredHeight;
+        currentIteration++;
+      }
+      return Math.max(maxBottomY + this.style.verticalPadding * 2, minHeight);
+    }
+
+    setTimelineHeight(height) {
+      // Set the height of the parent timeline element
+      this.timelineElement.style.height = `${height}px`;
+      this.currentHeight = height;
     }
 
     initializeOpacitySystem() {
@@ -497,10 +571,7 @@
       const canvasElement = document.createElement('canvas'),
             context = canvasElement.getContext('2d');
 
-      // since the containing
-      this.currentWidth = this.timelineElement.clientWidth;
-      this.currentHeight = this.timelineElement.clientHeight;
-
+      // Use the already calculated dimensions
       canvasElement.className = 'timeline-canvas-el';
       canvasElement.width = this.currentWidth * devicePixelRatio;
       canvasElement.height = this.currentHeight * devicePixelRatio;
@@ -520,27 +591,27 @@
     }
 
     onResize() {
-      const newWidth = this.timelineElement.clientWidth,
-            newHeight = this.timelineElement.clientHeight;
+      const newWidth = this.timelineElement.clientWidth;
+      // Always recompute required height with new width
+      this.currentWidth = newWidth;
+      const requiredHeight = this.computeRequiredHeight();
+      this.setTimelineHeight(requiredHeight);
 
-      if (newWidth !== this.currentWidth || newHeight !== this.currentHeight) {
-        this.canvas.context.clearRect(0, 0, this.currentWidth, this.currentHeight);
-        this.canvas.element.width = newWidth * devicePixelRatio;
-        this.canvas.element.height = newHeight * devicePixelRatio;
-        this.canvas.context.scale(devicePixelRatio, devicePixelRatio);
-        this.canvas.element.style.width = `${newWidth}px`;
-        this.canvas.element.style.height = `${newHeight}px`;
-        this.currentWidth = newWidth;
-        this.currentHeight = newHeight;
-        this.computeBaseLayout();
-        this.computeEventLayout();
-        this.drawBase();
-        this.drawEvents();
-        this.initializeOpacitySystem();
+      // Update canvas dimensions
+      this.canvas.context.clearRect(0, 0, this.currentWidth, this.currentHeight);
+      this.canvas.element.width = newWidth * devicePixelRatio;
+      this.canvas.element.height = this.currentHeight * devicePixelRatio;
+      this.canvas.context.scale(devicePixelRatio, devicePixelRatio);
+      this.canvas.element.style.width = `${newWidth}px`;
+      this.canvas.element.style.height = `${this.currentHeight}px`;
 
-        // Re-setup hover interactions based on current conditions
-        this.setupHoverInteractions();
-      }
+      // Redraw with new dimensions
+      this.computeBaseLayout();
+      this.computeEventLayout();
+      this.drawBase();
+      this.drawEvents();
+      this.initializeOpacitySystem();
+      this.setupHoverInteractions();
     }
 
     parseEvents() {

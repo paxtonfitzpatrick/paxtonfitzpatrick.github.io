@@ -1,8 +1,9 @@
 <div class="row no-gutters">
-  <div class="col-lg-7">
-
+  <div class="col-lg-7 bio-column">
     {% for paragraph in include.pane.bio_paragraphs %}
-      <div class="bio-paragraph {% cycle 'bio-paragraph-right', 'bio-paragraph-left' %} bio-group-{{ paragraph.timeline_group }}">
+      <div class="bio-paragraph
+                  {% cycle 'bio-paragraph-right', 'bio-paragraph-left' %}
+                  bio-group-{{ paragraph.timeline_group }}">
         <div class="bio-img-backdrop"></div>
         <img class="bio-img"
              src="{{ paragraph.image | relative_url }}"
@@ -13,7 +14,6 @@
       </div>
     {% endfor %}
   </div>
-
   <div id="timeline" class="col-lg-5"
        data-start="{{ include.pane.timeline.start }}"
        data-end="{{ include.pane.timeline.end }}">

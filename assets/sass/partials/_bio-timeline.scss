@@ -101,6 +101,12 @@ $bio-img-diameter: 6rem;
 }
 
 #timeline {
+  @media (width <= 991px) {
+    // on narrow screens where timeline column is wrapped below bio paragraphs
+    // column, add some padding between them
+    padding-top: 15px;
+  }
+
   @each $key, $value in $timeline-vars {
     --#{$key}: #{$value};
   }
@@ -108,26 +114,6 @@ $bio-img-diameter: 6rem;
   // Add group color CSS variables
   @each $group, $color in $timeline-group-colors {
     --group-#{$group}: #{$color};
-  }
-
-  // TODO: update these min-heights to fit new timeline content (would be better
-  //  if they weren't hardcoded)
-  /* stylelint-disable-next-line order/order -- @each at-rule above declares
-  custom CSS variables, which should come first */
-  @media (width <= 991px) {
-    min-height: 675px;
-  }
-
-  @media (width <= 767px) {
-    min-height: 728px;
-  }
-
-  @media (width <= 575px) {
-    min-height: 970px;
-  }
-
-  @media (width <= 414px) {
-    min-height: 1150px;
   }
 
   ul {
