@@ -29,16 +29,14 @@ $bio-img-diameter: 6rem;
   width: $bio-img-diameter;
   height: $bio-img-diameter;
 
-  pointer-events: none;  // don't interfere with image hover
-
   background-color: $bg-secondary;  // match section background
   border-radius: 50%;
 
-  &-right {
+  .bio-paragraph-right > & {
     right: 0;
   }
 
-  &-left {
+  .bio-paragraph-left > & {
     left: 0;
   }
 }
@@ -63,12 +61,12 @@ $bio-img-diameter: 6rem;
     }
   }
 
-  &-right {
+  .bio-paragraph-right > & {
     float: right;
     margin-left: 0.5rem;
   }
 
-  &-left {
+  .bio-paragraph-left > & {
     float: left;
     margin-right: 0.5rem;
   }
