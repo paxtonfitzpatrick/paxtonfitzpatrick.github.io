@@ -4,10 +4,10 @@
     {% for paragraph in include.pane.bio_paragraphs %}
       <div class="bio-paragraph {% cycle 'bio-paragraph-right', 'bio-paragraph-left' %} bio-group-{{ paragraph.timeline_group }}">
         <div class="bio-img-backdrop"></div>
-        <img class="bio-img bio-img-group-{{ paragraph.timeline_group }}"
+        <img class="bio-img"
              src="{{ paragraph.image | relative_url }}"
              alt="">
-        <div class="bio-text bio-text-group-{{ paragraph.timeline_group }}">
+        <div class="bio-text">
           {{- paragraph.text | markdownify | remove: '<p>' | remove: '</p>' -}}
         </div>
       </div>

@@ -618,47 +618,34 @@
         return;
       }
 
-      // Set up bio text and image hover interactions
-      const bioTexts = document.querySelectorAll('.bio-text'),
-            bioImages = document.querySelectorAll('.bio-img');
+      // Set up bio paragraph hover interactions
+      const bioParagraphs = document.querySelectorAll('.bio-paragraph');
 
       // Store event listeners for later removal
       this.hoverEventListeners = new Map();
 
-      // Add hover listeners to bio text elements
-      bioTexts.forEach((textElement) => {
-        const groupMatch = textElement.className.match(/bio-text-group-([\w-]+)/);
+      // Add hover listeners to children of bio paragraph elements
+      bioParagraphs.forEach((paragraphElement) => {
+        const groupMatch = paragraphElement.className.match(/bio-group-([\w-]+)/);
         if (groupMatch) {
           const group = groupMatch[1],
+                textElement = paragraphElement.querySelector('.bio-text'),
+                imageElement = paragraphElement.querySelector('.bio-img'),
                 mouseenterHandler = () => this.handleBioHoverEnter(group),
                 mouseleaveHandler = () => this.handleBioHoverLeave();
 
-          textElement.addEventListener('mouseenter', mouseenterHandler);
-          textElement.addEventListener('mouseleave', mouseleaveHandler);
+          // Add listeners to text and image elements within this paragraph
+          [textElement, imageElement].forEach((element) => {
+            if (element) {
+              element.addEventListener('mouseenter', mouseenterHandler);
+              element.addEventListener('mouseleave', mouseleaveHandler);
 
-          // Store handlers for later removal
-          this.hoverEventListeners.set(textElement, {
-            mouseenter: mouseenterHandler,
-            mouseleave: mouseleaveHandler,
-          });
-        }
-      });
-
-      // Add hover listeners to bio image elements
-      bioImages.forEach((imageElement) => {
-        const groupMatch = imageElement.className.match(/bio-img-group-([\w-]+)/);
-        if (groupMatch) {
-          const group = groupMatch[1],
-                mouseenterHandler = () => this.handleBioHoverEnter(group),
-                mouseleaveHandler = () => this.handleBioHoverLeave();
-
-          imageElement.addEventListener('mouseenter', mouseenterHandler);
-          imageElement.addEventListener('mouseleave', mouseleaveHandler);
-
-          // Store handlers for later removal
-          this.hoverEventListeners.set(imageElement, {
-            mouseenter: mouseenterHandler,
-            mouseleave: mouseleaveHandler,
+              // Store handlers for later removal
+              this.hoverEventListeners.set(element, {
+                mouseenter: mouseenterHandler,
+                mouseleave: mouseleaveHandler,
+              });
+            }
           });
         }
       });
@@ -764,8 +751,8 @@
       // Dim bio elements not in the active group
       const bioElements = document.querySelectorAll('.bio-img, .bio-text');
       bioElements.forEach((element) => {
-        const hasActiveGroup = element.classList.contains(`bio-img-group-${activeGroup}`)
-                            || element.classList.contains(`bio-text-group-${activeGroup}`);
+        const parentParagraph = element.closest('.bio-paragraph'),
+              hasActiveGroup = parentParagraph && parentParagraph.classList.contains(`bio-group-${activeGroup}`);
 
         if (hasActiveGroup) {
           element.classList.remove('dimmed');
