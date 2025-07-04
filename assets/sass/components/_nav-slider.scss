@@ -1,7 +1,7 @@
-// Modern slider-style nav pills component
+// Modern slider-style nav slider component
 // Creates a pill-shaped groove with an animated sliding indicator
 
-.nav-pills {
+.nav-slider {
   position: relative;
 
   // The groove container that holds all the nav items
@@ -23,8 +23,8 @@
     content: '';
     position: absolute;
     top: 2px;
-    left: var(--pill-left, 2px);
-    width: var(--pill-width, 0);
+    left: var(--slider-left, 2px);
+    width: var(--slider-width, 0);
     height: calc(100% - 4px);
     border-radius: 50px; // Fully rounded to match groove
     transition: all 0.3s ease;
@@ -51,14 +51,14 @@
     }
 
     &.active {
-      background: transparent !important; // Active tab has no background (pill provides it)
+      background: transparent !important; // Active tab has no background (slider provides it)
     }
   }
 }
 
 // Primary theme styling
 .bg-primary {
-  .nav-pills {
+  .nav-slider {
     &::after {
       background-color: $fg-primary;
     }
@@ -79,7 +79,7 @@
 
 // Secondary theme styling
 .bg-secondary {
-  .nav-pills {
+  .nav-slider {
     &::after {
       background-color: $fg-secondary;
     }
