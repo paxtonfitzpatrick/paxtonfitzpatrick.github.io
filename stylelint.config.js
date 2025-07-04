@@ -221,7 +221,7 @@ export default {
       {
         // don't actually want unspecified items at the top, but use this
         // warning to catch items missed by the rules above
-        unspecified: 'top',
+        unspecified: 'ignore',
       },
     ],
     'order/properties-order': [
@@ -622,7 +622,7 @@ export default {
       ],
       {
         unspecified: 'ignore',
-        emptyLineMinimumPropertyThreshold: 5,
+        emptyLineMinimumPropertyThreshold: 6,
       },
     ],
     'order/properties-alphabetical-order': null,

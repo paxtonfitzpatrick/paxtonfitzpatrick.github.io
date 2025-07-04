@@ -1,35 +1,40 @@
-// Modern slider-style nav slider component
-// Creates a pill-shaped groove with an animated sliding indicator
+$nav-slider-transition-duration: 0.3s;
 
 .nav-slider {
   position: relative;
+  display: flex;
+  width: fit-content; // Shrink to fit content
+  margin: 0 auto; // Center using auto margins
 
-  // The groove container that holds all the nav items
+  // ::before is the "groove" the slider sits in
   &::before {
     content: '';
+
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
+    z-index: 1;
+
     background: transparent;
     border-radius: 50px; // Fully rounded
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
-    z-index: 1;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 15%);
   }
 
-  // The sliding pill indicator
+  // ::after is the slider itself
   &::after {
     content: '';
+
     position: absolute;
     top: 2px;
     left: var(--slider-left, 2px);
+    z-index: 2;
+
     width: var(--slider-width, 0);
     height: calc(100% - 4px);
+
     border-radius: 50px; // Fully rounded to match groove
-    transition: all 0.3s ease;
-    z-index: 2;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); // Slightly raised appearance
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 20%); // Slightly raised appearance
+
+    transition: all $nav-slider-transition-duration ease;
   }
 
   .nav-item {
@@ -39,61 +44,9 @@
 
   .nav-link {
     position: relative;
-    border: none !important; // Remove default Bootstrap border
-    background: transparent !important; // Remove default background
-    border-radius: 50px; // Fully rounded
     padding: 0.75rem 1.5rem;
     font-weight: 500;
-    transition: color 0.3s ease;
-
-    &:hover:not(.active) {
-      background: transparent !important; // Ensure no background on hover
-    }
-
-    &.active {
-      background: transparent !important; // Active tab has no background (slider provides it)
-    }
-  }
-}
-
-// Primary theme styling
-.bg-primary {
-  .nav-slider {
-    &::after {
-      background-color: $fg-primary;
-    }
-
-    .nav-link {
-      color: $fg-primary;
-
-      &:hover:not(.active) {
-        color: $fg-primary-hfa;
-      }
-
-      &.active {
-        color: $bg-primary;
-      }
-    }
-  }
-}
-
-// Secondary theme styling
-.bg-secondary {
-  .nav-slider {
-    &::after {
-      background-color: $fg-secondary;
-    }
-
-    .nav-link {
-      color: $fg-secondary;
-
-      &:hover:not(.active) {
-        color: $fg-secondary-hfa;
-      }
-
-      &.active {
-        color: $bg-secondary;
-      }
-    }
+    border-radius: 50px; // Fully rounded
+    transition: color $nav-slider-transition-duration ease;
   }
 }

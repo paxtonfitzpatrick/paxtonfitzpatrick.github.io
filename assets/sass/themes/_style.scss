@@ -66,6 +66,29 @@
   //     background-color: $fg-primary;
   //   }
   // }
+
+  // ::after is the slider
+  .nav-slider::after {
+    background-color: $fg-primary;
+  }
+
+  .nav-link {
+    color: $fg-primary;
+
+    &.active {
+      color: $bg-primary;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      text-decoration: none;
+    }
+
+    &:hover:not(.active) {
+      color: $fg-primary-hfa;
+    }
+  }
 }
 
 .bg-secondary {
@@ -115,6 +138,7 @@
     color: $muted-secondary !important;
   }
 
+
   // .nav-pills .nav-link {
   //   color: $fg-secondary;
 
@@ -134,4 +158,27 @@
   //     background-color: $fg-secondary;
   //   }
   // }
+
+  // ::after is the slider
+  .nav-slider::after {
+    background-color: $fg-secondary;
+  }
+
+  .nav-link {
+    color: $fg-secondary;
+
+    &.active {
+      color: $bg-secondary;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      text-decoration: none;
+    }
+
+    &:hover:not(.active) {
+      color: $fg-secondary-hfa;
+    }
+  }
 }

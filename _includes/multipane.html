@@ -36,7 +36,7 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <ul class="nav nav-slider justify-content-center my-4" role="tablist">
+        <ul class="nav nav-slider my-4" role="tablist">
           {% for pane in section.panes %}
             {% assign pane_attrs = panes_array[forloop.index0] | split: "||" %}
             {% assign href = pane_attrs[0] | prepend: "#" %}
