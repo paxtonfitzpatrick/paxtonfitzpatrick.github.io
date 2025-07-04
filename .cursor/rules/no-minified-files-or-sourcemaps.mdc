@@ -1,0 +1,6 @@
+---
+description:
+globs: *.js,*.json
+alwaysApply: false
+---
+When creating or editing JavaScript or JSON files, do not create or modify minified files (e.g., `.min.js`) or source maps (e.g., `.min.js.map`). These are created and updated automatically by a file watcher program.
