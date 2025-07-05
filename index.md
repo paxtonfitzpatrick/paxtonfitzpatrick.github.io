@@ -79,7 +79,7 @@ sections:
               <i>Neukom</i> prize for graduate research in computational science.
             image: assets/img/bio/guarini-logo.png
             timeline_group: phd-student
-          - text: I'm now a PhD candidate in cognitive neuroscience, working with
+          - text: I'm now a Ph.D. candidate in cognitive neuroscience, working with
               [Dr. Jeremy Manning](https://pbs.dartmouth.edu/people/jeremy-rothman-manning){:target="_blank"}. My
               current work is focused on building automated, scalable systems for personalizing and improving how people
               learn.
@@ -279,6 +279,7 @@ sections:
                 caption: Organizational leadership
 
   - type: multipane-filter.html
+    all_first: false
     section_id: research
     background_style: bg-primary
     title: Research
