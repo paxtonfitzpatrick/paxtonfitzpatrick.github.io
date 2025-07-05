@@ -33,7 +33,9 @@
   'components/nav-slider';
 
 @import
-  'themes/style';
+  'themes/base',
+  'themes/primary',
+  'themes/secondary';
 
 @import
   'partials/particles',

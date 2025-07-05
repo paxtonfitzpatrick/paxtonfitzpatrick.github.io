@@ -1,0 +1,69 @@
+.bg-secondary {
+  color: $fg-secondary;
+  // has to have !important to override identical declaration in creative.scss
+  background-color: $bg-secondary !important;
+
+  code {
+    color: $code-secondary;
+  }
+
+  blockquote {
+    border-left-color: $bg-secondary-hfa;
+  }
+
+  i {
+    color: $fg-secondary;
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: $fg-secondary-hfa;
+      text-decoration: none;
+      background-color: transparent;
+    }
+  }
+
+  a {
+    color: $fg-secondary-link;
+    text-decoration: none;
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: $fg-secondary-link-hfa;
+      text-decoration: underline;
+      background-color: transparent;
+    }
+  }
+
+  .divider {
+    border-color: $fg-secondary;
+  }
+
+  .text-muted {
+    color: $muted-secondary !important;
+  }
+
+  // ::after is the slider
+  .nav-slider::after {
+    background-color: $fg-secondary;
+  }
+
+  .nav-link {
+    color: $fg-secondary;
+
+    &.active {
+      color: $bg-secondary;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      text-decoration: none;
+    }
+
+    &:hover:not(.active) {
+      color: $fg-secondary-hfa;
+    }
+  }
+}

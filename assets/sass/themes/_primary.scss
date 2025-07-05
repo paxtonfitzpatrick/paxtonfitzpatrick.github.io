@@ -1,0 +1,68 @@
+.bg-primary {
+  color: $fg-primary;
+  background-color: $bg-primary !important;
+
+  code {
+    color: $code-primary;
+  }
+
+  blockquote {
+    border-left-color: $bg-primary-hfa;
+  }
+
+  i {
+    color: $fg-primary;
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: $fg-primary-hfa;
+      text-decoration: none;
+      background-color: transparent;
+    }
+  }
+
+  a {
+    color: $fg-primary-link;
+    text-decoration: none;
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: $fg-primary-link-hfa;
+      text-decoration: underline;
+      background-color: transparent;
+    }
+  }
+
+  .divider {
+    border-color: $fg-primary;
+  }
+
+  .text-muted {
+    color: $muted-primary !important;
+  }
+
+  // ::after is the slider
+  .nav-slider::after {
+    background-color: $fg-primary;
+  }
+
+  .nav-link {
+    color: $fg-primary;
+
+    &.active {
+      color: $bg-primary;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      text-decoration: none;
+    }
+
+    &:hover:not(.active) {
+      color: $fg-primary-hfa;
+    }
+  }
+}
