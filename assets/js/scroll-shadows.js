@@ -16,8 +16,10 @@
     const scrollShadowElements = document.getElementsByClassName('scroll-shadows');
 
     Array.prototype.forEach.call(scrollShadowElements, (element) => {
-      // set initial state of shadows
-      updateShadows(element);
+      // divs start out unscrolled, so initialize with bottom shadow class
+      // (can't just call updateShadows() here because hidden divs have
+      // offsetHeight and scrollHeight of 0, so bottom shadow wouldn't be added)
+      element.classList.add('scroll-shadow-bottom');
 
       // optimize scroll performance
       let ticking = false;
