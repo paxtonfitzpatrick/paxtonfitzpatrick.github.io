@@ -47,6 +47,14 @@ $nav-slider-transition-duration: 0.3s;
     padding: 0.75rem 1.5rem;
     font-weight: 500;
     border-radius: 50px; // Fully rounded
+    // TODO: this currently affects the hover color transition too
     transition: color $nav-slider-transition-duration ease;
+
+    // Smaller padding and font size/weight on narrow screens to prevent wrapping
+    @media (width <= 767px) {
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+      font-weight: 400;
+    }
   }
 }
