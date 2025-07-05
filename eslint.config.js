@@ -64,6 +64,7 @@ export default defineConfig([
       '@stylistic/indent': ['error', 2, { VariableDeclarator: 'first' }],
       '@stylistic/brace-style': ['error', '1tbs', { allowSingleLine: true }],
       '@stylistic/object-curly-newline': ['error', { multiline: true, consistent: true }],
+      '@stylistic/space-before-function-paren': ['error', 'never'],
     },
   },
   // consider config files modules so imports/exports don't prevent linting
