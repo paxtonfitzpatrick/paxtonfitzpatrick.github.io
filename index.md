@@ -166,6 +166,8 @@ sections:
             skills:
               - image: python.png
                 caption: Python
+              - image: r.png
+                caption: R
               - image: javascript.png
                 caption: JavaScript
               - image: shell.png
@@ -176,11 +178,10 @@ sections:
                 caption: SuperCollider
               - image: html.png
                 caption: HTML
-              # TODO: update CSS logo
               - image: css.png
                 caption: CSS
               - image: sass.png
-                caption: Sass/SCSS
+                caption: Sass
               - image: liquid.png
                 caption: Liquid
               - image: jekyll.png
@@ -188,11 +189,13 @@ sections:
           - title: Development tools
             skills:
               - image: git.png
-                caption: Git/GitHub
+                caption: Git
               - image: docker.png
                 caption: Docker
-              - image: db.png
-                caption: SQLite/MySQL/SQLAlchemy
+              - image: sqlite.png
+                caption: SQLite
+              - image: slurm.png
+                caption: SLURM
               - image: moab-torque.png
                 caption: Moab-TORQUE
               - image: conda.png
@@ -206,7 +209,7 @@ sections:
               - image: github-actions.png
                 caption: GitHub Actions
               - image: jupyter.png
-                caption: Jupyter/IPython/ Colaboratory
+                caption: Jupyter/IPython ecosystem
               - image: packaging.png
                 caption: Python packaging
           - title: Experimental design & data collection
@@ -216,17 +219,17 @@ sections:
               - image: psiturk.png
                 caption: psiTurk
               - image: mturk.png
-                caption: Amazon Mechanical Turk
+                caption: Amazon MTurk
               - image: psychopy.png
                 caption: PsychoPy
               - image: superlab.png
-                caption: Cedrus SuperLab
+                caption: SuperLab
               - image: openbci.png
                 caption: OpenBCI
               - image: opensesame.png
                 caption: OpenSesame
               - image: morphx.png
-                caption: Norkross MorphX
+                caption: MorphX
               - image: qualtrics.png
                 caption: Qualtrics
           - title: Data analysis & visualization
@@ -239,10 +242,12 @@ sections:
                 caption: Pandas
               - image: nltk.png
                 caption: NLTK
+              - image: lme4.png
+                caption: lme4
               - image: statsmodels.png
                 caption: statsmodels
               - image: sklearn.png
-                caption: Scikit-learn
+                caption: scikit-learn
               - image: nilearn.png
                 caption: Nilearn
               - image: igraph.png
@@ -272,7 +277,7 @@ sections:
               - image: french.png
                 caption: French
               - image: writing.png
-                caption: Scientific & expository writing
+                caption: Scientific writing
               - image: speaking.png
                 caption: Public speaking
               - image: leadership.png
