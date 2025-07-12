@@ -209,7 +209,7 @@ sections:
               - image: github-actions.png
                 caption: GitHub Actions
               - image: jupyter.png
-                caption: Jupyter/IPython ecosystem
+                caption: Jupyter ecosystem
               - image: packaging.png
                 caption: Python packaging
           - title: Experimental design & data collection
