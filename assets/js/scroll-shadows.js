@@ -1,3 +1,5 @@
+// TODO: replace with CSS container scroll state queries once widely supported
+//  (https://caniuse.com/?search=scroll-state)
 'use strict';
 
 (() => {
