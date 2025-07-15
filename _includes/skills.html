@@ -6,8 +6,9 @@
         {% for skill in category.skills %}
           <div class="skill-box">
             <img src="{{ skill.image | prepend: "assets/img/skills/" | relative_url }}" alt="{{ skill.caption }}">
-            {% comment %} <img src="{% cycle 'https://placehold.co/600x600', 'https://placehold.co/500x750', 'https://placehold.co/800x400' %}" alt="{{ skill.caption }}"> {% endcomment %}
-            <p>{{ skill.caption }}</p>
+            <svg>
+              <text>{{ skill.caption }}</text>
+            </svg>
             {% comment %} <p>
               {% if skill.caption == 'LaTeX' %}
                 <span class="latex">L<sup>a</sup>T<sub>e</sub>X</span>
