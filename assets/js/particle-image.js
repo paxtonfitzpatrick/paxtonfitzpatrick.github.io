@@ -286,7 +286,9 @@ function ParticleImageDisplayer(canvasEl, params) {
 
     // Normalize delta time to target 60 FPS (16.67ms per frame)
     const targetFrameTime = 1000 / pImg.animation.targetFPS,
-          normalizedDelta = deltaTime / targetFrameTime;
+          // limit delta time to 2x target frame time to prevent massive jumps
+          // (e.g., when returning to browser tab after switching away)
+          normalizedDelta = Math.min(deltaTime / targetFrameTime, 2);
 
     pImg.functions.canvas.clear();
     pImg.functions.particles.updateParticles(normalizedDelta);
