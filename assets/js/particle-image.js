@@ -505,22 +505,21 @@ window.particleImageDisplay = function particleImageDisplay(tagId) {
 
   if (canvas != null) {
     // get params.json filepath from load parameters from element's data-params-src property
-    const paramsJson = pImageEl.dataset.paramsSrc,
-          xhr = new XMLHttpRequest();
-    xhr.overrideMimeType('application/json');
-    xhr.open('GET', paramsJson, false);
-    xhr.onreadystatechange = () => {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        // parse parameters & launch display
-        const params = JSON.parse(xhr.responseText);
+    const paramsJson = pImageEl.dataset.paramsSrc;
+    fetch(paramsJson)
+      .then((response) => {
+        if (!response.ok) throw new Error(response.statusText);
+        return response.json();
+      })
+      .then((params) => {
+        // eslint-disable-next-line no-param-reassign
         params.eventListenerOpts = passiveOptsOrUseCapture;
         window.pImgDom.push(new ParticleImageDisplayer(canvas, params));
-      } else {
+      })
+      .catch((error) => {
         // eslint-disable-next-line no-console
-        console.log(`failed to load params.json. XMLHTTPRequest status: ${xhr.statusText}`);
-      }
-    };
-    xhr.send();
+        console.log(`failed to load params.json: ${error.message}`);
+      });
   }
 };
 
