@@ -67,6 +67,11 @@ function ParticleImageDisplayer(canvasEl, params) {
       h: canvasEl.offsetHeight,
       offset_top: 72,
     },
+    animation: {
+      lastTimestamp: 0,
+      targetFPS: 60,
+      deltaTime: 0,
+    },
     functions: {
       particles: {},
       image: {},
@@ -177,7 +182,7 @@ function ParticleImageDisplayer(canvasEl, params) {
       pImg.functions.image.resize();
       const imgPixels = pImg.functions.canvas.getImagePixels();
       pImg.functions.particles.createImageParticles(imgPixels);
-      pImg.functions.particles.animateParticles();
+      window.requestAnimationFrame(pImg.functions.particles.animateParticles);
     }, pImg.eventListenerOpts);
     let srcPath = pImg.image.src.path;
     if (pImg.image.src.is_external) {
@@ -238,39 +243,53 @@ function ParticleImageDisplayer(canvasEl, params) {
     }
   };
 
-  pImg.functions.particles.updateParticles = function updateParticles() {
+  pImg.functions.particles.updateParticles = function updateParticles(deltaTime) {
+    const normalizedDelta = deltaTime || 1; // fallback for first frame
     // eslint-disable-next-line no-restricted-syntax
     for (const p of pImg.particles.array) {
       if ((pImg.particles.movement.restless.enabled) && (p.restlessness.on_curr_frame)) {
         // if restless activity is enabled & particle is in restless mode, animate some random movement
-        pImg.functions.particles.jitterParticle(p);
+        pImg.functions.particles.jitterParticle(p, normalizedDelta);
       } else {
         // otherwise, update position with approach to destination
         p.acc_x = (p.dest_x - p.x) / 500;
         p.acc_y = (p.dest_y - p.y) / 500;
         p.vx = (p.vx + p.acc_x) * p.friction;
         p.vy = (p.vy + p.acc_y) * p.friction;
-        p.x += p.vx;
-        p.y += p.vy;
+        p.x += p.vx * normalizedDelta;
+        p.y += p.vy * normalizedDelta;
       }
 
-      pImg.functions.interactivity.interactWithClient(p);
+      pImg.functions.interactivity.interactWithClient(p, normalizedDelta);
     }
   };
 
-  pImg.functions.particles.jitterParticle = function jitterParticle(p) {
+  pImg.functions.particles.jitterParticle = function jitterParticle(p, deltaTime) {
+    const normalizedDelta = deltaTime || 1;
     /* eslint-disable no-param-reassign */
-    p.x += p.restlessness.x_jitter;
-    p.y += p.restlessness.y_jitter;
+    p.x += p.restlessness.x_jitter * normalizedDelta;
+    p.y += p.restlessness.y_jitter * normalizedDelta;
     if (Math.sqrt((p.dest_x - p.x) ** 2 + (p.dest_y - p.y) ** 2) >= pImg.particles.movement.restless.value) {
       p.restlessness.on_curr_frame = false;
     }
     /* eslint-enable no-param-reassign */
   };
 
-  pImg.functions.particles.animateParticles = function animateParticles() {
+  pImg.functions.particles.animateParticles = function animateParticles(timestamp) {
+    // Calculate delta time for frame-rate independent animation
+    if (pImg.animation.lastTimestamp === 0) {
+      pImg.animation.lastTimestamp = timestamp;
+    }
+
+    const deltaTime = timestamp - pImg.animation.lastTimestamp;
+    pImg.animation.lastTimestamp = timestamp;
+
+    // Normalize delta time to target 60 FPS (16.67ms per frame)
+    const targetFrameTime = 1000 / pImg.animation.targetFPS,
+          normalizedDelta = deltaTime / targetFrameTime;
+
     pImg.functions.canvas.clear();
-    pImg.functions.particles.updateParticles();
+    pImg.functions.particles.updateParticles(normalizedDelta);
     // eslint-disable-next-line no-restricted-syntax
     for (const p of pImg.particles.array) {
       p.draw();
@@ -283,7 +302,7 @@ function ParticleImageDisplayer(canvasEl, params) {
   =        INTERACTIVITY FUNCTIONS       =
   ========================================
   */
-  pImg.functions.interactivity.repulseParticle = function repulseParticle(p, args) {
+  pImg.functions.interactivity.repulseParticle = function repulseParticle(p, args, deltaTime = 1) {
     // compute distance to mouse
     const dxMouse = p.x - pImg.mouse.x,
           dyMouse = p.y - pImg.mouse.y,
@@ -293,8 +312,8 @@ function ParticleImageDisplayer(canvasEl, params) {
       /* eslint-disable no-param-reassign */
       p.acc_x = (p.x - pImg.mouse.x) / invStrength;
       p.acc_y = (p.y - pImg.mouse.y) / invStrength;
-      p.vx += p.acc_x;
-      p.vy += p.acc_y;
+      p.vx += p.acc_x * deltaTime;
+      p.vy += p.acc_y * deltaTime;
       /* eslint-enable no-param-reassign */
     }
   };
@@ -314,15 +333,15 @@ function ParticleImageDisplayer(canvasEl, params) {
     }
   };
 
-  pImg.functions.interactivity.onMouseMove = function onMouseMove(func, args, p) {
+  pImg.functions.interactivity.onMouseMove = function onMouseMove(func, args, p, deltaTime) {
     if (pImg.mouse.x != null && pImg.mouse.y != null) {
-      func(p, args);
+      func(p, args, deltaTime);
     }
   };
 
-  pImg.functions.interactivity.onMouseClick = function onMouseClick(func, args, p) {
+  pImg.functions.interactivity.onMouseClick = function onMouseClick(func, args, p, deltaTime) {
     if (pImg.mouse.click_x != null && pImg.mouse.click_y != null) {
-      func(p, args);
+      func(p, args, deltaTime);
     }
   };
 
@@ -366,10 +385,10 @@ function ParticleImageDisplayer(canvasEl, params) {
     }
   };
 
-  pImg.functions.interactivity.interactWithClient = function interactWithClient(p) {
+  pImg.functions.interactivity.interactWithClient = function interactWithClient(p, deltaTime) {
     // eslint-disable-next-line no-restricted-syntax
     for (const func of pImg.particles.interactivity.fn_array) {
-      func(p);
+      func(p, deltaTime);
     }
   };
 
@@ -406,7 +425,7 @@ function ParticleImageDisplayer(canvasEl, params) {
     if (pImg.particles.interactivity[event].enabled) {
       const func = actionFuncs[pImg.particles.interactivity[event].action],
             args = pImg.interactions[pImg.particles.interactivity[event].action],
-            partialFunc = eventWrapper.bind(null, func, args);
+            partialFunc = (p, deltaTime) => eventWrapper(func, args, p, deltaTime);
       pImg.particles.interactivity.fn_array.push(partialFunc);
     }
   };
