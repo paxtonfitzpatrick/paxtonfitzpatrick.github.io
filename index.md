@@ -200,14 +200,14 @@ sections:
                 caption: Moab-TORQUE
               - image: conda.png
                 caption: Conda
+              - image: github-actions.png
+                caption: GitHub Actions
+              - image: travis.png
+                caption: Travis CI
               - image: pytest.png
                 caption: pytest
               - image: selenium.png
                 caption: Selenium
-              - image: travis.png
-                caption: Travis CI
-              - image: github-actions.png
-                caption: GitHub Actions
               - image: jupyter.png
                 caption: Jupyter ecosystem
               - image: packaging.png
@@ -234,12 +234,12 @@ sections:
                 caption: Qualtrics
           - title: Data analysis & visualization
             skills:
-              - image: scipy.png
-                caption: SciPy
               - image: numpy.png
                 caption: NumPy
               - image: pandas.png
                 caption: Pandas
+              - image: scipy.png
+                caption: SciPy
               - image: nltk.png
                 caption: NLTK
               - image: lme4.png
@@ -274,14 +274,14 @@ sections:
                 caption: Adobe Illustrator
               - image: photoshop.png
                 caption: Adobe Photoshop
+              - image: keynote.png
+                caption: Keynote
               - image: french.png
                 caption: French
               - image: writing.png
                 caption: Scientific writing
               - image: speaking.png
                 caption: Public speaking
-              - image: leadership.png
-                caption: Organizational leadership
 
   - type: multipane-filter.html
     all_first: false
