@@ -73,6 +73,7 @@ export default {
         ],
       },
     ],
+    'scss/dollar-variable-empty-line-before': null,
     'selector-max-id': 1,
     // old Ruby Sass required by github-pages gem doesn't support sass modules
     // TODO: remove this once github-pages gem is updated
