@@ -218,6 +218,8 @@
       this.isTransitioning = false;
       this.eventOpacities = new Map(); // event -> current opacity
       this.targetOpacities = new Map(); // event -> target opacity
+      // manage deferred resize when not visible (i.e., window resized when skills tab is active)
+      this.needsResizeWhenVisible = false;
 
       // Initialize with dynamic height calculation
       this.initializeWithDynamicHeight();
@@ -591,27 +593,35 @@
     }
 
     onResize() {
-      const newWidth = this.timelineElement.clientWidth;
-      // Always recompute required height with new width
-      this.currentWidth = newWidth;
-      const requiredHeight = this.computeRequiredHeight();
-      this.setTimelineHeight(requiredHeight);
+      if (this.timelineElement.checkVisibility()) {
+        const newWidth = this.timelineElement.clientWidth;
+        // Always recompute required height with new width
+        this.currentWidth = newWidth;
+        const requiredHeight = this.computeRequiredHeight();
+        this.setTimelineHeight(requiredHeight);
 
-      // Update canvas dimensions
-      this.canvas.context.clearRect(0, 0, this.currentWidth, this.currentHeight);
-      this.canvas.element.width = newWidth * devicePixelRatio;
-      this.canvas.element.height = this.currentHeight * devicePixelRatio;
-      this.canvas.context.scale(devicePixelRatio, devicePixelRatio);
-      this.canvas.element.style.width = `${newWidth}px`;
-      this.canvas.element.style.height = `${this.currentHeight}px`;
+        // Update canvas dimensions
+        this.canvas.context.clearRect(0, 0, this.currentWidth, this.currentHeight);
+        this.canvas.element.width = newWidth * devicePixelRatio;
+        this.canvas.element.height = this.currentHeight * devicePixelRatio;
+        this.canvas.context.scale(devicePixelRatio, devicePixelRatio);
+        this.canvas.element.style.width = `${newWidth}px`;
+        this.canvas.element.style.height = `${this.currentHeight}px`;
 
-      // Redraw with new dimensions
-      this.computeBaseLayout();
-      this.computeEventLayout();
-      this.drawBase();
-      this.drawEvents();
-      this.initializeOpacitySystem();
-      this.setupHoverInteractions();
+        // Redraw with new dimensions
+        this.computeBaseLayout();
+        this.computeEventLayout();
+        this.drawBase();
+        this.drawEvents();
+        this.initializeOpacitySystem();
+        this.setupHoverInteractions();
+
+        this.needsResizeWhenVisible = false;
+      } else {
+        // if window is resized when skills tab is active, defer the resize
+        // until the timeline is visible again
+        this.needsResizeWhenVisible = true;
+      }
     }
 
     parseEvents() {
@@ -1036,11 +1046,28 @@
   =             MAIN SCRIPT              =
   ========================================
   */
-  const timelineElement = document.getElementById('timeline');
-  if (timelineElement !== null) {
-    window.addEventListener('load', () => {
-      const timelineObj = new Timeline(timelineElement);
-      window.addEventListener('resize', () => timelineObj.onResize());
-    });
+  function initTimeline() {
+    const timelineElement = document.getElementById('timeline');
+    if (!timelineElement) return;
+
+    const timelineObj = new Timeline(timelineElement);
+    window.addEventListener('resize', () => timelineObj.onResize());
+
+    const bioTabElement = document.getElementById('bio'),
+          bioTabVisibilityObserver = new MutationObserver(() => {
+            // if viewport was resized while the bio tab (which contains the
+            // timeline) was hidden, and it's now visible again, resize the
+            // timeline for the updated viewport
+            if (bioTabElement.classList.contains('active') && timelineObj.needsResizeWhenVisible) {
+              timelineObj.onResize();
+            }
+          });
+    bioTabVisibilityObserver.observe(bioTabElement, { attributes: true, attributeFilter: ['class'] });
+  }
+
+  if (document.readyState !== 'loading') {
+    initTimeline();
+  } else {
+    document.addEventListener('DOMContentLoaded', initTimeline);
   }
 })();
