@@ -51,15 +51,13 @@ sections:
               processing fMRI data for a multi-year neuroimaging study.
             image: assets/img/bio/brain-scan.jpg
             timeline_group: dbic
-          - text: In 2017, I worked with
-              [Dr. Michael Casey](https://faculty-directory.dartmouth.edu/michael-casey){:target="_blank"}  in
-              [Bregman Media Labs](http://bregman.dartmouth.edu){:target="_blank"} to create
+          - text: In 2017, I worked with [Bregman Media Labs](http://bregman.dartmouth.edu){:target="_blank"} to create
               [*Exnectome*](https://vimeo.com/208333051){:target="_blank"}, the first EEG sonification-based musical
               ensemble.
             image: assets/img/bio/eeg-headset.jpeg
             timeline_group: bregman
           - text: I joined the [Contextual Dynamics Lab](https://www.context-lab.com){:target="_blank"} in 2017, where
-              I worked on developing novel methods and software for studying episodic memory. I managed the CDL from 2018
+              I helped develop novel methods and software for studying episodic memory. I managed the CDL from 2018
               to 2021, designing and executing studies, mentoring teams of undergrads, and maintaining the lab's
               software stack.
             image: assets/img/bio/cdl-logo.png
@@ -290,10 +288,13 @@ sections:
     title: Research
     pane_type: publication-cards.html
     before_text: >
-     My research uses language models to capture how our memories preserve, distort, and compress the external world,
-     and to identify the neural mechanisms that underlie these transformations.<br/><br/>I'm particularly interested in
-     how episodic memory compresses the temporal structure of an experience, and how that compression is warped over
-     time.
+      My research uses language models to capture how our memories preserve, distort, and compress the external world,
+      and to identify the neural mechanisms that drive these transformations.
+    #   <br/><br/>I'm particularly interested in
+    #   how episodic memory compresses the temporal structure of an experience, and how that compression is warped over
+    #   time.
+    # I use language models to transform real-world experiences into high-dimensional geometries, and study how these
+    # structures are preserved, distorted, and compressed in our memories.
     panes:
       - title: Manuscripts
         filter: manuscript
