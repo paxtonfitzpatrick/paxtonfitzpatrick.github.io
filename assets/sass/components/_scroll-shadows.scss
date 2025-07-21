@@ -27,7 +27,6 @@
     pointer-events: none;
 
     background: linear-gradient(to top, transparent, rgba(0, 0, 0, $scroll-shadow-max-alpha));
-    // box-shadow: inset 0 8px 8px rgba(0, 0, 0, 50%);
   }
 }
 
@@ -42,11 +41,14 @@
     position: -webkit-sticky;
     position: sticky;
     bottom: 0;
+    z-index: 1;
 
     display: block;
 
     height: $scroll-shadow-height;
     margin-top: -$scroll-shadow-height;
+
+    pointer-events: none;
 
     background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, $scroll-shadow-max-alpha));
   }

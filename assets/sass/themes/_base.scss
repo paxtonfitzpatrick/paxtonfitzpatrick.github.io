@@ -3,3 +3,29 @@
   // TODO: update page sections (except bio-timeline and footer) to be
   //  100vh - height of navbar (and move navbar height to variable)
 }
+
+#research,
+#software {
+  // For sections with scrollable content, make them viewport-aware
+
+  min-height: calc(100vh - 72px); // or just height?
+
+  // On smaller screens, adjust to prevent awkward layouts
+  @media (max-height: 700px) {
+    min-height: calc(100vh - 72px - 2rem);
+    padding: 1rem 0;
+
+    .divider {
+      margin: 1rem auto !important;
+    }
+
+    .nav-slider {
+      margin: 1rem auto !important;
+    }
+  }
+
+  @media (max-height: 600px) {
+    min-height: auto; // Let content determine height on very small screens
+    padding: 1rem 0;
+  }
+}

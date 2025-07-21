@@ -12,7 +12,7 @@
 {% assign all_pane_href = section.section_id | append: "_all" %}
 
 
-<section id="{{ section.section_id }}" class="page-section {{ section.background_style }}">
+<section id="{{ section.section_id }}" class="page-section multipane-section {{ section.background_style }}">
   <div class="container">
     <div class="row">
       <div class="col-12 text-center">
@@ -59,7 +59,7 @@
 
     <div class="row">
       <div class="col-12">
-        <div class="tab-content mb-4">
+        <div class="tab-content">
           {% if section.all_first %}
             <div id="{{ all_pane_href }}" class="tab-pane fade active show">
               {% if section contains "all_before_text" %}

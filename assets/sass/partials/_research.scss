@@ -3,8 +3,23 @@
   // `@include` this as `mixins.scrollbar`, and remove `@import` in main.scss
   @include styled-scrollbar($size: 8px, $fg-color: $bg-primary-hfa, $bg-color: transparent);
 
-  max-height: 40em;
+  // Default responsive height constraints
+  max-height: 40em; // Fallback to original height for non-multipane contexts
+  min-height: 300px; // Minimum reasonable height
   overflow-y: auto;
+
+// In multipane sections, use more conservative viewport-aware heights
+  // More conservative calculation: use 50vh as max to avoid overflow
+  max-height: min(50vh, 35em); // Use smaller of 50vh or 35em
+  min-height: 250px; // Slightly smaller minimum
+
+  @media (max-height: 700px) {
+    max-height: min(45vh, 30em);
+  }
+
+  @media (max-height: 600px) {
+    max-height: min(40vh, 25em);
+  }
 
   .footnote {
     margin-top: -1rem;
