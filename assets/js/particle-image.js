@@ -501,8 +501,7 @@ window.particleImageDisplay = function particleImageDisplay(tagId) {
   const canvasEl = document.createElement('canvas');
   canvasEl.className = canvasClassname;
   canvasEl.style.width = '100%';
-  // TODO: link this 72px value to pImageConfig.canvas.offset_top
-  canvasEl.style.height = 'calc(100% - 72px)';
+  canvasEl.style.height = 'calc(100% - var(--navbar-height))';
   const canvas = document.getElementById(tagId).appendChild(canvasEl);
 
   if (canvas != null) {
