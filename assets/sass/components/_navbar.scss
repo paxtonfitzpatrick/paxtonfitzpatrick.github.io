@@ -1,5 +1,9 @@
 // TODO: extract only necessary parts of creative.scss and refactor this
 
+:root {
+  --navbar-height: 72px;
+}
+
 #main-nav {
   position: fixed;
   top: 0;
@@ -36,9 +40,7 @@
   }
 
   #main-nav {
-    // TODO: convert hard-coded height to rem to handle user agent settings.
-    //  Also update other usages in particle-image.js, creative.js, etc.
-    height: 72px;
+    height: var(--navbar-height);
     color: $navbar-desktop-fg;
     background-color: $navbar-desktop-bg;
     transition: background-color 0.2s ease;
