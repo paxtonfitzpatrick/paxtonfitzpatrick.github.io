@@ -48,3 +48,60 @@
     background-color: $bg-color;
   }
 }
+
+@mixin multipane-fit-viewport-height(
+  $pane-content-preferred-height: 40rem,  // default (unshrunk) height of scrollable tab pane content area
+  $pane-content-min-height: 20rem         // min height of scrollable tab pane content area
+) {
+  // Allows a section with multipane or multipane-filter layout to shrink
+  // vertically (if necessary) to fit within the viewport height (minus the
+  // fixed-position navbar's height). If shrunk, height is taken only from the
+  // scrollable tab pane content area.
+  display: flex;
+  height: auto;
+  max-height: calc(100vh - var(--navbar-height));
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-height: auto;
+
+    > .row {
+      flex-shrink: 0;
+    }
+
+    > .row:has(.tab-content) {
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-wrap: nowrap;
+      min-height: $pane-content-min-height;
+
+      > .col-12 {  // or .col, [class$='col-'] to match any bootstrap column class
+        display: flex;
+        flex-grow: 1;
+      }
+    }
+  }
+
+  .tab-content {
+    display: flex;
+    flex-grow: 1;
+  }
+
+  .tab-pane {
+    display: none;
+    flex-grow: 1;
+
+    &.active {
+      display: flex;
+    }
+
+    > div {
+      flex-grow: 1;
+      min-height: $pane-content-min-height;
+      max-height: $pane-content-preferred-height;
+      overflow-y: auto;
+    }
+  }
+}
