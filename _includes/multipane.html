@@ -53,7 +53,7 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <div class="tab-content mb-4">
+        <div class="tab-content">
           {% for pane in section.panes %}
             {% assign pane_attrs = panes_array[forloop.index0] | split: "||" %}
             {% assign href = pane_attrs[0] %}
