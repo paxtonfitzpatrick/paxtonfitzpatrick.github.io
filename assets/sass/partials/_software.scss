@@ -1,6 +1,240 @@
-#software {
-  @include multipane-fit-viewport-height;
+/* stylelint-disable plugin/stylelint-group-selectors */
+// #software {
+//   @include multipane-fit-viewport-height;
+// }
+// #software {
+//   display: flex;
+//   flex-direction: column;
+//   height: calc(100vh - var(--navbar-height)); // exact constraint
+//   min-height: 0; // allow it to shrink
+// }
+
+// #software .container {
+//   display: flex;
+//   flex-direction: column;
+//   flex: 1 1 auto;
+//   min-height: 0; // allow children to shrink
+// }
+
+// #software .container > .row {
+//   flex-shrink: 0; // except the one with tab content
+// }
+
+// #software .container > .row:has(.tab-content) {
+//   flex: 1 1 auto; // this row should grow/shrink as needed
+//   min-height: 0;
+//   flex-wrap: nowrap;
+// }
+
+// #software .container > .row:has(.tab-content) > .col-12 {
+//   display: flex;
+//   flex-direction: column;
+//   flex: 1 1 auto;
+//   min-height: 0;
+// }
+
+// #software .tab-content {
+//   display: flex;
+//   flex: 1 1 auto;
+//   min-height: 0;
+// }
+
+// #software .tab-pane {
+//   display: none;
+//   flex: 1 1 auto;
+//   min-height: 0;
+// }
+
+// #software .tab-pane.active {
+//   display: flex;
+// }
+
+// #software .tab-pane > div {
+//   flex: 1 1 auto;
+//   min-height: 20rem;
+//   max-height: 40rem;
+//   overflow-y: auto;
+// }
+
+// :root {
+//   --navbar-height: 72px;
+//   --pane-max-height: 40rem;
+//   --pane-min-height: 20rem;
+// }
+
+// /* Root section grows naturally, but stops shrinking when its content can't */
+// #software {
+//   display: flex;
+//   flex-direction: column;
+//   height: auto;
+//   max-height: calc(100vh - var(--navbar-height));
+//   // overflow: hidden; /* Prevent scrollable content from overflowing */
+// }
+
+// /* Container takes up available height, but can shrink */
+// #software .container {
+//   display: flex;
+//   flex-direction: column;
+//   flex: 1 1 auto;
+//   min-height: 0;
+// }
+
+// /* All rows are fixed except the one with the tab content */
+// #software .container > .row {
+//   flex-shrink: 0;
+// }
+
+// /* Make the tab-content row flexible */
+// #software .container > .row:has(.tab-content) {
+//   flex: 1 1 auto;
+//   flex-direction: column;
+//   min-height: 0;
+// }
+
+// /* Make the column inside it flexible too */
+// #software .container > .row:has(.tab-content) > .col-12 {
+//   display: flex;
+//   flex-direction: column;
+//   flex: 1 1 auto;
+//   min-height: 0;
+// }
+
+// /* Tab content fills space, allows shrinking */
+// #software .tab-content {
+//   display: flex;
+//   flex: 1 1 auto;
+//   min-height: 0;
+// }
+
+// /* Inactive tab-pane hidden; active one is flexible */
+// #software .tab-pane {
+//   display: none;
+//   flex: 1 1 auto;
+//   min-height: 0;
+// }
+
+// #software .tab-pane.active {
+//   display: flex;
+//   flex-direction: column;
+// }
+
+// /* Scrollable area: the only thing allowed to shrink when space runs out */
+// #software .tab-pane > div {
+//   flex: 1 1 auto;
+//   min-height: var(--pane-min-height);
+//   max-height: var(--pane-max-height);
+//   overflow-y: auto;
+//   // min-height: 0; /* for flex container, to avoid overflow */
+// }
+
+
+:root {
+  --navbar-height: 72px;
+  --pane-max-height: 40rem;
+  --pane-min-height: 20rem;
 }
+
+#software {
+  padding: 0;
+}
+
+#software .container {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  max-height: calc(100vh - var(--navbar-height));
+}
+
+/* All rows are fixed except the one with the tab content */
+#software .container > .row {
+  flex: 0 0 auto;
+}
+
+/* Make the tab-content row flexible */
+#software .container > .row:has(.tab-content) {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 1;
+  min-height: 0; // var(--pane-min-height);
+  max-height: var(--pane-max-height);
+}
+
+#software .container > .row:has(.tab-content)::after {
+  content: '';
+  display: block;
+  height: 0;
+  min-height: calc(var(--pane-min-height) - 100%);
+  flex-shrink: 0;
+  pointer-events: none;
+  visibility: hidden;
+
+  // visibility: visible;
+  // background: red;
+  // opacity: 0.5;
+}
+
+/* Make the column inside it flexible too */
+#software .container > .row:has(.tab-content) > .col-12 {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0; // var(--pane-min-height);
+  max-height: var(--pane-max-height);
+}
+
+/* Tab content fills space, allows shrinking */
+#software .tab-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0; // var(--pane-min-height);
+  max-height: var(--pane-max-height);
+}
+
+/* Inactive tab-pane hidden; active one is flexible */
+#software .tab-pane {
+  display: none;
+  // flex: 1;
+  // min-height: var(--pane-min-height);
+  // max-height: var(--pane-max-height);
+}
+
+#software .tab-pane.active {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0; // var(--pane-min-height);
+  max-height: var(--pane-max-height);
+
+}
+
+// #software .tab-pane.active::after {
+//   content: '';
+//   display: block;
+//   height: 0;
+//   min-height: calc(var(--pane-min-height) - 100%);
+//   flex-shrink: 0;
+//   pointer-events: none;
+//   visibility: hidden;
+
+//   // visibility: visible;
+//   // background: red;
+//   // opacity: 0.5;
+// }
+
+/* Scrollable area: the only thing allowed to shrink when space runs out */
+#software .tab-pane > div {
+  flex: 1 1 auto;
+  // min-height: var(--pane-min-height);
+  // max-height: var(--pane-max-height);
+  overflow-y: auto;
+}
+
+
 
 .software-cards {
   @include styled-scrollbar($size: 8px, $fg-color: $bg-secondary-hfa, $bg-color: transparent);
