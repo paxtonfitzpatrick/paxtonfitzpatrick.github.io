@@ -56,10 +56,10 @@ sections:
               ensemble.
             image: assets/img/bio/eeg-headset.jpeg
             timeline_group: bregman
-          - text: I joined the [Contextual Dynamics Lab](https://www.context-lab.com){:target="_blank"} in 2017, where
-              I helped develop novel methods and software for studying episodic memory. I managed the CDL from 2018
-              to 2021, designing and executing studies, mentoring teams of undergrads, and maintaining the lab's
-              software stack.
+          - text: I joined the [Contextual Dynamics Lab](https://www.context-lab.com){:target="_blank"} in 2017, working
+              on developing novel methods and software for studying episodic memory. I managed the CDL from 2018 to
+              2021, designing and executing studies, mentoring teams of undergrads, and maintaining the lab's software
+              stack.
             image: assets/img/bio/cdl-logo.png
             timeline_group: cdl
           - text: In 2019, I graduated from [Dartmouth](https://home.dartmouth.edu){:target="_blank"} with a BA
@@ -729,11 +729,9 @@ sections:
 
 footer:
   credits:
-    - Built with [jekyll](https://jekyllrb.com/){:target="_blank"} and
+    - Built with [Jekyll](https://jekyllrb.com/){:target="_blank"} and
       [GitHub Pages](https://pages.github.com/){:target="_blank"}.
     - Site source code available on GitHub,
       [here](https://github.com/paxtonfitzpatrick/paxtonfitzpatrick.github.io){:target="_blank"}
-    - Particle animation source code available on GitHub,
-      [here](https://github.com/paxtonfitzpatrick/particle-image){:target="_blank"}
-    - Graphics for manuscripts by [Talia Manning](https://www.chamstudios.com/about){:target="_blank"}
+    - Manuscript graphics by [Talia Manning](https://www.chamstudios.com/about){:target="_blank"}
 ---
