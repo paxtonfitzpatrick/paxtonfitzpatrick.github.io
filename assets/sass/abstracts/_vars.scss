@@ -12,7 +12,7 @@ $muted-primary: #aeb2b5;
 $bg-secondary: #f7f7f7;
 $bg-secondary-hfa: #e2e2e2;
 $fg-secondary: $bg-primary;
-$fg-secondary-hfa: $bg-primary-hfa;
+$fg-secondary-hfa: #a4acb7;  // $bg-primary-hfa;
 $fg-secondary-link: #1257b5;
 $fg-secondary-link-hfa: #1876f5;
 $code-secondary: $code-primary;
@@ -23,6 +23,8 @@ $header-bg: $bg-primary;
 $header-fg: $fg-primary;
 $header-fade-in-duration: 2s;
 $header-fade-in-timing: ease-in;
+$header-text-fade-in-delay: 2s;
+$header-icons-fade-in-delay: 2.75s;
 
 // mobile navbar style
 $navbar-mobile-bg: $header-fg;
@@ -42,6 +44,11 @@ $navbar-scrolled-fg: $navbar-desktop-bg;
 $footer-bg: $bg-secondary;
 $footer-fg: $muted-secondary;
 $footer-link: $fg-secondary;
+
+// scroll shadow component style
+$scroll-shadow-height: 10px;
+$scroll-shadow-max-alpha: 25%;
+$scroll-shadow-fade-in-duration: 0.25s;
 
 // timeline style
 // Note: for simplicity, expects all values to be in px or unitless, as
@@ -70,9 +77,19 @@ $timeline-vars: (
   'info-background-padding': 5px,  // padding between text and background edge
   'info-background-alpha': 0.1,
   'info-background-radius': 8px,  // equivalent to border-radius for rounded corners
+  'event-hover-margin': 4px,  // margin around hoverable areas for easier targeting
+  'event-dimmed-opacity': 0.3, // opacity of non-hovered events
+  'transition-duration': 300ms, // duration for hover transitions (CSS and JS)
+  'hover-debounce-delay': 150ms, // delay to prevent flickering when mousing between bio elements
 );
 
-// scroll shadow component style
-$scroll-shadow-height: 10px;
-$scroll-shadow-max-alpha: 25%;
-$scroll-shadow-fade-in-duration: 0.25s;
+// timeline group colors
+$timeline-group-colors: (
+  'undergrad': #d60000,
+  'dbic': #7c22fa,
+  'cdl': #018700,
+  'bregman': #00acc6,
+  'teaching': #af6708,
+  'phd-student': #00d,
+  'phd-candidate': #77cae6
+);

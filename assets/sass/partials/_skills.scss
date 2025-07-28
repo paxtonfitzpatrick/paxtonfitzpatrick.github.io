@@ -1,17 +1,127 @@
-.skills {
-  text-align: center;
+$skills-category-width-lg: 95%;
+$skills-category-width-xl: 80%;
 
-  @media (min-width: 768px) {
-    width: 80%;
-    margin-right: auto;
-    margin-left: auto;
+$skills-grid-n-cols-xs: 3;
+$skills-grid-n-cols-sm: 4;
+$skills-grid-n-cols-md: 5;
+$skills-grid-n-cols-lg: 6;
+
+$skills-grid-gap-xs: 0.5rem;
+$skills-grid-gap-md: 1rem;
+$skills-grid-gap-lg: 1.5rem;
+
+.skills-category {
+  width: 100%;
+  margin: 0 auto;
+
+  + .skills-category {
+    margin-top: 2rem;
+  }
+}
+
+.skills-category-title {
+  position: relative;
+  justify-self: center;
+  width: max-content;
+  margin-bottom: 1.5rem;
+  font-weight: 700;  // bold
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    bottom: -0.5rem;
+    left: 0;
+
+    width: 100%;
+    height: 0.25rem;
+
+    background-color: $fg-secondary;
+    border-radius: 0.25rem;
+  }
+}
+
+
+.skills-grid {
+  --skills-grid-n-cols: #{$skills-grid-n-cols-xs};
+  --skills-grid-gap: #{$skills-grid-gap-xs};
+
+  display: grid;
+
+  grid-template-columns: repeat(auto-fill, calc((100% - (var(--skills-grid-n-cols) - 1) * var(--skills-grid-gap)) / var(--skills-grid-n-cols)));
+
+  gap: var(--skills-grid-gap);
+
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.skill-box {
+  display: grid;
+
+  grid-template-rows: 75% 20%;
+
+  gap: 5%;
+
+  place-items: center;  // align-items + justify-items
+
+  height: 6rem;
+  padding: 0.5rem;
+
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 0.25rem 0.5rem transparentize($color: $muted-secondary, $amount: 0.25);
+
+  transition: all 0.3s ease;
+
+  img {
+    max-width: 85%;
+    max-height: 100%;
+    object-fit: contain;
   }
 
-  img,
   svg {
-    max-width: 100%;
-    max-height: 6em;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (width >= 576px) {
+  .skills-grid {
+    --skills-grid-n-cols: #{$skills-grid-n-cols-sm};
+  }
+}
+
+
+@media (width >= 768px) {
+  @media (hover: hover) {
+    .skill-box:hover {
+      box-shadow: 0 0.75rem 1.5rem transparentize($color: $muted-secondary, $amount: 0.5);
+      transform: scale(1.07);
+    }
+  }
+
+  .skills-grid {
+    --skills-grid-n-cols: #{$skills-grid-n-cols-md};
+    --skills-grid-gap: #{$skills-grid-gap-md};
+  }
+}
+
+@media (width >= 992px) {
+  .skills-category {
+    width: $skills-category-width-lg;
+  }
+
+  .skills-grid {
+    --skills-grid-n-cols: #{$skills-grid-n-cols-lg};
+    --skills-grid-gap: #{$skills-grid-gap-lg};
+  }
+}
+
+
+@media (width >= 1200px) {
+  .skills-category {
+    width: $skills-category-width-xl;
   }
 }

@@ -1,6 +1,7 @@
 <div class="publication-cards scroll-shadows">
   {% for item in section.items %}
     {% if include.filter == "all" or include.filter == item.type %}
+      <!-- TODO: add a pill icon that shows the item type to items in the "all" pane -->
       <div class="publication row no-gutters align-items-center">
         <div class="col-md-2 mb-2 mb-md-0 pr-md-0 text-center">
           <img src="{{ item.image | relative_url }}" alt="X">

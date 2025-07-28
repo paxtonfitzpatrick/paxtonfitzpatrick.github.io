@@ -13,12 +13,12 @@ email: Paxton.C.Fitzpatrick.GR@Dartmouth.edu
 github: &github_url https://github.com/paxtonfitzpatrick
 linkedin: &linkedin_url https://www.linkedin.com/in/paxtonfitzpatrick
 twitter_handle: &twitter_handle paxt0n4
-twitter_url: &twitter_url https://twitter.com/paxt0n4
+twitter_url: &twitter_url https://x.com/paxt0n4
 google_scholar: &google_scholar_url https://scholar.google.com/citations?user=0Pvr9WEAAAAJ
 address: 416 Moore Hall, Dartmouth College<br>Hanover, NH 03755
 
 year_created: 2020
-year_last_updated: 2022
+year_last_updated: 2025
 
 google_analytics_id: UA-169319829-1
 
@@ -51,6 +51,8 @@ exclude:
   - package.json
   - package-lock.json
   - README.md
+  - eslint.config.js
+  - stylelint.config.js
   - node_modules/
   - scratch/
   # dotfiles are excluded from build by default, but edits to them still trigger
@@ -58,11 +60,9 @@ exclude:
   # unless explicitly listed here (jekyll-watch also appears not to handle glob
   # patterns here even though site.exclude supports them)
   - .DS_Store
-  - .eslintrc.js
   - .gitignore
   - .jekyll-metadata
   - .ruby-version
-  - .stylelintrc.js
   - .idea/
 
 include: []
@@ -118,8 +118,8 @@ plugins:
 title: *full_name
 tagline: My personal website
 description: >-
-  PhD student in Cognitive Neuroscience at Dartmouth College. I build 
-  computational models of human memory, and create software tools for research 
+  PhD candidate in Cognitive Neuroscience at Dartmouth College. I build
+  computational models of human memory, and create software tools for research
   and education.
 
 author:

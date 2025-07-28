@@ -1,0 +1,11 @@
+---
+description:
+globs: *.js,*.scss,*.css,*.html
+alwaysApply: false
+---
+- Ignore all linter errors and warnings that do not directly affect the functionality of the code. For example, ignore ESLint errors related to indentation, combining variable declarations, preferring destructuring, and all other lints related to code style or best practices.
+- Do not fix linter errors or warnings unless the issue will result in errors at runtime.
+- In .scss files, ignore linter messages related to ordering of rules (order/order) and property delcarations (order/properties-order).
+- Never add comments to disable linter rules yourself.
+- Never run linting tools from the command line.
+- The user will resolve style-related linter issues on their own once you've finished.

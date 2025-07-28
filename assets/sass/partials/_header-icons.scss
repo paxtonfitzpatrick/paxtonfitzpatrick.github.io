@@ -1,5 +1,5 @@
 .header-icons-row {
-  @include fade-in($duration: $header-fade-in-duration, $delay: 3.25s, $timing-func: $header-fade-in-timing);
+  @include fade-in($duration: $header-fade-in-duration, $delay: $header-icons-fade-in-delay, $timing-func: $header-fade-in-timing);
 
   justify-content: center;
 
@@ -25,32 +25,14 @@
 
   transition: color 0.7s, background 0.7s;
 
-  @media (min-width: 768px) {
+  @media (width >= 768px) {
     margin: 0.5em;
     font-size: 2em;
   }
 
-  // SVGs for custom icons
-  svg {
-    width: 1em;
-    height: 1em;
-
-    vertical-align: -0.0667em;  // based on fontawesome's .fa-lg
-
-    fill: $header-fg;
-
-    transition: fill 0.7s;
-  }
-
-  // stylelint-disable-next-line order/order -- want user interaction-based
-  // style mods to nested svg element to come after default style
   &:hover,
   &:active {
     color: $header-bg;
     background: $header-fg;
-
-    svg {
-      fill: $header-bg;
-    }
   }
 }

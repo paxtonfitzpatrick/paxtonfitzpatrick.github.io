@@ -29,10 +29,13 @@
 
 @import
   'components/scroll-shadows',
-  'components/navbar';
+  'components/navbar',
+  'components/nav-slider';
 
 @import
-  'themes/style';
+  'themes/base',
+  'themes/primary',
+  'themes/secondary';
 
 @import
   'partials/particles',

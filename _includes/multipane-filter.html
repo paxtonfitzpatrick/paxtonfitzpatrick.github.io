@@ -27,45 +27,66 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <ul class="nav nav-pills justify-content-center my-4" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" href="#{{ all_pane_href }}" data-toggle="pill">All</a>
-          </li>
+        <ul class="nav nav-slider my-4" role="tablist">
+          {% if section.all_first %}
+            <li class="nav-item">
+              <a class="nav-link active" href="#{{ all_pane_href }}" data-toggle="pill">All</a>
+            </li>
+          {% endif %}
           {% for pane in section.panes %}
             {% assign href = panes_hrefs[forloop.index0] | prepend: "#" %}
+            {% assign nav_class = "nav-link" %}
+            {% if forloop.first %}
+              {% unless section.all_first %}
+                {% assign nav_class = nav_class | append: " active" %}
+              {% endunless %}
+            {% endif %}
 
             <li class="nav-item">
-              <a class="nav-link" href="{{ href }}" data-toggle="pill">
+              <a class="{{ nav_class }}" href="{{ href }}" data-toggle="pill">
                 {{- pane.title -}}
               </a>
             </li>
           {% endfor %}
+          {% unless section.all_first %}
+            <li class="nav-item">
+              <a class="nav-link" href="#{{ all_pane_href }}" data-toggle="pill">All</a>
+            </li>
+          {% endunless %}
         </ul>
       </div>
     </div>
 
     <div class="row">
       <div class="col-12">
-        <div class="tab-content mb-4">
-          <div id="{{ all_pane_href }}" class="tab-pane fade active show">
-            {% if section contains "all_before_text" %}
-              <h6 class="mt-4">
-                {{- section.all_before_text | markdownify | remove: "<p>" | remove: "</p>" -}}
-              </h6>
-            {% endif %}
+        <div class="tab-content">
+          {% if section.all_first %}
+            <div id="{{ all_pane_href }}" class="tab-pane fade active show">
+              {% if section contains "all_before_text" %}
+                <h6 class="mt-4">
+                  {{- section.all_before_text | markdownify | remove: "<p>" | remove: "</p>" -}}
+                </h6>
+              {% endif %}
 
-            {% include {{ section.pane_type }} section=section filter="all" %}
+              {% include {{ section.pane_type }} section=section filter="all" %}
 
-            {% if section contains "all_after_text" %}
-              <p class="text-muted mt-4">
-                {{- section.all_after_text | markdownify | remove: "<p>" | remove: "</p>" -}}
-              </p>
-            {% endif %}
-          </div>
+              {% if section contains "all_after_text" %}
+                <p class="text-muted mt-4">
+                  {{- section.all_after_text | markdownify | remove: "<p>" | remove: "</p>" -}}
+                </p>
+              {% endif %}
+            </div>
+          {% endif %}
           {% for pane in section.panes %}
             {% assign href = panes_hrefs[forloop.index0] %}
+            {% assign tab_class = "tab-pane fade" %}
+            {% if forloop.first %}
+              {% unless section.all_first %}
+                {% assign tab_class = tab_class | append: " active show" %}
+              {% endunless %}
+            {% endif %}
 
-            <div id="{{ href }}" class="tab-pane fade">
+            <div id="{{ href }}" class="{{ tab_class }}">
               {% if pane contains "before_text" %}
                 <h6 class="mt-4">
                   {{- pane.before_text | markdownify | remove: "<p>" | remove: "</p>" -}}
@@ -81,6 +102,23 @@
               {% endif %}
             </div>
           {% endfor %}
+          {% unless section.all_first %}
+            <div id="{{ all_pane_href }}" class="tab-pane fade">
+              {% if section contains "all_before_text" %}
+                <h6 class="mt-4">
+                  {{- section.all_before_text | markdownify | remove: "<p>" | remove: "</p>" -}}
+                </h6>
+              {% endif %}
+
+              {% include {{ section.pane_type }} section=section filter="all" %}
+
+              {% if section contains "all_after_text" %}
+                <p class="text-muted mt-4">
+                  {{- section.all_after_text | markdownify | remove: "<p>" | remove: "</p>" -}}
+                </p>
+              {% endif %}
+            </div>
+          {% endunless %}
         </div>
       </div>
     </div>

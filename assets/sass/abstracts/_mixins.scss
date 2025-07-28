@@ -30,9 +30,6 @@
   // webkit/blink (Chrome, Safari, Edge, Opera)
   //   Note: starting with iOS 14, iOS Safari no longer supports custom CSS
   //   scrollbars. Desktop Safari still does as of v15.2.
-  // stylelint-disable-next-line order/order -- vendor-prefixed version
-  // currently provides more customization, so want to prioritize it where
-  // available
   &::-webkit-scrollbar {
     // stylelint-disable-next-line property-no-vendor-prefix -- Safari didn't
     // drop vendor prefix until 2022 (https://caniuse.com/css-appearance)

@@ -1,0 +1,29 @@
+{
+    "liquid.engine": "jekyll",
+    "runOnSave.commands": [
+        {
+            "globMatch": "assets/js/!(*.min).js",
+            "command": "npx terser ${fileRelative} -o ${fileDirnameRelative}/${fileBasenameNoExtension}.min.js -c -m --ecma=2019 --source-map \"filename=${fileBasenameNoExtension}.min.js.map,url=${fileBasenameNoExtension}.min.js.map\"",
+            "async": true,
+            "runningStatusMessage": "Minifying ${fileRelative}...",
+            "successStatusMessage": "Minified ${fileRelative}",
+            "statusMessageTimeout": 3000,
+            "workingDirectoryAsCWD": true,
+            "runIn": "backend"
+        },
+        {
+            "globMatch": "assets/js/!(*.min).json",
+            "command": "npx terser ${fileRelative} -o ${fileDirnameRelative}/${fileBasenameNoExtension}.min.json -p expression -f keep_quoted_props",
+            "async": true,
+            "runningStatusMessage": "Minifying ${fileRelative}...",
+            "successStatusMessage": "Minified ${fileRelative}",
+            "statusMessageTimeout": 3000,
+            "workingDirectoryAsCWD": true,
+            "runIn": "backend"
+        }
+    ],
+    "eslint.useFlatConfig": true,
+    "files.associations": {
+        "*.html": "liquid"
+    }
+}

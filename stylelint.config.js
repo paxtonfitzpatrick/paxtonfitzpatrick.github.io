@@ -1,6 +1,4 @@
-'use strict';
-
-module.exports = {
+export default {
   extends: [
     'stylelint-config-standard-scss',
     'stylelint-config-sass-guidelines',
@@ -10,32 +8,37 @@ module.exports = {
     'stylelint-group-selectors',
     'stylelint-order',
   ],
-  processors: [
-    'stylelint-processor-ignore-front-matter',
+  ignoreFiles: [
+    'assets/sass/vendors/**',
+    '_site/**',
+    'scratch/**',
   ],
   reportDescriptionlessDisables: true,
   reportInvalidScopeDisables: true,
   reportNeedlessDisables: true,
+  reportUnusedDisables: true,
   rules: {
     'at-rule-empty-line-before': [
       'always',
       {
         except: [
           'blockless-after-same-name-blockless',
-          'first-nested'
+          'first-nested',
         ],
         ignore: [
-          'after-comment'
+          'after-comment',
         ],
         ignoreAtRules: [
           'else',
-          'import'
-        ]
-      }
+          'import',
+        ],
+      },
     ],
-    // TODO: change this to 'modern' once github-pages gem issue is resolved
-    //  (see main.scss)
+    // TODO: change 'color-function-notation' to 'modern' and remove
+    //  'color-function-alias-notation' rule once github-pages gem issue is
+    //  resolved (see main.scss)
     'color-function-notation': 'legacy',
+    'color-function-alias-notation': 'with-alpha',
     // prioritize order/properties-order grouping
     'declaration-empty-line-before': null,
     'max-nesting-depth': [
@@ -49,6 +52,32 @@ module.exports = {
     ],
     // super strict, doesn't work well with component model
     'no-descending-specificity': null,
+    'plugin/declaration-block-no-ignored-properties': true,
+    'plugin/stylelint-group-selectors': true,
+    'comment-empty-line-before': [
+      'always',
+      {
+        ignore: [
+          'after-comment',
+          'stylelint-commands',
+        ],
+      },
+    ],
+    'scss/double-slash-comment-empty-line-before': [
+      'always',
+      {
+        ignore: [
+          'between-comments',
+          'stylelint-commands',
+          'inside-block',
+        ],
+      },
+    ],
+    'scss/dollar-variable-empty-line-before': null,
+    'selector-max-id': 1,
+    // old Ruby Sass required by github-pages gem doesn't support sass modules
+    // TODO: remove this once github-pages gem is updated
+    'scss/no-global-function-names': null,
     'order/order': [
       [
         'custom-properties',
@@ -75,12 +104,12 @@ module.exports = {
         // regular property declarations
         'declarations',
         {
-          // feature queries
+          // @supports queries
           type: 'at-rule',
           name: 'supports',
         },
         {
-          // media queries
+          // @media queries
           type: 'at-rule',
           name: 'media',
         },
@@ -107,7 +136,7 @@ module.exports = {
         {
           // BEM modifier classes
           type: 'rule',
-          selector: /^&--[\w-]+$/,
+          selector: /^&[-_]+[\w-]+$/,
           name: 'BEM modifier class',
         },
         {
@@ -119,12 +148,13 @@ module.exports = {
         {
           // attribute selectors
           type: 'rule',
-          selector: /^&\[.+]$/,
+          selector: /^&\[.+\]$/,
           name: 'attribute selector',
         },
         {
           // user-action pseudo-classes
           type: 'rule',
+          // eslint-disable-next-line @stylistic/max-len
           selector: /^(?:&:(?:hover|focus|focus-visible|focus-within|active),\n\s*)*&:(?:hover|focus|focus-visible|focus-within|active)$/,
           name: 'user-action pseudo-class',
         },
@@ -190,9 +220,9 @@ module.exports = {
         },
       ],
       {
-        // don't actually want unspecified items at the top, but use this warning to catch items
-        // missed by the rules above
-        unspecified: 'top',
+        // don't actually want unspecified items at the top, but use this
+        // warning to catch items missed by the rules above
+        unspecified: 'ignore',
       },
     ],
     'order/properties-order': [
@@ -309,17 +339,6 @@ module.exports = {
             'max-height',
             'aspect-ratio',
             'object-fit',
-            'padding',
-            'padding-block',
-            'padding-block-start',
-            'padding-block-end',
-            'padding-inline',
-            'padding-inline-start',
-            'padding-inline-end',
-            'padding-top',
-            'padding-right',
-            'padding-bottom',
-            'padding-left',
             'margin',
             'margin-block',
             'margin-block-start',
@@ -331,6 +350,17 @@ module.exports = {
             'margin-right',
             'margin-bottom',
             'margin-left',
+            'padding',
+            'padding-block',
+            'padding-block-start',
+            'padding-block-end',
+            'padding-inline',
+            'padding-inline-start',
+            'padding-inline-end',
+            'padding-top',
+            'padding-right',
+            'padding-bottom',
+            'padding-left',
             'overflow',
             'overflow-x',
             'overflow-y',
@@ -592,23 +622,10 @@ module.exports = {
         },
       ],
       {
-        unspecified: 'top',
-        emptyLineMinimumPropertyThreshold: 5,
+        unspecified: 'ignore',
+        emptyLineMinimumPropertyThreshold: 6,
       },
     ],
     'order/properties-alphabetical-order': null,
-    'plugin/declaration-block-no-ignored-properties': true,
-    'plugin/stylelint-group-selectors': true,
-    'scss/double-slash-comment-empty-line-before': [
-      'always',
-      {
-        'ignore': [
-          'between-comments',
-          'stylelint-commands',
-          'inside-block',
-        ],
-      },
-    ],
-    'selector-max-id': 1,
   },
 };

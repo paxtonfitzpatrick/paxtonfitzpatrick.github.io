@@ -1,6 +1,7 @@
-(() => {
-  'use strict';
+/* eslint-disable max-classes-per-file */
+'use strict';
 
+(() => {
   /*
   ========================================
   =         TIMELINE EVENT CLASS         =
@@ -13,31 +14,24 @@
       // start and end years (+ increments) of the timeline
       this.startYear = parseFloat(eventListItem.dataset.start);
       const endYear = eventListItem.dataset.end;
-      if (endYear === 'present') {
-        this.endYear = endYear;
-      } else {
-        this.endYear = parseFloat(endYear);
-      }
-      this.color = `#${eventListItem.dataset.color}`;
-      this.backgroundColor = hexToRGBA(this.color, timeline.style.infoBackgroundAlpha);
+      this.endYear = endYear === 'present' ? endYear : parseFloat(endYear);
+      this.group = eventListItem.dataset.group;
+      this.color = getComputedStyle(this.timeline.timelineElement).getPropertyValue(`--group-${this.group}`).trim();
+      this.backgroundColor = colorToRGBA(this.color, timeline.style.infoBackgroundAlpha);
       this.info = eventListItem.innerText.trim();
       // x-coordinate of column where event will be drawn
       this.xCoord = null;
     }
 
     computeInfoLayout() {
-      const ctx = this.timeline.canvas.context,
-        style = this.timeline.style,
-        infoLayout = {
-          lineArr: [],
-          bottomY: this.timeline.yearsYCoords[this.startYear],
-        },
-        infoWords = this.info.split(' '),
-        lineWidths = [];
+      const { canvas: { context: ctx }, style, yearsYCoords } = this.timeline,
+            infoLayout = { lineArr: [], bottomY: yearsYCoords[this.startYear] },
+            infoWords = this.info.split(' '),
+            lineWidths = [];
 
       let maxTextWidth,
-        currentLine = infoWords[0],
-        currentLineWidth = ctx.measureText(infoWords[0]).width;
+          currentLine = infoWords[0],
+          currentLineWidth = ctx.measureText(infoWords[0]).width;
 
       if (this.xCoord >= this.timeline.centerXCoord) {
         // place info to right of event line
@@ -57,7 +51,7 @@
       // length exceeds `maxTextWidth`, then starting a new one
       infoWords.slice(1).forEach((nextWord) => {
         const withNextWord = `${currentLine} ${nextWord}`,
-          widthWithNextWord = ctx.measureText(withNextWord).width;
+              widthWithNextWord = ctx.measureText(withNextWord).width;
         // always split on comma regardless of current line length
         if (widthWithNextWord > maxTextWidth || currentLine.endsWith(',')) {
           infoLayout.lineArr.push(currentLine);
@@ -79,9 +73,11 @@
     }
 
     drawEventLine() {
-      const ctx = this.timeline.canvas.context,
-        eventWidth = this.timeline.style.eventWidth,
-        yearsYCoords = this.timeline.yearsYCoords;
+      const {
+        canvas: { context: ctx },
+        style: { eventWidth },
+        yearsYCoords,
+      } = this.timeline;
 
       ctx.beginPath();
       ctx.lineWidth = eventWidth;
@@ -95,7 +91,7 @@
           this.xCoord,
           yearsYCoords[this.startYear],
           this.xCoord,
-          this.timeline.currentHeight
+          this.timeline.currentHeight,
         );
         gradient.addColorStop(0.25, this.color);
         gradient.addColorStop(1, this.timeline.style.backgroundColor);
@@ -109,14 +105,18 @@
     }
 
     drawInfo(infoLayout) {
-      const ctx = this.timeline.canvas.context,
-        style = this.timeline.style;
-      let lineXDest = infoLayout.lineXDest,
-        lineYDest = infoLayout.bottomY,
-        xLeft = lineXDest,
-        lineYStart = this.timeline.yearsYCoords[this.startYear + style.infoYOffset];
+      const {
+        canvas: { context: ctx },
+        style,
+        yearsYCoords,
+        centerXCoord,
+      } = this.timeline;
 
-      if (this.xCoord >= this.timeline.centerXCoord) {
+      let { lineXDest, bottomY: lineYDest } = infoLayout,
+          xLeft = lineXDest,
+          lineYStart = yearsYCoords[this.startYear + style.infoYOffset];
+
+      if (this.xCoord >= centerXCoord) {
         // info is on right side of event line
         lineXDest += style.infoBackgroundRadius / 2;
       } else {
@@ -125,14 +125,9 @@
         xLeft -= infoLayout.width;
       }
 
-      if (
-        this.endYear !== 'present'
-        && this.endYear - this.startYear <= style.infoYOffset
-      ) {
-      // if (this.endYear - this.startYear <= this.timeline.style.infoYOffset) {
+      if (this.endYear !== 'present' && this.endYear - this.startYear <= style.infoYOffset) {
         lineYStart = Math.round(
-          (this.timeline.yearsYCoords[this.startYear] + this.timeline.yearsYCoords[this.endYear])
-          / 2
+          (this.timeline.yearsYCoords[this.startYear] + this.timeline.yearsYCoords[this.endYear]) / 2,
         );
       }
 
@@ -149,7 +144,7 @@
       }
 
       // line properties
-      ctx.strokeStyle = hexToRGBA(this.color, style.infoLineAlpha);
+      ctx.strokeStyle = colorToRGBA(this.color, style.infoLineAlpha);
       ctx.lineWidth = style.infoLineWidth;
 
       // draw reference line first
@@ -166,7 +161,7 @@
         infoLayout.bottomY - infoLayout.height,
         infoLayout.width,
         infoLayout.height,
-        style.infoBackgroundRadius
+        style.infoBackgroundRadius,
       );
       // draw background
       ctx.fillStyle = this.backgroundColor;
@@ -176,7 +171,7 @@
         infoLayout.bottomY - infoLayout.height,
         infoLayout.width,
         infoLayout.height,
-        style.infoBackgroundRadius
+        style.infoBackgroundRadius,
       );
 
       ctx.beginPath();
@@ -191,7 +186,7 @@
           xLeft + style.infoBackgroundPadding,
           infoLayout.bottomY
             - style.infoBackgroundPadding
-            - (style.infoLineHeight * (lineArr.length - 1 - lineIndex))
+            - (style.infoLineHeight * (lineArr.length - 1 - lineIndex)),
         );
         if (line.endsWith(',')) {
           ctx.font = `italic ${style.infoFontSize}px sans-serif`;
@@ -212,41 +207,140 @@
       // start and end years of the timeline
       this.startYear = parseInt(timelineElement.dataset.start, 10);
       this.endYear = parseInt(timelineElement.dataset.end, 10);
-      // sets:
-      //  - this.canvas:
-      //    {element: HTMLCanvasElement, context: CanvasRenderingContext2D}
-      //  - this.currentWidth:
-      //    current width of both `this.timelineElement` & `this.canvas.element`
-      //  - this.currentHeight:
-      //    current height of both `this.timelineElement` & `this.canvas.element`
-      this.initCanvas();
-      // sets this.style (Object; see function for full list of field names)
+      // hover state management
+      this.currentHoveredGroup = null;
+      this.isHovering = false;
+      this.hoverInteractionsEnabled = false;
+      // hover debouncing
+      this.hoverDebounceTimer = null;
+      // transition state management
+      this.transitionStartTime = null;
+      this.isTransitioning = false;
+      this.eventOpacities = new Map(); // event -> current opacity
+      this.targetOpacities = new Map(); // event -> target opacity
+      // manage deferred resize when not visible (i.e., window resized when skills tab is active)
+      this.needsResizeWhenVisible = false;
+
+      // Initialize with dynamic height calculation
+      this.initializeWithDynamicHeight();
+    }
+
+    initializeWithDynamicHeight() {
+      // Step 1: Create temporary canvas for layout calculations
+      this.createTemporaryCanvas();
+
+      // Step 2: Get styles and parse events
       this.getStyles();
-      // sets this.events (Array of TimelineEvents)
       this.parseEvents();
-      // sets:
-      //  - this.yearXOffset:
-      //    used to offset labels from grid lines (approx. 1 character width)
       this.precomputeStaticValues();
-      // sets:
-      //  - this.yearsYCoords:
-      //    {year: y-coord} of offsets from the canvas top for each 1/4 year
-      //    increment in the timeline
-      //  - this.occupiedGrid:
-      //    {year: this.events.length binary array} initially has all 0's; will
-      //    contain 1's in rows/cols occupied by a timeline event
-      //  - this.centerXCoord:
-      //    x-coord at center of canvas, used to determine which side to place
-      //    each event's info on
+
+      // Step 3: Compute required height based on info layouts
+      const requiredHeight = this.computeRequiredHeight();
+
+      // Step 4: Set the parent element and canvas height
+      this.setTimelineHeight(requiredHeight);
+
+      // Step 5: Initialize the real canvas with correct dimensions
+      this.initCanvas();
+
+      // Step 6: Compute layouts and draw with correct height
       this.computeBaseLayout();
-      // sets:
-      //  - this.infoLeftXCoord:
-      //    x-coord of right edge of event info/description text on left side
-      //  - this.infoRightXCoord:
-      //    x-coord of left edge of event info/description text on right side
       this.computeEventLayout();
       this.drawBase();
       this.drawEvents();
+
+      // Step 7: Initialize opacity system and hover interactions
+      this.initializeOpacitySystem();
+      this.setupHoverInteractions();
+    }
+
+    createTemporaryCanvas() {
+      // Create a temporary canvas element for layout calculations
+      const tempCanvas = document.createElement('canvas'),
+            tempContext = tempCanvas.getContext('2d');
+
+      // Set initial dimensions (will be adjusted later)
+      this.currentWidth = this.timelineElement.clientWidth;
+      this.currentHeight = this.timelineElement.clientHeight;
+
+      tempCanvas.width = this.currentWidth * devicePixelRatio;
+      tempCanvas.height = this.currentHeight * devicePixelRatio;
+      tempContext.scale(devicePixelRatio, devicePixelRatio);
+
+      // Don't append to DOM - this is just for calculations
+      this.canvas = {
+        element: tempCanvas,
+        context: tempContext,
+      };
+    }
+
+    computeRequiredHeight() {
+      // on wide screens, take the same height as the adjacent bio column
+      if (window.innerWidth >= 1200) {
+        // Temporarily hide the timeline column to measure bio column's natural height
+        const bioColumn = document.querySelector('.bio-column'),
+              originalDisplay = this.timelineElement.style.display;
+        this.timelineElement.style.display = 'none';
+        // Force a reflow to get the updated bio column height
+        // eslint-disable-next-line no-void
+        void bioColumn.offsetHeight;
+        const bioColumnHeight = bioColumn.clientHeight;
+        // Restore the timeline column
+        this.timelineElement.style.display = originalDisplay;
+        return bioColumnHeight;
+      }
+
+      // Start with a reasonable minimum height based on the timeline span
+      const minHeight = 400,
+            maxIterations = 3;
+      let testHeight = minHeight,
+          currentIteration = 0,
+          maxBottomY = 0;
+
+      while (currentIteration < maxIterations) {
+        this.currentHeight = testHeight;
+        this.computeBaseLayout();
+        this.computeEventLayout();
+        const eventsInfoLayouts = [];
+        this.canvas.context.font = `${this.style.infoFontSize}px sans-serif`;
+        this.events.forEach((event) => {
+          const layout = event.computeInfoLayout();
+          eventsInfoLayouts.push(layout);
+        });
+
+        this.adjustEventInfo(eventsInfoLayouts);
+
+        let currentMaxBottomY = 0;
+        eventsInfoLayouts.forEach((layout) => {
+          if (layout.bottomY > currentMaxBottomY) {
+            currentMaxBottomY = layout.bottomY;
+          }
+        });
+
+        maxBottomY = currentMaxBottomY;
+
+        const requiredHeight = maxBottomY + this.style.verticalPadding * 2;
+        if (requiredHeight <= testHeight) {
+          break;
+        }
+        testHeight = requiredHeight;
+        currentIteration++;
+      }
+      return Math.max(maxBottomY + this.style.verticalPadding * 2, minHeight);
+    }
+
+    setTimelineHeight(height) {
+      // Set the height of the parent timeline element
+      this.timelineElement.style.height = `${height}px`;
+      this.currentHeight = height;
+    }
+
+    initializeOpacitySystem() {
+      // Initialize all events with full opacity
+      this.events.forEach((event) => {
+        this.eventOpacities.set(event, 1.0);
+        this.targetOpacities.set(event, 1.0);
+      });
     }
 
     adjustEventInfo(eventsInfoLayouts) {
@@ -265,16 +359,14 @@
       //        overlap the previous one
       [this.infoLeftXCoord, this.infoRightXCoord].forEach((lineXDest) => {
         // deal with vertically adjusting info on left and right separately
-        const sameSideInfoLayouts = eventsInfoLayouts.filter(
-          (info) => info.lineXDest === lineXDest
-        );
+        const sameSideInfoLayouts = eventsInfoLayouts.filter((info) => info.lineXDest === lineXDest);
         // index arg to forEach callback func corresponds to index of previous
         // event (on the same side)'s info because 1st item is `.slice`d off
         sameSideInfoLayouts.slice(1).forEach((eventInfo, prevEventIx) => {
           // get y-coord of top of event info text
           const infoTopY = eventInfo.bottomY - eventInfo.height,
             // get info data for previous event (on the same side)
-            prevEventInfo = sameSideInfoLayouts[prevEventIx];
+                prevEventInfo = sameSideInfoLayouts[prevEventIx];
           // if the top of the current event's info text isn't at least
           // infoMinPaddingY from the bottom of previous event's info text:
           if (infoTopY < prevEventInfo.bottomY + this.style.infoMinPaddingY) {
@@ -303,6 +395,7 @@
               // possible, and move the current event's info downward to make up
               // the difference
               prevEventInfo.bottomY -= prevInfoCanMove;
+              // eslint-disable-next-line no-param-reassign
               eventInfo.bottomY += toMove - prevInfoCanMove;
             }
           }
@@ -312,15 +405,13 @@
 
     computeBaseLayout() {
       const topY = this.style.verticalPadding,
-        bottomY = this.currentHeight - this.style.verticalPadding,
-        // compute y-coord for each 1/4 year increment included in the timeline
-        yInc = (bottomY - topY) / ((this.endYear - this.startYear) * 4),
-        yearsYCoords = {},
-        occupiedGrid = {};
+            bottomY = this.currentHeight - this.style.verticalPadding,
+            // compute y-coord for each 1/4 year increment included in the timeline
+            yInc = (bottomY - topY) / ((this.endYear - this.startYear) * 4),
+            yearsYCoords = {},
+            occupiedGrid = {};
 
-      for (
-        let year = this.startYear, yearY = topY; year <= this.endYear; year += 0.25, yearY += yInc
-      ) {
+      for (let year = this.startYear, yearY = topY; year <= this.endYear; year += 0.25, yearY += yInc) {
         yearsYCoords[year] = Math.floor(yearY);
         occupiedGrid[year] = Array(this.events.length).fill(0);
       }
@@ -353,13 +444,14 @@
       this.events.forEach((event) => {
         // get the index of the center-most column not occupied at its start year
         const firstOpenCol = this.occupiedGrid[event.startYear].indexOf(0),
-          // get the x-coordinate of the column where the event should be drawn
-          xCoord = eventColXCoords[firstOpenCol];
+              // get the x-coordinate of the column where the event should be drawn
+              xCoord = eventColXCoords[firstOpenCol];
 
+        // eslint-disable-next-line no-param-reassign
         event.xCoord = xCoord;
         eventXCoords.push(xCoord);
         // mark that column as occupied for the duration of the event
-        let endYear = event.endYear;
+        let { endYear } = event;
         if (endYear === 'present') {
           endYear = this.endYear;
         }
@@ -400,7 +492,7 @@
           ctx.fillText(
             yearString,
             this.currentWidth,
-            Math.round(yCoord + (this.style.yearFontSize / 2))
+            Math.round(yCoord + (this.style.yearFontSize / 2)),
           );
           ctx.moveTo(0, yCoord);
           ctx.lineTo(this.currentWidth - this.yearXOffset, yCoord);
@@ -421,7 +513,11 @@
       const eventsInfoLayouts = [];
       this.canvas.context.font = `${this.style.infoFontSize}px sans-serif`;
       this.events.forEach((event) => {
-        eventsInfoLayouts.push(event.computeInfoLayout());
+        const layout = event.computeInfoLayout();
+        eventsInfoLayouts.push(layout);
+        // Store layout on event for hit detection
+        // eslint-disable-next-line no-param-reassign
+        event.infoLayout = layout;
       });
       this.adjustEventInfo(eventsInfoLayouts);
       this.events.forEach((event, ix) => {
@@ -435,35 +531,39 @@
       // element. Timeline vars are set in _vars.scss and converted to CSS vars
       // in _bio-timeline.scss.
       const compStyles = getComputedStyle(this.timelineElement),
-        backgroundColor = compStyles.getPropertyValue('--background-color').trim(),
-        backgroundAlpha = parseFloat(compStyles.getPropertyValue('--background-alpha')),
-        yearColor = compStyles.getPropertyValue('--year-color').trim(),
-        yearAlpha = parseFloat(compStyles.getPropertyValue('--year-alpha')),
-        gridlineColor = compStyles.getPropertyValue('--gridline-color').trim(),
-        gridlineAlpha = parseFloat(compStyles.getPropertyValue('--gridline-alpha')),
-        infoFontColor = compStyles.getPropertyValue('--info-font-color').trim(),
-        infoFontAlpha = parseInt(compStyles.getPropertyValue('--info-font-alpha'), 10),
-        infoFontSize = parseInt(compStyles.getPropertyValue('--info-font-size'), 10);
+            backgroundColor = compStyles.getPropertyValue('--background-color').trim(),
+            backgroundAlpha = parseFloat(compStyles.getPropertyValue('--background-alpha')),
+            yearColor = compStyles.getPropertyValue('--year-color').trim(),
+            yearAlpha = parseFloat(compStyles.getPropertyValue('--year-alpha')),
+            gridlineColor = compStyles.getPropertyValue('--gridline-color').trim(),
+            gridlineAlpha = parseFloat(compStyles.getPropertyValue('--gridline-alpha')),
+            infoFontColor = compStyles.getPropertyValue('--info-font-color').trim(),
+            infoFontAlpha = parseInt(compStyles.getPropertyValue('--info-font-alpha'), 10),
+            infoFontSize = parseInt(compStyles.getPropertyValue('--info-font-size'), 10);
       this.style = {
         verticalPadding: parseInt(compStyles.getPropertyValue('--vertical-padding'), 10),
         yearFontSize: parseInt(compStyles.getPropertyValue('--year-font-size'), 10),
         gridlineWidth: parseInt(compStyles.getPropertyValue('--gridline-width'), 10),
         eventWidth: parseInt(compStyles.getPropertyValue('--event-width'), 10),
         eventOffset: parseInt(compStyles.getPropertyValue('--event-offset'), 10),
+        eventHoverMargin: parseInt(compStyles.getPropertyValue('--event-hover-margin'), 10),
         infoLineWidth: parseInt(compStyles.getPropertyValue('--info-line-width'), 10),
         infoLineAlpha: parseFloat(compStyles.getPropertyValue('--info-line-alpha')),
         infoXOffset: parseInt(compStyles.getPropertyValue('--info-x-offset'), 10),
         infoYOffset: parseFloat(compStyles.getPropertyValue('--info-y-offset')),
         infoMinPaddingY: parseInt(compStyles.getPropertyValue('--info-min-padding-y'), 10),
-        infoFontSize: infoFontSize,
+        infoFontSize,
         infoLineHeight: Math.round(infoFontSize * parseFloat(compStyles.getPropertyValue('--info-line-height'))),
         infoBackgroundPadding: parseInt(compStyles.getPropertyValue('--info-background-padding'), 10),
         infoBackgroundRadius: parseInt(compStyles.getPropertyValue('--info-background-radius'), 10),
         infoBackgroundAlpha: parseFloat(compStyles.getPropertyValue('--info-background-alpha')),
-        backgroundColor: hexToRGBA(backgroundColor, backgroundAlpha),
-        yearColor: hexToRGBA(yearColor, yearAlpha),
-        gridlineColor: hexToRGBA(gridlineColor, gridlineAlpha),
-        infoFontColor: hexToRGBA(infoFontColor, infoFontAlpha),
+        backgroundColor: colorToRGBA(backgroundColor, backgroundAlpha),
+        yearColor: colorToRGBA(yearColor, yearAlpha),
+        gridlineColor: colorToRGBA(gridlineColor, gridlineAlpha),
+        infoFontColor: colorToRGBA(infoFontColor, infoFontAlpha),
+        eventHoverOpacity: parseFloat(compStyles.getPropertyValue('--event-dimmed-opacity')),
+        transitionDuration: parseFloat(compStyles.getPropertyValue('--transition-duration')),
+        hoverDebounceDelay: parseFloat(compStyles.getPropertyValue('--hover-debounce-delay')),
       };
     }
 
@@ -471,12 +571,9 @@
       // create canvas element and push it to the DOM as a child of the target
       // element
       const canvasElement = document.createElement('canvas'),
-        context = canvasElement.getContext('2d');
+            context = canvasElement.getContext('2d');
 
-      // since the containing
-      this.currentWidth = this.timelineElement.clientWidth;
-      this.currentHeight = this.timelineElement.clientHeight;
-
+      // Use the already calculated dimensions
       canvasElement.className = 'timeline-canvas-el';
       canvasElement.width = this.currentWidth * devicePixelRatio;
       canvasElement.height = this.currentHeight * devicePixelRatio;
@@ -491,33 +588,45 @@
       this.timelineElement.appendChild(canvasElement);
       this.canvas = {
         element: canvasElement,
-        context: context,
+        context,
       };
     }
 
     onResize() {
-      const newWidth = this.timelineElement.clientWidth,
-        newHeight = this.timelineElement.clientHeight;
+      if (this.timelineElement.checkVisibility()) {
+        const newWidth = this.timelineElement.clientWidth;
+        // Always recompute required height with new width
+        this.currentWidth = newWidth;
+        const requiredHeight = this.computeRequiredHeight();
+        this.setTimelineHeight(requiredHeight);
 
-      if (newWidth !== this.currentWidth || newHeight !== this.currentHeight) {
+        // Update canvas dimensions
         this.canvas.context.clearRect(0, 0, this.currentWidth, this.currentHeight);
         this.canvas.element.width = newWidth * devicePixelRatio;
-        this.canvas.element.height = newHeight * devicePixelRatio;
+        this.canvas.element.height = this.currentHeight * devicePixelRatio;
         this.canvas.context.scale(devicePixelRatio, devicePixelRatio);
         this.canvas.element.style.width = `${newWidth}px`;
-        this.canvas.element.style.height = `${newHeight}px`;
-        this.currentWidth = newWidth;
-        this.currentHeight = newHeight;
+        this.canvas.element.style.height = `${this.currentHeight}px`;
+
+        // Redraw with new dimensions
         this.computeBaseLayout();
         this.computeEventLayout();
         this.drawBase();
         this.drawEvents();
+        this.initializeOpacitySystem();
+        this.setupHoverInteractions();
+
+        this.needsResizeWhenVisible = false;
+      } else {
+        // if window is resized when skills tab is active, defer the resize
+        // until the timeline is visible again
+        this.needsResizeWhenVisible = true;
       }
     }
 
     parseEvents() {
       const eventsList = this.timelineElement.getElementsByTagName('li'),
-        events = [];
+            events = [];
       Array.prototype.forEach.call(eventsList, (eventLi) => {
         events.push(new TimelineEvent(eventLi, this));
       });
@@ -540,6 +649,310 @@
       // more efficient in the comparatively uncommon case where someone resizes
       // the screen while the timeline is in view.
     }
+
+    // eslint-disable-next-line class-methods-use-this
+    shouldEnableHoverInteractions() {
+      // Check if hover interactions should be enabled:
+      // 1. Screen width >= 992px (breakpoint below which bio & timeline aren't in viewport at the same time)
+      // 2. Device supports hover (non-touchscreen)
+      return window.innerWidth >= 992 && window.matchMedia('(hover: hover)').matches;
+    }
+
+    removeHoverInteractions() {
+      // Clear any pending debounce timer
+      if (this.hoverDebounceTimer) {
+        clearTimeout(this.hoverDebounceTimer);
+        this.hoverDebounceTimer = null;
+      }
+
+      // Remove bio element event listeners
+      if (this.hoverEventListeners) {
+        this.hoverEventListeners.forEach((handlers, element) => {
+          element.removeEventListener('mouseenter', handlers.mouseenter);
+          element.removeEventListener('mouseleave', handlers.mouseleave);
+        });
+        this.hoverEventListeners.clear();
+      }
+
+      // Remove canvas event listeners
+      if (this.canvasMousemoveHandler) {
+        this.canvas.element.removeEventListener('mousemove', this.canvasMousemoveHandler);
+        this.canvasMousemoveHandler = null;
+      }
+      if (this.canvasMouseleaveHandler) {
+        this.canvas.element.removeEventListener('mouseleave', this.canvasMouseleaveHandler);
+        this.canvasMouseleaveHandler = null;
+      }
+
+      this.hoverInteractionsEnabled = false;
+
+      // Clear any active dimming when disabling hover interactions
+      this.clearDimming();
+    }
+
+    setupHoverInteractions() {
+      // Clear any existing hover interactions first
+      this.removeHoverInteractions();
+
+      // Only set up hover interactions if conditions are met
+      if (!this.shouldEnableHoverInteractions()) {
+        return;
+      }
+
+      // Set up bio paragraph hover interactions
+      const bioParagraphs = document.querySelectorAll('.bio-paragraph');
+
+      // Store event listeners for later removal
+      this.hoverEventListeners = new Map();
+
+      // Add hover listeners to children of bio paragraph elements
+      bioParagraphs.forEach((paragraphElement) => {
+        const groupMatch = paragraphElement.className.match(/bio-group-([\w-]+)/);
+        if (groupMatch) {
+          const group = groupMatch[1],
+                textElement = paragraphElement.querySelector('.bio-text'),
+                imageElement = paragraphElement.querySelector('.bio-img'),
+                mouseenterHandler = () => this.handleBioHoverEnter(group),
+                mouseleaveHandler = () => this.handleBioHoverLeave();
+
+          // Add listeners to text and image elements within this paragraph
+          [textElement, imageElement].forEach((element) => {
+            if (element) {
+              element.addEventListener('mouseenter', mouseenterHandler);
+              element.addEventListener('mouseleave', mouseleaveHandler);
+
+              // Store handlers for later removal
+              this.hoverEventListeners.set(element, {
+                mouseenter: mouseenterHandler,
+                mouseleave: mouseleaveHandler,
+              });
+            }
+          });
+        }
+      });
+
+      // Set up timeline canvas hover interactions
+      this.canvasMousemoveHandler = (e) => this.handleTimelineHover(e);
+      this.canvasMouseleaveHandler = () => this.handleBioHoverLeave();
+
+      this.canvas.element.addEventListener('mousemove', this.canvasMousemoveHandler);
+      this.canvas.element.addEventListener('mouseleave', this.canvasMouseleaveHandler);
+      this.hoverInteractionsEnabled = true;
+    }
+
+    handleBioHoverEnter(group) {
+      // Cancel any pending hover-out
+      if (this.hoverDebounceTimer) {
+        clearTimeout(this.hoverDebounceTimer);
+        this.hoverDebounceTimer = null;
+      }
+
+      // Immediately dim the new group
+      this.dimGroup(group);
+    }
+
+    handleBioHoverLeave() {
+      // Clear any existing timer first to prevent timer leaks
+      if (this.hoverDebounceTimer) {
+        clearTimeout(this.hoverDebounceTimer);
+      }
+
+      // Set a timeout before clearing dimming
+      this.hoverDebounceTimer = setTimeout(() => {
+        this.clearDimming();
+        this.hoverDebounceTimer = null;
+      }, this.style.hoverDebounceDelay);
+    }
+
+    handleTimelineHover(event) {
+      const rect = this.canvas.element.getBoundingClientRect(),
+            x = event.clientX - rect.left,
+            y = event.clientY - rect.top,
+            hoveredEvent = this.getEventAtPosition(x, y);
+
+      if (hoveredEvent) {
+        // Cancel any pending hover-out
+        if (this.hoverDebounceTimer) {
+          clearTimeout(this.hoverDebounceTimer);
+          this.hoverDebounceTimer = null;
+        }
+
+        if (!this.isHovering || this.currentHoveredGroup !== hoveredEvent.group) {
+          this.dimGroup(hoveredEvent.group);
+        }
+      } else if (this.isHovering && !this.hoverDebounceTimer) {
+        // Only start the leave process if we're not already in a debounce state
+        this.handleBioHoverLeave();
+      }
+    }
+
+    getEventAtPosition(x, y) {
+      // Check each event to see if the mouse is over it
+      return this.events.find((event) => this.isPositionOverEvent(x, y, event)) || null;
+    }
+
+    isPositionOverEvent(x, y, event) {
+      const { yearsYCoords, style } = this,
+            lineStartY = yearsYCoords[event.startYear],
+            lineEndY = event.endYear === 'present' ? this.currentHeight : yearsYCoords[event.endYear];
+
+      // Check if over the event line
+      if (Math.abs(x - event.xCoord) <= style.eventWidth / 2 + style.eventHoverMargin
+          && y >= lineStartY - style.eventHoverMargin
+          && y <= lineEndY + style.eventHoverMargin) {
+        return true;
+      }
+
+      // Check if over the info text area
+      if (event.infoLayout) {
+        const { infoLayout } = event;
+        let infoLeft = infoLayout.lineXDest;
+
+        if (event.xCoord < this.centerXCoord) {
+          // Info is on the left side
+          infoLeft -= infoLayout.width;
+        }
+
+        const infoTop = infoLayout.bottomY - infoLayout.height,
+              infoRight = infoLeft + infoLayout.width,
+              infoBottom = infoLayout.bottomY;
+
+        if (x >= infoLeft - style.eventHoverMargin && x <= infoRight + style.eventHoverMargin
+            && y >= infoTop - style.eventHoverMargin && y <= infoBottom + style.eventHoverMargin) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    dimGroup(activeGroup) {
+      // Only proceed if hover interactions are enabled
+      if (!this.hoverInteractionsEnabled) {
+        return;
+      }
+
+      this.currentHoveredGroup = activeGroup;
+      this.isHovering = true;
+
+      // Dim bio elements not in the active group
+      const bioElements = document.querySelectorAll('.bio-img, .bio-text');
+      bioElements.forEach((element) => {
+        const parentParagraph = element.closest('.bio-paragraph'),
+              hasActiveGroup = parentParagraph && parentParagraph.classList.contains(`bio-group-${activeGroup}`);
+
+        if (hasActiveGroup) {
+          element.classList.remove('dimmed');
+        } else {
+          element.classList.add('dimmed');
+        }
+      });
+
+      // Set target opacities for timeline events and start transition
+      this.events.forEach((event) => {
+        const targetOpacity = event.group === activeGroup ? 1.0 : this.style.eventHoverOpacity;
+        this.targetOpacities.set(event, targetOpacity);
+      });
+
+      this.startTransition();
+    }
+
+    clearDimming() {
+      // Always clear dimming state, even if hover interactions are disabled
+      this.currentHoveredGroup = null;
+      this.isHovering = false;
+
+      // Remove dimming from bio elements
+      const bioElements = document.querySelectorAll('.bio-img, .bio-text');
+      bioElements.forEach((element) => {
+        element.classList.remove('dimmed');
+      });
+
+      // Set target opacities for timeline events back to normal and start transition
+      this.events.forEach((event) => {
+        this.targetOpacities.set(event, 1.0);
+      });
+
+      this.startTransition();
+    }
+
+    startTransition() {
+      // Store initial opacities at the start of transition
+      if (!this.initialOpacities) {
+        this.initialOpacities = new Map();
+      }
+
+      this.events.forEach((event) => {
+        const currentOpacity = this.eventOpacities.get(event) || 1.0;
+        this.initialOpacities.set(event, currentOpacity);
+      });
+
+      this.transitionStartTime = performance.now();
+      this.isTransitioning = true;
+      this.animateTransition();
+    }
+
+    animateTransition() {
+      if (!this.isTransitioning) return;
+
+      const elapsed = performance.now() - this.transitionStartTime,
+            progress = Math.min(elapsed / this.style.transitionDuration, 1.0);
+
+      // Linear interpolation between initial and target opacities
+      this.events.forEach((event) => {
+        const initialOpacity = this.initialOpacities.get(event) || 1.0,
+              targetOpacity = this.targetOpacities.get(event) || 1.0,
+              currentOpacity = initialOpacity + (targetOpacity - initialOpacity) * progress;
+
+        this.eventOpacities.set(event, currentOpacity);
+      });
+
+      this.redrawWithTransitions();
+
+      if (progress < 1.0) {
+        requestAnimationFrame(() => this.animateTransition());
+      } else {
+        this.isTransitioning = false;
+      }
+    }
+
+    redrawWithTransitions() {
+      // Clear and redraw the timeline with current opacity values
+      this.canvas.context.clearRect(0, 0, this.currentWidth, this.currentHeight);
+      this.drawBase();
+      this.drawEventsWithTransitions();
+    }
+
+    drawEventsWithTransitions() {
+      // Similar to drawEvents but with smooth opacity transitions
+      const eventsInfoLayouts = [];
+      this.canvas.context.font = `${this.style.infoFontSize}px sans-serif`;
+
+      this.events.forEach((event) => {
+        const layout = event.computeInfoLayout();
+        eventsInfoLayouts.push(layout);
+        // Store layout on event for hit detection
+        // eslint-disable-next-line no-param-reassign
+        event.infoLayout = layout;
+      });
+
+      this.adjustEventInfo(eventsInfoLayouts);
+
+      this.events.forEach((event, ix) => {
+        const currentOpacity = this.eventOpacities.get(event) || 1.0;
+
+        if (currentOpacity < 1.0) {
+          this.canvas.context.globalAlpha = currentOpacity;
+        }
+
+        event.drawInfo(eventsInfoLayouts[ix]);
+        event.drawEventLine();
+
+        if (currentOpacity < 1.0) {
+          this.canvas.context.globalAlpha = 1.0;
+        }
+      });
+    }
   }
 
   /*
@@ -547,15 +960,73 @@
   =           HELPER FUNCTIONS           =
   ========================================
   */
-  const hexToRGBA = (hex, opacity = 1) => {
-    const tempHex = hex.replace('#', ''),
-      r = parseInt(tempHex.substring(0, 2), 16),
-      g = parseInt(tempHex.substring(2, 4), 16),
-      b = parseInt(tempHex.substring(4, 6), 16);
-    return `rgba(${r},${g},${b},${opacity})`;
-  };
+  const colorCache = new Map();
 
-  const roundedRect = (ctx, x, y, width, height, radius) => {
+  function colorToRGBA(inputColor, opacity = 1) {
+    const cacheKey = `${inputColor}-${opacity}`;
+    if (colorCache.has(cacheKey)) {
+      return colorCache.get(cacheKey);
+    }
+    const trimmedColor = inputColor.trim();
+
+    // handle 3- or 6-digit hex colors
+    // eslint-disable-next-line one-var
+    const hexMatch = trimmedColor.match(/^#([0-9a-f]+)$/i);
+    if (hexMatch) {
+      let hex = hexMatch[1];
+      if (hex.length === 3) {
+        hex = hex.split('').map((char) => char + char).join('');
+      } else if (hex.length !== 6) {
+        throw new Error(`colorToRGBA: Failed to parse color: ${inputColor}`);
+      }
+      const r = parseInt(hex.slice(0, 2), 16),
+            g = parseInt(hex.slice(2, 4), 16),
+            b = parseInt(hex.slice(4, 6), 16),
+            outputRgba = `rgba(${r},${g},${b},${opacity})`;
+      colorCache.set(cacheKey, outputRgba);
+      return outputRgba;
+    }
+
+    // handle RGB colors
+    const rgbMatch = trimmedColor.match(/^rgb\(\s*([^)]+)\s*\)$/i);
+    if (rgbMatch) {
+      const outputRgba = `rgba(${rgbMatch[1]},${opacity})`;
+      colorCache.set(cacheKey, outputRgba);
+      return outputRgba;
+    }
+
+    // handle RGBA colors
+    const rgbaMatch = trimmedColor.match(/^rgba\(((?:\s*[^,]+,){3})(?:[^,)]+)\)$/i);
+    if (rgbaMatch) {
+      const outputRgba = `rgba(${rgbaMatch[1]},${opacity})`;
+      colorCache.set(cacheKey, outputRgba);
+      return outputRgba;
+    }
+
+    // fall back to using the browser directly to parse colors (named, hls, etc.)
+    try {
+      const temp = document.createElement('div');
+      temp.style.color = trimmedColor;
+      document.body.appendChild(temp);
+      const rgbOrRgba = getComputedStyle(temp).color;
+      document.body.removeChild(temp);
+
+      const rgbOrRgbaMatch = rgbOrRgba.match(
+        /rgba?\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)(?:\s*,\s*[^)]+)?\s*\)$/i,
+      );
+      if (!rgbOrRgbaMatch) {
+        throw new Error();
+      }
+      const [, r, g, b] = rgbOrRgbaMatch,
+            outputRgba = `rgba(${r},${g},${b},${opacity})`;
+      colorCache.set(cacheKey, outputRgba);
+      return outputRgba;
+    } catch {
+      throw new Error(`colorToRGBA: Failed to parse color: ${inputColor}`);
+    }
+  }
+
+  function roundedRect(ctx, x, y, width, height, radius) {
     ctx.beginPath();
     ctx.moveTo(x, y + radius);
     ctx.lineTo(x, y + height - radius);
@@ -568,18 +1039,35 @@
     ctx.quadraticCurveTo(x, y, x, y + radius);
     ctx.closePath();
     ctx.fill();
-  };
+  }
 
   /*
   ========================================
   =             MAIN SCRIPT              =
   ========================================
   */
-  const timelineElement = document.getElementById('timeline');
-  if (timelineElement !== null) {
-    window.addEventListener('load', () => {
-      const timelineObj = new Timeline(timelineElement);
-      window.addEventListener('resize', () => timelineObj.onResize());
-    });
+  function initTimeline() {
+    const timelineElement = document.getElementById('timeline');
+    if (!timelineElement) return;
+
+    const timelineObj = new Timeline(timelineElement);
+    window.addEventListener('resize', () => timelineObj.onResize());
+
+    const bioTabElement = document.getElementById('bio'),
+          bioTabVisibilityObserver = new MutationObserver(() => {
+            // if viewport was resized while the bio tab (which contains the
+            // timeline) was hidden, and it's now visible again, resize the
+            // timeline for the updated viewport
+            if (bioTabElement.classList.contains('active') && timelineObj.needsResizeWhenVisible) {
+              timelineObj.onResize();
+            }
+          });
+    bioTabVisibilityObserver.observe(bioTabElement, { attributes: true, attributeFilter: ['class'] });
+  }
+
+  if (document.readyState !== 'loading') {
+    initTimeline();
+  } else {
+    document.addEventListener('DOMContentLoaded', initTimeline);
   }
 })();

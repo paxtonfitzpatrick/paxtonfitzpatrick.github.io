@@ -1,26 +1,22 @@
 {
-  "browserList": [
-    "defaults"
-  ],
+  "type": "module",
   "devDependencies": {
-    "eslint": "^8.18.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-compat": "^4.0.2",
-    "eslint-plugin-import": "^2.26.0",
-    "install": "^0.13.0",
-    "postcss": "^8.4.14",
-    "stylelint": "^14.8.5",
-    "stylelint-config-sass-guidelines": "^9.0.1",
-    "stylelint-config-standard": "^25.0.0",
-    "stylelint-config-standard-scss": "^4.0.0",
-    "stylelint-declaration-block-no-ignored-properties": "^2.5.0",
-    "stylelint-find-new-rules": "^4.0.0",
-    "stylelint-group-selectors": "^1.0.9",
-    "stylelint-order": "^5.0.0",
-    "stylelint-processor-ignore-front-matter": "^1.0.3",
-    "terser": "^5.14.1"
-  },
-  "scripts": {
-    "stylelint-find-rules": "stylelint-find-new-rules"
+    "@eslint/compat": "^1.2.9",
+    "@eslint/js": "^9.28.0",
+    "@stylistic/eslint-plugin": "^3.1.0",
+    "browserslist": "^4.25.0",
+    "eslint": "^9.28.0",
+    "eslint-config-airbnb-extended": "^1.0.11",
+    "eslint-plugin-compat": "^6.0.2",
+    "eslint-plugin-import-x": "^4.15.1",
+    "eslint-plugin-n": "^17.19.0",
+    "globals": "^16.2.0",
+    "stylelint": "^16.20.0",
+    "stylelint-config-sass-guidelines": "^12.1.0",
+    "stylelint-config-standard-scss": "^15.0.1",
+    "stylelint-declaration-block-no-ignored-properties": "^2.8.0",
+    "stylelint-group-selectors": "^1.0.10",
+    "stylelint-order": "^7.0.0",
+    "terser": "^5.41.0"
   }
 }

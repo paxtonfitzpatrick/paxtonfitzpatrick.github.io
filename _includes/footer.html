@@ -7,8 +7,12 @@
 <footer class="footer py-4">
   <div class="container small text-center">
     <p class="mb-1">{{ copyright }}</p>
-    {% for credit in footer.credits %}
-      {{ credit | markdownify }}
-    {% endfor %}
+    <div class="row">
+      {% for credit in footer.credits %}
+        <div class="col-12 col-lg-4">
+          {{ credit | markdownify }}
+        </div>
+      {% endfor %}
+    </div>
   </div>
 </footer>

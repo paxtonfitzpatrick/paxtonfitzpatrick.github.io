@@ -1,21 +1,19 @@
 <div class="row no-gutters">
-  <div class="col-lg-7">
-    {% assign img_right_cls = "float-right pl-3" %}
-    {% assign img_left_cls = "float-left pr-3" %}
-
+  <div class="col-lg-7 bio-column">
     {% for paragraph in include.pane.bio_paragraphs %}
-      <div class="bio-paragraph">
-        {% if paragraph contains "image" %}
-          <img class="{% cycle img_right_cls, img_left_cls %}"
-               src="{{ paragraph.image | relative_url }}"
-               alt="X">
-        {% endif %}
-
-        {{- paragraph.text | markdownify | remove: '<p>' | remove: '</p>' -}}
+      <div class="bio-paragraph
+                  {% cycle 'bio-paragraph-right', 'bio-paragraph-left' %}
+                  bio-group-{{ paragraph.timeline_group }}">
+        <div class="bio-img-backdrop"></div>
+        <img class="bio-img"
+             src="{{ paragraph.image | relative_url }}"
+             alt="">
+        <div class="bio-text">
+          {{- paragraph.text | markdownify | remove: '<p>' | remove: '</p>' -}}
+        </div>
       </div>
     {% endfor %}
   </div>
-
   <div id="timeline" class="col-lg-5"
        data-start="{{ include.pane.timeline.start }}"
        data-end="{{ include.pane.timeline.end }}">
@@ -26,7 +24,7 @@
         <li id="{{ event_id }}"
             data-start="{{ event.start }}"
             data-end="{{ event.end }}"
-            data-color="{{ event.color }}">
+            data-group="{{ event.group }}">
           {{ event.title }}
         </li>
       {% endfor %}
